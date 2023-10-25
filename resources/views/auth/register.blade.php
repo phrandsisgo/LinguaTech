@@ -39,10 +39,10 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <!-- development Password -->
+        <!-- development Password  Bitte entfernen wenn developementphase vorbei ist.-->
         <div class="mt-4">
-            <x-label for="secret_password" :value="__('Secret Password')" />
-            <x-input id="secret_password" class="block mt-1 w-full" type="password" name="secret_password" required />
+            <x-input-label for="secret_password" :value="__('Secret Password')" />
+            <x-text-input id="secret_password" class="block mt-1 w-full" type="password" name="secret_password" required />
         </div>
 
 

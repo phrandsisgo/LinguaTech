@@ -34,6 +34,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            //Nächste Zeile ist nur für die Entwicklungsfase gedacht. Bitte entfernen wenn developementphase vorbei ist.
             'secret_password' => ['required', 'string', 'max:255', 'in:'.env('REGISTER_ACTIVATION_PASSWORD')]
         ]);
 
