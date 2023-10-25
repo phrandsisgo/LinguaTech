@@ -39,6 +39,13 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <!-- development Password -->
+        <div class="mt-4">
+            <x-label for="secret_password" :value="__('Secret Password')" />
+            <x-input id="secret_password" class="block mt-1 w-full" type="password" name="secret_password" required />
+        </div>
+
+
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
@@ -49,4 +56,9 @@
             </x-primary-button>
         </div>
     </form>
+    <div>
+        <p>
+            Hallo, da diese Seite sich zur Zeit noch in Entwicklung befindet und ich nicht möchte, dass jeder sich hier anmelden kann, habe ich ein Passwort eingebaut. Falls du dich gerne registrieren möchtest, dann kontaktier mich doch über Discord (phrandsisgo) und ich gebe dir das Passwort.
+        </p>
+    </div>
 </x-guest-layout>
