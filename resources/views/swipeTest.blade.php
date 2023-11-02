@@ -4,6 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://hammerjs.github.io/dist/hammer.js"></script> 
+    <!-- hier kommt mein script für hammer.js hin -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var myElement = document.getElementById('flashCardContent');
+            var hammertime = new Hammer(myElement);
+            hammertime.on('swipe', function(ev) {
+                console.log(ev);
+                alert(ev.direction);
+                if(ev.direction === Hammer.DIRECTION_LEFT){
+                    alert("swipe left");
+                    handleLeftClick();
+                }else if(ev.direction === Hammer.DIRECTION_RIGHT){
+                    alert("swipe right");
+                    handleRightClick();
+                }
+            });
+
+            function handleLeftClick() {
+                console.log("Links geklickt!");
+                naechsteKarte();
+            }
+            function handleRightClick() {
+                console.log("Rechts geklickt!");
+                naechsteKarte();
+         }
+        });
+    </script>
+
     <script defer>
         const karten = [
             'Karte 1',
@@ -100,7 +130,6 @@
             border-radius: 10px;
             width: 40%;
             height:50%;
-            border: 5px solid green;
         }
         .kartenInhalt{
             display: flex;    
@@ -115,6 +144,11 @@
             padding: 10px;
         }
 
+         #flashCardContent{
+
+            border: 5px solid green;
+         }
+
     </style>
 </head>
 <body>
@@ -122,7 +156,7 @@
 
 
     <div id="karteModal" class="modal">
-        <div class="karteContent">
+        <div class="karteContent" id="flashCardContent">
             <button id="zurueckBtn">Zurück</button>
             <div class="kartenInhalt">
                 <div class="karteLeft" onclick="handleLeftClick()">← Links</div>
