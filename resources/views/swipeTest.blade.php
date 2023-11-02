@@ -91,7 +91,6 @@
 
         .karteContent {
             align-items: center;
-            justify-content: space-between;
             position: relative;
             top: 50%;
             left: 50%;
@@ -101,6 +100,7 @@
             border-radius: 10px;
             width: 40%;
             height:50%;
+            border: 5px solid green;
         }
         .kartenInhalt{
             display: flex;    

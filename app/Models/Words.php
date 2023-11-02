@@ -14,5 +14,10 @@ class Words extends Model
     public function wordListWord(): BelongsToMany{
         return $this->belongsToMany(WordListWord::class);
     }
-    
+    public function langOption(): BelongsToMany{
+        return $this->belongsToMany(LangOption::class);
+    }
+    public function userWords(): BelongsToMany{
+        return $this->belongsToMany(UserWords::class);
+    }
 }
