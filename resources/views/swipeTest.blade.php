@@ -154,10 +154,12 @@
 
         .karteContent {
             align-items: center;
-            position: relative;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: fixed;
+            top:0;
+            left: 0;
+            right:0;
+            bottom: 0;
+            margin: auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 10px;
@@ -260,7 +262,7 @@
             }
 
             30% {
-                -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+                -webkit-transform: perspective(400px) rotate3d(0, , 0, -15deg);
                 transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
                 opacity: 1;
             }
