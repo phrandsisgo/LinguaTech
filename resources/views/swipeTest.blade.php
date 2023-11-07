@@ -210,8 +210,8 @@
             }
             to {
                 opacity: 0;
-                -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
-                transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
+                -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 60deg);
+                transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 60deg);
             }
             }
             .animate__rollOut__right {
@@ -230,8 +230,8 @@
             }
             to{
                 opacity: 0;
-                -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
-                transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+                -webkit-transform: translate3d(-150%, 0, 0) rotate3d(0, 0, 1, -120deg);
+                transform: translate3d(-150%, 0, 0) rotate3d(0, 0, 1, -120deg);
             }}
             @keyframes rollOutLeft {
             from {
@@ -239,8 +239,8 @@
             }
             to{
                 opacity: 0;
-                -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
-                transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+                -webkit-transform: translate3d(-150%, 0, 0) rotate3d(0, 0, 1, -60deg);
+                transform: translate3d(-150%, 0, 0) rotate3d(0, 0, 1, -60deg);
             }}
             .animate__rollOut__left {
             -webkit-animation-name: rollOutLeft;
