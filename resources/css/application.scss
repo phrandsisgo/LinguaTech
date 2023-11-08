@@ -1,0 +1,52 @@
+@import "colors.scss";
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 999;
+}
+
+.karteContent {
+    align-items: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 40%;
+    height:50%;
+}
+.kartenInhalt{
+    display: flex;    
+    border: 1px solid #888;   
+    justify-content: center;
+    align-items: center; 
+    height:50vh;
+}
+
+.karteLeft, .karteRight {
+    cursor: pointer;
+    padding: 10px;
+}
+
+ #flashCardContent{
+
+    border: 5px solid green;
+ }
+    .confirmRight{
+        position: absolute;
+        top: 80%;
+        left:84%;
+    }
+    .confirmLeft{
+        position: absolute;
+        top: 80%;
+        left: 30%;
+    }

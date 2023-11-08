@@ -1,0 +1,89 @@
+@-webkit-keyframes rollOutRight {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
+        transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
+    }
+    }
+    @keyframes rollOutRight {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
+        transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
+    }
+    }
+    .animate__rollOut__right {
+    -webkit-animation-name: rollOutRight;
+    animation-name: rollOutRight;
+    /* Define the duration, fill mode, etc. for the animation */
+    -webkit-animation-duration: 0.7s;
+    animation-duration: 0.7s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    }
+
+    @-webkit-keyframes rollOutLeft {
+    from {
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+        transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+    }}
+    @keyframes rollOutLeft {
+    from {
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+        transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+    }}
+    .animate__rollOut__left {
+    -webkit-animation-name: rollOutLeft;
+    animation-name: rollOutLeft;
+    /* Define the duration, fill mode, etc. for the animation */
+    -webkit-animation-duration: 0.7s;
+    animation-duration: 0.7s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    }
+
+    /*hier noch die Animation für das flippen der Karten*/
+
+    @keyframes flipOutY {
+    from {
+        -webkit-transform: perspective(400px);
+        transform: perspective(400px);
+        transform-origin: center;
+    }
+
+    30% {
+        -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+        transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+        opacity: 1;
+    }
+
+    to {
+        -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        opacity: 0;
+    }}
+    .animate__flipOutY {
+    -webkit-animation-duration: calc(1s * 0.75);
+    animation-duration: calc(1s * 0.75);
+    -webkit-animation-duration: calc(var(--animate-duration) * 0.75);
+    animation-duration: calc(var(--animate-duration) * 0.75);
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+    -webkit-animation-name: flipOutY;
+    animation-name: flipOutY;
+    
+    }

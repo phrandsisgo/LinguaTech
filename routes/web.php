@@ -20,6 +20,10 @@ Route::get('/', function () {
 Route::get('/swipeTest', function () {
     return view('swipeTest');
 });
+Route::get('/home_logged', function () {
+    return view('home_logged');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

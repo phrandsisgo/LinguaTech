@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Relations\HasMany;
+use Illuminate\Database\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -42,4 +44,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function createdWordLists(){
+        return $this->hasMany(WordList::class, 'created_by', 'id');
+    }
+
+    public function wordLists(){
+        return $this->belongsToMany(WordList::class, 'user_word_lists', 'user_id', 'word_list_id');
+    }
+
+    public function words(){
+        return $this->belongsToMany(Word::class, 'user_words', 'user_id', 'word_id');
+    }
 }
