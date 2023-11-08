@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('user_words', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('word_id')->constrained();
-            $table->int('count')->default(0);
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('word_id')->constrained('words');
+            $table->integer('count')->default(0);
         });
     }
 

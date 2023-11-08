@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('word_list_words', function (Blueprint $table){
             $table->id();
-            $table->foreignId('word_list_id')->constrained();
-            $table->foreignId('word_id')->constrained();
+            $table->foreignId('word_list_id')->constrained('word_lists');
+            $table->foreignId('word_id')->constrained('words');
+            $table->timestamps();
         });
     }
 

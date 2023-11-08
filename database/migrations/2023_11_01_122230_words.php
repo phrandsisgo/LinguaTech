@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('word_lists', function (Blueprint $table) {
+        Schema::create('words', function (Blueprint $table){
             $table->id();
-            $table->foreignId('created_by')->constrained('users');//not sure if "users" is needed
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->timestamps();//not sure if this is needed
+            $table->foreignId('base_language_id')->constrained('lang_options')->nullable();
+            $table->foreignId('target_language_id')->constrained('lang_options')->nullable();
+
+            $table->string('base_word');
+            $table->string('target_word');
+            
+            $table->timestamps();
         });
     }
 

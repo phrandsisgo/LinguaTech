@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('word_list_words', function (Blueprint $table){
+        Schema::create('lang_options', function (Blueprint $table){
             $table->id();
             $table->string('language_name');
             $table->string('language_code')->nullable();

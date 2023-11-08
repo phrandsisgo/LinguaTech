@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_word_lists', function (Blueprint $table){
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('word_list_id')->constrained();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('word_list_id')->constrained('word_lists');
             $table->timestamps();
         });
     }

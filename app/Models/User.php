@@ -44,13 +44,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function wordList(): hasMany{
-        return $this->hasMany(WordList::class);
+
+
+    public function createdWordLists(){
+        return $this->hasMany(WordList::class, 'created_by', 'id');
     }
-    public function userWordList(): BelongsToMany{
-        return $this->belongsToMany(UserWordList::class);
+
+    public function wordLists(){
+        return $this->belongsToMany(WordList::class, 'user_word_lists', 'user_id', 'word_list_id');
     }
-    public function userWords(): BelongsToMany{
-        return $this->belongsToMany(UserWords::class);
+
+    public function words(){
+        return $this->belongsToMany(Word::class, 'user_words', 'user_id', 'word_id');
     }
 }
