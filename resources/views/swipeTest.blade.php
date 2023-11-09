@@ -58,12 +58,10 @@
 
             //  make sure to remove the class after the animation ends to allow it to be triggered again
             karteContent.addEventListener('animationend', function(){
-                karteContent.classList.remove('animate__rollOut__left');
+                karteContent.classList.remove('animate__rollOut__left','flipInY', 'flipOutY');
             });
         }
-    </script>
-
-    <script defer>
+    
         const karten = [
             'Karte 1',
             'Karte 2',
@@ -104,14 +102,31 @@
 
             const karteContent = document.getElementById('flashCardContent');
             karteContent.classList.add('animate__flipOutY');
+            //  make sure to remove the class after the animate__flipOutY ends to allow the next animation to be triggered again
+            karteContent.addEventListener('animationend', function(){
+                karteContent.classList.remove('animate__flipOutY');
+                if(baseLangWord.textContent == woerterbuch[index][0]){
+                    baseLangWord.textContent = woerterbuch[index][1];
+                }else{
+                    baseLangWord.textContent = woerterbuch[index][0];
+                }
+                baseLangWord.removeEventListener('click', showUebersetzung);
+                //falls spiegelverkehrt-klasse vorhanden, entferne sie
+                if(baseLangWord.classList.contains('spiegelverkehrt')){
+                    baseLangWord.classList.remove('spiegelverkehrt');
+                }else{
+                    baseLangWord.classList.add('spiegelverkehrt');
+                }
+                element.classList.add('animate__flipInY');
+
+                element.addEventListener('animationend', function(){
+                    element.classList.remove('animate__flipInY', 'animate__flipOutY', );
+                });
+            });
+            //next Animation 
             const baseLangWord = document.querySelector('.karteInfo');
             const index = baseLangWord.getAttribute("data-index");
-            if(baseLangWord.textContent == woerterbuch[index][0]){
-                baseLangWord.textContent = woerterbuch[index][1];
-            }else{
-                baseLangWord.textContent = woerterbuch[index][0];
-            }
-            baseLangWord.removeEventListener('click', showUebersetzung);
+           
         }
 
         function naechsteKarte() {
@@ -150,6 +165,8 @@
             height: 100%;
             background-color: rgba(0,0,0,0.6);
             z-index: 999;
+        }
+        .spiegelverkehrt{
         }
 
         .karteContent {
@@ -270,7 +287,7 @@
             to {
                 -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
                 transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
-                opacity: 0;
+                /*opacity: 0;*/
             }}
             .animate__flipOutY {
             -webkit-animation-duration: calc(1s * 0.75);
@@ -283,6 +300,32 @@
             animation-name: flipOutY;
             
             }
+            @keyframes flipInY {
+            from {
+                -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+                transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+                opacity: 0;
+            }
+            30%{
+                -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+                transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+                opacity: 1;
+            }
+            to {
+                -webkit-transform: perspective(400px);
+                transform: perspective(400px);
+            }}
+            .animate__flipInY {
+            -webkit-animation-duration: calc(1s * 0.75);
+            animation-duration: calc(1s * 0.75);
+            -webkit-animation-duration: calc(var(--animate-duration) * 0.75);
+            animation-duration: calc(var(--animate-duration) * 0.75);
+            -webkit-backface-visibility: visible !important;
+            backface-visibility: visible !important;
+            -webkit-animation-name: flipInY;
+            animation-name: flipInY;
+            }
+
 
     </style>
 </head>
