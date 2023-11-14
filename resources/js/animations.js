@@ -122,11 +122,11 @@ function updateKarte() {
     karteInfo.setAttribute("data-index", aktuelleKarteIndex);
     console.log('hallo ich wurde geladen');
 }
-
+/*//warscheindlich braucht es diese funktion nicht nov 14
 function openModal() {
     document.getElementById('karteModal').style.display = 'block';
     updateKarte();
-}
+}*/
 document.getElementById('zurueckBtn').addEventListener('click', function() {
     document.getElementById('karteModal').style.display = 'none';
 });
