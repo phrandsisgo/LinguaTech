@@ -1,9 +1,64 @@
 @import"colors.scss";
 
+$phonewidth: 650px;
+$middlewidth: 1000px;//and bigger
+$bigwidth: 1200px;//and bigger
 //als erstes ändere ich die hintergrudfarbe der Seite
 body {
     background-color: $background10;
+    padding: 0;
+    margin: 0;
+}
+.nav-wrapper {
+    background-color: $contrast;
+    color: $approve;
+    position: sticky;
+    display: flex;
+    padding: 20px;
+    //add something that makes every child of here have at least 5px space between them
+}
+.icons{
+    margin:5px;
+}
+.horizontal-fill{
+    flex: 1;
+}
+#navText{
+    //change the textsize
+    font-size: 50px;
+    font-weight: bold;
+}
+.footer_box{
+    color: $approve;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    right:0;
+    display:flex;
+    justify-content:space-evenly;
+    
+
 }
 
-//navbar fängt hier an:
+
+@media screen and (max-width: $phonewidth) {
+    .des-only {
+        display: none;
+
+    }
+   
+    .icons{
+        margin: 0;
+        height: 50px;
+    }
+}
+@media screen and (min-width: $phonewidth) {
+    .mob-only {
+        display: block;
+    }
+    .footer_box {
+        display: none;
+    }
+}
+
 
