@@ -19,9 +19,9 @@
 <button id="startPlay" onclick="openModal()" class="animate__flip">Start Play</button>
     <div id="karteModal" class="modal">
         <div class="karteContent animate__flip" id="flashCardContent">   
-            <div class="confirmRight"><img src="https://www.svgrepo.com/show/384403/accept-check-good-mark-ok-tick.svg" alt="accept" height="20px"></div>
+            <div class="confirmRight"><img src="https://www.svgrepo.com/show/384403/accept-check-good-mark-ok-tick.svg" alt="accept" height="20px" onclick="handleRightClick()"></div>
             <div class="confirmLeft">
-                <img src="{{ asset('questionmark-icon.svg')}}" alt="questionmark-icon" height="20">
+                <img src="{{ asset('questionmark-icon.svg')}}" alt="questionmark-icon" height="20" onclick="handleLeftClick()">
             </div>
             <button id="zurueckBtn" onclick="triggerAnimation()">Zurück</button>
             <div class="kartenInhalt">

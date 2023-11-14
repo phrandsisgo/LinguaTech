@@ -16,7 +16,7 @@
     <img src="{{ asset('icons/library-icon.svg')}}" alt="library Icon">
     <p id="navText">LinguaTech</p>
     <img src="{{ asset('icons/menu-icon.svg')}}" alt="menu Icon">
-    <img src="{{ asset('icons/pencil-icon.svg')}}" alt="pencil Icon">
+    <img src="{{ asset('icons/pencil-icon.svg')}}" alt="pencil Icon" height="80px" width="80px">
     <!--  -->
 </nav>
 @yield('content')

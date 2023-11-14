@@ -1,6 +1,7 @@
+const karteContent = document.getElementById('flashCardContent');
+
 document.addEventListener('DOMContentLoaded', function() {
-    var myElement = document.getElementById('flashCardContent');
-    var hammertime = new Hammer(myElement);
+    var hammertime = new Hammer(karteContent);
     hammertime.on('swipe', function(ev) {
         console.log(ev);
        // alert(ev.direction);
@@ -29,20 +30,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function triggerAnimationRight(){
     //const karteContent = document.querySelector('.flashCardContent');
-    const karteContent = document.getElementById('flashCardContent');
     karteContent.classList.add('animate__rollOut__right');
 
-    //  make sure to remove the class after the animation ends to allow it to be triggered again
+    //  class has to be removed after the animation ends to allow it to be triggered again
     karteContent.addEventListener('animationend', function(){
         karteContent.classList.remove('animate__rollOut__right');
     });
 }
 function triggerAnimationLeft(){
-    //const karteContent = document.querySelector('.flashCardContent');
-    const karteContent = document.getElementById('flashCardContent');
     karteContent.classList.add('animate__rollOut__left');
 
-    //  make sure to remove the class after the animation ends to allow it to be triggered again
+    //  class has to be removed after the animation ends to allow it to be triggered again
     karteContent.addEventListener('animationend', function(){
         karteContent.classList.remove('animate__rollOut__left','flipInY', 'flipOutY');
     });
@@ -82,7 +80,6 @@ function handleRightClick() {
 }
 function showUebersetzung(){
 
-    const karteContent = document.getElementById('flashCardContent');
     karteContent.classList.add('animate__flipOutY');
     //  make sure to remove the class after the animate__flipOutY ends to allow the next animation to be triggered again
     karteContent.addEventListener('animationend', function(){
