@@ -9,6 +9,9 @@ body {
     padding: 0;
     margin: 0;
 }
+.footer-wrapper{
+    position: fixed;
+}
 .nav-wrapper {
     background-color: $contrast;
     color: $approve;
@@ -16,6 +19,11 @@ body {
     display: flex;
     padding: 20px;
     //add something that makes every child of here have at least 5px space between them
+}
+#profilBild{
+    height: 200px;
+    width: 280px;
+    margin: 10px;
 }
 .icons{
     margin:5px;
@@ -36,15 +44,51 @@ body {
     right:0;
     display:flex;
     justify-content:space-evenly;
-    
-
+    background-color: $background10;
+}
+.gradiant-box{
+    background-image: linear-gradient(to top, $background10, $oppacity0);
+    height :80px;
+    width: 100%;
+    position:fixed;
+    bottom:50px;
+    left:0;
+    right:0;
+}
+.heightbox{
+    height: 100px;
+}
+.mainContent{
+    padding: 5%;
+    margin: 20px;
+    background-color: $background10;
 }
 
+//fonts are gonne be colored here
+.pagetitle{
+    color: $contrast;
+    font-size: 50px;
+    font-weight: bold;
+}
+.sectiontitle{
+    color: $contrast;
+    font-size: 30px;
+    font-weight: bold;
+}
+.section-content{
+    color: $contrast;
+    font-size: 20px;
+   // text-align: justify;
+    //font-weight: bold;
+}
 
 @media screen and (max-width: $phonewidth) {
     .des-only {
         display: none;
 
+    }
+    .gradiant-box{
+        display: none;
     }
    
     .icons{
