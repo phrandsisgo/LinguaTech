@@ -1,6 +1,7 @@
 
 window.createLibraryCard = function(cardAnzahl) {//die Anzahl in der Funktion ist die Anzahl der Karten, die schon existieren
-    // Erstellen des Div-Containers
+    event.preventDefault();
+    
     var luis= document.getElementById('luis');
     var libraryCard = document.createElement('div');
     libraryCard.className = 'library-Card';
