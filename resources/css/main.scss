@@ -55,6 +55,15 @@ body {
     left:0;
     right:0;
 }
+.desktop-gradiant{
+    background-image: linear-gradient(to top, $background10, $oppacity0);
+    height :80px;
+    width: 100%;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+}
 .heightbox{
     height: 100px;
 }
@@ -87,7 +96,7 @@ body {
         display: none;
 
     }
-    .gradiant-box{
+    .desktop-gradiant{
         display: none;
     }
    
@@ -103,6 +112,9 @@ body {
     .footer_box {
         display: none;
     }
-}
+    .gradiant-box{
+        display: none;
+    }
 
+}
 

@@ -7,6 +7,7 @@
     <title>linguaTech-@yield('title')</title>
     <!-- scripts and styles-->
     @vite(['resources/css/main.scss', 'resources/js/app.js'])
+    @yield('head')
 </head>
 <body>
 <nav>
@@ -28,6 +29,7 @@
 <footer>
     <div class="footer-Wrapper">
         <div class="gradiant-box"></div>
+        <div class="desktop-gradiant"></div>
         <div class="footer_box">
             <p>lingua tech</p>
             <div class="horizontal-fill"></div>
