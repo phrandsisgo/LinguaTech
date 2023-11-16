@@ -1,9 +1,9 @@
-const karteContent = document.getElementById('flashCardContent');
+const karteContent = document.getElementById('flip-card-inner');
 
 document.addEventListener('DOMContentLoaded', function() {
     var hammertime = new Hammer(karteContent);
     hammertime.on('swipe', function(ev) {
-        console.log(ev);
+        console.log(ev+" is the direction");
        // alert(ev.direction);
         if(ev.direction === Hammer.DIRECTION_LEFT){
         triggerAnimationLeft();
@@ -78,36 +78,9 @@ function handleRightClick() {
     console.log("Rechts geklickt!");
     naechsteKarte();
 }
-/*
-function showUebersetzung(){
-    karteContent.classList.add('animate__flipOutY');
-    //  make sure to remove the class after the animate__flipOutY ends to allow the next animation to be triggered again
-    karteContent.addEventListener('animationend', function(){
-        karteContent.classList.remove('animate__flipOutY');
-        if(baseLangWord.textContent == woerterbuch[index][0]){
-            baseLangWord.textContent = woerterbuch[index][1];
-        }else{
-            baseLangWord.textContent = woerterbuch[index][0];
-        }
-        baseLangWord.removeEventListener('click', showUebersetzung);
-        //falls spiegelverkehrt-klasse vorhanden, entferne sie
-        if(baseLangWord.classList.contains('spiegelverkehrt')){
-            baseLangWord.classList.remove('spiegelverkehrt');
-        }else{
-            baseLangWord.classList.add('spiegelverkehrt');
-        }
-        element.classList.add('animate__flipInY');
 
-        element.addEventListener('animationend', function(){
-            element.classList.remove('animate__flipInY', 'animate__flipOutY', );
-        });
-    });
-    //next Animation 
-    const baseLangWord = document.querySelector('.karteInfo');
-    const index = baseLangWord.getAttribute("data-index");
-}*/
 function showUebersetzung(){
-    var flipcard = document.getElementsByClassName('flip-card-inner');
+    var flipcard = document.getElementsById('flip-card-inner');
     //I need a function that checks if the class turnCard is already there and if so, removes it
     
     if(flipcard.classList.contains('turnCard')){
@@ -127,10 +100,18 @@ function naechsteKarte() {
 }
 
 function updateKarte() {
+    /*
     const karteInfo = document.querySelector('.karteInfo');
     karteInfo.textContent = woerterbuch[aktuelleKarteIndex][0];
     karteInfo.setAttribute("data-index", aktuelleKarteIndex);
-    console.log('hallo ich wurde geladen');
+    console.log('hallo ich wurde geladen');*/
+
+    //das obere ist veraltet desswegen ein neuer Anlauf
+    const kartenTextBase = document.getElementById('baseWord');
+    const kartenTextTarget = document.getElementById('targetWord');
+    kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex][0];
+    kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex][1];
+
 }
 /*//warscheindlich braucht es diese funktion nicht nov 14
 function openModal() {
