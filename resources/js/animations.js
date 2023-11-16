@@ -78,8 +78,8 @@ function handleRightClick() {
     console.log("Rechts geklickt!");
     naechsteKarte();
 }
+/*
 function showUebersetzung(){
-
     karteContent.classList.add('animate__flipOutY');
     //  make sure to remove the class after the animate__flipOutY ends to allow the next animation to be triggered again
     karteContent.addEventListener('animationend', function(){
@@ -105,8 +105,18 @@ function showUebersetzung(){
     //next Animation 
     const baseLangWord = document.querySelector('.karteInfo');
     const index = baseLangWord.getAttribute("data-index");
-   
+}*/
+function showUebersetzung(){
+    var flipcard = document.getElementsByClassName('flip-card-inner');
+    //I need a function that checks if the class turnCard is already there and if so, removes it
+    
+    if(flipcard.classList.contains('turnCard')){
+        flipcard.classList.remove('turnCard');
+    }else{
+        flipcard.classList.add('turnCard');
+    }
 }
+
 
 function naechsteKarte() {
     aktuelleKarteIndex++;

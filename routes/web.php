@@ -38,6 +38,9 @@ Route::get('/list_create', function () {
 Route::get('/swipePlay', function () {
     return view('swipePlay');
 });
+Route::get('/playground', function () {
+    return view('playground');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

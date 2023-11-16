@@ -12,22 +12,83 @@
 @endsection
 
 @section('content')
+<!--
+<div class="karteContent">
+    <div class="flashCardContent flip-card-inner" id="flashCardContent">
+        <div class="countZeile">
+            <div class="repetitionCountBox"><p class="anzeigemargin">12</p></div>
+            <div class="countAnzeige">12/23 Wörter</div>
+            <div class="doneCountBox"><p class="anzeigemargin">12</p></div>
+        </div>
+        <div class="flipcardWordWrapper">
+            <p class="flipcardWord">word</p>
+        </div>
+        <div class="displayFlex">
+            <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+            <div class="horizontal-fill"></div>
+            <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
 
+        </div>
 
-    <div id="karteModal" class="modal">
-        <div class="karteContent animate__flip" id="flashCardContent">   
-            <div class="confirmRight"><img src="https://www.svgrepo.com/show/384403/accept-check-good-mark-ok-tick.svg" alt="accept" height="20px" onclick="handleRightClick()"></div>
-            <div class="confirmLeft">
-                <img src="{{ asset('questionmark-icon.svg')}}" alt="questionmark-icon" height="20" onclick="handleLeftClick()">
-            </div>
-            <div class="kartenInhalt">
-                <div class="karteLeft" onclick="handleLeftClick()">← Links </div>
-
-                <div> </div>
-                <span onclick="showUebersetzung()"><div class="karteInfo">kart1</div></span>
-                <div> </div>
-                <div class="karteRight" onclick="handleRightClick()">Rechts →</div>
-            </div> 
-         
     </div>
+
+    <div class="flashCardContent" id="flashCardContent">
+        <div class="countZeile">
+            <div class="repetitionCountBox"><p class="anzeigemargin">12</p></div>
+            <div class="countAnzeige">12/23 Wörter</div>
+            <div class="doneCountBox"><p class="anzeigemargin">12</p></div>
+        </div>
+        <div class="flipcardWordWrapper">
+            <p class="flipcardWord">word</p>
+        </div>
+        <div class="displayFlex">
+            <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+            <div class="horizontal-fill"></div>
+            <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+
+        </div>
+
+    </div>
+</div>
+-->
+<div class="karteContent">
+    <div class="flip-card-inner">
+        <div class="flashCardContent frontface" id="flashCardContent">
+            <div class="countZeile">
+                <div class="repetitionCountBox"><p class="anzeigemargin">12</p></div>
+                <div class="countAnzeige">12/23 Wörter</div>
+                <div class="doneCountBox"><p class="anzeigemargin">11</p></div>
+            </div>
+            <div class="flipcardWordWrapper" onclick="showUebersetzung()">
+                <p class="flipcardWord">word</p>
+            </div>
+            <div class="displayFlex">
+                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <div class="horizontal-fill"></div>
+                <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+
+            </div>
+
+        </div>
+
+        <div class="flashCardContent backface" id="flashCardContent">
+            <div class="countZeile">
+                <div class="repetitionCountBox"><p class="anzeigemargin">12</p></div>
+                <div class="countAnzeige">12/23 Wörter</div>
+                <div class="doneCountBox"><p class="anzeigemargin">11</p></div>
+            </div>
+            <div class="flipcardWordWrapper">
+                <p class="flipcardWord">Wort</p>
+            </div>
+            <div class="displayFlex">
+                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <div class="horizontal-fill"></div>
+                <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @endsection
