@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WordListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,12 @@ Route::get('/about_me', function () {
 Route::get('/about_project', function () {
     return view('about_project');
 });
-Route::get('/library', function () {
+Route::get('/library-old', function () {
     return view('library');
 });
+
+Route::get('/library',[WordListController::class,'library'])->name('library');
+
 Route::get('/list_show', function () {
     return view('list_show');
 });
