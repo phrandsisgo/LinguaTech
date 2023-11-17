@@ -23,6 +23,24 @@ Route::get('/swipeTest', function () {
 Route::get('/home_logged', function () {
     return view('home_logged');
 });
+Route::get('/about_project', function () {
+    return view('about_project');
+});
+Route::get('/library', function () {
+    return view('library');
+});
+Route::get('/list_show', function () {
+    return view('list_show');
+});
+Route::get('/list_create', function () {
+    return view('list_create');
+});
+Route::get('/swipePlay', function () {
+    return view('swipePlay');
+});
+Route::get('/playground', function () {
+    return view('playground');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
