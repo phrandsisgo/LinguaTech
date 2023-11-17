@@ -12,12 +12,18 @@
 <body>
 <nav>
    <div class="nav-wrapper">
+    <a href="/about_project">
         <img src="{{ asset('icons/home-icon.svg')}}" alt="home Icon" class="icons">
+    </a>
         <div class="horizontal-fill"></div>
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
-        <img src="{{ asset('icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
-        <img src="{{ asset('icons/library-icon.svg')}}" alt="library Icon" class="icons des-only">
+        <a href="/about_me">
+            <img src="{{ asset('icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
+        </a>
+        <a href="/library">
+            <img src="{{ asset('icons/library-icon.svg')}}" alt="library Icon" class="icons des-only">
+        </a>
         <img src="{{ asset('icons/menu-icon.svg')}}" alt="menu Icon" class="icons">
         <!--  -->
    </div> 
@@ -33,9 +39,13 @@
         <div class="footer_box">
             <p>lingua tech</p>
             <div class="horizontal-fill"></div>
-            <img src="{{ asset('icons/info-icon.svg')}}" alt="impressum Icon" class="icons">
+            <a href="/about_me">
+                <img src="{{ asset('icons/info-icon.svg')}}" alt="impressum Icon" class="icons">
+            </a>
             <div class="horizontal-fill"></div>
-            <img src="{{ asset('icons/library-icon.svg')}}" alt="library Icon" class="icons ">
+            <a href="/library">
+                <img src="{{ asset('icons/library-icon.svg')}}" alt="library Icon" class="icons ">
+            </a>
             <div class="horizontal-fill"></div>
         </div>
     </div>

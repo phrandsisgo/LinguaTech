@@ -20,8 +20,8 @@ Route::get('/', function () {
 Route::get('/swipeTest', function () {
     return view('swipeTest');
 });
-Route::get('/home_logged', function () {
-    return view('home_logged');
+Route::get('/about_me', function () {
+    return view('about_me');
 });
 Route::get('/about_project', function () {
     return view('about_project');

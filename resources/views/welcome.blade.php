@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>In Bearbeitung</title>
-    <link rel="stylesheet" href="{{ asset('css/maintenance.css') }}">
+
+@extends('layouts.lingua_main')
+@section('title', 'under construction')
+@section('head')
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
         .container {
@@ -35,8 +28,8 @@
         }
 
     </style>
-</head>
-<body>
+@endsection
+@section('content')
     <div class="container">
         <h3>english below!</h3>
         <h1>Website in Bearbeitung</h1>
@@ -59,5 +52,4 @@
         <p>weil sich die Seite noch in einer Bearbeitungsphase befindet, können neue Accounts nur durch Admins erstellt werden. Aber falls du ein Login besitzst, dann melde dich <a href="/register">hier</a> an. </p>
         <p>because the site is still in an editing phase, new accounts can only be created by admins. But if you have a login, then log in <a href="/register">here</a>. </p>
     </div>
-</body>
-</html>
+@endsection
