@@ -22,11 +22,14 @@
     <p class="sectiontitle center-vertically">targetword</p>
 </div>
 
+@foreach ($begriffe as $begriffe)
+    
 <div class="library-Card">
-    <p class="sectiontitle center-vertically">baseword</p>
+    <p class="sectiontitle center-vertically">{{ $begriffe->base_word}}</p>
     <hr class="hrborder">
-    <p class="sectiontitle center-vertically">targetword</p>
+    <p class="sectiontitle center-vertically">{{ $begriffe->target_word }}</p>
 </div>
+@endforeach
 
 
 @endsection

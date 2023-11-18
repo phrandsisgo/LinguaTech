@@ -27,15 +27,16 @@ Route::get('/about_me', function () {
 Route::get('/about_project', function () {
     return view('about_project');
 });
-Route::get('/library-old', function () {
-    return view('library');
-});
 
 Route::get('/library',[WordListController::class,'library'])->name('library');
 
+Route::get('/list_show/{id}',[WordListController::class,'listShow'])->name('list_show');
+/*
 Route::get('/list_show', function () {
     return view('list_show');
 });
+*/
+
 Route::get('/list_create', function () {
     return view('list_create');
 });
