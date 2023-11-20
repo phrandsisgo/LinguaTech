@@ -28,4 +28,7 @@ class WordList extends Model
     {
         return $this->belongsToMany(Word::class,'word_list_words', 'word_list_id', 'word_id');
     }
+    public function getWordListById($id){
+        return $this->belongsToMany(Word::class)->wherePivot('word_list_id', $id);
+    }
 }

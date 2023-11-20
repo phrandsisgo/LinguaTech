@@ -22,7 +22,7 @@
     <p class="sectiontitle center-vertically">targetword</p>
 </div>
 
-@foreach ($begriffe as $begriffe)
+@foreach ($liste->words as $begriffe)
     
 <div class="library-Card">
     <p class="sectiontitle center-vertically">{{ $begriffe->base_word}}</p>

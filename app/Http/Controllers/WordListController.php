@@ -13,9 +13,10 @@ class WordListController extends Controller{
         $libraryList = WordList::get();
         return view('library',['libraryList' => $libraryList]);
     }
-    public function listShow(){
-        $begriffe = Word::with('base','target')->get();
-        return view('list_show',['begriffe' => $begriffe]);
+    public function listShow($id){
+        $liste = WordList::with('words')->find($id);
+        // $begriffe = WordList::->getWordListById($id);
+        return view('list_show',['liste' => $liste]);
     }
 /*
     public function listShow($id){

@@ -20,10 +20,58 @@ body {
     padding: 20px;
     //add something that makes every child of here have at least 5px space between them
 }
+
+//variable für die Bilder
+@media screen and (min-width: $phonewidth) {
+
+    .hero{
+        display:flex;
+    }
+    $bildmass: 20vw;
+    #profilBild{
+        height: $bildmass;
+        width: $bildmass*1.37;
+        margin: 10px;
+        position:relative;
+        left:-44%;
+        top:-4.5%;
+    }
+    .image-crop{
+        height: $bildmass*0.95;
+        width: $bildmass*0.95;
+        overflow: hidden;
+        position:relative;
+        border-radius: 50%;
+        border: 6px solid $approve;
+        box-sizing: border-box;
+        margin: 10px auto;
+        display: block;
+    }
+}
+@media screen and (max-width: $phonewidth) {
+    
+$bildmass: 50vw;
 #profilBild{
-    height: 200px;
-    width: 280px;
+    height: $bildmass;
+    width: $bildmass*1.37;
     margin: 10px;
+    position:relative;
+    left:-44%;
+    top:-4.5%;
+}
+.image-crop{
+    height: $bildmass*0.95;
+    width: $bildmass*0.95;
+    overflow: hidden;
+    position:relative;
+    border-radius: 50%;
+    border: 6px solid $approve;
+    margin: 10px auto;
+    display: block;
+}
+}
+.heroleading{
+
 }
 .icons{
     margin:5px;
@@ -117,7 +165,7 @@ $iconSize: 50px; //gehört zu IconSize
 //fonts are gonne be colored here
 .pagetitle{
     color: $contrast;
-    font-size: 50px;
+    font-size: 2.7rem;
     font-weight: bold;
 }
 .sectiontitle{
@@ -145,7 +193,6 @@ $iconSize: 50px; //gehört zu IconSize
         margin: 0;
         height: 50px;
     }
-}
 @media screen and (min-width: $phonewidth) {
     .mob-only {
         display: block;
@@ -157,5 +204,7 @@ $iconSize: 50px; //gehört zu IconSize
         display: none;
     }
 
+
+}
 }
 
