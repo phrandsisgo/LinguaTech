@@ -17,4 +17,11 @@ class WordListController extends Controller{
         $begriffe = Word::with('base','target')->get();
         return view('list_show',['begriffe' => $begriffe]);
     }
+/*
+    public function listShow($id){
+        $begriffe = Word::with('base','target')->find($id);
+        
+        return view('list_show',['begriffe' => $begriffe]);
+    }
+*/
 }
