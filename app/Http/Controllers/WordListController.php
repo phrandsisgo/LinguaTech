@@ -23,6 +23,40 @@ class WordListController extends Controller{
     }
 
     public function list_update_function(Request $request, $id){
+        $liste = WordList::find($id);
+        $baseWords = $request->baseWord;
+        $targetWords = $request->targetWord;
+        $wordIds = $request->wordIds;
+    
+        foreach ($wordIds as $index => $wordId) {
+            if ($wordId === 'new') {
+                $word = new Word;
+                $word->base_word = $baseWords[$index];
+                $word->target_word = $targetWords[$index];
+                $word->base_language_id = 1;
+                $word->target_language_id = 2;
+                $word->save();
+                $liste->words()->attach($word->id);
+            } else {
+                $word = Word::find($wordId);
+                if ($word) { // Stellen Sie sicher, dass das Wort gefunden wurde
+                    $word->base_word = $baseWords[$index];
+                    $word->target_word = $targetWords[$index];
+                    $word->save();
+                    $liste->words()->syncWithoutDetaching($word->id);
+                }
+            }
+        }
+    
+        $liste->name = $request->listTitle;
+        $liste->description = $request->listDescription;
+        $liste->save();
+    
+        return redirect('/library');
+    }
+    
+    /*
+    public function list_update_function(Request $request, $id){
         //dd($request);
         $liste = WordList::find($request->id);
         $baseWords = $request->baseWord;

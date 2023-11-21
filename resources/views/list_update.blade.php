@@ -8,6 +8,7 @@
 @section('content')
 <!--ich muss daraus ein component machen--->
 <p class="pagetitle">Deine Liste bearbeiten</p>
+<p>{{$liste}}</p>
 
 <form action="/list_update_function/{{$liste->id}}"  method="POST">
     @csrf
