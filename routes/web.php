@@ -34,6 +34,9 @@ Route::get('/list_show/{id}',[WordListController::class,'listShow'])->name('list
 
 Route::get('/list_update/{id}', [WordListController::class,'listLoad'])->name('list_load');
 
+Route::post('/list_update_function/{id}', [WordListController::class, 'list_update_function'])
+->name('list_update_function');//middleware is missing here
+
 Route::get('/list_create', function () {
     return view('list_create');
 });

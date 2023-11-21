@@ -1,15 +1,24 @@
 
 window.createLibraryCard = function(cardAnzahl) {//die Anzahl in der Funktion ist die Anzahl der Karten, die schon existieren
     event.preventDefault();
+    alert(cardAnzahl);
     
     var luis= document.getElementById('luis');
     var libraryCard = document.createElement('div');
     libraryCard.className = 'library-Card';
 
+
+    // Verstecktes Feld für die Wort-ID (mit speziellem Wert für neue Wörter)
+    var inputWordId = document.createElement('input');
+    inputWordId.setAttribute('type', 'hidden');
+    inputWordId.setAttribute('name', 'wordIds[]');
+    inputWordId.setAttribute('value', 'new');
+    libraryCard.appendChild(inputWordId);
+
     // Erstellen des ersten Input-Feldes
     var inputBaseWord = document.createElement('input');
     inputBaseWord.setAttribute('type', 'text');
-    inputBaseWord.setAttribute('name', 'baseWord');
+    inputBaseWord.setAttribute('name', 'baseWord[]');
     inputBaseWord.setAttribute('id', 'baseWord'+cardAnzahl);
     inputBaseWord.setAttribute('placeholder', 'Basiswort');
     inputBaseWord.className = 'inputField';
@@ -24,7 +33,7 @@ window.createLibraryCard = function(cardAnzahl) {//die Anzahl in der Funktion is
     // Erstellen des zweiten Input-Feldes
     var inputTargetWord = document.createElement('input');
     inputTargetWord.setAttribute('type', 'text');
-    inputTargetWord.setAttribute('name', 'targetWord');
+    inputTargetWord.setAttribute('name', 'targetWord[]');
     inputTargetWord.setAttribute('id', 'targetWord'+cardAnzahl);
     inputTargetWord.setAttribute('placeholder', 'Zielwort');
     inputTargetWord.className = 'inputField';
