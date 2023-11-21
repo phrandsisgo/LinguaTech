@@ -7,20 +7,17 @@
 
 @section('content')
 <!--ich muss daraus ein component machen--->
-<p class="pagetitle">Listentitel</p>
-<p class="section-content">Eine Beschreibung der Listeninhalte und wofür diese Liste gebraucht werden kann.</p>
-
-<div class="library-Card">
-    <p class="sectiontitle center-vertically">baseword</p>
-    <hr class="hrborder">
-    <p class="sectiontitle center-vertically">targetword</p>
+<div class="displayFlex">
+    <div>
+        <p class="pagetitle">{{$liste->name}}</p>
+        <p class="section-content">{{$liste->description}}</p>
+    </div>
+    <div class="horizontal-fill"></div>
+    <div>
+        <a href="/list_update/{{$liste->id}}"><p class="pagetitle noUnderline">Bearbeiten</p></a>
+    </div>
 </div>
 
-<div class="library-Card">
-    <p class="sectiontitle center-vertically">baseword</p>
-    <hr class="hrborder">
-    <p class="sectiontitle center-vertically">targetword</p>
-</div>
 
 @foreach ($liste->words as $begriffe)
     

@@ -31,11 +31,8 @@ Route::get('/about_project', function () {
 Route::get('/library',[WordListController::class,'library'])->name('library');
 
 Route::get('/list_show/{id}',[WordListController::class,'listShow'])->name('list_show');
-/*
-Route::get('/list_show', function () {
-    return view('list_show');
-});
-*/
+
+Route::get('/list_update/{id}', [WordListController::class,'listLoad'])->name('list_load');
 
 Route::get('/list_create', function () {
     return view('list_create');

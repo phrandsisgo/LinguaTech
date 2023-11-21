@@ -15,8 +15,11 @@ class WordListController extends Controller{
     }
     public function listShow($id){
         $liste = WordList::with('words')->find($id);
-        // $begriffe = WordList::->getWordListById($id);
         return view('list_show',['liste' => $liste]);
+    }
+    public function listLoad($id){
+        $liste = WordList::with('words')->find($id);
+        return view('list_update',['liste' => $liste]);
     }
 /*
     public function listShow($id){
