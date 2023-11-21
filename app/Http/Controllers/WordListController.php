@@ -21,6 +21,34 @@ class WordListController extends Controller{
         $liste = WordList::with('words')->find($id);
         return view('list_update',['liste' => $liste]);
     }
+
+    public function list_update_function(Request $request, $id){
+        //dd($request);
+        $liste = WordList::find($request->id);
+        $baseWords = $request->baseWord;
+        $targetWords = $request->targetWord;
+        $wordIds = $request->wordIds;
+        foreach ($wordIds as $index => $wordId) {
+            if ($wordId === 'new'){
+                $word = new Word();
+                $word->save();
+                $liste->words()->attach($word->id);
+            }else {
+                
+                $word = Word::find($wordId);
+                if(!$word){
+                    $word->base_word = $baseWords[$index];
+                    $word->target_word = $targetWords[$index];
+                    $word->save();
+                }
+            $liste->words()->syncWithoutDetaching($word->id);
+            }
+        }
+        $liste->name = $request->listTitle;
+        $liste->description = $request->listDescription;
+        $liste->save();
+        return redirect('/library');
+    }
 /*
     public function listShow($id){
         $begriffe = Word::with('base','target')->find($id);
