@@ -87,12 +87,12 @@ class WordListController extends Controller{
         return redirect('/library');
     }
 
-    public function word_delete_function($id){
+    public function word_delete_function($id, $listId){
         $word = Word::find($id);
         $word->lists()->detach();
         $word->users()->detach();
         $word->delete();
-        return redirect('/list_show/$id');
+        return redirect('/list_show/'.$listId);
     }
     
 }

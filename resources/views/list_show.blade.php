@@ -28,7 +28,7 @@
                 <hr class="hrborder">
                 <p class="sectiontitle center-vertically">{{ $begriffe->target_word }}</p>
         </div>
-        <form action="/word_delete_function/{{$begriffe->id}}" method="POST">
+        <form action="/word_delete_function/{{$begriffe->id}}/{{$liste->id}}" method="POST">
                 @csrf
                 <button type="submit" class="delete-hitbox">
                

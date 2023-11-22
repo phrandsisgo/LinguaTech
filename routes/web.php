@@ -43,7 +43,7 @@ Route::post('/list_create_function', [WordListController::class, 'list_create_fu
 Route::post('/list_delete_function/{id}', [WordListController::class, 'list_delete_function'])
 ->name('list_delete_function');//middleware is missing here
 
-Route::post('/word_delete_function/{id}', [WordListController::class, 'word_delete_function'])
+Route::post('/word_delete_function/{id}/{listId}', [WordListController::class, 'word_delete_function'])
 ->name('word_delete_function');//middleware is missing here
 
 Route::get('/list_create', function () {
