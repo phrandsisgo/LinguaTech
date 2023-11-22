@@ -76,5 +76,11 @@ class WordListController extends Controller{
         }
         return redirect('/library');
     }
+
+    public function list_delete_function($id){
+        $liste = WordList::find($id);
+        $liste->delete();
+        return redirect('/library');
+    }
     
 }

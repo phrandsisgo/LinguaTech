@@ -1,8 +1,30 @@
 @extends('layouts.lingua_main')
 @section('title', 'Home')
 @section('head')
-<!-- ich muss noch fragen wesswegen library.scss nicht funktioniert-->
-@vite('resources/css/library.scss')
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // ,'resources/js/delete-functions.js'
+    function deleteList(id) {
+        var bestaetigung = confirm("Sind Sie sicher, dass Sie diesen Post unwiderruflich löschen möchten?");
+
+        // Überprüfen, ob der Benutzer auf "OK" geklickt hat
+        if (bestaetigung) {  
+            axios.post('/list_delete_function/'+id)
+            .then(function(response) {
+            location.reload();
+        })
+            console.log("Post wurde gelöscht.");
+        } else {
+            console.log("Löschvorgang abgebrochen.");
+        }
+
+        event.preventDefault();
+        return false;
+    }
+</script>
+
+
+
 @endsection
 
 @section('content')
@@ -22,7 +44,19 @@
     
 <div class="library-Card">
     <a href="/list_show/{{$libraryList->id}}">
-        <p class="cardTitle">{{$libraryList->name}}</p>
+        <div class="displayFlex">
+            <p class="cardTitle">{{$libraryList->name}}</p>
+            <div class="horizontal-fill"></div>
+            
+            <form action="/list_delete_function/{{$libraryList->id}}" method="POST">
+                @csrf
+                <button type="submit" class="delete-hitbox">
+               
+                    <img src="{{ asset('icons/trash-icon.svg')}}" alt="Löschen Icon">
+              
+                </button>
+            </form>
+        </div>
         <div></div>
         <div>
             <!-- give me the amount of words next-->
@@ -35,7 +69,8 @@
         </div>
     </a>
 </div>
-@endforeach
 
+@endforeach
+@vite(['resources/css/library.scss'])
 
 @endsection
