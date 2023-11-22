@@ -33,8 +33,8 @@ class WordListController extends Controller{
                 $word = new Word;
                 $word->base_word = $baseWords[$index];
                 $word->target_word = $targetWords[$index];
-                $word->base_language_id = 1;
-                $word->target_language_id = 2;
+                /* $word->base_language_id = 1;
+                $word->target_language_id = 2; */
                 $word->save();
                 $liste->words()->attach($word->id);
             } else {
@@ -54,40 +54,27 @@ class WordListController extends Controller{
     
         return redirect('/library');
     }
-    
-    /*
-    public function list_update_function(Request $request, $id){
+
+    public function list_create_function(Request $request){
+        //diese Funktion sollte nicht nur eine Liste erstellen sondern auch die Wörter aus dem Formular in die Datenbank schreiben.
+        //und dann auch die dazugehöriegen Verknüpfungen in der many-to-many Tabelle erstellen.
         //dd($request);
-        $liste = WordList::find($request->id);
-        $baseWords = $request->baseWord;
-        $targetWords = $request->targetWord;
-        $wordIds = $request->wordIds;
-        foreach ($wordIds as $index => $wordId) {
-            if ($wordId === 'new'){
-                $word = new Word();
-                $word->save();
-                $liste->words()->attach($word->id);
-            }else {
-                
-                $word = Word::find($wordId);
-                if(!$word){
-                    $word->base_word = $baseWords[$index];
-                    $word->target_word = $targetWords[$index];
-                    $word->save();
-                }
-            $liste->words()->syncWithoutDetaching($word->id);
-            }
-        }
+        $liste = new WordList;
         $liste->name = $request->listTitle;
         $liste->description = $request->listDescription;
+        $liste->created_by = 1;
         $liste->save();
+
+        foreach ($request->baseWord as $index => $baseWord) {
+            $word = new Word;
+            $word->base_word = $baseWord;
+            $word->target_word = $request->targetWord[$index];
+            $word->base_language_id = 1;
+            $word->target_language_id = 2;
+            $word->save();
+            $liste->words()->attach($word->id);
+        }
         return redirect('/library');
     }
-/*
-    public function listShow($id){
-        $begriffe = Word::with('base','target')->find($id);
-        
-        return view('list_show',['begriffe' => $begriffe]);
-    }
-*/
+    
 }

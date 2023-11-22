@@ -7,7 +7,16 @@
 
 @section('content')
 <!--ich muss ich daraus ein Component machen?--->
+<div class="displayFlex">
 
+<p class="pagetitle">Deine Bibliothek</p>
+<div class="horizontal-fill"></div>
+<a href="/list_create">
+    <div class="addButton">
+        <p class="addButtonText">neue Liste erstellen</p>
+    </div>
+</a>
+</div>
 
 @foreach ($libraryList as $libraryList)
     
