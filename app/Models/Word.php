@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Relations\BelongsToMany;
+//use Illuminate\Database\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class Word extends Model
@@ -12,9 +13,9 @@ class Word extends Model
     use HasFactory;
 
     // only needed if you want to have all listst a word belongs to(Beni)
-    // public function lists(): BelongsToMany{
-    //     return $this->belongsToMany(WordListWord::class);
-    // }
+     public function lists(): BelongsToMany{
+         return $this->belongsToMany(WordListWord::class);
+     }
 
 
     public function base(){
