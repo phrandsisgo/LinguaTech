@@ -26,15 +26,22 @@ Route::get('/about_me', function () {
 });
 Route::get('/about_project', function () {
     return view('about_project');
-});
+})->name('about_project');
 
-Route::get('/library',[WordListController::class,'library'])->name('library');
+Route::get('/library',[WordListController::class,'library'])
+->middleware('auth')
+->name('library');
 
-Route::get('/list_show/{id}',[WordListController::class,'listShow'])->name('list_show');
+Route::get('/list_show/{id}',[WordListController::class,'listShow'])
+->name('list_show');
 
-Route::get('/list_update/{id}', [WordListController::class,'listLoad'])->name('list_load');
+Route::get('/list_update/{id}', [WordListController::class,'listLoad'])
+->middleware('checkListAuthor')
+->name('list_load');
+
 
 Route::post('/list_update_function/{id}', [WordListController::class, 'list_update_function'])
+->middleware('checkListAuthor')
 ->name('list_update_function');//middleware is missing here
 
 Route::post('/list_create_function', [WordListController::class, 'list_create_function'])
@@ -49,9 +56,10 @@ Route::post('/word_delete_function/{id}/{listId}', [WordListController::class, '
 Route::get('/list_create', function () {
     return view('list_create');
 });
+
 Route::get('/swipePlay', function () {
     return view('swipePlay');
-});
+})->middleware('auth');
 Route::get('/playground', function () {
     return view('playground');
 });
@@ -65,5 +73,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+//die liste der Middlewares mit den Zuweisungen findet man unter app/Http/Kernel.php
 
 require __DIR__.'/auth.php';

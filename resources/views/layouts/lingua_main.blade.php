@@ -12,7 +12,7 @@
 <body>
 <nav>
    <div class="nav-wrapper">
-    <a href="/about_project">
+    <a href="/">
         <img src="{{ asset('icons/home-icon.svg')}}" alt="home Icon" class="icons">
     </a>
         <div class="horizontal-fill"></div>
