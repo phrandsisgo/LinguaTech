@@ -22,9 +22,22 @@
 @foreach ($liste->words as $begriffe)
     
 <div class="library-Card">
-    <p class="sectiontitle center-vertically">{{ $begriffe->base_word}}</p>
-    <hr class="hrborder">
-    <p class="sectiontitle center-vertically">{{ $begriffe->target_word }}</p>
+    <div class="displayFlex">
+        <div>
+                <p class="sectiontitle center-vertically">{{ $begriffe->base_word}}</p>
+                <hr class="hrborder">
+                <p class="sectiontitle center-vertically">{{ $begriffe->target_word }}</p>
+        </div>
+        <form action="/word_delete_function/{{$begriffe->id}}/{{$liste->id}}" method="POST">
+                @csrf
+                <button type="submit" class="delete-hitbox">
+               
+                    <img src="{{ asset('icons/trash-icon.svg')}}" alt="Löschen Icon">
+              
+                </button>
+            </form>
+        </div>
+    </div>
 </div>
 @endforeach
 
