@@ -35,8 +35,8 @@
                     <img src="{{ asset('icons/trash-icon.svg')}}" alt="Löschen Icon">
               
                 </button>
-            </form>
-        </div>
+        </form>
+        
     </div>
 </div>
 @endforeach

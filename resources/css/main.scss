@@ -70,11 +70,16 @@ $bildmass: 50vw;
     display: block;
 }
 }
-.heroleading{
 
-}
 .icons{
     margin:5px;
+}
+.iconWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
 }
 .horizontal-fill{
     flex: 1;

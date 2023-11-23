@@ -12,19 +12,19 @@
 <body>
 <nav>
    <div class="nav-wrapper">
-    <a href="/">
+    <a href="/" class="iconWrapper">
         <img src="{{ asset('icons/home-icon.svg')}}" alt="home Icon" class="icons">
     </a>
         <div class="horizontal-fill"></div>
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
-        <a href="/about_me">
+        <a href="/about_me" class="iconWrapper">
             <img src="{{ asset('icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
         </a>
-        <a href="/library">
-            <img src="{{ asset('icons/library-icon.svg')}}" alt="library Icon" class="icons des-only">
+        <a href="/library" class="iconWrapper">
+            <img src="{{ asset('icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
         </a>
-        <img src="{{ asset('icons/menu-icon.svg')}}" alt="menu Icon" class="icons">
+        <img src="{{ asset('icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
         <!--  -->
    </div> 
 </nav>
