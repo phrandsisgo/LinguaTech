@@ -36,12 +36,12 @@ Route::get('/list_show/{id}',[WordListController::class,'listShow'])
 ->name('list_show');
 
 Route::get('/list_update/{id}', [WordListController::class,'listLoad'])
-->middleware('checkListAuthor')
+//->middleware('checkListAuthor')
 ->name('list_load');
 
 
 Route::post('/list_update_function/{id}', [WordListController::class, 'list_update_function'])
-->middleware('checkListAuthor')
+//->middleware('checkListAuthor')
 ->name('list_update_function');//middleware is missing here
 
 Route::post('/list_create_function', [WordListController::class, 'list_create_function'])

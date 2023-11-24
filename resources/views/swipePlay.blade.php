@@ -12,45 +12,7 @@
 @endsection
 
 @section('content')
-<!--
-<div class="karteContent">
-    <div class="flashCardContent flip-card-inner" id="flashCardContent">
-        <div class="countZeile">
-            <div class="repetitionCountBox"><p class="anzeigemargin">12</p></div>
-            <div class="countAnzeige">12/23 Wörter</div>
-            <div class="doneCountBox"><p class="anzeigemargin">12</p></div>
-        </div>
-        <div class="flipcardWordWrapper">
-            <p class="flipcardWord">word</p>
-        </div>
-        <div class="displayFlex">
-            <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
-            <div class="horizontal-fill"></div>
-            <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
 
-        </div>
-
-    </div>
-
-    <div class="flashCardContent" id="flashCardContent">
-        <div class="countZeile">
-            <div class="repetitionCountBox"><p class="anzeigemargin">12</p></div>
-            <div class="countAnzeige">12/23 Wörter</div>
-            <div class="doneCountBox"><p class="anzeigemargin">12</p></div>
-        </div>
-        <div class="flipcardWordWrapper">
-            <p class="flipcardWord">word</p>
-        </div>
-        <div class="displayFlex">
-            <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
-            <div class="horizontal-fill"></div>
-            <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
-
-        </div>
-
-    </div>
-</div>
--->
 <div class="karteContent">
     <div class="flip-card-inner"id="flip-card-inner">
         <div class="flashCardContent frontface" id="flashCardContent">
@@ -84,9 +46,7 @@
                 <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
                 <div class="horizontal-fill"></div>
                 <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
-
             </div>
-
         </div>
     </div>
 </div>

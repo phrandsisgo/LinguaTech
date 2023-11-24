@@ -21,9 +21,24 @@ body {
     //add something that makes every child of here have at least 5px space between them
 }
 
-//variable für die Bilder
-@media screen and (min-width: $phonewidth) {
+.flipcardWordWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   // padding-top: 30%;
+   // padding-bottom: 35%;
+    border: 1px solid red;
+    
+}
 
+@media screen and (min-width: $phonewidth) {
+    .flipcardWordWrapper{
+        height:10vw;
+    }
+}
+
+@media screen and (min-width: $phonewidth) {
+//hier wird die nav bar für die Desktop ansicht angepasst
     .hero{
         display:flex;
     }
@@ -49,27 +64,30 @@ body {
     }
 }
 @media screen and (max-width: $phonewidth) {
-    
-$bildmass: 50vw;
-#profilBild{
-    height: $bildmass;
-    width: $bildmass*1.37;
-    margin: 10px;
-    position:relative;
-    left:-44%;
-    top:-4.5%;
+    .flipcardWordWrapper{
+        height:4vw;
+    }
+    $bildmass: 50vw;
+    #profilBild{
+        height: $bildmass;
+        width: $bildmass*1.37;
+        margin: 10px;
+        position:relative;
+        left:-44%;
+        top:-4.5%;
+    }
+    .image-crop{
+        height: $bildmass*0.95;
+        width: $bildmass*0.95;
+        overflow: hidden;
+        position:relative;
+        border-radius: 50%;
+        border: 6px solid $approve;
+        margin: 10px auto;
+        display: block;
+    }
 }
-.image-crop{
-    height: $bildmass*0.95;
-    width: $bildmass*0.95;
-    overflow: hidden;
-    position:relative;
-    border-radius: 50%;
-    border: 6px solid $approve;
-    margin: 10px auto;
-    display: block;
-}
-}
+
 
 .icons{
     margin:5px;
