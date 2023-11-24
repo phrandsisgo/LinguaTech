@@ -18,6 +18,11 @@
         <div class="horizontal-fill"></div>
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
+        @if (auth()->check())
+            <p>Hello {{auth()->user()->name}}</p>
+        @else
+            <a href="/login">Login</a>
+        @endif
         <a href="/about_me" class="iconWrapper">
             <img src="{{ asset('icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
         </a>

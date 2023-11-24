@@ -1,4 +1,4 @@
-@import "colors.scss";
+@import "colorsNvariables.scss";
 
 .modal {
     //display: none;
@@ -40,21 +40,7 @@
     //border: 1px solid red;
 }
 
-.karteContent {
-    align-items: center;
-   // position: fixed;
-    left: 0;
-    right:0;
-    margin: auto;
-    //margin-top: 20px;
-    //padding: 20px;
-    background-color: transparent;
-    border-radius: 18px;
-    //putting in a helper border
-    border: 4px solid $contrast60;
-    width: 60vw;// wird nur auf der Mobile ansicht gebraucht
-    height:50vh;
-}
+
  .flashCardContent{
     //border: 5px solid red;
     position:absolute;
@@ -92,6 +78,8 @@
     transition: transform 0.6s;
     transform-style: preserve-3d;
 }
+
+
 .turnCard{//gonna be added to flip-card-inner
     transform: rotateY(180deg);//hier wird die Karte mit hilfe von js umgedreht
 }

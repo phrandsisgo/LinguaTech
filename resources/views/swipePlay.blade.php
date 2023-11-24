@@ -8,7 +8,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-@vite(['resources/js/animations.js', 'resources/css/application.scss'])
+@vite(['resources/js/animations.js', 'resources/css/application.scss', 'resources/css/animations.scss'])
 @endsection
 
 @section('content')
@@ -25,9 +25,9 @@
                 <p class="flipcardWord" id="baseWord">word</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
-                <div class="horizontal-fill"></div>
                 <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <div class="horizontal-fill"></div>
+                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
 
             </div>
 

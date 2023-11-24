@@ -1,3 +1,5 @@
+@import "colorsNvariables.scss";
+
 @-webkit-keyframes rollOutRight {
     from {
         opacity: 1;
@@ -86,4 +88,29 @@
     -webkit-animation-name: flipOutY;
     animation-name: flipOutY;
     
+    }
+
+
+    //css anpassungen fürs SwipePlay
+
+    .karteContent {
+        align-items: center;
+       // position: fixed;
+        left: 0;
+        right:0;
+        margin: auto;
+        //margin-top: 20px;
+        //padding: 20px;
+        background-color: transparent;
+        border-radius: 18px;
+        //putting in a helper border
+        border: 4px solid $contrast60;
+        width: 60vw;// wird nur auf der Mobile ansicht gebraucht
+        height:50vh;
+    }
+    @media screen and (min-width: $bigwidth){
+        .karteContent{
+            width: 40vw;
+        }
+        
     }
