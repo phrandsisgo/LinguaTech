@@ -24,7 +24,7 @@
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
                 <p class="flipcardWord" id="baseWord">word</p>
             </div>
-            <div class="displayFlex">
+            <div class="displayFlex cardBottom">
                 <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
                 <div class="horizontal-fill"></div>
                 <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
@@ -43,9 +43,9 @@
                 <p class="flipcardWord" id="targetWord">Wort</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
-                <div class="horizontal-fill"></div>
                 <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <div class="horizontal-fill"></div>
+                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
             </div>
         </div>
     </div>

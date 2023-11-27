@@ -93,6 +93,41 @@
 
     //css anpassungen fürs SwipePlay
 
+    .flashCardContent{
+        //border: 5px solid red;
+        position:absolute;
+        background-color: white;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        padding-top: 20px;
+        box-sizing:border-box;
+        border-radius: 18px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+     }
+     .countZeile{
+        display: flex;
+        //margin:20;
+        padding-top: 20px;
+        justify-content: space-between;
+        background-color: #fff;
+        flex: 1;
+    }
+    
+    .flipcardWordWrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid red;
+        flex:5;
+    }
+    .cardBottom{
+        flex:2;
+    }
+
     .karteContent {
         align-items: center;
        // position: fixed;
@@ -106,7 +141,9 @@
         //putting in a helper border
         border: 4px solid $contrast60;
         width: 60vw;// wird nur auf der Mobile ansicht gebraucht
-        height:50vh;
+        //height:50vh;
+        max-width: 30rem;
+        aspect-ratio: 3/4;
     }
     @media screen and (min-width: $bigwidth){
         .karteContent{

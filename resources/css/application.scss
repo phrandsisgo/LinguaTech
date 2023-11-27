@@ -41,31 +41,11 @@
 }
 
 
- .flashCardContent{
-    //border: 5px solid red;
-    position:absolute;
-    background-color: white;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    padding-top: 20px;
-    box-sizing:border-box;
-    border-radius: 18px;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
 
- }
  .backface{
     transform:rotateY(180deg);
  }
 
-.countZeile{
-    display: flex;
-    margin:20;
-    margin-top: 40px;
-    justify-content: space-between;
-    background-color: #fff;
-}
 
 //hier sollte das umdrehen erfolgen
 .flip-card-inner{

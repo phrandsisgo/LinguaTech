@@ -1,4 +1,4 @@
-@import"colorsNvariables.scss";
+ @import"colorsNvariables.scss";
 
 
 //als erstes ändere ich die hintergrudfarbe der Seite
@@ -25,16 +25,10 @@ body {
     //add something that makes every child of here have at least 5px space between them
 }
 
-.flipcardWordWrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid red;
-    
-}
 
 
-@media screen and (min-width: $phonewidth) {
+
+/* @media screen and (min-width: $phonewidth) {
     .flipcardWordWrapper{
         height:10vw;
     }
@@ -44,7 +38,7 @@ body {
         padding-top : 30%;
         padding-bottom: 35%;
     }
-}
+} */
 
 @media screen and (min-width: $phonewidth) {
 //hier wird die nav bar für die Desktop ansicht angepasst
@@ -190,7 +184,7 @@ body {
     text-decoration: none;
 }
 
-$iconSize: 50px; //gehört zu IconSize
+$iconSize: 4rem; //gehört zu IconSize
 .iconSpacer{
     height: $iconSize;
     width: $iconSize;
