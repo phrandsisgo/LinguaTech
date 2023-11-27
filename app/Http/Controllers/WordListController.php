@@ -23,6 +23,13 @@ class WordListController extends Controller{
     }
 
     public function list_update_function(Request $request, $id){
+        $request->validate([
+            'listTitle' => 'required|min:3|max:20',
+            'baseWord.*' => 'required|min:1|max:50',
+            'targetWord.*' => 'required|min:1|max:50',
+            'listDescription' => 'max:200',
+        ]);
+
         $liste = WordList::find($id);
         $baseWords = $request->baseWord;
         $targetWords = $request->targetWord;
