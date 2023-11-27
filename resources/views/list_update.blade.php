@@ -18,10 +18,10 @@
     <p class="section-content">Die Beschreibung</p>
     <input type="text" name="listDescription" id="listDescription" value="{{$liste->description}}" placeholder="Beschreibung" class="inputField">
 
+    <div id="luis">
      @foreach ($liste->words as $begriffe)
 
 
-     <div id="luis">
         <div class="library-Card">
             <input type="hidden" name="wordIds[]" value="{{ $begriffe->id }}">
             <input type="text" name="baseWord[]" value="{{ $begriffe->base_word}}" class="inputField">
@@ -30,9 +30,9 @@
             <input type="text" name="targetWord[]"  value="{{$begriffe->target_word}}" class="inputField">
             <p class="formHelper">Target Language</p>
         </div>
-    </div>
      @endforeach
 
+     </div>
 
     <button onclick="createLibraryCard(karten); anzahlplus();//die Zahl sagt vor wie viele Begriffe bereits existieren"> weiterer Begriff hinzufügen.</button>
     <button type="submit">Änderungen abspeichern</button>
