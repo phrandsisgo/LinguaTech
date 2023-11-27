@@ -7,24 +7,31 @@ document.addEventListener('DOMContentLoaded', function() {
        // alert(ev.direction);
         if(ev.direction === Hammer.DIRECTION_LEFT){
         triggerAnimationLeft();
-           // alert("swipe left");
-            handleLeftClick();
+            handleLeftClickLeft();
         }else if(ev.direction === Hammer.DIRECTION_RIGHT){
         triggerAnimationRight();
-            //alert("swipe right");
             handleRightClick();
         }
     });
 
     function handleLeftClickLeft() {
+     // alert("swipe left");
         triggerAnimationLeft();
-        //console.log("Links geklickt!");
         naechsteKarte();
+        repAzeig++;
+        document.getElementById('repAzeigA').innerHTML=repetitionAnzeige;
+        document.getElementById('repAzeigB').innerHTML=repetitionAnzeige;
     }
+    
+    
     function handleRightClick() {
         triggerAnimationRight();
-       // console.log("Rechts geklickt!");
+        // console.log("Rechts geklickt!");
+       
         naechsteKarte();
+        doneAnzeige++;
+        document.getElementById('doneAnzeigeA').innerHTML=doneAnzeige;
+        document.getElementById('doneAnzeigeB').innerHTML=doneAnzeige;
  }
 });
 
@@ -46,30 +53,13 @@ function triggerAnimationLeft(){
     });
 }
 
-const karten = [
-    'Karte 1',
-    'Karte 2',
-    'Karte 3',
-    'Karte 4',
-    'Karte 5',
-];
-const woerterbuch = [
-    ["libro", "Buch"],
-    ["mesa", "Tisch"],
-    ["silla", "Stuhl"],
-    ["puerta", "Tür"],
-    ["ventana", "Fenster"],
-    ["agua", "Wasser"],
-    ["sol", "Sonne"],
-    ["luna", "Mond"],
-    ["cielo", "Himmel"],
-    ["estrella", "Stern"],
-    // ... Fügen Sie hier weitere Wörter hinzu
-];
+
+
+
 let aktuelleKarteIndex = 0;
 
 
-function handleLeftClick() {
+/* function handleLeftClick() {
    // console.log("Links geklickt!");
     naechsteKarte();
 }
@@ -78,7 +68,7 @@ function handleRightClick() {
     console.log("Rechts geklickt!");
     naechsteKarte();
 }
-
+ */
 function showUebersetzung(){
     var flipcard = document.getElementsById('flip-card-inner');
     //I need a function that checks if the class turnCard is already there and if so, removes it
@@ -100,24 +90,18 @@ function naechsteKarte() {
 }
 
 function updateKarte() {
-    /*
-    const karteInfo = document.querySelector('.karteInfo');
-    karteInfo.textContent = woerterbuch[aktuelleKarteIndex][0];
-    karteInfo.setAttribute("data-index", aktuelleKarteIndex);
-    console.log('hallo ich wurde geladen');*/
+    var countAnzeigeA = document.getElementById('countAnzeigeA');
+    var countAnzeigeB = document.getElementById('countAnzeigeB');
+    countAnzeigeA.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
+    countAnzeigeB.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
 
-    //das obere ist veraltet desswegen ein neuer Anlauf
+
     const kartenTextBase = document.getElementById('baseWord');
     const kartenTextTarget = document.getElementById('targetWord');
     kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex][0];
     kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex][1];
 
 }
-/*//warscheindlich braucht es diese funktion nicht nov 14
-function openModal() {
-    document.getElementById('karteModal').style.display = 'block';
-    updateKarte();
-}*/
 document.getElementById('zurueckBtn').addEventListener('click', function() {
     document.getElementById('karteModal').style.display = 'none';
 });

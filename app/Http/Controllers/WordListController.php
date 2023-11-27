@@ -62,12 +62,17 @@ class WordListController extends Controller{
         return redirect('/library');
     }
 
+    public function swipeLearn($id){
+        $liste = WordList::with('words')->find($id);
+        return view('swipeLearn',['liste' => $liste]);
+    }
+
     public function list_create_function(Request $request){
         //diese Funktion sollte nicht nur eine Liste erstellen sondern auch die Wörter aus dem Formular in die Datenbank schreiben.
         //und dann auch die dazugehöriegen Verknüpfungen in der many-to-many Tabelle erstellen.
         //dd($request);
         $request->validate([
-            'listTitle' => 'required|min:3|max:20',
+            'listTitle' => 'required|min:3|max:40',
             'baseWord.*' => 'required|min:1|max:50',
             'targetWord.*' => 'required|min:1|max:50',
             'listDescription' => 'max:200',

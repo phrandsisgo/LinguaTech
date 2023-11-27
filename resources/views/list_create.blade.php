@@ -54,9 +54,9 @@ document.getElementById('list_create_form').addEventListener('submit', function(
     const listDescription = document.getElementById('listDescription');
 
     // Validierung für Listentitel
-    if (listTitle.value.trim().length < 3 || listTitle.value.trim().length > 20) {
+    if (listTitle.value.trim().length < 3 || listTitle.value.trim().length > 40) {
         isValid = false;
-        alert('Titel muss zwischen 3 und 20 Zeichen lang sein.');
+        alert('Titel muss zwischen 3 und 40 Zeichen lang sein.');
     }
 
     // Validierung für Listenbeschreibung

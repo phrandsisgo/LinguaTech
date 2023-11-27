@@ -32,6 +32,10 @@ Route::get('/library',[WordListController::class,'library'])
 ->middleware('auth')
 ->name('library');
 
+Route::get('/swipeLearn/{id}',[WordListController::class,'swipeLearn'])
+->middleware('auth')
+->name('swipeLearn');
+
 Route::get('/list_show/{id}',[WordListController::class,'listShow'])
 ->name('list_show');
 

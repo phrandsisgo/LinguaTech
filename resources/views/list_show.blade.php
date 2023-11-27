@@ -21,6 +21,9 @@ function confirmDelete() {
     <div>
         <a href="/list_update/{{$liste->id}}"><p class="pagetitle noUnderline">Bearbeiten</p></a>
     </div>
+    <div>
+        <a href="/swipeLearn/{{$liste->id}}"><p class="pagetitle noUnderline">Lernen</p></a>
+    </div>
 </div>
 
 
