@@ -11,6 +11,11 @@ body {
 .footer-wrapper{
     position: fixed;
 }
+.error{
+    color: $deny;
+    font-size: 1rem;
+    font-weight: bold;
+}
 .nav-wrapper {
     background-color: $contrast;
     color: $approve;

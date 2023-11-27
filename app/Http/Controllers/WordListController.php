@@ -59,18 +59,25 @@ class WordListController extends Controller{
         //diese Funktion sollte nicht nur eine Liste erstellen sondern auch die Wörter aus dem Formular in die Datenbank schreiben.
         //und dann auch die dazugehöriegen Verknüpfungen in der many-to-many Tabelle erstellen.
         //dd($request);
+        $request->validate([
+            'listTitle' => 'required|min:3|max:20',
+            'baseWord.*' => 'required|min:1|max:50',
+            'targetWord.*' => 'required|min:1|max:50',
+            'listDescription' => 'max:200',
+        ]);
         $liste = new WordList;
         $liste->name = $request->listTitle;
         $liste->description = $request->listDescription;
         $liste->created_by = 1;
         $liste->save();
 
+
         foreach ($request->baseWord as $index => $baseWord) {
             $word = new Word;
             $word->base_word = $baseWord;
             $word->target_word = $request->targetWord[$index];
-            $word->base_language_id = 1;
-            $word->target_language_id = 2;
+            $word->base_language_id = 1;//muss noch zu einem späteren Zeitpunkt angepasst werden.
+            $word->target_language_id = 2;//muss noch zu einem späteren Zeitpunkt angepasst werden.
             $word->save();
             $liste->words()->attach($word->id);
         }
