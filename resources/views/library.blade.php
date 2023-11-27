@@ -23,6 +23,7 @@
     }
 </script>
 
+@vite(['resources/css/library.scss'])
 
 
 @endsection
@@ -71,6 +72,5 @@
 </div>
 
 @endforeach
-@vite(['resources/css/library.scss'])
 
 @endsection

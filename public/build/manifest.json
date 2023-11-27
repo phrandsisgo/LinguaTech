@@ -4,8 +4,13 @@
     "isEntry": true,
     "src": "resources/css/app.css"
   },
+  "resources/css/library.scss": {
+    "file": "assets/library-e1e3e954.css",
+    "isEntry": true,
+    "src": "resources/css/library.scss"
+  },
   "resources/css/main.scss": {
-    "file": "assets/main-85a20d54.css",
+    "file": "assets/main-0a0fc4c7.css",
     "isEntry": true,
     "src": "resources/css/main.scss"
   },
