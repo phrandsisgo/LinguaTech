@@ -20,7 +20,11 @@
 
         event.preventDefault();
         return false;
+
     }
+    function confirmDelete() {
+    return confirm('sind sie sich sicher, dass sie diese Liste löschen wollen?');
+}
 </script>
 
 @vite(['resources/css/library.scss'])
@@ -49,7 +53,7 @@
             <p class="cardTitle">{{$libraryList->name}}</p>
             <div class="horizontal-fill"></div>
             
-            <form action="/list_delete_function/{{$libraryList->id}}" method="POST">
+            <form action="/list_delete_function/{{$libraryList->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 <button type="submit" class="delete-hitbox">
                

@@ -3,6 +3,11 @@
 @section('head')
 <!-- ich muss noch fragen wesswegen library.scss nicht funktioniert-->
 @vite('resources/css/library.scss')
+<script>
+function confirmDelete() {
+    return confirm('sind sie sich sicher, dass sie dieses Wort löschen wollen?');
+}
+</script>
 @endsection
 
 @section('content')
@@ -28,7 +33,7 @@
                 <hr class="hrborder">
                 <p class="sectiontitle center-vertically">{{ $begriffe->target_word }}</p>
         </div>
-        <form action="/word_delete_function/{{$begriffe->id}}/{{$liste->id}}" method="POST">
+        <form action="/word_delete_function/{{$begriffe->id}}/{{$liste->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 <button type="submit" class="delete-hitbox">
                
