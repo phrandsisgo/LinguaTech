@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WordListController;
+use App\Http\Controllers\PatchNotesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,8 @@ Route::get('/list_update/{id}', [WordListController::class,'listLoad'])
 //->middleware('checkListAuthor')
 ->name('list_load');
 
+Route::get('/showPatch/{id}', [PatchNotesController::class,'showPatch'])
+->name('showPatch');
 
 Route::post('/list_update_function/{id}', [WordListController::class, 'list_update_function'])
 //->middleware('checkListAuthor')
@@ -60,6 +63,7 @@ Route::post('/word_delete_function/{id}/{listId}', [WordListController::class, '
 Route::get('/list_create', function () {
     return view('list_create');
 });
+
 
 Route::get('/swipePlay', function () {
     return view('swipePlay');
