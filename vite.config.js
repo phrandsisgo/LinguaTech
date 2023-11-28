@@ -8,9 +8,12 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/main.scss',
                 'resources/css/library.scss',
+                'resources/css/application.scss',
+                'resources/css/animations.scss',
                 'resources/js/app.js',
                 'resources/js/list-create.js',
                 'resources/js/animations.js',
+
             ],
             refresh: true,
         }),

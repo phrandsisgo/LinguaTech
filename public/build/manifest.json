@@ -1,8 +1,18 @@
 {
+  "resources/css/animations.scss": {
+    "file": "assets/animations-7236be0f.css",
+    "isEntry": true,
+    "src": "resources/css/animations.scss"
+  },
   "resources/css/app.css": {
     "file": "assets/app-14150bdf.css",
     "isEntry": true,
     "src": "resources/css/app.css"
+  },
+  "resources/css/application.scss": {
+    "file": "assets/application-c9729e96.css",
+    "isEntry": true,
+    "src": "resources/css/application.scss"
   },
   "resources/css/library.scss": {
     "file": "assets/library-e1e3e954.css",
