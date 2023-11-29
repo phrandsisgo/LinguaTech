@@ -15,7 +15,7 @@
             <div class="comment">
                 <p>{{$comment->comment}}</p>
                 <p>{{$comment->user ? $comment->user->name : 'deleted-user'}}</p>
-            {{dd($comment);}}
+            
             </div>
         @endforeach
     </div>

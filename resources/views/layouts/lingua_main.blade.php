@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>linguaTech-@yield('title')</title>
-    <!-- scripts and styles-->
+    
     @vite(['resources/css/main.scss', 'resources/js/app.js'])
     @yield('head')
 </head>
@@ -29,8 +31,25 @@
         <a href="/library" class="iconWrapper">
             <img src="{{ asset('icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
         </a>
-        <img src="{{ asset('icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
-        <!--  -->
+        <!-- <img src="{{ asset('icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
+         -->
+         <div class="btn-group">
+            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ asset('icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="/about_me">Über den Entwickler</a></li>
+                <li><a class="dropdown-item" href="/about_project">Über das projekt</a></li>
+                <li><a class="dropdown-item" href="/showPatch/1">ReleaseNotes</a></li>
+                @if (auth()->check())
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                @else
+                    <li><a class="dropdown-item" href="/login">Login</a></li>
+                    <li><a class="dropdown-item" href="/register">Register</a></li>
+                @endif
+            </ul>
+        </div>
+
    </div> 
 </nav>
 <div class="mainContent">
