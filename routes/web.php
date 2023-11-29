@@ -47,6 +47,9 @@ Route::get('/list_update/{id}', [WordListController::class,'listLoad'])
 Route::get('/showPatch/{id}', [PatchNotesController::class,'showPatch'])
 ->name('showPatch');
 
+Route::post('/releaseNotesComment/{id}', [PatchNotesController::class,'releaseNotesComment'])
+->name('releaseNotesComment');
+
 Route::post('/list_update_function/{id}', [WordListController::class, 'list_update_function'])
 //->middleware('checkListAuthor')
 ->name('list_update_function');//middleware is missing here
