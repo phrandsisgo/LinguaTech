@@ -21,7 +21,7 @@ body {
     color: $approve;
     position: sticky;
     display: flex;
-    padding: 20px;
+    padding: 8px;
     //add something that makes every child of here have at least 5px space between them
 }
 
@@ -214,6 +214,9 @@ $iconSize: 4rem; //gehört zu IconSize
         display: none;
 
     }
+    .begruessung{
+        display:none;
+    }
     .desktop-gradiant{
         display: none;
     }
@@ -222,11 +225,11 @@ $iconSize: 4rem; //gehört zu IconSize
         margin: 0;
         height: 50px;
     }
-@media screen and (min-width: $phonewidth) {
+@media screen and (min-width: 650px) {
     .mob-only {
         display: block;
     }
-    .footer_box {
+    .footer-Wrapper {
         display: none;
     }
     .gradiant-box{

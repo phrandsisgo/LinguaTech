@@ -21,9 +21,9 @@
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
         @if (auth()->check())
-            <p>Hello {{auth()->user()->name}}</p>
+            <p class="begruessung">Hello {{auth()->user()->name}}</p>
         @else
-            <a href="/login">Login</a>
+            <a href="/login" class="begruessung">Login</a>
         @endif
         <a href="/about_me" class="iconWrapper">
             <img src="{{ asset('icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
@@ -38,9 +38,11 @@
                 <img src="{{ asset('icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
+                <li class="mob-only"><a class="dropdown-item" href="/library">Bibliothek</a></li>
                 <li><a class="dropdown-item" href="/about_me">Über den Entwickler</a></li>
                 <li><a class="dropdown-item" href="/about_project">Über das projekt</a></li>
-                <li><a class="dropdown-item" href="/showPatch/1">ReleaseNotes</a></li>
+                <li><a class="dropdown-item" href="/showPatch/1">Neuigkeiten</a></li>
+
                 @if (auth()->check())
                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
                 @else
@@ -57,6 +59,7 @@
 </div>
 <div class="heightbox"></div>
 <footer>
+    <!--
     <div class="footer-Wrapper">
         <div class="gradiant-box"></div>
         <div class="desktop-gradiant"></div>
@@ -72,7 +75,7 @@
             </a>
             <div class="horizontal-fill"></div>
         </div>
-    </div>
+    </div>-->
 </footer>
 
 </body>
