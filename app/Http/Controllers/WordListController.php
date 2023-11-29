@@ -80,7 +80,7 @@ class WordListController extends Controller{
         $liste = new WordList;
         $liste->name = $request->listTitle;
         $liste->description = $request->listDescription;
-        $liste->created_by = 1;
+        $liste->created_by = auth()->user()->id;
         $liste->save();
 
 

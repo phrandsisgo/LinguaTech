@@ -1,9 +1,11 @@
 @extends('layouts.lingua_main')
 @section('title', 'Home')
 @section('head')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/css/bootstrap5-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/js/bootstrap5-toggle.ecmas.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    // ,'resources/js/delete-functions.js'
     function deleteList(id) {
         var bestaetigung = confirm("Sind Sie sicher, dass Sie diesen Post unwiderruflich löschen möchten?");
 
@@ -25,6 +27,9 @@
     function confirmDelete() {
     return confirm('sind sie sich sicher, dass sie diese Liste löschen wollen?');
 }
+document.querySelectorAll('input[type=checkbox][data-toggle="toggle"]').forEach(function(ele) {
+    ele.bootstrapToggle();
+});
 </script>
 
 @vite(['resources/css/library.scss'])
@@ -33,27 +38,102 @@
 @endsection
 
 @section('content')
-<!--ich muss ich daraus ein Component machen?--->
-<div class="displayFlex">
+<!--toggle button--->
 
-<p class="pagetitle">Deine Bibliothek</p>
-<div class="horizontal-fill"></div>
-<a href="/list_create">
-    <div class="addButton">
-        <p class="addButtonText">neue Liste erstellen</p>
+<div class="toggle-wrapper">
+    <input type="checkbox" id="toggleButton" class="toggle-checkbox">
+    <label for="toggleButton" class="toggle-label">
+        <span class="toggle-inner"></span>
+        <span class="toggle-on">Eigene</span>
+        <span class="toggle-off">Alle</span>
+    </label>
+</div>
+<script>
+document.getElementById('toggleButton').addEventListener('change', function() {
+    if(this.checked) {
+        //if the id="privateList" is visible, hide it
+        document.getElementById('privateList').style.display = 'none';
+        //if the id="publicList" is hidden, show it
+        document.getElementById('publicList').style.display = 'block';
+    } else {
+        //if the id="privateList" is hidden, show it
+        document.getElementById('privateList').style.display = 'block';
+        //if the id="publicList" is visible, hide it
+        document.getElementById('publicList').style.display = 'none';
+    }
+});
+</script>
+
+<input type="checkbox" checked="" data-toggle="toggle">
+
+
+
+
+
+<div class="" id="publicList" style="display:none">
+    <div class="displayFlex">
+        <p class="pagetitle">Öffentliche Bibliothek</p>
+        <div class="horizontal-fill"></div>
+        <a href="/list_create">
+            <div class="addButton">
+                <p class="addButtonText">neue Liste erstellen</p>
+            </div>
+        </a>
     </div>
-</a>
+    @foreach ($libraryList as $libraryListe)
+    
+    <div class="library-Card">
+        <a href="/list_show/{{$libraryListe->id}}">
+            <div class="displayFlex">
+                <p class="cardTitle">{{$libraryListe->name}}</p>
+                <div class="horizontal-fill"></div>
+                
+                <form action="/list_delete_function/{{$libraryListe->id}}" method="POST" onsubmit="return confirmDelete()">
+                    @csrf
+                    <button type="submit" class="delete-hitbox">
+                   
+                        <img src="{{ asset('icons/trash-icon.svg')}}" alt="Löschen Icon">
+                  
+                    </button>
+                </form>
+            </div>
+            <div></div>
+            <div>
+                <!-- give me the amount of words next-->
+                <p class="begriffCount">{{$libraryListe->words->count()}} Begriffe</p> 
+            </div> 
+            <div class="leading-library">
+                <p class="leadingText">Erstellt von {{$libraryListe->creator->name}}</p>
+                <div class="horizontal-fill"></div>
+                <p class="leadingText">{{ date('d.m.y', strtotime($libraryListe->created_at)) }}</p>
+            </div>
+        </a>
+    </div>
+    @endforeach
 </div>
 
-@foreach ($libraryList as $libraryList)
-    
+
+<!-- nur Listen anzeigen die vom User erstellt wurden-->
+ 
+
+<div class="" id="privateList">
+<div class="displayFlex">
+        <p class="pagetitle">Deine Bibliothek</p>
+        <div class="horizontal-fill"></div>
+        <a href="/list_create">
+            <div class="addButton">
+                <p class="addButtonText">neue Liste erstellen</p>
+            </div>
+        </a>
+    </div>
+@foreach ($libraryList as $privateList)
+@if ($privateList->created_by == auth()->user()->id)
 <div class="library-Card">
-    <a href="/list_show/{{$libraryList->id}}">
+    <a href="/list_show/{{$privateList->id}}">
         <div class="displayFlex">
-            <p class="cardTitle">{{$libraryList->name}}</p>
+            <p class="cardTitle">{{$privateList->name}}</p>
             <div class="horizontal-fill"></div>
-            
-            <form action="/list_delete_function/{{$libraryList->id}}" method="POST" onsubmit="return confirmDelete()">
+            <form action="/list_delete_function/{{$privateList->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 <button type="submit" class="delete-hitbox">
                
@@ -65,16 +145,16 @@
         <div></div>
         <div>
             <!-- give me the amount of words next-->
-            <p class="begriffCount">{{$libraryList->words->count()}} Begriffe</p> 
+            <p class="begriffCount">{{$privateList->words->count()}} Begriffe</p> 
         </div> 
         <div class="leading-library">
-            <p class="leadingText">Erstellt von {{$libraryList->creator->name}}</p>
+            <p class="leadingText">Erstellt von {{$privateList->creator->name}}</p>
             <div class="horizontal-fill"></div>
-            <p class="leadingText">{{ date('d.m.y', strtotime($libraryList->created_at)) }}</p>
+            <p class="leadingText">{{ date('d.m.y', strtotime($privateList->created_at)) }}</p>
         </div>
     </a>
 </div>
-
+@endif
 @endforeach
-
+</div>
 @endsection

@@ -57,3 +57,65 @@ hr.hrborder {
     //turn the text to like 18px
     font-size: 14 px;
 }
+
+//toggle switch start
+
+.toggle-wrapper {
+    position: relative;
+    display: inline-block;
+    color:white;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-label {
+    display: block;
+    width: 120px; /* Größe des Toggles */
+    height: 34px;
+    background-color: $contrast;
+    border-radius: 17px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.toggle-inner {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 58px; /* Etwas kleiner als die Höhe des Toggles */
+    height: 30px;
+    background-color: $background;
+    border-radius: 50%;
+    transition: left 0.3s;
+}
+
+.toggle-on, .toggle-off {
+    position: absolute;
+    width: 50%;
+    line-height: 34px; /* Gleiche Höhe wie der Toggle */
+    text-align: center;
+}
+
+.toggle-on {
+    left: 0;
+    z-index: 1; /* Stellt sicher, dass Option1 über dem Slider liegt */
+}
+
+.toggle-off {
+    right: 0;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+    background-color: $approve;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-inner {
+    left: calc(100% - 2px - 58px); /* Verschiebt den Slider nach rechts */
+}
+
+
+
+//toggle switch end
