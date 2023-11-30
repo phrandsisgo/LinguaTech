@@ -19,6 +19,11 @@ use App\Http\Controllers\PatchNotesController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/spielwiese', function () {
+    return view('patchNotes/spielwiese');
+});
+
 Route::get('/swipeTest', function () {
     return view('swipeTest');
 });

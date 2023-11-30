@@ -9,9 +9,11 @@
         {{$patch->title}}
 
     </p>
-    <p>
-        {{$patch->content}}
-    </p>
+    <div>
+
+        {!! $patch->content !!}
+    </div>
+   
     <br>
     <div class="showComments">
         @foreach ($patch->comments as $comment)
