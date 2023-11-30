@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function handleLeftClickLeft() {
-     // alert("swipe left");
+      alert("swipe left");
         triggerAnimationLeft();
         naechsteKarte();
         repAzeig++;
-        document.getElementById('repAzeigA').innerHTML=repetitionAnzeige;
-        document.getElementById('repAzeigB').innerHTML=repetitionAnzeige;
+        document.getElementById('repAzeigA').innerHTML=repAzeig;
+        document.getElementById('repAzeigB').innerHTML=repAzeig;
     }
     
     
@@ -59,16 +59,7 @@ function triggerAnimationLeft(){
 let aktuelleKarteIndex = 0;
 
 
-/* function handleLeftClick() {
-   // console.log("Links geklickt!");
-    naechsteKarte();
-}
 
-function handleRightClick() {
-    console.log("Rechts geklickt!");
-    naechsteKarte();
-}
- */
 function showUebersetzung(){
     var flipcard = document.getElementsById('flip-card-inner');
     //I need a function that checks if the class turnCard is already there and if so, removes it

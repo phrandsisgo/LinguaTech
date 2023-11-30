@@ -19,7 +19,7 @@
     <div class="flip-card-inner"id="flip-card-inner">
         <div class="flashCardContent frontface" id="flashCardContent">
             <div class="countZeile">
-                <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigB">0</p></div>
+                <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigB">1</p></div>
                 <div class="countAnzeige" id="countAnzeigeB">1/{{count($liste->words)}}Wörter</div>
                 <div class="doneCountBox"><p class="anzeigemargin" id="doneAnzeigeB">0</p></div>
             </div>
@@ -54,7 +54,6 @@
 </div>
 
 <script>
-
 var listLength={{count($liste->words)}};
 var listProgress=0;
 var doneAnzeige=0;
