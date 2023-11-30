@@ -1,5 +1,8 @@
 @extends('layouts.lingua_main')
 @section('title', 'ReleaseNotes')
+@section('head')
+    @vite(['resources/css/library.scss'])
+@endsection
 @section('content')
     <p>show the patch</p>
     <p>
@@ -12,20 +15,25 @@
     <br>
     <div class="showComments">
         @foreach ($patch->comments as $comment)
-            <div class="comment">
-                <p>{{$comment->comment}}</p>
-                <p>{{$comment->user ? $comment->user->name : 'deleted-user'}}</p>
+            <div class="library-Card">
+               <div class="displayFlex">
+               <p>{{$comment->user ? $comment->user->name : 'deleted-user'}}</p>
+               <div class="horizontal-fill"></div>
+                <p>{{$comment->created_at}}</p>
+               </div>
+                <p class="section-content"  >{{$comment->comment}}</p>
             
             </div>
         @endforeach
     </div>
     <br>
-    <p>KommentarSektion</p>
     <form action="/releaseNotesComment/{{$patch->id}}" method="POST">
         @csrf
-        <!-- <input type="hidden" name="patchId" value="{{$patch->id}}"> -->
-        <label for="comment">neuer Kommentar hinzufügen</label>
-        <textarea name="comment" id="newComment" cols="30" rows="10"></textarea>
-        <button type="submit">submit</button>
+       <div class="patchCommentWrapper">
+            <!-- <input type="hidden" name="patchId" value="{{$patch->id}}"> -->
+            <label for="comment" class="section-content">Neuer Kommentar hinzufügen</label>
+            <textarea name="comment" id="newComment" cols="30" rows="10"></textarea>
+            <button type="submit" class="standartButton">submit</button>
+       </div>
     </form>
  @endsection

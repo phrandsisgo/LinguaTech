@@ -240,3 +240,35 @@ $iconSize: 4rem; //gehört zu IconSize
 }
 }
 
+
+.patchCommentWrapper{
+    display: flex;
+    color: $contrast;
+    flex-direction: column;
+    justify-content: center;
+    //align-items: center;
+    
+}
+#newComment{
+    //this is a textarea
+    width: 100%;
+    height: 250px;
+    border: 2px solid $contrast60;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+}
+#newComment:focus{
+    outline: 3px solid $approve60;
+}
+.standartButton{
+    background-color: transparent;
+    color: $contrast;
+    border: 2px solid $contrast60;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+}   

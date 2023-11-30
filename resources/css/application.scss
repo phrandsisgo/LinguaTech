@@ -63,17 +63,17 @@
     transform: rotateY(180deg);//hier wird die Karte mit hilfe von js umgedreht
 }
 
-    .confirmRight{
-        position: absolute;
-        top: 80%;
-        left:84%;
-    }
-    .confirmLeft{
-        position: absolute;
-        top: 80%;
-        left: 16%;
-    }
-    
+.confirmRight{
+    position: absolute;
+    top: 80%;
+    left:84%;
+}
+.confirmLeft{
+    position: absolute;
+    top: 80%;
+    left: 16%;
+}
+
  @-webkit-keyframes rollOutRight {
     from {
         opacity: 1;
@@ -83,8 +83,8 @@
         -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
         transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
     }
-    }
-    @keyframes rollOutRight {
+}
+@keyframes rollOutRight {
     from {
         opacity: 1;
     }
@@ -93,8 +93,8 @@
         -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 60deg);
         transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 60deg);
     }
-    }
-    .animate__rollOut__right {
+ }
+.animate__rollOut__right {
     -webkit-animation-name: rollOutRight;
     animation-name: rollOutRight;
     /* Define the duration, fill mode, etc. for the animation */
@@ -102,9 +102,9 @@
     animation-duration: 0.7s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
-    }
+}
 
-    @-webkit-keyframes rollOutLeft {
+@-webkit-keyframes rollOutLeft {
     from {
         opacity: 1;
     }
@@ -113,7 +113,7 @@
         -webkit-transform: translate3d(-150%, 0, 0) rotate3d(0, 0, 1, -120deg);
         transform: translate3d(-150%, 0, 0) rotate3d(0, 0, 1, -120deg);
     }}
-    @keyframes rollOutLeft {
+@keyframes rollOutLeft {
     from {
         opacity: 1;
     }
@@ -122,7 +122,7 @@
         -webkit-transform: translate3d(-150%, 0, 0) rotate3d(0, 0, 1, -60deg);
         transform: translate3d(-150%, 0, 0) rotate3d(0, 0, 1, -60deg);
     }}
-    .animate__rollOut__left {
+.animate__rollOut__left {
     -webkit-animation-name: rollOutLeft;
     animation-name: rollOutLeft;
     /* Define the duration, fill mode, etc. for the animation */
@@ -130,11 +130,11 @@
     animation-duration: 0.7s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
-    }
+}
 
     /*hier noch die Animation für das flippen der Karten*/
 
-    @keyframes flipOutY {
+ @keyframes flipOutY {
     from {
         -webkit-transform: perspective(400px);
         transform: perspective(400px);
@@ -152,7 +152,7 @@
         transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
         /*opacity: 0;*/
     }}
-    .animate__flipOutY {
+.animate__flipOutY {
     -webkit-animation-duration: calc(1s * 0.75);
     animation-duration: calc(1s * 0.75);
     -webkit-animation-duration: calc(var(--animate-duration) * 0.75);
@@ -162,8 +162,8 @@
     -webkit-animation-name: flipOutY;
     animation-name: flipOutY;
     
-    }
-    @keyframes flipInY {
+}
+@keyframes flipInY {
     from {
         -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
         transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
@@ -178,7 +178,7 @@
         -webkit-transform: perspective(400px);
         transform: perspective(400px);
     }}
-    .animate__flipInY {
+.animate__flipInY {
     -webkit-animation-duration: calc(1s * 0.75);
     animation-duration: calc(1s * 0.75);
     -webkit-animation-duration: calc(var(--animate-duration) * 0.75);
@@ -187,4 +187,4 @@
     backface-visibility: visible !important;
     -webkit-animation-name: flipInY;
     animation-name: flipInY;
-    }
+}
