@@ -44,7 +44,12 @@
                 <li><a class="dropdown-item" href="/showPatch/1">Neuigkeiten</a></li>
 
                 @if (auth()->check())
-                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item">ausloggen</button>
+                        </form>
+                    </li>
                 @else
                     <li><a class="dropdown-item" href="/login">Login</a></li>
                     <li><a class="dropdown-item" href="/register">Register</a></li>
