@@ -19,7 +19,7 @@
     <div class="flip-card-inner"id="flip-card-inner">
         <div class="flashCardContent frontface" id="flashCardContent">
             <div class="countZeile">
-                <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigB">1</p></div>
+                <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigB">0</p></div>
                 <div class="countAnzeige" id="countAnzeigeB">1/{{count($liste->words)}}Wörter</div>
                 <div class="doneCountBox"><p class="anzeigemargin" id="doneAnzeigeB">0</p></div>
             </div>
@@ -61,7 +61,6 @@ var repAzeig=0;
 
 function showUebersetzung(){
     var flipcard = document.getElementById('flip-card-inner');
-    //I need a function that checks if the class turnCard is already there and if so, removes it
     
     if(flipcard.classList.contains('turnCard')){
         flipcard.classList.remove('turnCard');
@@ -70,7 +69,13 @@ function showUebersetzung(){
     }
 }
 var woerterbuch = @json($liste->words->map(function ($word) {
-        return [$word->base_word, $word->target_word]; // Adjust these properties based on your Word model
+        return [$word->base_word, $word->target_word]; 
     }));
+    document.addEventListener('DOMContentLoaded', function() {
+        var baseWord = document.getElementById('baseWord');
+        var targetWord = document.getElementById('targetWord');
+        baseWord.innerHTML=woerterbuch[0][0];
+        targetWord.innerHTML=woerterbuch[0][1];
+    });
 </script>
 @endsection

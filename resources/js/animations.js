@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function handleLeftClickLeft() {
-      alert("swipe left");
         triggerAnimationLeft();
         naechsteKarte();
         repAzeig++;
