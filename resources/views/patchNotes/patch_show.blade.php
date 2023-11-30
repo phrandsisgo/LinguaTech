@@ -4,8 +4,7 @@
     @vite(['resources/css/library.scss'])
 @endsection
 @section('content')
-    <p>show the patch</p>
-    <p>
+    <p class="sectiontitle">
         {{$patch->title}}
 
     </p>

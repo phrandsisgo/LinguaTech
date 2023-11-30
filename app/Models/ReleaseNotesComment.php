@@ -17,4 +17,7 @@ class ReleaseNotesComment extends Model
      public function lists(): BelongsToMany{
          return $this->belongsToMany(WordList::class, 'word_list_words', 'word_id', 'word_list_id');
      }
+        public function user(){
+            return $this->belongsTo(User::class);
+        }
 }
