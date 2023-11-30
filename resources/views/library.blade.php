@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     function deleteList(id) {
-        var bestaetigung = confirm("Sind Sie sicher, dass Sie diesen Post unwiderruflich löschen möchten?");
+        var bestaetigung = confirm("{{__('library.rUSureUDelete') }}");
 
         // Überprüfen, ob der Benutzer auf "OK" geklickt hat
         if (bestaetigung) {  
@@ -25,7 +25,7 @@
 
     }
     function confirmDelete() {
-    return confirm('sind sie sich sicher, dass sie diese Liste löschen wollen?');
+    return confirm('{{__('library.rUSureUDelete') }}');
 }
 document.querySelectorAll('input[type=checkbox][data-toggle="toggle"]').forEach(function(ele) {
     ele.bootstrapToggle();
@@ -44,8 +44,8 @@ document.querySelectorAll('input[type=checkbox][data-toggle="toggle"]').forEach(
     <input type="checkbox" id="toggleButton" class="toggle-checkbox">
     <label for="toggleButton" class="toggle-label">
         <span class="toggle-inner"></span>
-        <span class="toggle-on">Eigene</span>
-        <span class="toggle-off">Alle</span>
+        <span class="toggle-on">{{__('library.own') }}</span>
+        <span class="toggle-off">{{__('library.public') }}</span>
     </label>
 </div>
 <script>
@@ -72,11 +72,11 @@ document.getElementById('toggleButton').addEventListener('change', function() {
 
 <div class="" id="publicList" style="display:none">
     <div class="displayFlex">
-        <p class="pagetitle">Öffentliche Bibliothek</p>
+        <p class="pagetitle">{{__('library.titlePublic') }}</p>
         <div class="horizontal-fill"></div>
         <a href="/list_create">
             <div class="addButton">
-                <p class="addButtonText">neue Liste erstellen</p>
+                <p class="addButtonText">{{__('library.newList') }}</p>
             </div>
         </a>
     </div>
@@ -100,10 +100,10 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             <div></div>
             <div>
                 <!-- give me the amount of words next-->
-                <p class="begriffCount">{{$libraryListe->words->count()}} Begriffe</p> 
+                <p class="begriffCount">{{$libraryListe->words->count()}} {{__('library.begriff') }}</p> 
             </div> 
             <div class="leading-library">
-                <p class="leadingText">Erstellt von {{$libraryListe->creator->name}}</p>
+                <p class="leadingText"> {{__('library.begriff') }} {{$libraryListe->creator->name}}</p>
                 <div class="horizontal-fill"></div>
                 <p class="leadingText">{{ date('d.m.y', strtotime($libraryListe->created_at)) }}</p>
             </div>
@@ -118,11 +118,11 @@ document.getElementById('toggleButton').addEventListener('change', function() {
 
 <div class="" id="privateList">
 <div class="displayFlex">
-        <p class="pagetitle">Deine Bibliothek</p>
+        <p class="pagetitle">{{__('library.titlePrivate') }}</p>
         <div class="horizontal-fill"></div>
         <a href="/list_create">
             <div class="addButton">
-                <p class="addButtonText">neue Liste erstellen</p>
+                <p class="addButtonText">{{__('library.newList') }}</p>
             </div>
         </a>
     </div>
@@ -145,10 +145,10 @@ document.getElementById('toggleButton').addEventListener('change', function() {
         <div></div>
         <div>
             <!-- give me the amount of words next-->
-            <p class="begriffCount">{{$privateList->words->count()}} Begriffe</p> 
+            <p class="begriffCount">{{$privateList->words->count()}} {{__('library.begriff') }}</p> 
         </div> 
         <div class="leading-library">
-            <p class="leadingText">Erstellt von {{$privateList->creator->name}}</p>
+            <p class="leadingText"> {{__('library.createdBy') }} {{$privateList->creator->name}}</p>
             <div class="horizontal-fill"></div>
             <p class="leadingText">{{ date('d.m.y', strtotime($privateList->created_at)) }}</p>
         </div>
