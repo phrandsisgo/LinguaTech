@@ -18,9 +18,19 @@
         @foreach ($patch->comments as $comment)
             <div class="library-Card">
                <div class="displayFlex">
-               <p>{{$comment->user ? $comment->user->name : 'deleted-user'}}</p>
-               <div class="horizontal-fill"></div>
-                <p>{{$comment->created_at}}</p>
+                    <p>{{$comment->user ? $comment->user->name : 'deleted-user'}}</p>
+                    <div class="horizontal-fill"></div>
+                    <p>{{$comment->created_at}}</p>
+                    @if ($comment->user_id == auth()->user()->id)
+                    <form action="/releaseNotesCommentDelete/{{$comment->id}}" method="POST" onsubmit="//return confirmDelete()">
+                        @csrf
+                        <button type="submit" class="delete-hitbox">
+                    
+                            <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
+                    
+                        </button>
+                    </form>
+                    @endif
                </div>
                 <p class="section-content"  >{{$comment->comment}}</p>
             
@@ -28,6 +38,8 @@
         @endforeach
     </div>
     <br>
+    @if (auth()->check())
+        
     <form action="/releaseNotesComment/{{$patch->id}}" method="POST">
         @csrf
        <div class="patchCommentWrapper">
@@ -37,4 +49,5 @@
             <button type="submit" class="standartButton">submit</button>
        </div>
     </form>
+    @endif
  @endsection

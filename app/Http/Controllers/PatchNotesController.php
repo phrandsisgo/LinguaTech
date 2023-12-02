@@ -25,7 +25,13 @@ class PatchNotesController extends Controller{
             'release_note_id' => $id,
             'user_id' => auth()->user()->id,
         ]);
-        dd(auth()->user()->id);
+        //dd(auth()->user()->id);
         return redirect()->route('showPatch', ['id' => $id]);
+    }
+
+    public function releaseNotesCommentDelete($id){
+        $comment = ReleaseNotesComment::find($id);
+        $comment->delete();
+        return redirect()->route('showPatch', ['id' => $comment->release_note_id]);
     }
 }

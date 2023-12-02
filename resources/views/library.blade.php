@@ -63,9 +63,9 @@ document.getElementById('toggleButton').addEventListener('change', function() {
     }
 });
 </script>
-
+<!--
 <input type="checkbox" checked="" data-toggle="toggle">
-
+-->
 
 
 
@@ -92,7 +92,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
                     @csrf
                     <button type="submit" class="delete-hitbox">
                    
-                        <img src="{{ asset('icons/trash-icon.svg')}}" alt="Löschen Icon">
+                        <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
                   
                     </button>
                 </form>
@@ -137,7 +137,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
                 @csrf
                 <button type="submit" class="delete-hitbox">
                
-                    <img src="{{ asset('icons/trash-icon.svg')}}" alt="Löschen Icon">
+                    <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
               
                 </button>
             </form>

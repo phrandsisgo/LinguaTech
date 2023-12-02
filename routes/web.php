@@ -55,6 +55,9 @@ Route::get('/showPatch/{id}', [PatchNotesController::class,'showPatch'])
 Route::post('/releaseNotesComment/{id}', [PatchNotesController::class,'releaseNotesComment'])
 ->name('releaseNotesComment');
 
+Route::post('/releaseNotesCommentDelete/{id}', [PatchNotesController::class,'releaseNotesCommentDelete'])
+->name('releaseNotesCommentDelete');
+
 Route::post('/list_update_function/{id}', [WordListController::class, 'list_update_function'])
 //->middleware('checkListAuthor')
 ->name('list_update_function');//middleware is missing here
