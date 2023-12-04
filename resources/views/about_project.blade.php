@@ -20,6 +20,7 @@
 <p class="hyperlink">Registriere dich jetzt und beginne deine Reise!</p>
 
 <p class="sectiontitle">Kontaktiere mich</p>
+<p class="section-content">Falls sie mehr über mich erfahren wollen, dann clicken sie <a href="/about_me">hier</a> drauf.</p>
 <p class="section-content">Hast du Fragen, Anregungen oder Feedback? Ich freue mich, von dir zu hören! Schreib mir eine Nachricht an <a href="#">discord: phrandsisgo</a></p>
 
 <p class="sectiontitle">Folge mir</p>

@@ -40,13 +40,15 @@ document.querySelectorAll('input[type=checkbox][data-toggle="toggle"]').forEach(
 @section('content')
 <!--toggle button--->
 
-<div class="toggle-wrapper">
-    <input type="checkbox" id="toggleButton" class="toggle-checkbox">
-    <label for="toggleButton" class="toggle-label">
-        <span class="toggle-inner"></span>
-        <span class="toggle-on">{{__('library.own') }}</span>
-        <span class="toggle-off">{{__('library.public') }}</span>
-    </label>
+<div class=" titleMargin">
+    <div class="toggle-wrapper">
+        <input type="checkbox" id="toggleButton" class="toggle-checkbox">
+        <label for="toggleButton" class="toggle-label">
+            <span class="toggle-inner"></span>
+            <span class="toggle-on">{{__('library.own') }}</span>
+            <span class="toggle-off">{{__('library.public') }}</span>
+        </label>
+    </div>
 </div>
 <script>
 document.getElementById('toggleButton').addEventListener('change', function() {
@@ -71,7 +73,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
 
 
 <div class="" id="publicList" style="display:none">
-    <div class="displayFlex">
+    <div class="displayFlex titleMargin">
         <p class="pagetitle">{{__('library.titlePublic') }}</p>
         <div class="horizontal-fill"></div>
         <a href="/list_create">
@@ -82,20 +84,12 @@ document.getElementById('toggleButton').addEventListener('change', function() {
     </div>
     @foreach ($libraryList as $libraryListe)
     
-    <div class="library-Card">
-        <a href="/list_show/{{$libraryListe->id}}">
+    <div class="library-Card ">
+        <a href="/list_show/{{$libraryListe->id}}" class="anker-no-underline">
             <div class="displayFlex">
                 <p class="cardTitle">{{$libraryListe->name}}</p>
                 <div class="horizontal-fill"></div>
                 
-                <form action="/list_delete_function/{{$libraryListe->id}}" method="POST" onsubmit="return confirmDelete()">
-                    @csrf
-                    <button type="submit" class="delete-hitbox">
-                   
-                        <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
-                  
-                    </button>
-                </form>
             </div>
             <div></div>
             <div>
@@ -117,7 +111,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
  
 
 <div class="" id="privateList">
-<div class="displayFlex">
+<div class="displayFlex titleMargin">
         <p class="pagetitle">{{__('library.titlePrivate') }}</p>
         <div class="horizontal-fill"></div>
         <a href="/list_create">
@@ -129,7 +123,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
 @foreach ($libraryList as $privateList)
 @if ($privateList->created_by == auth()->user()->id)
 <div class="library-Card">
-    <a href="/list_show/{{$privateList->id}}">
+    <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline">
         <div class="displayFlex">
             <p class="cardTitle">{{$privateList->name}}</p>
             <div class="horizontal-fill"></div>

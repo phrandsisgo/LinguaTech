@@ -25,7 +25,7 @@
         @else
             <a href="/login" class="begruessung">Login</a>
         @endif
-        <a href="/about_me" class="iconWrapper">
+        <a href="/about_project" class="iconWrapper">
             <img src="{{ asset('svg-icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
         </a>
         <a href="/library" class="iconWrapper">

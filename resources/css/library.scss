@@ -10,6 +10,11 @@
     border: 3px solid $contrast60;
     border-radius: 20px;
     margin: 25px;
+    //make a max-width: ;
+    max-width: 900px;
+    //make it align in the center horizontally
+    margin-left: auto;
+    margin-right: auto;
 }
 .cardTitle {
     font-size: 24px;
@@ -35,9 +40,9 @@
     display: flex;
 }
 .leadingText {
-    margin-left: 20px;
     margin-top: 10px;
-    margin-right: 20px;
+    //margin-left: 5px;
+    //margin-right: 5px;
     color: $contrast60;
 }
 hr.hrborder {
@@ -58,7 +63,13 @@ hr.hrborder {
     //turn the text to like 18px
     font-size: 14 px;
 }
+.titleMargin{
+    margin-top: 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 
+}
 //toggle switch start
 
 .toggle-wrapper {
