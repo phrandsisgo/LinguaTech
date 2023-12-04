@@ -1,6 +1,6 @@
 {
   "resources/css/animations.scss": {
-    "file": "assets/animations-7236be0f.css",
+    "file": "assets/animations-c181ec2e.css",
     "isEntry": true,
     "src": "resources/css/animations.scss"
   },
@@ -15,17 +15,17 @@
     "src": "resources/css/application.scss"
   },
   "resources/css/library.scss": {
-    "file": "assets/library-e1e3e954.css",
+    "file": "assets/library-b169fa88.css",
     "isEntry": true,
     "src": "resources/css/library.scss"
   },
   "resources/css/main.scss": {
-    "file": "assets/main-a473d10c.css",
+    "file": "assets/main-95b65fd9.css",
     "isEntry": true,
     "src": "resources/css/main.scss"
   },
   "resources/js/animations.js": {
-    "file": "assets/animations-7d36c173.js",
+    "file": "assets/animations-23ce74d4.js",
     "isEntry": true,
     "src": "resources/js/animations.js"
   },

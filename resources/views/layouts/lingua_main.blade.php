@@ -14,7 +14,7 @@
 <body>
 <nav>
    <div class="nav-wrapper">
-    <a href="/" class="iconWrapper">
+    <a href="/library" class="iconWrapper">
         <img src="{{ asset('svg-icons/home-icon.svg')}}" alt="home Icon" class="icons">
     </a>
         <div class="horizontal-fill"></div>
