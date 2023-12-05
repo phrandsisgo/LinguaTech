@@ -15,8 +15,8 @@
     <p class="section-content">Dein Titel:</p>
     <input type="text" name="listTitle" id="listTitle" value="{{$liste->name}}" placeholder="Titel" class="inputField">
 
-    <p class="section-content">Die Beschreibung</p>
-    <input type="text" name="listDescription" id="listDescription" value="{{$liste->description}}" placeholder="Beschreibung" class="inputField">
+    <p class="section-content">Die Beschreibung (optional).</p>
+    <input type="text" name="listDescription" id="listDescription" value="{{$liste->description}}" placeholder="Beschreibung (optional)." class="inputField">
 
     <div id="luis">
      @foreach ($liste->words as $begriffe)
@@ -34,8 +34,8 @@
 
      </div>
 
-    <button onclick="createLibraryCard(karten); anzahlplus();//die Zahl sagt vor wie viele Begriffe bereits existieren"> weiterer Begriff hinzufügen.</button>
-    <button type="submit">Änderungen abspeichern</button>
+    <button onclick="createLibraryCard(karten); anzahlplus();" class="standartButton"> weiterer Begriff hinzufügen.</button>
+    <button type="submit" class="approveButton">Änderungen abspeichern</button>
 </form>
 
 <script>

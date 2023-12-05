@@ -14,15 +14,16 @@
 <form action="/list_create_function" method="POST" id="list_create_form">
     @csrf
 
-    <p class="section-content">Bitte fügen sie ein Titel ein</p>
+    <p class="section-content" id="listTitleInput">Bitte fügen sie ein Titel ein</p>
     <input type="text" name="listTitle" id="listTitle" placeholder="Titel" class="inputField">
     @error("listTitle")
     <p class="error">{{$message}}</p>
 
     
     @enderror
-    <p class="section-content">Bitte fügen sie eine Beschreibung ein</p>
-    <input type="text" name="listDescription" id="listDescription" placeholder="Beschreibung" class="inputField">
+    <br><br>
+    <p class="section-content">Sie können der Liste eine Beschreibung einfügen die jedoch optional ist.</p>
+    <input type="text" name="listDescription" id="listDescription" placeholder="Beschreibung (optional)" class="inputField">
 
     @error("listDescription")
     <p class="error">{{$message}}</p>
@@ -42,8 +43,8 @@
     @error("targetWord.*")
     <p class="error">{{$message}}</p>
     @enderror 
-    <button onclick="createLibraryCard(karten); anzahlplus();//die Zahl sagt vor wie viele Begriffe bereits existieren"> weiterer Begriff hinzufügen.</button>
-    <button type="submit">Liste erstellen</button>
+    <button onclick="createLibraryCard(karten); anzahlplus();" class="standartButton"> weiterer Begriff hinzufügen.</button>
+    <button type="submit" class="approveButton">Liste erstellen</button>
 </form>
 <script>
 document.getElementById('list_create_form').addEventListener('submit', function(event) {
@@ -52,11 +53,13 @@ document.getElementById('list_create_form').addEventListener('submit', function(
     const targetWords = document.querySelectorAll('input[name="targetWord[]"]');
     const listTitle = document.getElementById('listTitle');
     const listDescription = document.getElementById('listDescription');
-
+    const listTitleInput = document.getElementById('listTitleInput');
     // Validierung für Listentitel
     if (listTitle.value.trim().length < 3 || listTitle.value.trim().length > 40) {
         isValid = false;
-        alert('Titel muss zwischen 3 und 40 Zeichen lang sein.');
+        listTitleInput.style.color = "red";
+        listTitleInput.innerHTML = "Bitte fügen sie ein Titel ein (zwischen 3 und 40 Zeichen)";
+        //alert('Titel muss zwischen 3 und 40 Zeichen lang sein.');
     }
 
     // Validierung für Listenbeschreibung

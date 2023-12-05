@@ -15,12 +15,12 @@
     "src": "resources/css/application.scss"
   },
   "resources/css/library.scss": {
-    "file": "assets/library-b169fa88.css",
+    "file": "assets/library-c799c20b.css",
     "isEntry": true,
     "src": "resources/css/library.scss"
   },
   "resources/css/main.scss": {
-    "file": "assets/main-95b65fd9.css",
+    "file": "assets/main-008eede0.css",
     "isEntry": true,
     "src": "resources/css/main.scss"
   },
