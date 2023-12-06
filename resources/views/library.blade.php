@@ -78,7 +78,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
         <div class="horizontal-fill"></div>
         <a href="/list_create">
             <div class="addButton">
-                <p class="addButtonText">{{__('library.newList') }}</p>
+                <p class="addButtonText pagetitle">{{__('library.newList') }}</p>
             </div>
         </a>
     </div>
@@ -116,7 +116,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
         <div class="horizontal-fill"></div>
         <a href="/list_create">
             <div class="addButton">
-                <p class="addButtonText">{{__('library.newList') }}</p>
+                <p class="addButtonText pagetitle">{{__('library.newList') }}</p>
             </div>
         </a>
     </div>

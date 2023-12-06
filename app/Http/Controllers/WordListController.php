@@ -9,7 +9,6 @@ use App\Models\Word;
 
 class WordListController extends Controller{
     public function library(){
-        //hier kann das Modell nicht gefunden werden.
         $libraryList = WordList::get();
         return view('library',['libraryList' => $libraryList]);
     }

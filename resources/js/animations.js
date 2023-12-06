@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     var hammertime = new Hammer(karteContent);
     hammertime.on('swipe', function(ev) {
         console.log(ev+" is the direction");
-       // alert(ev.direction);
+        // alert(ev.direction);
         if(ev.direction === Hammer.DIRECTION_LEFT){
-        triggerAnimationLeft();
+            triggerAnimationLeft();
             handleLeftClickLeft();
         }else if(ev.direction === Hammer.DIRECTION_RIGHT){
-        triggerAnimationRight();
+            triggerAnimationRight();
             handleRightClick();
         }
     });

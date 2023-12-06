@@ -26,11 +26,10 @@
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
                 <p class="flipcardWord" id="baseWord">word</p>
             </div>
-            <div class="displayFlex cardBottom">
-                <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+            <div class="displayFlex">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
-
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
             </div>
 
         </div>
@@ -45,9 +44,9 @@
                 <p class="flipcardWord" id="targetWord">Wort</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="handleLeftClickLeft(); triggerAnimationLeft();">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
             </div>
         </div>
     </div>
@@ -69,13 +68,13 @@ function showUebersetzung(){
     }
 }
 var woerterbuch = @json($liste->words->map(function ($word) {
-        return [$word->base_word, $word->target_word]; 
-    }));
-    document.addEventListener('DOMContentLoaded', function() {
-        var baseWord = document.getElementById('baseWord');
-        var targetWord = document.getElementById('targetWord');
-        baseWord.innerHTML=woerterbuch[0][0];
-        targetWord.innerHTML=woerterbuch[0][1];
-    });
+    return [$word->base_word, $word->target_word]; 
+}));
+document.addEventListener('DOMContentLoaded', function() {
+    var baseWord = document.getElementById('baseWord');
+    var targetWord = document.getElementById('targetWord');
+    baseWord.innerHTML=woerterbuch[0][0];
+    targetWord.innerHTML=woerterbuch[0][1];
+});
 </script>
 @endsection
