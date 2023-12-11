@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WordListController;
 use App\Http\Controllers\PatchNotesController;
+use App\Http\Controllers\LingApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,5 +94,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 //die liste der Middlewares mit den Zuweisungen findet man unter app/Http/Kernel.php
+
+
+//hier fangen die routen an für die API sachen:
+Route::get('/textPlay', function () {
+    return view('api-stuff/textPlay');
+})->middleware('auth');
+
+
+Route::post('/translate', [LingApiController::class, 'translate'])
+->name('translate');
 
 require __DIR__.'/auth.php';
