@@ -21,6 +21,25 @@ class WordListController extends Controller{
         return view('list_update',['liste' => $liste]);
     }
 
+    public function list_add_word(Request $request){
+        //dd($request);
+        //diese Funktion sollte so funktionieren, dass es im request ein base und target wort bekommt und noch eine WordlistID und dann sollte ein neuer Eintrag in der WordlistWord Tabelle erstellt werden und in die Wordlist auch.
+        $request->validate([
+            'baseWord' => 'required|min:1|max:50',
+            'targetWord' => 'required|min:1|max:50',
+        ]);
+        $word = new Word;
+        $word->base_word = $request->baseWord;
+        $word->target_word = $request->targetWord;
+        $word->base_language_id = 1;//muss noch zu einem späteren Zeitpunkt angepasst werden.
+        $word->target_language_id = 2;//muss noch zu einem späteren Zeitpunkt angepasst werden.
+        $word->save();
+        $id=$request->list;
+        $liste = WordList::find($id);
+        $liste->words()->attach($word->id);
+        return redirect('/list_show/'.$id);//redirect wird gar nicht gebraucht, da es ein event.preventDefault request ist.
+    }
+
     public function list_update_function(Request $request, $id){
         $request->validate([
             'listTitle' => 'required|min:3|max:20',

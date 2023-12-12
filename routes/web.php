@@ -63,6 +63,9 @@ Route::post('/list_update_function/{id}', [WordListController::class, 'list_upda
 //->middleware('checkListAuthor')
 ->name('list_update_function');//middleware is missing here
 
+Route::post('/list_add_word', [WordListController::class, 'list_add_word'])
+->name('list_add_word');//middleware is missing here
+
 Route::post('/list_create_function', [WordListController::class, 'list_create_function'])
 ->name('list_create_function');//middleware is missing here
 
@@ -97,10 +100,13 @@ Route::middleware('auth')->group(function () {
 
 
 //hier fangen die routen an für die API sachen:
+/* //diese route kann gelöscht werden
 Route::get('/textPlay', function () {
     return view('api-stuff/textPlay');
 })->middleware('auth');
-
+ */
+Route::get('/textPlay', [LingApiController::class, 'textPlay'])
+->middleware('auth');
 
 Route::post('/translate', [LingApiController::class, 'translate'])
 ->name('translate');

@@ -61,19 +61,53 @@
 
 <p>Titel wierd hier hin gesetzt.</p>
 <p id="textContainer"></p>
+<br><br><br>
+
 
 <!-- Modal-Struktur -->
-<div id="translationModal" >
-    <p id="translationText"></p>
-    <button onclick="closeModal()">Schließen</button>
+<div id="translationModal">
+    <div class="modal-content">
+        <p>Das Wort übersetzt bedeutet: </p>
+        <p id="translationText"></p>
+        <br>
+        <p>Das Wort nach dem Sie gefragt haben: </p>
+        <p id="originalWord"></p>
+        <br>
+        
+        <br>
+        <form action="/list_add_word"method="post" id="wordAddForm">
+            @csrf
+            <!-- muss zu einem späteren Zeitpunkt noch angeben, welche Sprache die base und targetLang ist. -->
+            <div class="dropdown">
+            <p>Wollen sie dies einer Liste hinzufügen?</p>
+                <select name="list" id="list">
+                    @foreach ($ownLibraryList as $ownLibraryList)
+                    <option value="{{$ownLibraryList->id}}">{{$ownLibraryList->name}}</option>
+                    @endforeach
+                    <input type="hidden" id="baseWordForm" name="baseWord" value="#">
+                    <input type="hidden" id="targetWordForm" name="targetWord" value="#">
+                </select>
+            </div>
+            <br>
+            <button type="submit" onclick="prevDef(event)">Einfügen</button>
+        </form>
+        <button onclick="closeModal()">Schließen</button>
+    </div>
 </div>
 <script>
-
+    function prevDef(event){/* 
+        event.preventDefault();
+        document.getElementById('wordAddForm').submit(); */
+    }
+let anfrageWort=' ';
 document.getElementById('wordTranslateForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
+  
     const word = document.getElementById('wordInput').value;
+    anfrageWort = word;
     const formData = new FormData(this);
+    let translatedWord='';
   
     //alert('Wort: ' );
 
@@ -83,7 +117,14 @@ document.getElementById('wordTranslateForm').addEventListener('submit', function
         })
         .then(response => {
             res = response.json()
+            
             res.then(data => {
+                //alert(data.translation);
+                translatedWord = data.translation;
+                originalWord =data.request;
+                //alert(data.request));
+                openModal(translatedWord);
+
                 return console.log(data.translation);
             })
         })
@@ -94,11 +135,20 @@ document.getElementById('wordTranslateForm').addEventListener('submit', function
             event.preventDefault();
             document.getElementById('wordInput').value = word;
             document.getElementById('wordTranslateForm').dispatchEvent(new Event('submit'));
-        }
+          
+    }
 
-        function closeModal() {
-            document.getElementById('translationModal').style.display = 'none';
-        }
+    function openModal(translation, originalWord) {
+        document.getElementById('translationText').textContent = translation;
+        document.getElementById('translationModal').style.display = 'block';
+        document.getElementById('originalWord').textContent = anfrageWort;
+        document.getElementById('baseWordForm').value = anfrageWort;
+        document.getElementById('targetWordForm').value = translation;
+    }
+
+    function closeModal() {
+        document.getElementById('translationModal').style.display = 'none';
+    }
 
 </script>
 @endsection
