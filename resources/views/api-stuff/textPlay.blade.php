@@ -37,7 +37,7 @@
                     if (/\p{L}/u.test(part)) {
                         span.addEventListener('mouseover', () => span.classList.add('highlighted'));
                         span.addEventListener('mouseout', () => span.classList.remove('highlighted'));
-                        span.addEventListener('click', () => handleClick(part, sentence, event));
+                        span.addEventListener('click', (e) => handleClick( part, sentence, e));
                     }
 
                     textContainer.appendChild(span);
@@ -115,18 +115,11 @@ document.getElementById('wordTranslateForm').addEventListener('submit', function
             method: 'POST',
             body: formData
         })
-        .then(response => {
-            res = response.json()
-            
-            res.then(data => {
-                //alert(data.translation);
-                translatedWord = data.translation;
-                originalWord =data.request;
-                //alert(data.request));
-                openModal(translatedWord);
+        .then(response => response.json())
+        .then(data => {
 
-                return console.log(data.translation);
-            })
+                openModal(data);
+                // return data;
         })
         .catch(error => console.error('Error:', error));
 
@@ -138,12 +131,12 @@ document.getElementById('wordTranslateForm').addEventListener('submit', function
           
     }
 
-    function openModal(translation, originalWord) {
-        document.getElementById('translationText').textContent = translation;
+    function openModal(data) {
+        document.getElementById('translationText').textContent = data.translation;
         document.getElementById('translationModal').style.display = 'block';
-        document.getElementById('originalWord').textContent = anfrageWort;
-        document.getElementById('baseWordForm').value = anfrageWort;
-        document.getElementById('targetWordForm').value = translation;
+        document.getElementById('originalWord').textContent = data.request;
+        document.getElementById('baseWordForm').value = data.request;
+        document.getElementById('targetWordForm').value = data.translation;
     }
 
     function closeModal() {
