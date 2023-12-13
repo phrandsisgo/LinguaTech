@@ -1,4 +1,5 @@
 <section class="space-y-6">
+    <br><br>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Delete Account') }}
@@ -11,6 +12,7 @@
 
     <x-danger-button
         x-data=""
+        class="standartButton"
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
     >{{ __('Delete Account') }}</x-danger-button>
 
