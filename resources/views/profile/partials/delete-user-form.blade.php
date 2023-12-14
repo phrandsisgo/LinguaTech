@@ -12,8 +12,8 @@
 
     <x-danger-button
         x-data=""
-        class="standartButton"
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+        class="standartButton"
     >{{ __('Delete Account') }}</x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>

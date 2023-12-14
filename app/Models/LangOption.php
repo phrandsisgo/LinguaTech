@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 //is beeing used 2 times by the foreign key of "words" table
 class LangOption extends Model
 {
+    public $timestamps = false;
     use HasFactory;
     protected $fillable = [
         'language_name',
