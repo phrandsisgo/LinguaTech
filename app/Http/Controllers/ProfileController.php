@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Interest;
+
 
 class ProfileController extends Controller
 {
@@ -16,8 +18,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $interests = Interest::all();
+        //dd($interests);
         return view('profile.edit', [
             'user' => $request->user(),
+            'interests' => $interests,
         ]);
     }
 

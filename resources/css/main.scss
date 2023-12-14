@@ -347,6 +347,15 @@ $iconSize: 4rem; //gehört zu IconSize
     }
 }
 
+//for the login and register and /profile page
+.interestsWords{
+    color: $approve;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px;
+    background-color: beige;
+}
+
 //modal box for the textPlay
 #translationModal{
     display: none;

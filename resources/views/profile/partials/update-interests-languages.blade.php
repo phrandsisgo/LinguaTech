@@ -15,7 +15,6 @@
                 <option value="en">Englisch</option>
                 <option value="fr">Französisch</option>
                 <option value="es">Spanisch</option>
-                <option value="it">Italienisch</option>
                 <option value="ru">Russisch</option>
             </select>
         </div>
@@ -24,3 +23,10 @@
 </form>
 <br><br>
 <p class="sectiontitle">Bitte gebe deine Interessen an.</p>
+
+@foreach ($interests as $interest)
+   <div class="displayFlex interestsWords">
+   <input type="checkbox">
+    <p class="section-content">{{$interest->name}}</p>
+   </div>
+@endforeach
