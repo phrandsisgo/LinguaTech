@@ -23,10 +23,13 @@
 </form>
 <br><br>
 <p class="sectiontitle">Bitte gebe deine Interessen an.</p>
-
+<div class ="interestsWrapper">
 @foreach ($interests as $interest)
    <div class="displayFlex interestsWords">
-   <input type="checkbox">
-    <p class="section-content">{{$interest->name}}</p>
+        <input type="checkbox" id="interest_{{ $interest->id }}" class="interestCheckbox" />
+
+       
+        <label for="interest_{{ $interest->id }}" class="section-content">{{ $interest->name }}</label>
    </div>
 @endforeach
+</div>

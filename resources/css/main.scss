@@ -347,15 +347,45 @@ $iconSize: 4rem; //gehört zu IconSize
     }
 }
 
-//for the login and register and /profile page
+//for the login and register and /profile page and update-interests
 .interestsWords{
     color: $approve;
     font-size: 1.2rem;
     font-weight: bold;
     margin: 10px;
-    background-color: beige;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid $contrast30;
+    padding: 5px;
+    width:fit-content;
+    display: block;
+    cursor: pointer;
+}
+.interestsWords:hover{
+    background-color: $approve;
+    color: $background10;
+    border: 2px solid $approve;
+    cursor: pointer;
 }
 
+.interestsWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+.interestCheckbox {
+    display: none;
+}
+.interestCheckbox:checked + label {
+    background-color: $approve60; /* Change to your desired color for checked state */
+    /* Other styles for checked state */
+   //border: 2px solid green; /* Add border style for checked state */
+}
+.interestCheckbox:checked + label.interestsWords {
+    border: 2px solid green;
+}
 //modal box for the textPlay
 #translationModal{
     display: none;
