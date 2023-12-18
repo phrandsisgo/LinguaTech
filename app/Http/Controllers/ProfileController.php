@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Interest;
+use App\Models\LangOption;
 
 
 class ProfileController extends Controller
@@ -20,12 +21,14 @@ class ProfileController extends Controller
     {
         $interests = Interest::all();
         $user = Auth::user();
+        $languages = LangOption::all();
 
         //dd($user);
         //dd($interests);
         return view('profile.edit', [
             'user' => $user,
             'interests' => $interests,
+            'languages' => $languages,
         ]);
     }
 
@@ -71,6 +74,15 @@ class ProfileController extends Controller
         // Aktualisiert die Interessen der Benutzer
         $user->interests()->sync($interests);
     
+        return redirect('/profile');
+    }
+    public function addLanguage(Request $request){
+        
+        $user = $request->user();
+        $languages = $request->input('languages', []);
+        // Aktualisiert die Interessen der Benutzer
+        $user->languages()->sync($languages);
+       //dd($languages);
         return redirect('/profile');
     }
     

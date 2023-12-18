@@ -7,6 +7,7 @@
 
 @section('content')
     @include('profile.partials.update-interests-languages')
+    @include('profile.partials.select-language')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Profile') }}

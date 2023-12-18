@@ -10,13 +10,7 @@
         <div class="section-content">
             <label for="interests">Interessen</label>
             <br>
-            <select name="accountLanguage" id="accountLanguage"><!-- diese Select liste muss noch über den Controller geladen werden und somit ist sie nur temporär hier. -->
-                <option value="de">Deutsch</option>
-                <option value="en">Englisch</option>
-                <option value="fr">Französisch</option>
-                <option value="es">Spanisch</option>
-                <option value="ru">Russisch</option>
-            </select>
+           
         </div>
     </div>
 
