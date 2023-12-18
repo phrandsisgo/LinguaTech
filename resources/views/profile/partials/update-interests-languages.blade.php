@@ -28,7 +28,8 @@
     <div class ="interestsWrapper">
     @foreach ($interests as $interest)
     <div class="displayFlex interestsWords">
-            <input type="checkbox" id="interest_{{ $interest->id }}" class="interestCheckbox" value="{{$interest->id}}" name="interests[]" {{ $user->interests && $user->interests->contains($interest->id) ? 'checked' : '' }}/>
+            <input type="checkbox" id="interest_{{ $interest->id }}" class="interestCheckbox" value="{{$interest->id}}" name="interests[]" {{ $user->interests->contains(function ($val) use ($interest) { return $val->id == $interest->id; }) ? 'checked' : '' }}/>
+
 
         
             <label for="interest_{{ $interest->id }}" class="section-content">{{ $interest->name }}</label>
@@ -36,5 +37,5 @@
     @endforeach
     </div>
     <br>
-    <button type="submit" class="button">Interesse aktualisieren</button>
+    <button type="submit" class="approveButton">Interesse aktualisieren</button>
 </form>

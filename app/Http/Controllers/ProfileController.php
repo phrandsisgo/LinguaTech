@@ -19,9 +19,12 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         $interests = Interest::all();
+        $user = Auth::user();
+
+        //dd($user);
         //dd($interests);
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
             'interests' => $interests,
         ]);
     }
