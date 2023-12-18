@@ -62,4 +62,13 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    public function updateInterests(Request $request){
+        $user = $request->user();
+        $interests = $request->input('interests', []);
+        // Aktualisiert die Interessen der Benutzer
+        $user->interests()->sync($interests);
+    
+        return redirect('/profile');
+    }
+    
 }

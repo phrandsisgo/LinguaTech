@@ -23,13 +23,18 @@
 </form>
 <br><br>
 <p class="sectiontitle">Bitte gebe deine Interessen an.</p>
-<div class ="interestsWrapper">
-@foreach ($interests as $interest)
-   <div class="displayFlex interestsWords">
-        <input type="checkbox" id="interest_{{ $interest->id }}" class="interestCheckbox" />
+<form action="/updateInterests" method="post">
+    @csrf
+    <div class ="interestsWrapper">
+    @foreach ($interests as $interest)
+    <div class="displayFlex interestsWords">
+            <input type="checkbox" id="interest_{{ $interest->id }}" class="interestCheckbox" value="{{$interest->id}}" name="interests[]" {{ $user->interests && $user->interests->contains($interest->id) ? 'checked' : '' }}/>
 
-       
-        <label for="interest_{{ $interest->id }}" class="section-content">{{ $interest->name }}</label>
-   </div>
-@endforeach
-</div>
+        
+            <label for="interest_{{ $interest->id }}" class="section-content">{{ $interest->name }}</label>
+    </div>
+    @endforeach
+    </div>
+    <br>
+    <button type="submit" class="button">Interesse aktualisieren</button>
+</form>
