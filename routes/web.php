@@ -97,6 +97,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/updateInterests', [ProfileController::class, 'updateInterests'])->name('updateInterests');  
     Route::post('/addLanguage', [ProfileController::class, 'addLanguage'])->name('addLanguage');  
+    Route::delete('/removeLanguage/{id}', [ProfileController::class, 'removeLanguage'])->name('removeLanguage');
+    Route::get('/initiateProfile', [ProfileController::class, 'initiateProfile'])->name('initiateProfile');
+    Route::post('/initiateProfile', [ProfileController::class, 'postInitiate'])->name('postInitiate');
 });
 //die liste der Middlewares mit den Zuweisungen findet man unter app/Http/Kernel.php
 

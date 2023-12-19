@@ -22,15 +22,37 @@ class ProfileController extends Controller
         $interests = Interest::all();
         $user = Auth::user();
         $languages = LangOption::all();
-
-        //dd($user);
-        //dd($interests);
         return view('profile.edit', [
             'user' => $user,
             'interests' => $interests,
             'languages' => $languages,
         ]);
     }
+    public function initiateProfile(Request $request): View
+    {
+        $interests = Interest::all();
+        $user = Auth::user();
+        $languages = LangOption::all();
+
+        //dd($user);
+        //dd($interests);
+        return view('profile.initiate', [
+            'user' => $user,
+            'interests' => $interests,
+            'languages' => $languages,
+        ]);
+    }
+    public function postInitiate(Request $request): RedirectResponse{
+        $user = $request->user();
+        $interests = $request->input('interests', []);
+        $languages = $request->input('language', []);
+        // Aktualisiert die Interessen der Benutzer
+        $user->interests()->sync($interests);
+        $user->languages()->sync($languages);
+        //dd($user);
+        return redirect('/');
+    }
+
 
     /**
      * Update the user's profile information.
@@ -80,9 +102,15 @@ class ProfileController extends Controller
         $user = $request->user();
         $languages = $request->input('language', []);
         // Aktualisiert die Interessen der Benutzer
-        $user->languages()->sync($languages);
+        $user->languages()->attach($languages);
         //dd($user);
         return redirect('/');
     }
+    public function removeLanguage(Request $request, $id){
+        $user = $request->user();
+        $user->languages()->detach($id);
+        return redirect('/profile');
+    }
+
     
 }
