@@ -62,6 +62,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Interest::class, 'interest_user', 'user_id', 'interest_id');
     }
     public function languages(): BelongsToMany{
-        return $this->belongsToMany(LangOption::class, 'lang_option_users', 'user_id', 'language_id');
+        return $this->belongsToMany(LangOption::class, 'lang_option_users', 'user_id', 'lang_option_id');
     }
 }

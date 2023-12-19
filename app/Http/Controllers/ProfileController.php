@@ -77,13 +77,12 @@ class ProfileController extends Controller
         return redirect('/profile');
     }
     public function addLanguage(Request $request){
-        
         $user = $request->user();
-        $languages = $request->input('languages', []);
+        $languages = $request->input('language', []);
         // Aktualisiert die Interessen der Benutzer
         $user->languages()->sync($languages);
-       //dd($languages);
-        return redirect('/profile');
+        //dd($user);
+        return redirect('/');
     }
     
 }
