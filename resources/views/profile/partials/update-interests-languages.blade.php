@@ -1,22 +1,13 @@
 
-<p class="pagetitle">Einstellungen für das Profil.</p>
-<br><br>
-<p class="sectiontitle">Bitte wäle deine Sprache aus</p>
-<!-- muss noch alle spracheinstellungen von der Datenbank hierherladen. -->
-<form action="#" method="post">
-    <div class="sectionWrapper">
-        <p class="section-content">    Hallo {{ Auth::user()->name }}, hier kannst du deine Interessen und Sprachen einstellen. Diese werden dann auf deinem Profil angezeigt.</p>
-        <br>
-        <div class="section-content">
-            <label for="interests">Interessen</label>
-            <br>
-           
-        </div>
-    </div>
 
-</form>
 <br><br>
-<p class="sectiontitle">Bitte gebe deine Interessen an.</p>
+    @if ($path == "edit")
+        <p class="sectiontitle">Interessen aktualisieren.</p>
+    @elseif($path==initiate)
+        <p class="pagetitle">Danke dass Sie ein Profil angelegt haben. Sie können nun Ihre Sprachen angeben</p>
+        <p class="section-content">Mit diesen Spracheinstellungen wird es Ihnen vereinfacht, was Sie nachher für Lerntexte und Lernlisten vorgeschlagen bekommen</p>
+    @endif
+
 <form action="/updateInterests" method="post">
     @csrf
     <div class="sectionWrapper">

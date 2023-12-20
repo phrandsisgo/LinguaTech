@@ -96,15 +96,19 @@ class ProfileController extends Controller
         // Aktualisiert die Interessen der Benutzer
         $user->interests()->sync($interests);
     
-        return redirect('/profile');
+        return redirect()->back();
     }
     public function addLanguage(Request $request){
         $user = $request->user();
         $languages = $request->input('language', []);
-        // Aktualisiert die Interessen der Benutzer
         $user->languages()->attach($languages);
-        //dd($user);
-        return redirect('/');
+        return redirect('/profile');
+    }
+    public function addLanguageInitiate(Request $request){
+        $user = $request->user();
+        $languages = $request->input('language', []);
+        $user->languages()->attach($languages);
+        return redirect('/initiateProfile');
     }
     public function removeLanguage(Request $request, $id){
         $user = $request->user();
