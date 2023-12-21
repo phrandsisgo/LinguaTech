@@ -10,6 +10,6 @@ $path = "initiate";
 @section('content')
 
 @include('profile.partials.select-language')
-<!--  -->
-@include(ladet danach)
+
+
 @endsection
