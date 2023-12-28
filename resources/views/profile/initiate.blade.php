@@ -10,7 +10,5 @@ $path = "initiate";
 @section('content')
 
 @include('profile.partials.select-language')
-@include('profile.partials.update-interests-languages')
 <!--  -->
-@include(ladet danach)
 @endsection

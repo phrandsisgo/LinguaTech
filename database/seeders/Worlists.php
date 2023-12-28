@@ -65,7 +65,6 @@ class Worlists extends Seeder
                     ["Land", "country"],
                     ["Wasser", "water"],
                     ["Himmel", "sky"]
-                    //and so on
                 ],
             ],
             [
@@ -881,6 +880,8 @@ class Worlists extends Seeder
                 'created_by' => 1, // Admin User ID
                 'name' => $config['listName'],
                 'description' => $config['description'],
+                'base_language' => $config['baseLanguageId'],
+                'target_language' => $config['targetLanguageId'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

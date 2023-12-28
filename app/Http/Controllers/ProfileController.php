@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Interest;
 use App\Models\LangOption;
+use App\Models\WordList;
+use App\Models\User;
+use App\Models\Word;
 
 
 class ProfileController extends Controller
@@ -108,7 +111,11 @@ class ProfileController extends Controller
         $user = $request->user();
         $languages = $request->input('language', []);
         $user->languages()->attach($languages);
+        //search database for all Wordlists that have the language in it and are created from the user_id =1 and store it in a variable
+        $wordlists = WordList::where('created_by', 1)->where('base_language', $languages)->orWhere('target_language', $languages)->get();
+        dd($wordlists);
         return redirect('/initiateProfile');
+        
     }
     public function removeLanguage(Request $request, $id){
         $user = $request->user();

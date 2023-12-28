@@ -131,5 +131,9 @@ class WordListController extends Controller{
         $word->delete();
         return redirect('/list_show/'.$listId);
     }
-    
+    public function word_list_copy($id){
+        dd($id);//zur Zeit wird dies noch nicht gebraucht.
+        $liste = WordList::with('words')->find($id);
+        return view('list_copy',['liste' => $liste]);
+    }
 }
