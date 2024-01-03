@@ -12,7 +12,7 @@ class Worlists extends Seeder
     {
         return [
             [
-                'listName' => 'EgnlishA1 zu Deutsch',
+                'listName' => 'EnglishA1 zu Deutsch',
                 'description' => 'English A1 WörterListe mit deutsch als Basissprache',
                 'baseLanguageId' => 1,
                 'targetLanguageId' => 9,
@@ -40,7 +40,7 @@ class Worlists extends Seeder
                 ],
             ],
             [
-                'listName' => 'EgnlishA2 zu Deutsch',
+                'listName' => 'EnglishA2 zu Deutsch',
                 'description' => 'English A2 WörterListe mit deutsch als Basissprache',
                 'baseLanguageId' => 1,
                 'targetLanguageId' => 10,
@@ -68,7 +68,7 @@ class Worlists extends Seeder
                 ],
             ],
             [
-                'listName' => 'EgnlishB1 zu Deutsch',
+                'listName' => 'EnglishB1 zu Deutsch',
                 'description' => 'English B1 WörterListe mit deutsch als Basissprache',
                 'baseLanguageId' => 1,
                 'targetLanguageId' => 11,
@@ -98,7 +98,7 @@ class Worlists extends Seeder
 
             ],
             [
-                'listName' => 'EgnlishB2 zu Deutsch',
+                'listName' => 'EnglishB2 zu Deutsch',
                 'description' => 'English B2 WörterListe mit deutsch als Basissprache',
                 'baseLanguageId' => 1,
                 'targetLanguageId' => 12,
@@ -127,7 +127,7 @@ class Worlists extends Seeder
                 ]
             ],
                 [
-                'listName' => 'EgnlishC1 zu Deutsch',
+                'listName' => 'EnglishC1 zu Deutsch',
                 'description' => 'English C1 WörterListe mit deutsch als Basissprache',
                 'baseLanguageId' => 1,
                 'targetLanguageId' => 13,
@@ -156,7 +156,7 @@ class Worlists extends Seeder
                 
             ],
             [
-                'listName' => 'EgnlishC2 zu Deutsch',
+                'listName' => 'EnglishC2 zu Deutsch',
                 'description' => 'English C2 WörterListe mit deutsch als Basissprache',
                 'baseLanguageId' => 1,
                 'targetLanguageId' => 14,
