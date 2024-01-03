@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Interest;
 use App\Models\LangOption;
+use App\Models\WordList;
+use App\Models\User;
+use App\Models\Word;
 
 
 class ProfileController extends Controller
@@ -108,7 +111,33 @@ class ProfileController extends Controller
         $user = $request->user();
         $languages = $request->input('language', []);
         $user->languages()->attach($languages);
+        //search database for all Wordlists that have the language in it and are created from the user_id =1 and store it in a variable
+        $wordlists = WordList::where('created_by', 1)->where('base_language', $languages)->orWhere('target_language', $languages)->get();
+        dd();
+        //and now it has to copy the wordlists and change the user_id to the current user_id
+        foreach($wordlists as $wordlist){
+            $newWordlist = new WordList;
+            $newWordlist->name = $wordlist->name;
+            $newWordlist->description = $wordlist->description;
+            $newWordlist->created_by = $user->id;
+            $newWordlist->base_language_id = $wordlist->base_language_id;
+            $newWordlist->target_language_id = $wordlist->target_language_id;
+            $newWordlist->save();
+            $newWordListId = $newWordlist->id;
+            $newWordlist->created_at = now();
+            $wordListWords = WordListWord::where('word_list_id', $wordlist->id)->get();
+            foreach($wordListWords as $wordListWord){
+                $newWordListWord = new WordListWord;
+                $newWordListWord->word_list_id = $newWordListId;
+                $newWordListWord->word_id = $wordListWord->word_id;
+                $newWordListWord->created_at = now();
+                $newWordListWord->save();
+            }
+        
+        }
+        
         return redirect('/initiateProfile');
+        
     }
     public function removeLanguage(Request $request, $id){
         $user = $request->user();
