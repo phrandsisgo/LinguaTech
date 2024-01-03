@@ -14,6 +14,7 @@
 @endsection
 
 @section('content')
+<p class="sectiontitle swipeLearnTitle">{{$liste->name}}</p>
 
 <div class="karteContent">
     <div class="flip-card-inner"id="flip-card-inner">
@@ -51,6 +52,8 @@
         </div>
     </div>
 </div>
+
+<p class="section-content swipeContent">Beschreibung: {{$liste->description}}</p>
 
 <script>
 var listLength={{count($liste->words)}};

@@ -75,7 +75,11 @@ hr.hrborder {
 .toggle-checkbox {
     display: none;
 }
-
+.libraryIcon {
+    color: $contrast;
+    height: 2rem;
+    width: 2rem;
+}
 .toggle-label {
     display: block;
     width: 120px; /* Größe des Toggles */

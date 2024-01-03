@@ -20,11 +20,6 @@
         <div class="horizontal-fill"></div>
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
-        @if (auth()->check())
-            <p class="begruessung">Hello {{auth()->user()->name}}</p>
-        @else
-            <a href="/login" class="begruessung">Login</a>
-        @endif
         <a href="/about_project" class="iconWrapper">
             <img src="{{ asset('svg-icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
         </a>
@@ -44,10 +39,11 @@
                 <li><a class="dropdown-item" href="/showPatch/1">Neuigkeiten</a></li>
 
                 @if (auth()->check())
+                    <li><a class="dropdown-item" href="/profile">Profil: {{auth()->user()->name}}</a></li>
                     <li>
                     <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="dropdown-item">ausloggen</button>
+                            <button type="submit" class="dropdown-item">Ausloggen</button>
                         </form>
                     </li>
                 @else

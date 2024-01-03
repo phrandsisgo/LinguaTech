@@ -5,6 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/js/bootstrap5-toggle.ecmas.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
     function deleteList(id) {
         var bestaetigung = confirm("{{__('library.rUSureUDelete') }}");
@@ -127,12 +128,16 @@ document.getElementById('toggleButton').addEventListener('change', function() {
         <div class="displayFlex">
             <p class="cardTitle">{{$privateList->name}}</p>
             <div class="horizontal-fill"></div>
+            <a href="/swipeLearn/{{$privateList->id}}">
+                <img src="{{ asset('svg-icons/learnIcon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
+            <a>
+            <a href="/list_update/{{$privateList->id}}">
+                <img src="{{ asset('svg-icons/pencil-icon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
+            </a>
             <form action="/list_delete_function/{{$privateList->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 <button type="submit" class="delete-hitbox">
-               
                     <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
-              
                 </button>
             </form>
         </div>

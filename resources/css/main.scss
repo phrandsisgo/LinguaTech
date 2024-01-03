@@ -280,6 +280,20 @@ $iconSize: 4rem; //gehört zu IconSize
 #newComment:focus{
     outline: 3px solid $approve60;
 }
+.swipeLearnTitle{
+    color: $contrast;
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center; // Add this line to center the title horizontally
+}
+.swipeContent{
+    color: $contrast;
+    font-size: 20px;
+    text-align: center; // Add this line to center the content horizontally
+    margin: 20px;
+
+}
 .standartButton{
 
     //das wäre ein guter Ansatz bei color invert
