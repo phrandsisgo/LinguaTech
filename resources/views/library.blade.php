@@ -72,25 +72,26 @@ document.getElementById('toggleButton').addEventListener('change', function() {
 
 
 
-
+<!-- nur Listen anzeigen die öffentlich sind-->
 <div class="" id="publicList" style="display:none">
     <div class="displayFlex titleMargin">
         <p class="pagetitle">{{__('library.titlePublic') }}</p>
         <div class="horizontal-fill"></div>
-        <a href="/list_create">
-            <div class="addButton">
-                <p class="addButtonText pagetitle">{{__('library.newList') }}</p>
-            </div>
-        </a>
     </div>
     @foreach ($libraryList as $libraryListe)
-    
+    @if ($libraryListe->created_by == 1)
+        
     <div class="library-Card ">
         <a href="/list_show/{{$libraryListe->id}}" class="anker-no-underline">
             <div class="displayFlex">
                 <p class="cardTitle">{{$libraryListe->name}}</p>
                 <div class="horizontal-fill"></div>
-                
+            <form action="#" method="POST" onsubmit="return confirmDelete()">
+                @csrf
+                <button type="submit" class="delete-hitbox">
+                    <img src="{{ asset('svg-icons/copy-icon.svg')}}" alt="Löschen Icon" class="libraryIcon">
+                </button>
+            </form>
             </div>
             <div></div>
             <div>
@@ -104,6 +105,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             </div>
         </a>
     </div>
+    @endif
     @endforeach
 </div>
 
@@ -137,7 +139,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             <form action="/list_delete_function/{{$privateList->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 <button type="submit" class="delete-hitbox">
-                    <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
+                    <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon" class="libryryIcon">
                 </button>
             </form>
         </div>
