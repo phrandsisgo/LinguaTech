@@ -12,17 +12,22 @@
        @foreach ($user->languages as $language)
         
            <div class="langWrapper displayFlex interestsWords">
-               <p class="centerTextvertical">{{ $language->language_name }}</p>
-               <form action="/removeLanguage/{{ $language->id }}" method="post" class="delete-hitbox">
+                <p class="centerTextvertical">{{ $language->language_name }}</p>
+                @if($path=='profile')
+                <form action="/removeLanguage/{{ $language->id }}" method="post" class="delete-hitbox">
+                @elseif($path=='initiate')
+                <form action="/removeLanguageInitiate/{{ $language->id }}" method="post" class="delete-hitbox">
+                @endif
                    @csrf
                    @method('delete')
+                   
                    <button type="submit"><img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon"></button>
                </form>
            </div>
            
        @endforeach
     </div>
-@if ($path == 'profile')
+    @if($path=='profile')
     <form action="/addLanguage" method="post">
 
 @elseif($path == 'initiate')

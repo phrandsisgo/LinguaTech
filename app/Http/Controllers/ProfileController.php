@@ -36,9 +36,6 @@ class ProfileController extends Controller
         $interests = Interest::all();
         $user = Auth::user();
         $languages = LangOption::all();
-
-        //dd($user);
-        //dd($interests);
         return view('profile.initiate', [
             'user' => $user,
             'interests' => $interests,
@@ -113,7 +110,7 @@ class ProfileController extends Controller
         $user->languages()->attach($languages);
         //search database for all Wordlists that have the language in it and are created from the user_id =1 and store it in a variable
         $wordlists = WordList::where('created_by', 1)->where('base_language', $languages)->orWhere('target_language', $languages)->get();
-        dd();
+        //dd();
         //and now it has to copy the wordlists and change the user_id to the current user_id
         foreach($wordlists as $wordlist){
             $newWordlist = new WordList;
@@ -143,6 +140,11 @@ class ProfileController extends Controller
         $user = $request->user();
         $user->languages()->detach($id);
         return redirect('/profile');
+    }
+    public function removeLanguageInitiate(Request $request, $id){
+        $user = $request->user();
+        $user->languages()->detach($id);
+        return redirect('/initiateProfile');
     }
 
     

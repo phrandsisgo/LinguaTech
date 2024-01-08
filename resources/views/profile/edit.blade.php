@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @section('head')
 <?php 
-$path = "edit";
+$path = "profile";
 ?>
 <!-- ich muss noch fragen wesswegen library.scss nicht funktioniert-->
 @vite(['resources/css/library.scss','resources/js/list-create.js'])
