@@ -83,7 +83,7 @@ $iconHeightANDwidth: 2.5rem;
 }
 .toggle-label {
     display: block;
-    width: 120px; /* Größe des Toggles */
+    width: 180px; /* Größe des Toggles */
     height: 34px;
     background-color: $contrast;
     border-radius: 17px;
@@ -96,11 +96,15 @@ $iconHeightANDwidth: 2.5rem;
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 58px; /* Etwas kleiner als die Höhe des Toggles */
+    width: 89px; /* Etwas kleiner als die Höhe des Toggles */
     height: 30px;
     background-color: $background;
-    border-radius: 50%;
+    border-radius: 15px;
     transition: left 0.3s;
+}
+.toggle-label .toggle-on,
+.toggle-label .toggle-off {
+    user-select: none;
 }
 
 .toggle-on, .toggle-off {
@@ -124,7 +128,7 @@ $iconHeightANDwidth: 2.5rem;
 }
 
 .toggle-checkbox:checked + .toggle-label .toggle-inner {
-    left: calc(100% - 2px - 58px); /* Verschiebt den Slider nach rechts */
+    left: calc(100% - 90px); /* Verschiebt den Slider nach rechts */
 }
 
 

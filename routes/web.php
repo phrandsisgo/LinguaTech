@@ -102,6 +102,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/initiateProfile', [ProfileController::class, 'initiateProfile'])->name('initiateProfile');
     Route::post('/initiateProfile', [ProfileController::class, 'postInitiate'])->name('postInitiate');
     Route::post('addLanguageInitiate', [ProfileController::class, 'addLanguageInitiate'])->name('addLanguageInitiate');
+    Route::post('/copyList/{listId}', [WordListController::class, 'copyList'])->name('copyList');
 });
 //die liste der Middlewares mit den Zuweisungen findet man unter app/Http/Kernel.php
 

@@ -28,6 +28,9 @@
     function confirmDelete() {
     return confirm('{{__('library.rUSureUDelete') }}');
 }
+function confirmCopy() {
+    return confirm('Sind Sie sicher, dass Sie diese Liste kopieren wollen?');
+}
 document.querySelectorAll('input[type=checkbox][data-toggle="toggle"]').forEach(function(ele) {
     ele.bootstrapToggle();
 });
@@ -86,7 +89,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             <div class="displayFlex">
                 <p class="cardTitle">{{$libraryListe->name}}</p>
                 <div class="horizontal-fill"></div>
-            <form action="#" method="POST" onsubmit="return confirmDelete()">
+            <form action="/copyList/{{$libraryListe->id}}" method="POST" onsubmit="return confirmCopy()">
                 @csrf
                 <button type="submit" class="delete-hitbox">
                     <img src="{{ asset('svg-icons/copy-icon.svg')}}" alt="Löschen Icon" class="libraryIcon">

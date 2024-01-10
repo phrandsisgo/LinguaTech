@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WordList;
+use App\Models\WordListWord;
 use App\Models\User;
 use App\Models\Word;
 
@@ -135,5 +136,26 @@ class WordListController extends Controller{
         dd($id);//zur Zeit wird dies noch nicht gebraucht.
         $liste = WordList::with('words')->find($id);
         return view('list_copy',['liste' => $liste]);
+    }
+    public function copyList($id){
+        $liste = WordList::with('words')->find($id);
+        $newList = new WordList;
+        $newList->name = $liste->name;
+        $newList->description = $liste->description;
+        $newList->created_by = auth()->user()->id;
+        $newList->base_language= $liste->base_language;
+        $newList->target_language = $liste->target_language;
+        $newList->save();
+        $newListId = $newList->id;
+        $newList->created_at = now();
+        $wordListWords = WordListWord::where('word_list_id', $liste->id)->get();
+        foreach($wordListWords as $wordListWord){ 
+            $newWordListWord = new WordListWord;
+            $newWordListWord->word_list_id = $newListId;
+            $newWordListWord->word_id = $wordListWord->word_id;
+            $newWordListWord->created_at = now();
+            $newWordListWord->save();
+        }
+        return redirect('/library');
     }
 }

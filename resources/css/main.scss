@@ -26,7 +26,7 @@ body {
     position: sticky;
     display: flex;
     padding: 8px;
-    //add something that makes every child of here have at least 5px space between them
+    user-select: none;
 }
 
 .anker-no-underline{
@@ -114,9 +114,10 @@ body {
 }
 #navText{
     //change the textsize
-    font-size: 50px;
+    font-size: 3.3rem;
     font-weight: bold;
     margin: auto;
+    user-select: none;
 }
 .footer_box{
     color: $approve;
