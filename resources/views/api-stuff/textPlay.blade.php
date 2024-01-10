@@ -58,9 +58,16 @@
     @csrf
     <input type="hidden" name="word" id="wordInput">
 </form>
-
-<p>Titel wierd hier hin gesetzt.</p>
-<p id="textContainer"></p>
+<div class="dropdown-wrapper">
+    <button class="dropbtn">Andere Texte</button>
+    <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+    </div>
+</div>
+<p class="pagetitle ">Titel wierd hier hin gesetzt oder so.</p>
+<p id="textContainer" class="section-content"></p>
 <br><br><br>
 
 
@@ -70,7 +77,7 @@
         <p>Das Wort übersetzt bedeutet: </p>
         <p id="translationText"></p>
         <br>
-        <p>Das Wort nach dem Sie gefragt haben: </p>
+        <p >Das Wort nach dem Sie gefragt haben: </p>
         <p id="originalWord"></p>
         <br>
         
