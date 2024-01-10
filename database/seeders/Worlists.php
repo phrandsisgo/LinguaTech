@@ -911,6 +911,7 @@ class Worlists extends Seeder
             }
         }
     }
+    
     public function run(): void
     {
         $configurations = $this->getWordListConfigurations();

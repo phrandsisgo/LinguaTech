@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\WordListWord;
 use Illuminate\View\View;
 use App\Models\Interest;
 use App\Models\LangOption;
@@ -108,6 +109,7 @@ class ProfileController extends Controller
         $user = $request->user();
         $languages = $request->input('language', []);
         $user->languages()->attach($languages);
+        //dd($request->all());
         //search database for all Wordlists that have the language in it and are created from the user_id =1 and store it in a variable
         $wordlists = WordList::where('created_by', 1)->where('base_language', $languages)->orWhere('target_language', $languages)->get();
         //dd();
@@ -117,8 +119,8 @@ class ProfileController extends Controller
             $newWordlist->name = $wordlist->name;
             $newWordlist->description = $wordlist->description;
             $newWordlist->created_by = $user->id;
-            $newWordlist->base_language_id = $wordlist->base_language_id;
-            $newWordlist->target_language_id = $wordlist->target_language_id;
+            $newWordlist->base_language = $wordlist->base_language;
+            $newWordlist->target_language = $wordlist->target_language;
             $newWordlist->save();
             $newWordListId = $newWordlist->id;
             $newWordlist->created_at = now();
