@@ -1,4 +1,6 @@
-[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#7328
+
+WordList::where('created_by', 1)->delete(); //ist der Titel von diesem File (warscheindlich nicht gebraucht)
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#7328
     [34mall[39m: [
       [34;4mApp\Models\WordList[39;24m {#7330
         [34mid[39m: [35m1[39m,
