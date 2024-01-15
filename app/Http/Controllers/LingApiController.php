@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\WordList;
+use App\Models\Text;
 
 class LingApiController extends Controller
 {
@@ -29,6 +30,14 @@ class LingApiController extends Controller
     }
     public function textPlay(){
         $ownLibraryList = WordList::where('created_by', auth()->user()->id)->get();
-        return view('api-stuff/textPlay',['ownLibraryList' => $ownLibraryList]);
+        $allTexts = Text::with("langOption")->get();
+
+        return view('api-stuff/textPlay',['ownLibraryList' => $ownLibraryList, 'allTexts' => $allTexts]);
+    }
+    public function textShow($id){
+        $text = Text::with("langOption")->find($id);
+        $allTexts = Text::with("langOption")->get();
+        $ownLibraryList = WordList::where('created_by', auth()->user()->id)->get();
+        return view('api-stuff/textShow',['text' => $text, 'allTexts' => $allTexts, 'ownLibraryList' => $ownLibraryList]);
     }
 }

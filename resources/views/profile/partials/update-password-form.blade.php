@@ -2,7 +2,7 @@
     <header>
 
         <p class="section-content">
-            {{ __('you can change your Password if you want. Ensure your account is using a long, random password to stay secure.') }}
+            {{ __('You can change your Password if you want. Ensure your account is using a long, random password to stay secure.') }}
         </p>
     </header>
 

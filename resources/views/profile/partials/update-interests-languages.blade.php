@@ -3,7 +3,7 @@
 <br><br>
     @if ($path == "edit")
         <p class="sectiontitle">Interessen aktualisieren.</p>
-    @elseif($path==initiate)
+    @elseif($path=="initiate")
         <p class="pagetitle">Danke dass Sie ein Profil angelegt haben. Sie können nun Ihre Sprachen angeben</p>
         <p class="section-content">Mit diesen Spracheinstellungen wird es Ihnen vereinfacht, was Sie nachher für Lerntexte und Lernlisten vorgeschlagen bekommen</p>
     @endif

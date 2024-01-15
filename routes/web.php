@@ -116,6 +116,9 @@ Route::get('/textPlay', function () {
 Route::get('/textPlay', [LingApiController::class, 'textPlay'])
 ->middleware('auth');
 
+Route::get('/textShow/{id}', [LingApiController::class, 'textShow'])
+->name('textShow')->middleware('auth');
+
 Route::post('/translate', [LingApiController::class, 'translate'])
 ->name('translate');
 

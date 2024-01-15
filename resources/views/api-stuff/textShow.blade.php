@@ -20,7 +20,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             const textContainer = document.getElementById('textContainer');
             // Russischer Text mit deutscher Übersetzung in Klammern
-            const text = "Кирилл работает веб-разработчиком. Он создает веб-сайты и приложения для интернета. Кирилл очень умный и талантливый человек. Он знает много языков программирования, таких как HTML, CSS и JavaScript. Он также умеет работать с базами данных и серверами.Когда Кирилл создает веб-сайт, он уделяет особое внимание дизайну и удобству использования. Он старается сделать сайты красивыми и функциональными, чтобы пользователи могли легко находить необходимую информацию и выполнять разные задачи.Кирилл работает в офисе, но иногда он также работает из дома. Ему нравится свобода, которую ему дает его профессия. Он всегда следит за последними тенденциями в веб-разработке и учится новым технологиям.";
+            const text = "{{$text->text}}";
+            //alert("tehaxt");
+        
+            
             //В свободное время Кирилл также занимается программированием. Он создает собственные проекты и участвует в хакатонах. Ему нравится решать сложные задачи и находить новые способы улучшить веб-сайты.Кирилл любит свою работу и гордится тем, что он веб-разработчик. Он знает, что его работа помогает людям делать интернет лучше и более интересным местом.
             
             
@@ -66,12 +69,12 @@
         <a href="#">Link 2</a>
         <a href="#">Link 3</a>
         
-    @foreach ($allTexts as $text)
-        <a href="/textShow/{{$text->id}}">{{$text->title}},{{$text->langOption->language_name}}</a>
+    @foreach ($allTexts as $textL)
+        <a href="/textShow/{{$textL->id}}">{{$textL->title}},{{$textL->langOption->language_name}}</a>
     @endforeach
     </div>
 </div>
-<p class="pagetitle ">Titel wierd hier hin gesetzt oder so.</p>
+<p class="pagetitle ">{{$text->title}}</p>
 <p id="textContainer" class="section-content"></p>
 <br><br><br>
 
@@ -139,8 +142,6 @@ document.getElementById('wordTranslateForm').addEventListener('submit', function
     const formData = new FormData(this);
     let translatedWord='';
   
-    //alert('Wort: ' );
-
     fetch(this.action, {
             method: 'POST',
             body: formData
