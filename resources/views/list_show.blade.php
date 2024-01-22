@@ -40,6 +40,7 @@ function confirmDelete() {
                 <hr class="hrborder">
                 <p class="sectiontitle center-vertically">{{ $begriffe->target_word }}</p>
         </div>
+        <div class="horizontal-fill"></div>
         <form action="/word_delete_function/{{$begriffe->id}}/{{$liste->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 <button type="submit" class="delete-hitbox">

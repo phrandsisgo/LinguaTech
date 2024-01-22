@@ -129,13 +129,15 @@ document.getElementById('toggleButton').addEventListener('change', function() {
 @foreach ($libraryList as $privateList)
 @if ($privateList->created_by == auth()->user()->id)
 <div class="library-Card">
-    <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline">
         <div class="displayFlex">
-            <p class="cardTitle">{{$privateList->name}}</p>
-            <div class="horizontal-fill"></div>
+            <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline displayFlex">
+                <p class="cardTitle">{{$privateList->name}}</p>
+
+            </a>
+                <a href="/list_show/{{$privateList->id}}" class="horizontal-fill"></a>
             <a href="/swipeLearn/{{$privateList->id}}">
                 <img src="{{ asset('svg-icons/learnIcon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
-            <a>
+            </a>
             <a href="/list_update/{{$privateList->id}}">
                 <img src="{{ asset('svg-icons/pencil-icon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
             </a>
@@ -145,6 +147,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
                     <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon" class="libryryIcon">
                 </button>
             </form>
+        <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline">
         </div>
         <div></div>
         <div>

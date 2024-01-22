@@ -133,10 +133,11 @@ window.onclick = function(event) {
         document.getElementById('wordAddForm').submit(); */
     }
 let anfrageWort=' ';
+//document.addEventListener('DOMContentLoaded', (event) => {
 document.getElementById('wordTranslateForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-  
+    alert("event should be prevented");
     const word = document.getElementById('wordInput').value;
     anfrageWort = word;
     const formData = new FormData(this);
@@ -155,6 +156,7 @@ document.getElementById('wordTranslateForm').addEventListener('submit', function
         .catch(error => console.error('Error:', error));
 
     });
+//});
     function handleClick(word, sentence, event) {
             event.preventDefault();
             document.getElementById('wordInput').value = word;
