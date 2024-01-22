@@ -119,7 +119,12 @@ Route::get('/textPlay', [LingApiController::class, 'textPlay'])
 Route::get('/textShow/{id}', [LingApiController::class, 'textShow'])
 ->name('textShow')->middleware('auth');
 
+Route::get('/displayAllTexts', [LingApiController::class, 'displayAllTexts'])
+->name('displayAllTexts')->middleware('auth');
+
 Route::post('/translate', [LingApiController::class, 'translate'])
 ->name('translate');
+
+
 
 require __DIR__.'/auth.php';

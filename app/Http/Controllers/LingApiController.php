@@ -40,4 +40,9 @@ class LingApiController extends Controller
         $ownLibraryList = WordList::where('created_by', auth()->user()->id)->get();
         return view('api-stuff/textShow',['text' => $text, 'allTexts' => $allTexts, 'ownLibraryList' => $ownLibraryList]);
     }
+    
+    public function displayAllTexts(){
+        $allTexts = Text::with("langOption")->get();
+        return view('api-stuff/displayAllTexts',['allTexts' => $allTexts]);
+    }
 }

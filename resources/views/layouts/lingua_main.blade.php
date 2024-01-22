@@ -32,13 +32,14 @@
             <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
             </button>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="dropdown-menu dropdown-menu-end z-index-up">
                 <li class="mob-only"><a class="dropdown-item" href="/library">Bibliothek</a></li>
                 <li><a class="dropdown-item" href="/about_me">Über den Entwickler</a></li>
                 <li><a class="dropdown-item" href="/about_project">Über das projekt</a></li>
                 <li><a class="dropdown-item" href="/showPatch/1">Neuigkeiten</a></li>
 
                 @if (auth()->check())
+                    <li><a class="dropdown-item" href="/displayAllTexts">Texte</a></li>
                     <li><a class="dropdown-item" href="/profile">Profil: {{auth()->user()->name}}</a></li>
                     <li>
                     <form method="POST" action="{{ route('logout') }}">
