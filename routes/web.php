@@ -73,7 +73,8 @@ Route::post('/list_delete_function/{id}', [WordListController::class, 'list_dele
 ->name('list_delete_function');//middleware is missing here
 
 Route::post('/word_delete_function/{id}/{listId}', [WordListController::class, 'word_delete_function'])
-->name('word_delete_function');//middleware is missing here
+->name('word_delete_function')
+->middleware('ensure.user:word');//middleware is missing here or not
 
 Route::get('/list_create', function () {
     return view('list_create');

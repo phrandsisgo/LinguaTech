@@ -12,7 +12,10 @@
 
         {!! $patch->content !!}
     </div>
-   
+    <br>
+    <br>
+    <br>
+   <p class="sectiontitle">Kommentarsektion:</p>
     <br>
     <div class="showComments">
         @foreach ($patch->comments as $comment)
