@@ -32,15 +32,15 @@
 
 
             sentences.forEach(sentence => {
-                sentence.split(/([\p{L}]+)/gu).forEach(part => {
+                sentence.split(/([\p{L}'’]+)/gu).forEach(part => {
                     const span = document.createElement('span');
                     span.textContent = part;
                     span.className = 'word';
 
-                    if (/\p{L}/u.test(part)) {
+                    if (/\p{L}|['’]/u.test(part)) {
                         span.addEventListener('mouseover', () => span.classList.add('highlighted'));
                         span.addEventListener('mouseout', () => span.classList.remove('highlighted'));
-                        span.addEventListener('click', (e) => handleClick( part, sentence, e));
+                        span.addEventListener('click', (e) => handleClick(part, sentence, e));
                     }
 
                     textContainer.appendChild(span);
@@ -99,18 +99,18 @@ window.onclick = function(event) {
 <div id="translationModal">
     <div class="modal-content">
         <p>Das Wort übersetzt bedeutet: </p>
-        <p id="translationText"></p>
+        <p id="translationText" class="sectiontitle"></p>
         <br>
         <p >Das Wort nach dem Sie gefragt haben: </p>
-        <p id="originalWord"></p>
+        <p id="originalWord" class="sectiontitle"></p>
         <br>
         
         <br>
         <form action="/list_add_word"method="post" id="wordAddForm">
             @csrf
             <!-- muss zu einem späteren Zeitpunkt noch angeben, welche Sprache die base und targetLang ist. -->
+            <p >Wollen sie dies einer Liste hinzufügen?</p>
             <div class="dropdown">
-            <p>Wollen sie dies einer Liste hinzufügen?</p>
                 <select name="list" id="list">
                     @foreach ($ownLibraryList as $ownLibraryList)
                     <option value="{{$ownLibraryList->id}}">{{$ownLibraryList->name}}</option>
@@ -120,9 +120,9 @@ window.onclick = function(event) {
                 </select>
             </div>
             <br>
-            <button type="submit" onclick="prevDef(event)">Einfügen</button>
+            <button type="submit" onclick="prevDef(event)" class="standartButton">Einfügen</button>
+            <button type="button" onclick="closeModal()"class="standartDangerButton standartButton">Schliessen</button>
         </form>
-        <button onclick="closeModal()">Schließen</button>
     </div>
 </div>
 <script>

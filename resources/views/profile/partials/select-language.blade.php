@@ -63,7 +63,6 @@ function addLanguage() {
 function removeLanguage(language, level) {
     // Entfernen Sie die Sprache aus der Liste
 }
-alert(<?php echo $path ?>)
 
 
 </script>

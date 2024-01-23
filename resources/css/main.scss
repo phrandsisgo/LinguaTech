@@ -470,7 +470,7 @@ $iconSize: 4rem; //gehört zu IconSize
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
+    padding-top: 15.5rem;
     left: 0;
     top: 0;
     width: 100%;
@@ -512,7 +512,7 @@ $iconSize: 4rem; //gehört zu IconSize
 .dropdown{
     width: 100%;
     height: 40px;
-    border: 2px solid $contrast60;
+   // border: 2px solid $contrast60;
     border-radius: 10px;
     padding: 5px;
     resize: none;

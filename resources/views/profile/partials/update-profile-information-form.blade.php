@@ -2,7 +2,7 @@
     <header>
 <br><br>
         <p class="section-content">
-            {{ __("If you wish you can update your account's profile information and email address.") }}
+                        {{ __("Wenn Sie möchten, können Sie die Profilinformationen und die E-Mail-Adresse Ihres Kontos aktualisieren.") }}
         </p>
     </header>
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -47,7 +47,7 @@
 
         <div class="flex items-center gap-4">
             <!-- <x-primary-button>{{ __('Save') }}</x-primary-button> -->
-            <button type="submit" class="approveButton">Save</button>
+            <button type="submit" class="approveButton">Speichern</button>
 
             @if (session('status') === 'profile-updated')
                 <p
