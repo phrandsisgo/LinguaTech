@@ -46,6 +46,11 @@
         
 
         <input type="submit" value="Hinzufügen" class="approveButton">
+        @if ($path == 'initiate')
+        <button class="standartButton">
+            <a href="/library"  style="text-decoration: none;">Weiter</a>
+        </button>
+        @endif
     </form>
     <script>
 function addLanguage() {

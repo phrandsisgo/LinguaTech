@@ -7,6 +7,7 @@
 <?php 
 $path = "initiate";
 ?>
+helloOder so
 @section('content')
 
 @include('profile.partials.select-language')

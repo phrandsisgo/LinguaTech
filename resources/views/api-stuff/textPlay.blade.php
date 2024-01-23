@@ -18,6 +18,7 @@
     </style>
     <script defer>
         document.addEventListener('DOMContentLoaded', function() {
+            event.preventDefault();
             const textContainer = document.getElementById('textContainer');
             // Russischer Text mit deutscher Übersetzung in Klammern
             const text = "Кирилл работает веб-разработчиком. Он создает веб-сайты и приложения для интернета. Кирилл очень умный и талантливый человек. Он знает много языков программирования, таких как HTML, CSS и JavaScript. Он также умеет работать с базами данных и серверами.Когда Кирилл создает веб-сайт, он уделяет особое внимание дизайну и удобству использования. Он старается сделать сайты красивыми и функциональными, чтобы пользователи могли легко находить необходимую информацию и выполнять разные задачи.Кирилл работает в офисе, но иногда он также работает из дома. Ему нравится свобода, которую ему дает его профессия. Он всегда следит за последними тенденциями в веб-разработке и учится новым технологиям.";
@@ -55,10 +56,11 @@
 @endsection
 @section('content')
 
-<form id="wordTranslateForm" method="POST" action="{{ route('translate') }}" style="display: none;">
+<!-- <form id="wordTranslateForm" method="POST" action="{{ route('translate') }}" style="display: none;">
     @csrf
     <input type="hidden" name="word" id="wordInput">
-</form>
+</form> -->
+<h1>hallo</h1>
 <div class="dropdown-wrapper">
     <button class="dropbtn" onclick="myFunction()">Andere Texte</button>
     <div id="myDropdown" class="dropdown-content" >
@@ -131,7 +133,7 @@ window.onclick = function(event) {
     }
 let anfrageWort=' ';
 document.getElementById('wordTranslateForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+ 
 
   
     const word = document.getElementById('wordInput').value;
@@ -139,7 +141,6 @@ document.getElementById('wordTranslateForm').addEventListener('submit', function
     const formData = new FormData(this);
     let translatedWord='';
   
-    //alert('Wort: ' );
 
     fetch(this.action, {
             method: 'POST',

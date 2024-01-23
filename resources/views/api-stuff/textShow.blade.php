@@ -55,13 +55,11 @@
         } */
 
     </script>
+    <meta name="_token" content="{{ csrf_token() }}">
+
 @endsection
 @section('content')
 
-<form id="wordTranslateForm" method="POST" action="{{ route('translate') }}" style="display: none;">
-    @csrf
-    <input type="hidden" name="word" id="wordInput">
-</form>
 <div class="dropdown-wrapper">
     <button class="dropbtn" onclick="myFunction()">Andere Texte</button>
     <div id="myDropdown" class="dropdown-content" >
@@ -128,25 +126,56 @@ window.onclick = function(event) {
     </div>
 </div>
 <script>
-    function prevDef(event){/* 
+    function prevDef(event){
         event.preventDefault();
+        /*
         document.getElementById('wordAddForm').submit(); */
     }
 let anfrageWort=' ';
 //document.addEventListener('DOMContentLoaded', (event) => {
-document.getElementById('wordTranslateForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+// document.getElementById('wordTranslateForm').addEventListener('submit', function(event) {
+//     event.preventDefault();
 
-    alert("event should be prevented");
-    const word = document.getElementById('wordInput').value;
-    anfrageWort = word;
-    const formData = new FormData(this);
-    let translatedWord='';
+//     alert("event should be prevented");
+//     const word = document.getElementById('wordInput').value;
+//     anfrageWort = word;
+//     console.log(this)
+//     const formData = new FormData(this);
+//     let translatedWord='';
   
-    fetch(this.action, {
-            method: 'POST',
-            body: formData
-        })
+//     fetch(this.action, {
+//             method: 'POST',
+//             body: formData
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+
+//                 openModal(data);
+//                 // return data;
+//         })
+//         .catch(error => console.error('Error:', error));
+
+//     });
+//});
+    function handleClick(word, sentence, event) {
+            event.preventDefault();
+            const translateWord = {
+                word: word
+            };
+            var csrf = document.querySelector('meta[name="_token"]').content;
+            console.log(csrf)
+
+        const formData = JSON.stringify(translateWord);
+        let translatedWord='';
+  
+        fetch('/translate/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrf
+                }
+            })
         .then(response => response.json())
         .then(data => {
 
@@ -154,13 +183,6 @@ document.getElementById('wordTranslateForm').addEventListener('submit', function
                 // return data;
         })
         .catch(error => console.error('Error:', error));
-
-    });
-//});
-    function handleClick(word, sentence, event) {
-            event.preventDefault();
-            document.getElementById('wordInput').value = word;
-            document.getElementById('wordTranslateForm').dispatchEvent(new Event('submit'));
           
     }
 
