@@ -11,6 +11,7 @@
 @vite(['resources/css/application.scss', 'resources/css/animations.scss', 'resources/js/animations.js'])
 
 
+<meta name="_token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
@@ -72,6 +73,37 @@ var listProgress=0;
 var doneAnzeige=0;
 var repAzeig=0;
 
+
+
+function handleSwipe(direction, wordId) {
+        event.preventDefault();
+        const translateWord = {
+            word: word
+        };
+        var csrf = document.querySelector('meta[name="_token"]').content;
+        //console.log(csrf)
+
+    const formData = JSON.stringify(translateWord);
+    let translatedWord='';
+
+    fetch('/swipeHandle/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrf
+            }
+        })
+    .then(response => response.json())
+    .then(data => {
+
+           // openModal(data);
+            // return data;
+    })
+    .catch(error => console.error('Error:', error));
+        
+}
+
 function showUebersetzung(){
     var flipcard = document.getElementById('flip-card-inner');
     
@@ -82,7 +114,7 @@ function showUebersetzung(){
     }
 }
 var woerterbuch = @json($liste->words->map(function ($word) {
-    return [$word->base_word, $word->target_word]; 
+    return [$word->base_word, $word->target_word, $word->id]; 
 }));
 document.addEventListener('DOMContentLoaded', function() {
     var baseWord = document.getElementById('baseWord');

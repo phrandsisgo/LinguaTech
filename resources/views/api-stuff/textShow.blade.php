@@ -132,71 +132,47 @@ window.onclick = function(event) {
         document.getElementById('wordAddForm').submit(); */
     }
 let anfrageWort=' ';
-//document.addEventListener('DOMContentLoaded', (event) => {
-// document.getElementById('wordTranslateForm').addEventListener('submit', function(event) {
-//     event.preventDefault();
 
-//     alert("event should be prevented");
-//     const word = document.getElementById('wordInput').value;
-//     anfrageWort = word;
-//     console.log(this)
-//     const formData = new FormData(this);
-//     let translatedWord='';
-  
-//     fetch(this.action, {
-//             method: 'POST',
-//             body: formData
-//         })
-//         .then(response => response.json())
-//         .then(data => {
+function handleClick(word, sentence, event) {
+        event.preventDefault();
+        const translateWord = {
+            word: word
+        };
+        var csrf = document.querySelector('meta[name="_token"]').content;
+        //console.log(csrf)
 
-//                 openModal(data);
-//                 // return data;
-//         })
-//         .catch(error => console.error('Error:', error));
+    const formData = JSON.stringify(translateWord);
+    let translatedWord='';
 
-//     });
-//});
-    function handleClick(word, sentence, event) {
-            event.preventDefault();
-            const translateWord = {
-                word: word
-            };
-            var csrf = document.querySelector('meta[name="_token"]').content;
-            console.log(csrf)
-
-        const formData = JSON.stringify(translateWord);
-        let translatedWord='';
-  
-        fetch('/translate/', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrf
-                }
-            })
-        .then(response => response.json())
-        .then(data => {
-
-                openModal(data);
-                // return data;
+    fetch('/translate/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrf
+            }
         })
-        .catch(error => console.error('Error:', error));
-          
-    }
+    .then(response => response.json())
+    .then(data => {
 
-    function openModal(data) {
-        document.getElementById('translationText').textContent = data.translation;
-        document.getElementById('translationModal').style.display = 'block';
-        document.getElementById('originalWord').textContent = data.request;
-        document.getElementById('baseWordForm').value = data.request;
-        document.getElementById('targetWordForm').value = data.translation;
-    }
+            openModal(data);
+            // return data;
+    })
+    .catch(error => console.error('Error:', error));
+        
+}
 
-    function closeModal() {
-        document.getElementById('translationModal').style.display = 'none';
-    }
+function openModal(data) {
+    document.getElementById('translationText').textContent = data.translation;
+    document.getElementById('translationModal').style.display = 'block';
+    document.getElementById('originalWord').textContent = data.request;
+    document.getElementById('baseWordForm').value = data.request;
+    document.getElementById('targetWordForm').value = data.translation;
+}
+
+function closeModal() {
+    document.getElementById('translationModal').style.display = 'none';
+}
 
 </script>
 @endsection

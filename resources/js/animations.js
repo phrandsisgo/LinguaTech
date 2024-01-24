@@ -86,6 +86,7 @@ function naechsteKarte() {
         zeigeStatistikModal();
         //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
     }
+    console.log("Aktuelle Karte ID:" +woerterbuch[aktuelleKarteIndex][2])
     updateKarte();
 }
 
