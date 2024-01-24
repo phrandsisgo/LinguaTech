@@ -76,6 +76,9 @@ function zeigeStatistikModal() {
     document.getElementById('swipeStatistikModal').style.display = 'block';
 }
 
+function closeStatModal() {
+    document.getElementById('swipeStatistikModal').style.display = 'none';
+}
 
 function naechsteKarte() {
     aktuelleKarteIndex++;

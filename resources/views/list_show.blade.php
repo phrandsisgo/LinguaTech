@@ -40,6 +40,7 @@ function confirmDelete() {
                 <hr class="hrborder">
                 <p class="sectiontitle center-vertically">{{ $begriffe->target_word }}</p>
         </div>
+        @if (Auth::user()->id == $liste->created_by)
         <div class="horizontal-fill"></div>
         <form action="/word_delete_function/{{$begriffe->id}}/{{$liste->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
@@ -49,6 +50,7 @@ function confirmDelete() {
               
                 </button>
         </form>
+        @endif
         
     </div>
 </div>

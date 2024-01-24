@@ -20,7 +20,7 @@ class EnsureUser
     {
         $word = Word::find($request->id);
         // Überprüfe, ob das Wort existiert und ob der angemeldete Benutzer der Besitzer ist
-        if ($word && $word->user_id == Auth::id()) {
+        if (!empty($word) && $word->user_id == Auth::id()) {
             return $next($request);
         }
 
