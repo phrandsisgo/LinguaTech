@@ -66,48 +66,53 @@ body {
         margin-right: auto;
         width: 100%; // Add this line
 }
+.tech-skills-title {
+    font-size: 20px;
+    color: #333333;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
 
-    /* @media screen and (min-width: $phonewidth) {
-        .flipcardWordWrapper{
-            height:10vw;
-        }
-    }
-    @media screen and (max-width: $phonewidth) {
-        .flipcardWordWrapper{
-            padding-top : 30%;
-            padding-bottom: 35%;
-        }
-    } */
-
-    @media screen and (min-width: $phonewidth) {
+.tech-skill {
+    font-size: 16px;
+    color: $background;
+    background-color: $contrast30;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+@media screen and (min-width: $phonewidth) {
     //hier wird die nav bar für die Desktop ansicht angepasst
-        .hero{
-            display:flex;
-        }
-        $bildmass: 20vw;
-        #profilBild{
-            height: $bildmass;
-            width: $bildmass*1.37;
-            margin: 10px;
-            position:relative;
-            left:-44%;
-            top:-4.5%;
-        }
-        .image-crop{
-            height: $bildmass*0.95;
-            width: $bildmass*0.95;
-            overflow: hidden;
-            position:relative;
-            border-radius: 50%;
-            border: 6px solid $approve;
-            box-sizing: border-box;
-            margin: 10px auto;
-            display: block;
-        }
+    .hero{
+        display:flex;
     }
-    @media screen and (max-width: $phonewidth) {
-        .flipcardWordWrapper{
-            height:140px;
+    $bildmass: 20vw;
+    #profilBild{
+        height: $bildmass;
+        width: $bildmass*1.37;
+        margin: 10px;
+        position:relative;
+        left:-44%;
+        top:-4.5%;
+    }
+    .image-crop{
+        height: $bildmass*0.95;
+        width: $bildmass*0.95;
+        overflow: hidden;
+        position: sticky;
+        left: 0;
+        border-radius: 43%;
+        
+        box-sizing: border-box;
+        margin: 10px auto;
+        display: block;
+    }
+}
+@media screen and (max-width: $phonewidth) {
+    .flipcardWordWrapper{
+        height:140px;
     }
     $bildmass: 50vw;
     #profilBild{
@@ -129,7 +134,6 @@ body {
         display: block;
     }
 }
-
 
 .icons{
     margin:5px;

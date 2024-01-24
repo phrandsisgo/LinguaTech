@@ -36,7 +36,7 @@
                 <li class="mob-only"><a class="dropdown-item" href="/library">Bibliothek</a></li>
                 <li><a class="dropdown-item" href="/about_me">Über den Entwickler</a></li>
                 <li><a class="dropdown-item" href="/about_project">Über das projekt</a></li>
-                <li><a class="dropdown-item" href="/showPatch/1">Neuigkeiten</a></li>
+                <li><a class="dropdown-item" href="/showPatch/1">Patchnotizen</a></li>
 
                 @if (auth()->check())
                     <li><a class="dropdown-item" href="/displayAllTexts">Texte</a></li>

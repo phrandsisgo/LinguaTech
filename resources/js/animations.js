@@ -70,14 +70,22 @@ function showUebersetzung(){
     }
 }
 
+function zeigeStatistikModal() {
+    document.getElementById('leftSwipeCount').textContent = repAzeig;
+    document.getElementById('rightSwipeCount').textContent = doneAnzeige;
+    document.getElementById('swipeStatistikModal').style.display = 'block';
+}
+
 
 function naechsteKarte() {
     aktuelleKarteIndex++;
     if (aktuelleKarteIndex >= woerterbuch.length) {
-        aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
+        zeigeStatistikModal();
+        //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
     }
     updateKarte();
 }
+
 
 function updateKarte() {
     var countAnzeigeA = document.getElementById('countAnzeigeA');
