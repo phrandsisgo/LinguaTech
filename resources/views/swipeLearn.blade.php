@@ -77,14 +77,15 @@ var repAzeig=0;
 
 function handleSwipe(direction, wordId) {
         event.preventDefault();
-        const translateWord = {
-            word: word
+        const requestData = {
+            wordId: wordId,
+            direction: direction
         };
         var csrf = document.querySelector('meta[name="_token"]').content;
         //console.log(csrf)
 
-    const formData = JSON.stringify(translateWord);
-    let translatedWord='';
+    const formData = JSON.stringify(requestData);
+    //let translatedWord='';
 
     fetch('/swipeHandle/', {
             method: 'POST',

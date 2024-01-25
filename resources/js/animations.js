@@ -15,22 +15,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function handleLeftClickLeft() {
+        //this direction is when the User fails
         triggerAnimationLeft();
         naechsteKarte();
         repAzeig++;
         document.getElementById('repAzeigA').innerHTML=repAzeig;
         document.getElementById('repAzeigB').innerHTML=repAzeig;
+        handleSwipe("left", woerterbuch[aktuelleKarteIndex][2]);
     }
     
     
     function handleRightClick() {
+        //this direction is when the User succeeds
         triggerAnimationRight();
-        // console.log("Rechts geklickt!");
-       
         naechsteKarte();
         doneAnzeige++;
         document.getElementById('doneAnzeigeA').innerHTML=doneAnzeige;
         document.getElementById('doneAnzeigeB').innerHTML=doneAnzeige;
+        handleSwipe("right", woerterbuch[aktuelleKarteIndex][2]);
  }
 });
 

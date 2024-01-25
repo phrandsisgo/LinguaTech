@@ -111,6 +111,13 @@ class WordListController extends Controller{
             $word->target_language_id = 2;//muss noch zu einem späteren Zeitpunkt angepasst werden.
             $word->save();
             $liste->words()->attach($word->id);
+
+            
+            //der pivot Table wird noch erstellt
+            $currentUser = auth()->user();
+
+            // Create a new pivot entry between the User and Word models
+            $currentUser->words()->attach($word);
         }
         return redirect('/library');
     }
@@ -150,12 +157,66 @@ class WordListController extends Controller{
         $newList->created_at = now();
         $wordListWords = WordListWord::where('word_list_id', $liste->id)->get();
         foreach($wordListWords as $wordListWord){ 
-            $newWordListWord = new WordListWord;
-            $newWordListWord->word_list_id = $newListId;
-            $newWordListWord->word_id = $wordListWord->word_id;
-            $newWordListWord->created_at = now();
-            $newWordListWord->save();
+            $originalWordId = Word::where('id', $wordListWord->word_id)->first();
+            //if($originalWord){
+                $newWord = new Word;
+                $newWord->base_word = $originalWordId->base_word;
+                $newWord->target_word = $originalWordId->target_word;
+                $newWord->base_language_id = $originalWordId->base_language_id;
+                $newWord->target_language_id = $originalWordId->target_language_id;
+                $newWord->created_at = now();
+                $newWord->save();
+
+                $newWordId = $newWord->id; // Store the ID of the marked word in a variable
+
+                $newWordListWord = new WordListWord;
+                $newWordListWord->word_list_id = $newListId;
+                $newWordListWord->word_id = $newWordId;
+                $newWordListWord->created_at = now();
+                $newWordListWord->save();
+            
+                //der pivot Table wird noch erstellt
+                $currentUser = auth()->user();
+
+                // Create a new pivot entry between the User and Word models
+                $currentUser->words()->attach($newWordId);
+            //}
+
+// Continue with the rest of your code...
+
         }
         return redirect('/library');
+    }
+
+    public function swipeHandle(Request $request){
+        $request->validate([
+            'wordId' => 'required',
+            'direction' => 'required',
+        ]);
+        if ($request->direction == 'left') {
+            //happens when the user swipes left
+            $word = Word::find($request->wordId);
+            $word->decreaseCountForAuthUser(1);
+            return response()->json([
+                'success' => 'success',
+                'count' => $word->count(),
+                'wordId' => $word->id
+            ], 200);
+        } elseif ($request->direction == 'right') {
+            //happens when the user swipes right
+            $word = Word::find($request->wordId);
+            $word->increaseCountForAuthUser(1);
+            return response()->json([
+                'success' => 'success',
+                'count' => $word->count(),
+                'wordId' => $word->id
+            ], 200);
+        }else{
+            return response()->json(['error' => 'false input(direction expected)'], 400);
+        }
+        $liste = WordList::with('words')->find($request->listId);
+        $word = Word::find($request->wordId);
+        $liste->words()->syncWithoutDetaching($word->id);
+        return response()->json(['success' => 'success'], 200);
     }
 }
