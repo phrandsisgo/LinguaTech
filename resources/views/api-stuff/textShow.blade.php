@@ -60,41 +60,15 @@
 @endsection
 @section('content')
 
-<div class="dropdown-wrapper">
-    <button class="dropbtn" onclick="myFunction()">Andere Texte</button>
-    <div id="myDropdown" class="dropdown-content" >
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-        
-    @foreach ($allTexts as $textL)
-        <a href="/textShow/{{$textL->id}}">{{$textL->title}},{{$textL->langOption->language_name}}</a>
-    @endforeach
-    </div>
-</div>
+<a href="/displayAllTexts">
+    <button class="standartButton">Alle Texte</button>
+</a>
 <p class="pagetitle ">{{$text->title}}</p>
 <p id="textContainer" class="section-content"> </p>
 <br><br><br>
 
-<script>
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}  
-</script>
+
 <!-- Modal-Struktur -->
 <div id="translationModal">
     <div class="modal-content">

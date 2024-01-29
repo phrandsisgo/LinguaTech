@@ -66,7 +66,7 @@ body {
         margin-right: auto;
         width: 100%; // Add this line
 }
-.tech-skills-title {
+.tech-skills-   Card {      
     font-size: 20px;
     color: #333333;
     font-weight: bold;
@@ -291,11 +291,56 @@ $iconSize: 4rem; //gehört zu IconSize
     .gradiant-box{
         display: none;
     }
-
-
 }
 }
+.language-button {
+    background-color: $background10;
+    color: $contrast;
+    border: 2px solid $contrast60;
+    display:flex;
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    //height: 5.1rem;
 
+    &:hover{
+        background-color: $approve;
+        color: $background10;
+        .bi.bi-arrow-right-short path {
+            fill: white;
+            transform: rotate(90deg);
+            z-index: 99;
+        }
+    }
+}
+.bi.bi-arrow-right-short path {
+    fill: #073B4C; // Ursprüngliche Füllfarbe
+    //transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+
+.textSortierer {
+    display: flex;
+    flex-direction: column;
+}
+
+.language-spez-text {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 600px) {
+    .textSortierer {
+        flex-direction: row;
+    }
+
+    .language-spez-text {
+        flex-direction: column;
+    }
+}
 
 .patchCommentWrapper{
     display: flex;

@@ -144,7 +144,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             <form action="/list_delete_function/{{$privateList->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 <button type="submit" class="delete-hitbox">
-                    <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon" class="libryryIcon">
+                    <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon" style ="height:34px; padding-top:3px;"class="libryryIcon">
                 </button>
             </form>
         <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline">
