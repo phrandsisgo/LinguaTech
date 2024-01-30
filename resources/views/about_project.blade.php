@@ -30,6 +30,11 @@
 
 
 <p class="pagetitle">{{ __('about_project.discoverLinguaTech') }}</p>
+
+<p class="sectiontitle">Was ist LinguaTech?</p>
+<p class="section-content">LinguaTech ist ein Lernplattform die das Ziel hat Sprachen den Benutzer beizubringen. Es wurde von Francisco Wohlgemuth entwickelt als Abschlussprojekt in einem coding Bootcamp</p>
+<br>
+
 <p class="sectiontitle">{{ __('about_project.smartWayToLearn') }}</p>
 <p class="section-content">{{ __('about_project.welcomeMessage') }}</p>
 

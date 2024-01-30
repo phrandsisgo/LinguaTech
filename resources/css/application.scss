@@ -37,14 +37,20 @@
         top: 30%;
         left: 50%;      // Horizontale Position auf 50% des Bildschirms setzen
         transform: translateX(-50%); // Verschiebt das Element um 50% seiner eigenen Breite
-        
+        width: 50%;
+        height: 40%;
         background-color: $background30w;
-        padding: 20px;
+        padding: 35px;
         border-radius: 30px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         color: $contrast;
         text-align: center;
-
+        @media (min-width: 1000px) {
+            width: 35%;
+        }
+        @media (max-width: 550px) {
+            width: 70%;
+        }    
         .close {
             color: $deny;
             float: right;

@@ -293,6 +293,7 @@ $iconSize: 4rem; //gehört zu IconSize
     }
 }
 }
+
 .language-button {
     background-color: $background10;
     color: $contrast;
@@ -309,18 +310,19 @@ $iconSize: 4rem; //gehört zu IconSize
     &:hover{
         background-color: $approve;
         color: $background10;
-        .bi.bi-arrow-right-short path {
-            fill: white;
-            transform: rotate(90deg);
-            z-index: 99;
-        }
+      
     }
 }
 .bi.bi-arrow-right-short path {
-    fill: #073B4C; // Ursprüngliche Füllfarbe
-    //transition: fill 0.3s ease, transform 0.3s ease;
+    fill: $contrast; // Ursprüngliche Füllfarbe
+    transition: fill 0.3s ease, transform 0.4s ease;
+    transform-origin: center center;
 }
-
+.arrow-Right path {
+    fill: white;
+    transform: rotate(90deg);
+        
+}
 
 .textSortierer {
     display: flex;
@@ -332,21 +334,25 @@ $iconSize: 4rem; //gehört zu IconSize
     flex-direction: column;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 600px) {/* 
     .textSortierer {
         flex-direction: row;
-    }
-
+    } */
+/* 
     .language-spez-text {
         flex-direction: column;
-    }
+    } */
 }
 
 .patchCommentWrapper{
     display: flex;
+    position: sticky;
+    margin-left: auto;
+    margin-right: auto;
     color: $contrast;
     flex-direction: column;
     justify-content: center;
+    max-width: 900px;
     //align-items: center;
     
 }
@@ -499,7 +505,7 @@ $iconSize: 4rem; //gehört zu IconSize
 .interestsWrapper{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    //justify-content: center;
     align-items: center;
 
 }

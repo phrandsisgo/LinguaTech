@@ -62,7 +62,7 @@
         <h2>Swipe Statistik</h2>
         <p>Anzahl der Swipes nach links: <span id="leftSwipeCount"></span></p>
         <p>Anzahl der Swipes nach rechts: <span id="rightSwipeCount"></span></p>
-        <button onclick="location.reload();">von vorne lernen</button>
+        <button onclick="location.reload();" class="standartButton">von vorne lernen</button>
         <button onclick="document.getElementById('swipeStatistikModal').style.display = 'none';" class="modalclose" >Schliessen</button>
     </div>
 </div>
