@@ -18,9 +18,12 @@ function confirmDelete() {
         <p class="section-content">{{$liste->description}}</p>
     </div>
     <div class="horizontal-fill"></div>
+    @if (Auth::user()->id == $liste->created_by)
+        
     <div>
         <a href="/list_update/{{$liste->id}}"><p class="pagetitle noUnderline">Bearbeiten</p></a>
     </div>
+    @endif
     <div class="space"></div>
     <div>
         <a href="/swipeLearn/{{$liste->id}}"><p class="pagetitle noUnderline">Lernen</p></a>
@@ -37,14 +40,17 @@ function confirmDelete() {
                 <hr class="hrborder">
                 <p class="sectiontitle center-vertically">{{ $begriffe->target_word }}</p>
         </div>
+        @if (Auth::user()->id == $liste->created_by)
+        <div class="horizontal-fill"></div>
         <form action="/word_delete_function/{{$begriffe->id}}/{{$liste->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 <button type="submit" class="delete-hitbox">
                
-                    <img src="{{ asset('icons/trash-icon.svg')}}" alt="Löschen Icon">
+                    <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
               
                 </button>
         </form>
+        @endif
         
     </div>
 </div>

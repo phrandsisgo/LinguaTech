@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('words', function (Blueprint $table){
             $table->id();
-            $table->foreignId('base_language_id')->nullable()->constrained('lang_options');
-            $table->foreignId('target_language_id')->nullable()->constrained('lang_options');
+            $table->foreignId('base_language_id')->constrained('lang_options')->nullable()->default(null);
+            $table->foreignId('target_language_id')->constrained('lang_options')->nullable()->default(null);
 
             $table->string('base_word');
             $table->string('target_word');

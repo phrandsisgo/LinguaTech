@@ -10,6 +10,11 @@
     border: 3px solid $contrast60;
     border-radius: 20px;
     margin: 25px;
+    //make a max-width: ;
+    max-width: 900px;
+    //make it align in the center horizontally
+    margin-left: auto;
+    margin-right: auto;
 }
 .cardTitle {
     font-size: 24px;
@@ -24,20 +29,14 @@
     padding: 9px;
     border-radius: 18px;
 }
-.delete-hitbox {
-    padding: 20px;
-    //zur hilfe eine umrandung
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
+
 .leading-library {
     display: flex;
 }
 .leadingText {
-    margin-left: 20px;
     margin-top: 10px;
-    margin-right: 20px;
+    //margin-left: 5px;
+    //margin-right: 5px;
     color: $contrast60;
 }
 hr.hrborder {
@@ -58,7 +57,19 @@ hr.hrborder {
     //turn the text to like 18px
     font-size: 14 px;
 }
+.errorMessages{
+    color: $deny;
+    margin-top: 0;
+    //turn the text to like 18px
+    font-size: 1.2rem;
+}
+.titleMargin{
+    margin-top: 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 
+}
 //toggle switch start
 
 .toggle-wrapper {
@@ -70,10 +81,15 @@ hr.hrborder {
 .toggle-checkbox {
     display: none;
 }
-
+$iconHeightANDwidth: 2.5rem;
+.libraryIcon {
+    color: $contrast;
+    height: $iconHeightANDwidth;
+    width: $iconHeightANDwidth;
+}
 .toggle-label {
     display: block;
-    width: 120px; /* Größe des Toggles */
+    width: 180px; /* Größe des Toggles */
     height: 34px;
     background-color: $contrast;
     border-radius: 17px;
@@ -86,11 +102,15 @@ hr.hrborder {
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 58px; /* Etwas kleiner als die Höhe des Toggles */
+    width: 89px; /* Etwas kleiner als die Höhe des Toggles */
     height: 30px;
     background-color: $background;
-    border-radius: 50%;
+    border-radius: 15px;
     transition: left 0.3s;
+}
+.toggle-label .toggle-on,
+.toggle-label .toggle-off {
+    user-select: none;
 }
 
 .toggle-on, .toggle-off {
@@ -114,7 +134,7 @@ hr.hrborder {
 }
 
 .toggle-checkbox:checked + .toggle-label .toggle-inner {
-    left: calc(100% - 2px - 58px); /* Verschiebt den Slider nach rechts */
+    left: calc(100% - 90px); /* Verschiebt den Slider nach rechts */
 }
 
 

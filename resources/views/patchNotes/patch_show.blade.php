@@ -4,6 +4,13 @@
     @vite(['resources/css/library.scss'])
 @endsection
 @section('content')
+   <div class="displayFlex">
+   <p class="pagetitle">Release notes Version {{$patch->version}}</p>
+    <a href="/patchList">
+        <button class="standartButton"style="margin-left:14px;">ältere Patches</button>
+    </a>
+   </div>
+
     <p class="sectiontitle">
         {{$patch->title}}
 
@@ -12,7 +19,10 @@
 
         {!! $patch->content !!}
     </div>
-   
+    <br>
+    <br>
+    <br>
+   <p class="sectiontitle">Kommentarsektion:</p>
     <br>
     <div class="showComments">
         @foreach ($patch->comments as $comment)
@@ -46,7 +56,7 @@
             <!-- <input type="hidden" name="patchId" value="{{$patch->id}}"> -->
             <label for="comment" class="section-content">Neuer Kommentar hinzufügen</label>
             <textarea name="comment" id="newComment" cols="30" rows="10"></textarea>
-            <button type="submit" class="standartButton">submit</button>
+            <button type="submit" class="standartButton" style="margin:0px; margin-top:9px;">submit</button>
        </div>
     </form>
     @endif

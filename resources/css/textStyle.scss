@@ -3,15 +3,7 @@
     background-color: green;
     border: 3px solid $contrast60;
 }
-.sectionWrapper {
-    padding-left: 20px; /* Abstand vom linken Rand erhöhen */
-    border-left: 2px solid $contrast30; /* Linie links vom Text mit Ihrer gewünschten Farbe (hier blau) */
-    margin-top: 10px; /* Optional: Abstand nach oben hinzufügen */
-}
 
-.sectionWrapper p {
-    margin: 0; /* Um den Abstand um den Text zu entfernen */
-}
 .sectionSubTitle{
     color: $contrast;
     font-size: 1.5rem;

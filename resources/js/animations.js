@@ -4,33 +4,35 @@ document.addEventListener('DOMContentLoaded', function() {
     var hammertime = new Hammer(karteContent);
     hammertime.on('swipe', function(ev) {
         console.log(ev+" is the direction");
-       // alert(ev.direction);
+        // alert(ev.direction);
         if(ev.direction === Hammer.DIRECTION_LEFT){
-        triggerAnimationLeft();
+            triggerAnimationLeft();
             handleLeftClickLeft();
         }else if(ev.direction === Hammer.DIRECTION_RIGHT){
-        triggerAnimationRight();
+            triggerAnimationRight();
             handleRightClick();
         }
     });
 
     function handleLeftClickLeft() {
+        //this direction is when the User fails
         triggerAnimationLeft();
         naechsteKarte();
         repAzeig++;
         document.getElementById('repAzeigA').innerHTML=repAzeig;
         document.getElementById('repAzeigB').innerHTML=repAzeig;
+        handleSwipe("left", woerterbuch[aktuelleKarteIndex][2]);
     }
     
     
     function handleRightClick() {
+        //this direction is when the User succeeds
         triggerAnimationRight();
-        // console.log("Rechts geklickt!");
-       
         naechsteKarte();
         doneAnzeige++;
         document.getElementById('doneAnzeigeA').innerHTML=doneAnzeige;
         document.getElementById('doneAnzeigeB').innerHTML=doneAnzeige;
+        handleSwipe("right", woerterbuch[aktuelleKarteIndex][2]);
  }
 });
 
@@ -70,14 +72,26 @@ function showUebersetzung(){
     }
 }
 
+function zeigeStatistikModal() {
+    document.getElementById('leftSwipeCount').textContent = repAzeig;
+    document.getElementById('rightSwipeCount').textContent = doneAnzeige;
+    document.getElementById('swipeStatistikModal').style.display = 'block';
+}
+
+function closeStatModal() {
+    document.getElementById('swipeStatistikModal').style.display = 'none';
+}
 
 function naechsteKarte() {
     aktuelleKarteIndex++;
     if (aktuelleKarteIndex >= woerterbuch.length) {
-        aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
+        zeigeStatistikModal();
+        //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
     }
+    console.log("Aktuelle Karte ID:" +woerterbuch[aktuelleKarteIndex][2])
     updateKarte();
 }
+
 
 function updateKarte() {
     var countAnzeigeA = document.getElementById('countAnzeigeA');

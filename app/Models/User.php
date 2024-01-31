@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Relations\HasMany;
-use Illuminate\Database\Relations\BelongsToMany;
+//use Illuminate\Database\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\belongsToMany;
 
 class User extends Authenticatable
 {
@@ -56,5 +57,11 @@ class User extends Authenticatable
 
     public function words(){
         return $this->belongsToMany(Word::class, 'user_words', 'user_id', 'word_id');
+    }
+    public function interests(): BelongsToMany{
+        return $this->belongsToMany(Interest::class, 'interest_user', 'user_id', 'interest_id');
+    }
+    public function languages(): BelongsToMany{
+        return $this->belongsToMany(LangOption::class, 'lang_option_users', 'user_id', 'lang_option_id');
     }
 }

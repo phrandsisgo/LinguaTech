@@ -1,6 +1,6 @@
 @import "colorsNvariables.scss";
 
-.modal {
+.modalWrapper {
     //display: none;
     display:block;
     position: fixed;
@@ -12,7 +12,58 @@
     z-index: 999;
 }
 
+.modalclose{
+    background-color: $deny; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 15px; 
+    cursor: pointer;
+}
 
+#swipeStatistikModal {
+    position: fixed; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); // halbtransparenter Hintergrund
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modal-content {
+        position: fixed;
+        top: 30%;
+        left: 50%;      // Horizontale Position auf 50% des Bildschirms setzen
+        transform: translateX(-50%); // Verschiebt das Element um 50% seiner eigenen Breite
+        width: 50%;
+        height: 40%;
+        background-color: $background30w;
+        padding: 35px;
+        border-radius: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: $contrast;
+        text-align: center;
+        @media (min-width: 1000px) {
+            width: 35%;
+        }
+        @media (max-width: 550px) {
+            width: 70%;
+        }    
+        .close {
+            color: $deny;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+    }
+}
 
 
 .kartenInhalt{

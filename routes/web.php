@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WordListController;
 use App\Http\Controllers\PatchNotesController;
+use App\Http\Controllers\LingApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,9 +59,15 @@ Route::post('/releaseNotesComment/{id}', [PatchNotesController::class,'releaseNo
 Route::post('/releaseNotesCommentDelete/{id}', [PatchNotesController::class,'releaseNotesCommentDelete'])
 ->name('releaseNotesCommentDelete');
 
+Route::get('/patchList', [PatchNotesController::class,'patchList'])
+->name('patchList');
+
 Route::post('/list_update_function/{id}', [WordListController::class, 'list_update_function'])
 //->middleware('checkListAuthor')
 ->name('list_update_function');//middleware is missing here
+
+Route::post('/list_add_word', [WordListController::class, 'list_add_word'])
+->name('list_add_word');//middleware is missing here
 
 Route::post('/list_create_function', [WordListController::class, 'list_create_function'])
 ->name('list_create_function');//middleware is missing here
@@ -69,7 +76,11 @@ Route::post('/list_delete_function/{id}', [WordListController::class, 'list_dele
 ->name('list_delete_function');//middleware is missing here
 
 Route::post('/word_delete_function/{id}/{listId}', [WordListController::class, 'word_delete_function'])
-->name('word_delete_function');//middleware is missing here
+->name('word_delete_function');//middleware is missing here 
+//->middleware('ensure.user:word');
+
+Route::post('/swipeHandle', [WordListController::class, 'swipeHandle'])
+->name('swipeHandle'); //middleware is missing here
 
 Route::get('/list_create', function () {
     return view('list_create');
@@ -91,7 +102,36 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/updateInterests', [ProfileController::class, 'updateInterests'])->name('updateInterests');  
+    Route::post('/addLanguage', [ProfileController::class, 'addLanguage'])->name('addLanguage');  
+    Route::delete('/removeLanguageInitiate/{id}', [ProfileController::class, 'removeLanguageInitiate'])->name('removeLanguageInitiate');
+    Route::delete('/removeLanguage/{id}', [ProfileController::class, 'removeLanguage'])->name('removeLanguage');
+    Route::get('/initiateProfile', [ProfileController::class, 'initiateProfile'])->name('initiateProfile');
+    Route::post('/initiateProfile', [ProfileController::class, 'postInitiate'])->name('postInitiate');
+    Route::post('addLanguageInitiate', [ProfileController::class, 'addLanguageInitiate'])->name('addLanguageInitiate');
+    Route::post('/copyList/{listId}', [WordListController::class, 'copyList'])->name('copyList');
 });
 //die liste der Middlewares mit den Zuweisungen findet man unter app/Http/Kernel.php
+
+
+//hier fangen die routen an für die API sachen:
+/* //diese route kann gelöscht werden
+Route::get('/textPlay', function () {
+    return view('api-stuff/textPlay');
+})->middleware('auth');
+ */
+Route::get('/textPlay', [LingApiController::class, 'textPlay'])
+->middleware('auth');
+
+Route::get('/textShow/{id}', [LingApiController::class, 'textShow'])
+->name('textShow')->middleware('auth');
+
+Route::get('/displayAllTexts', [LingApiController::class, 'displayAllTexts'])
+->name('displayAllTexts')->middleware('auth');
+
+Route::post('/translate', [LingApiController::class, 'translate'])
+->name('translate');
+
+
 
 require __DIR__.'/auth.php';

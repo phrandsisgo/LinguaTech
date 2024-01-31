@@ -1,10 +1,11 @@
 @extends('layouts.lingua_main')
-@section('title', 'Home')
+@section('title', 'Library')
 @section('head')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/css/bootstrap5-toggle.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/js/bootstrap5-toggle.ecmas.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
     function deleteList(id) {
         var bestaetigung = confirm("{{__('library.rUSureUDelete') }}");
@@ -27,6 +28,9 @@
     function confirmDelete() {
     return confirm('{{__('library.rUSureUDelete') }}');
 }
+function confirmCopy() {
+    return confirm('Sind Sie sicher, dass Sie diese Liste kopieren wollen?');
+}
 document.querySelectorAll('input[type=checkbox][data-toggle="toggle"]').forEach(function(ele) {
     ele.bootstrapToggle();
 });
@@ -40,13 +44,15 @@ document.querySelectorAll('input[type=checkbox][data-toggle="toggle"]').forEach(
 @section('content')
 <!--toggle button--->
 
-<div class="toggle-wrapper">
-    <input type="checkbox" id="toggleButton" class="toggle-checkbox">
-    <label for="toggleButton" class="toggle-label">
-        <span class="toggle-inner"></span>
-        <span class="toggle-on">{{__('library.own') }}</span>
-        <span class="toggle-off">{{__('library.public') }}</span>
-    </label>
+<div class=" titleMargin">
+    <div class="toggle-wrapper">
+        <input type="checkbox" id="toggleButton" class="toggle-checkbox">
+        <label for="toggleButton" class="toggle-label">
+            <span class="toggle-inner"></span>
+            <span class="toggle-on">{{__('library.own') }}</span>
+            <span class="toggle-off">{{__('library.public') }}</span>
+        </label>
+    </div>
 </div>
 <script>
 document.getElementById('toggleButton').addEventListener('change', function() {
@@ -69,33 +75,26 @@ document.getElementById('toggleButton').addEventListener('change', function() {
 
 
 
-
+<!-- nur Listen anzeigen die öffentlich sind-->
 <div class="" id="publicList" style="display:none">
-    <div class="displayFlex">
+    <div class="displayFlex titleMargin">
         <p class="pagetitle">{{__('library.titlePublic') }}</p>
         <div class="horizontal-fill"></div>
-        <a href="/list_create">
-            <div class="addButton">
-                <p class="addButtonText">{{__('library.newList') }}</p>
-            </div>
-        </a>
     </div>
     @foreach ($libraryList as $libraryListe)
-    
-    <div class="library-Card">
-        <a href="/list_show/{{$libraryListe->id}}">
+    @if ($libraryListe->created_by == 1)
+        
+    <div class="library-Card ">
+        <a href="/list_show/{{$libraryListe->id}}" class="anker-no-underline">
             <div class="displayFlex">
                 <p class="cardTitle">{{$libraryListe->name}}</p>
                 <div class="horizontal-fill"></div>
-                
-                <form action="/list_delete_function/{{$libraryListe->id}}" method="POST" onsubmit="return confirmDelete()">
-                    @csrf
-                    <button type="submit" class="delete-hitbox">
-                   
-                        <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
-                  
-                    </button>
-                </form>
+            <form action="/copyList/{{$libraryListe->id}}" method="POST" onsubmit="return confirmCopy()">
+                @csrf
+                <button type="submit" class="delete-hitbox">
+                    <img src="{{ asset('svg-icons/copy-icon.svg')}}" alt="Löschen Icon" class="libraryIcon">
+                </button>
+            </form>
             </div>
             <div></div>
             <div>
@@ -109,6 +108,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             </div>
         </a>
     </div>
+    @endif
     @endforeach
 </div>
 
@@ -117,30 +117,37 @@ document.getElementById('toggleButton').addEventListener('change', function() {
  
 
 <div class="" id="privateList">
-<div class="displayFlex">
+<div class="displayFlex titleMargin">
         <p class="pagetitle">{{__('library.titlePrivate') }}</p>
         <div class="horizontal-fill"></div>
         <a href="/list_create">
             <div class="addButton">
-                <p class="addButtonText">{{__('library.newList') }}</p>
+                <p class="addButtonText pagetitle">{{__('library.newList') }}</p>
             </div>
         </a>
     </div>
 @foreach ($libraryList as $privateList)
 @if ($privateList->created_by == auth()->user()->id)
 <div class="library-Card">
-    <a href="/list_show/{{$privateList->id}}">
         <div class="displayFlex">
-            <p class="cardTitle">{{$privateList->name}}</p>
-            <div class="horizontal-fill"></div>
+            <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline displayFlex">
+                <p class="cardTitle">{{$privateList->name}}</p>
+
+            </a>
+                <a href="/list_show/{{$privateList->id}}" class="horizontal-fill"></a>
+            <a href="/swipeLearn/{{$privateList->id}}">
+                <img src="{{ asset('svg-icons/learnIcon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
+            </a>
+            <a href="/list_update/{{$privateList->id}}">
+                <img src="{{ asset('svg-icons/pencil-icon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
+            </a>
             <form action="/list_delete_function/{{$privateList->id}}" method="POST" onsubmit="return confirmDelete()">
                 @csrf
                 <button type="submit" class="delete-hitbox">
-               
-                    <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
-              
+                    <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon" style ="height:34px; padding-top:3px;"class="libryryIcon">
                 </button>
             </form>
+        <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline">
         </div>
         <div></div>
         <div>

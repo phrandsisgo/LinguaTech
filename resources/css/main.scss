@@ -26,48 +26,89 @@ body {
     position: sticky;
     display: flex;
     padding: 8px;
-    //add something that makes every child of here have at least 5px space between them
+    user-select: none;
+    z-index: 2;
 }
 
-
-
-
-/* @media screen and (min-width: $phonewidth) {
-    .flipcardWordWrapper{
-        height:10vw;
-    }
+.anker-no-underline{
+    text-decoration: none;
 }
-@media screen and (max-width: $phonewidth) {
-    .flipcardWordWrapper{
-        padding-top : 30%;
-        padding-bottom: 35%;
-    }
-} */
 
+.Card-Wrapper{
+    //border: 5px solid green;
+        display: grid;
+        grid-gap: 20px;
+        z-index:5;
+
+        @media screen and (min-width: 501px) and (max-width: 850px) {
+            grid-template-columns: auto auto;
+        }
+        @media screen and (min-width: 851px) {
+            grid-template-columns: auto auto auto;
+        }
+
+}
+
+.Texts-Card {
+    //wird gebraucht weil es ähnlich ist wie librarycard jedoch hat 
+    background-color: white;
+    color: $approve;
+    position: sticky;
+    padding: 20px;
+    border: 3px solid $contrast60;
+    border-radius: 20px;
+    margin: 25px;
+    
+        //make a max-width: ;
+        max-width: 900px;
+        //make it align in the center horizontally
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%; // Add this line
+}
+.tech-skills-   Card {      
+    font-size: 20px;
+    color: #333333;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.tech-skill {
+    font-size: 16px;
+    color: $background;
+    background-color: $contrast30;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 @media screen and (min-width: $phonewidth) {
-//hier wird die nav bar für die Desktop ansicht angepasst
+    //hier wird die nav bar für die Desktop ansicht angepasst
     .hero{
         display:flex;
     }
-    $bildmass: 20vw;
+    $bildmass: 28vw;
     #profilBild{
         height: $bildmass;
         width: $bildmass*1.37;
         margin: 10px;
         position:relative;
-        left:-44%;
-        top:-4.5%;
+        left:-47%;
+        top:-7.5%;
     }
     .image-crop{
         height: $bildmass*0.95;
         width: $bildmass*0.95;
         overflow: hidden;
-        position:relative;
-        border-radius: 50%;
-        border: 6px solid $approve;
+        position: sticky;
+        left: 0;
+        border-radius: 36%;
+        
         box-sizing: border-box;
-        margin: 10px auto;
+        margin-right : 2rem;
         display: block;
+        margin-bottom: 3rem;
     }
 }
 @media screen and (max-width: $phonewidth) {
@@ -95,7 +136,6 @@ body {
     }
 }
 
-
 .icons{
     margin:5px;
 }
@@ -111,8 +151,10 @@ body {
 }
 #navText{
     //change the textsize
-    font-size: 50px;
+    font-size: 3.3rem;
     font-weight: bold;
+    margin: auto;
+    user-select: none;
 }
 .footer_box{
     color: $approve;
@@ -208,11 +250,22 @@ $iconSize: 4rem; //gehört zu IconSize
 }
 .section-content{
     color: $contrast;
-    font-size: 20px;
+    font-size: 1.3rem;
    // text-align: justify;
     //font-weight: bold;
 }
+.sectionWrapper {
+    padding-left: 20px; /* Abstand vom linken Rand erhöhen */
+    border-left: 2px solid $contrast30; /* Linie links vom Text mit Ihrer gewünschten Farbe (hier blau) */
+    margin-top: 10px; /* Optional: Abstand nach oben hinzufügen */
+}
 
+.sectionWrapper p {
+    margin: 0; /* Um den Abstand um den Text zu entfernen */
+}
+.maxwidthXY{
+    max-width: 500px;
+}
 @media screen and (max-width: $phonewidth) {
     .des-only {
         display: none;
@@ -239,17 +292,69 @@ $iconSize: 4rem; //gehört zu IconSize
     .gradiant-box{
         display: none;
     }
-
-
 }
 }
 
+.language-button {
+    background-color: $background10;
+    color: $contrast;
+    border: 2px solid $contrast60;
+    display:flex;
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    margin-left:0;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    //height: 5.1rem;
+
+    &:hover{
+        background-color: $approve;
+        color: $background10;
+      
+    }
+}
+.bi.bi-arrow-right-short path {
+    fill: $contrast; // Ursprüngliche Füllfarbe
+    transition: fill 0.3s ease, transform 0.4s ease;
+    transform-origin: center center;
+}
+.arrow-Right path {
+    fill: white;
+    transform: rotate(90deg);
+        
+}
+
+.textSortierer {
+    display: flex;
+    flex-direction: column;
+}
+
+.language-spez-text {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 600px) {/* 
+    .textSortierer {
+        flex-direction: row;
+    } */
+/* 
+    .language-spez-text {
+        flex-direction: column;
+    } */
+}
 
 .patchCommentWrapper{
     display: flex;
+    position: sticky;
+    margin-left: auto;
+    margin-right: auto;
     color: $contrast;
     flex-direction: column;
     justify-content: center;
+    max-width: 900px;
     //align-items: center;
     
 }
@@ -265,14 +370,233 @@ $iconSize: 4rem; //gehört zu IconSize
 #newComment:focus{
     outline: 3px solid $approve60;
 }
+.swipeLearnTitle{
+    color: $contrast;
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center; // Add this line to center the title horizontally
+}
+.swipeContent{
+    color: $contrast;
+    font-size: 20px;
+    text-align: center; // Add this line to center the content horizontally
+    margin: 20px;
+
+}
+
 .standartButton{
-    background-color: transparent;
+
+    //das wäre ein guter Ansatz bei color invert
+    
+    background-color: white;
     color: $contrast;
     border: 2px solid $contrast60;
     border-radius: 5px;
-    padding: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    margin-left:0;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    //height: 5.1rem;
+
+    &:hover{
+        background-color: $contrast;
+        color: white;
+
+    }
+}   
+.approveButton{
+    background-color: $contrast;
+    color: $background10;
+    //border: 2px solid $approve;
+    border-radius: 5px;
+    padding: 5px 13px ;
+    
+    margin: 5px;
+    margin-left:0;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold; 
+    transition: background-color 0.23s ease-in-out;
+    &:hover{
+        background-color: $approve;
+        color: $background10;
+    }
+}
+.standartDangerButton{
+    background-color: $deny;
+    color: $background10;
+    border: 2px solid $deny;
+    border-radius: 5px;
+    padding: 5px 13px;
     margin: 5px;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
-}   
+    transition: background-color 0.23s ease-in-out;
+    &:hover{
+        background-color: $deny60;
+        color: $background10;
+    }
+}
+.standartSelect{
+    background-color: $background10;
+    color: $contrast;
+    border: 2px solid $contrast60;
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.23s ease-in-out;
+    &:hover{
+        background-color: $contrast;
+        color: $background10;
+    }
+
+}
+.delete-hitbox {
+    //padding: 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+//authentification classes:
+.authTextField {
+    width: 100%;
+    height: 40px;
+    border: 2px solid $contrast60;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+
+    &:focus {
+        border-color: green;
+    }
+}
+
+//for the login and register and /profile page and update-interests
+.centerTextvertical{
+    //this is used on <p> tags to center em
+    text-align: center;
+    margin: auto;
+    //change fontcolor
+    color: $contrast;
+}
+.interestsWords{
+    color: $approve;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid $contrast30;
+    padding: 5px;
+    width:fit-content;
+    //display: block;
+    cursor: pointer;
+}
+.interestsWords:hover{
+    background-color: $approve;
+    color: $background10;
+    border: 2px solid $approve;
+    cursor: pointer;
+}
+
+.interestsWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    //justify-content: center;
+    align-items: center;
+
+}
+.interestCheckbox {
+    display: none;
+}
+.interestCheckbox:checked + label {
+    background-color: $approve60; /* Change to your desired color for checked state */
+    /* Other styles for checked state */
+   //border: 2px solid green; /* Add border style for checked state */
+}
+.interestCheckbox:checked + label.interestsWords {
+    border: 2px solid green;
+}
+//modal box for the textPlay
+#translationModal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 15.5rem;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content{
+    background-color: $background10;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid $contrast;
+    width: 80%;
+    border-radius: 10px;
+}
+
+// -/textPlay fängt hier an
+.dropdown-wrapper{
+    display: inline-block;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 16px;
+    margin: 10px;
+    cursor: pointer;
+}
+.dropbtn {
+    background-color: $contrast;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+.z-index-up{
+    z-index: 1;
+}
+.dropdown{
+    width: 100%;
+    height: 40px;
+   // border: 2px solid $contrast60;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+    background-color: $background10;
+    color: $contrast;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+}
+.dropdown:focus{
+    outline: 3px solid $approve60;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: $contrast;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.show {display:block;}
+.dropdown-content a{
+    color: $approve;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}

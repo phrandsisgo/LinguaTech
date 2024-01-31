@@ -34,4 +34,9 @@ class PatchNotesController extends Controller{
         $comment->delete();
         return redirect()->route('showPatch', ['id' => $comment->release_note_id]);
     }
+
+    public function patchList(){
+        $patches = ReleaseNote::orderBy('updated_at', 'desc')->get();
+        return view('patchNotes/patchList',['patches' => $patches]);
+    }
 }

@@ -11,9 +11,11 @@
 @vite(['resources/css/application.scss', 'resources/css/animations.scss', 'resources/js/animations.js'])
 
 
+<meta name="_token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
+<p class="sectiontitle swipeLearnTitle">{{$liste->name}}</p>
 
 <div class="karteContent">
     <div class="flip-card-inner"id="flip-card-inner">
@@ -26,11 +28,10 @@
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
                 <p class="flipcardWord" id="baseWord">word</p>
             </div>
-            <div class="displayFlex cardBottom">
-                <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+            <div class="displayFlex">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
-
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
             </div>
 
         </div>
@@ -45,11 +46,26 @@
                 <p class="flipcardWord" id="targetWord">Wort</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="handleLeftClickLeft(); triggerAnimationLeft();">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
             </div>
         </div>
+    </div>
+</div>
+
+<p class="section-content swipeContent">Beschreibung: {{$liste->description}}</p>
+
+<div id="swipeStatistikModal" style="display:none;">
+    <div class="modal-content">
+        
+        <h2>Swipe Statistik</h2>
+        <p>Anzahl falsche Antworten: <span id="leftSwipeCount"></span></p>
+        <p>Anzahl richtige Antworten: <span id="rightSwipeCount"></span></p>
+        <br><br>
+        <div style="height:4rem;"></div>
+        <a href="#"><button onclick="location.reload();" class="standartButton">von vorne lernen</button></a>
+        <a href="/library"><button onclick="document.getElementById('swipeStatistikModal').style.display = 'none';" class="modalclose" >Schliessen</button></a>
     </div>
 </div>
 
@@ -58,6 +74,38 @@ var listLength={{count($liste->words)}};
 var listProgress=0;
 var doneAnzeige=0;
 var repAzeig=0;
+
+
+
+function handleSwipe(direction, wordId) {
+        event.preventDefault();
+        const requestData = {
+            wordId: wordId,
+            direction: direction
+        };
+        var csrf = document.querySelector('meta[name="_token"]').content;
+        //console.log(csrf)
+
+    const formData = JSON.stringify(requestData);
+    //let translatedWord='';
+
+    fetch('/swipeHandle/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrf
+            }
+        })
+    .then(response => response.json())
+    .then(data => {
+
+           // openModal(data);
+            // return data;
+    })
+    .catch(error => console.error('Error:', error));
+        
+}
 
 function showUebersetzung(){
     var flipcard = document.getElementById('flip-card-inner');
@@ -69,13 +117,13 @@ function showUebersetzung(){
     }
 }
 var woerterbuch = @json($liste->words->map(function ($word) {
-        return [$word->base_word, $word->target_word]; 
-    }));
-    document.addEventListener('DOMContentLoaded', function() {
-        var baseWord = document.getElementById('baseWord');
-        var targetWord = document.getElementById('targetWord');
-        baseWord.innerHTML=woerterbuch[0][0];
-        targetWord.innerHTML=woerterbuch[0][1];
-    });
+    return [$word->base_word, $word->target_word, $word->id]; 
+}));
+document.addEventListener('DOMContentLoaded', function() {
+    var baseWord = document.getElementById('baseWord');
+    var targetWord = document.getElementById('targetWord');
+    baseWord.innerHTML=woerterbuch[0][0];
+    targetWord.innerHTML=woerterbuch[0][1];
+});
 </script>
 @endsection

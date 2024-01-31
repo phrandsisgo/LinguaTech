@@ -20,12 +20,7 @@
         <div class="horizontal-fill"></div>
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
-        @if (auth()->check())
-            <p class="begruessung">Hello {{auth()->user()->name}}</p>
-        @else
-            <a href="/login" class="begruessung">Login</a>
-        @endif
-        <a href="/about_me" class="iconWrapper">
+        <a href="/about_project" class="iconWrapper">
             <img src="{{ asset('svg-icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
         </a>
         <a href="/library" class="iconWrapper">
@@ -37,17 +32,19 @@
             <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
             </button>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="dropdown-menu dropdown-menu-end z-index-up">
                 <li class="mob-only"><a class="dropdown-item" href="/library">Bibliothek</a></li>
                 <li><a class="dropdown-item" href="/about_me">Über den Entwickler</a></li>
-                <li><a class="dropdown-item" href="/about_project">Über das projekt</a></li>
-                <li><a class="dropdown-item" href="/showPatch/1">Neuigkeiten</a></li>
+                <li><a class="dropdown-item" href="/about_project">Über das Projekt</a></li>
+                <li><a class="dropdown-item" href="/showPatch/2">Patchnotizen</a></li>
 
                 @if (auth()->check())
+                    <li><a class="dropdown-item" href="/displayAllTexts">Texte</a></li>
+                    <li><a class="dropdown-item" href="/profile">Profil: {{auth()->user()->name}}</a></li>
                     <li>
                     <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="dropdown-item">ausloggen</button>
+                            <button type="submit" class="dropdown-item">Ausloggen</button>
                         </form>
                     </li>
                 @else
