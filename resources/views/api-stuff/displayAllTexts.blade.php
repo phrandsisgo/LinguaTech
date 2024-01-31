@@ -11,7 +11,7 @@
 
 <div class="textSortierer">
     <div class="language-spez-text">
-        <button class="language-button " data-target="DE" onclick="changeArrowDirection('FR')">
+        <button class="language-button " data-target="DE" onclick="changeArrowDirection('DE')">
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#073B4C" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" fill="#073B4C"/>
             </svg>
@@ -75,7 +75,7 @@
         </div>
     </div>
     <div class="language-spez-text">
-        <button class="language-button" data-target="EN">
+        <button class="language-button" data-target="EN" onclick="changeArrowDirection('EN')">
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#073B4C" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" fill="#073B4C"/>
             </svg>
@@ -96,7 +96,7 @@
         </div>
     </div>
     <div class="language-spez-text">
-        <button class="language-button" data-target="PT">
+        <button class="language-button" data-target="PT" onclick="changeArrowDirection('PT')">
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#073B4C" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" fill="#073B4C"/>
             </svg>

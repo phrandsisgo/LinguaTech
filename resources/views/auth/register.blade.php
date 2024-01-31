@@ -52,11 +52,11 @@
                 </div>
 
                 <!-- development Password  Bitte entfernen wenn developementphase vorbei ist.-->
-                <div class="mt-4">
+               <!--  <div class="mt-4">
                     <x-input-label for="secret_password" :value="__('Secret Password')" class="section-content" />
                     <br>
                     <x-text-input id="secret_password" class="authTextField" type="password" name="secret_password" required />
-                </div>
+                </div> -->
 
                 </div>
 

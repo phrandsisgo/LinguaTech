@@ -40,12 +40,15 @@
         <input type="hidden" name="wordIds[]" value="{{ $begriffe->id }}">
         <input type="text" name="baseWord[]" value="{{ $begriffe->base_word }}" class="inputField">
         @error('baseWord.' . $loop->index)
-            <p class="formHelper">Das Basiswort muss zwischen 1 und 50 Zeichen lang sein.</p>
+            <p class="errorMessages">Das Basiswort muss zwischen 1 und 50 Zeichen lang sein.</p>
         @enderror
         <p class="formHelper">Base Language</p>
 
         <input type="text" name="targetWord[]" value="{{ $begriffe->target_word }}" class="inputField">
         <p class="formHelper">Target Language</p>
+        @error('targetWord.' . $loop->index)
+            <p class="errorMessages">Das Zielwort muss zwischen 1 und 50 Zeichen lang sein.</p>
+        @enderror
     </div>
     @endforeach
      </div>
