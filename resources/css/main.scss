@@ -88,7 +88,7 @@ body {
     .hero{
         display:flex;
     }
-    $bildmass: 20vw;
+    $bildmass: 28vw;
     #profilBild{
         height: $bildmass;
         width: $bildmass*1.37;
@@ -108,6 +108,7 @@ body {
         box-sizing: border-box;
         margin-right : 2rem;
         display: block;
+        margin-bottom: 3rem;
     }
 }
 @media screen and (max-width: $phonewidth) {
@@ -249,7 +250,7 @@ $iconSize: 4rem; //gehört zu IconSize
 }
 .section-content{
     color: $contrast;
-    font-size: 20px;
+    font-size: 1.3rem;
    // text-align: justify;
     //font-weight: bold;
 }
@@ -302,6 +303,7 @@ $iconSize: 4rem; //gehört zu IconSize
     border-radius: 5px;
     padding: 5px 13px;
     margin: 5px;
+    margin-left:0;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
@@ -393,6 +395,7 @@ $iconSize: 4rem; //gehört zu IconSize
     border-radius: 5px;
     padding: 5px 13px;
     margin: 5px;
+    margin-left:0;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;

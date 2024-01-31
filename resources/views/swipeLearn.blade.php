@@ -58,12 +58,14 @@
 
 <div id="swipeStatistikModal" style="display:none;">
     <div class="modal-content">
-        <span class="close" onclick="closeStatModal()">&times;</span>
+        
         <h2>Swipe Statistik</h2>
-        <p>Anzahl der Swipes nach links: <span id="leftSwipeCount"></span></p>
-        <p>Anzahl der Swipes nach rechts: <span id="rightSwipeCount"></span></p>
-        <button onclick="location.reload();" class="standartButton">von vorne lernen</button>
-        <button onclick="document.getElementById('swipeStatistikModal').style.display = 'none';" class="modalclose" >Schliessen</button>
+        <p>Anzahl falsche Antworten: <span id="leftSwipeCount"></span></p>
+        <p>Anzahl richtige Antworten: <span id="rightSwipeCount"></span></p>
+        <br><br>
+        <div style="height:4rem;"></div>
+        <a href="#"><button onclick="location.reload();" class="standartButton">von vorne lernen</button></a>
+        <a href="/library"><button onclick="document.getElementById('swipeStatistikModal').style.display = 'none';" class="modalclose" >Schliessen</button></a>
     </div>
 </div>
 

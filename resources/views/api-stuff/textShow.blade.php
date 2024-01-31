@@ -19,16 +19,10 @@
     <script defer>
         document.addEventListener('DOMContentLoaded', function() {
             const textContainer = document.getElementById('textContainer');
-            // Russischer Text mit deutscher Übersetzung in Klammern
             const text = {!! json_encode($text->text) !!};
-            //alert("text");
-        
-            
-            //В свободное время Кирилл также занимается программированием. Он создает собственные проекты и участвует в хакатонах. Ему нравится решать сложные задачи и находить новые способы улучшить веб-сайты.Кирилл любит свою работу и гордится тем, что он веб-разработчик. Он знает, что его работа помогает людям делать интернет лучше и более интересным местом.
-            
-            
-            // Teile den Text in Sätze
-            const sentences = text.split(/(?<=[.\?!]) /);
+
+            let sentences = text.split(/(?<=[.\?!])/);
+
 
 
             sentences.forEach(sentence => {
@@ -72,7 +66,7 @@
 <!-- Modal-Struktur -->
 <div id="translationModal">
     <div class="modal-content">
-        <p>Das Wort übersetzt bedeutet: </p>
+        <p>Das Wort bedeutet übersetzt: </p>
         <p id="translationText" class="sectiontitle"></p>
         <br>
         <p >Das Wort nach dem Sie gefragt haben: </p>
