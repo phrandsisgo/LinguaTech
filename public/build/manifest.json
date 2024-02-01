@@ -10,22 +10,22 @@
     "src": "resources/css/app.css"
   },
   "resources/css/application.scss": {
-    "file": "assets/application-c9729e96.css",
+    "file": "assets/application-4f6b44e4.css",
     "isEntry": true,
     "src": "resources/css/application.scss"
   },
   "resources/css/library.scss": {
-    "file": "assets/library-6721fb03.css",
+    "file": "assets/library-66315988.css",
     "isEntry": true,
     "src": "resources/css/library.scss"
   },
   "resources/css/main.scss": {
-    "file": "assets/main-c34e3c9c.css",
+    "file": "assets/main-15ed202f.css",
     "isEntry": true,
     "src": "resources/css/main.scss"
   },
   "resources/js/animations.js": {
-    "file": "assets/animations-23ce74d4.js",
+    "file": "assets/animations-65aa3779.js",
     "isEntry": true,
     "src": "resources/js/animations.js"
   },
