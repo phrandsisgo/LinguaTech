@@ -31,7 +31,7 @@
                     <p>{{$comment->user ? $comment->user->name : 'deleted-user'}}</p>
                     <div class="horizontal-fill"></div>
                     <p>{{$comment->created_at}}</p>
-                    @if ($comment->user_id == auth()->user()->id)
+                    @if (auth()->user() && $comment->user_id == auth()->user()->id)
                     <form action="/releaseNotesCommentDelete/{{$comment->id}}" method="POST" onsubmit="//return confirmDelete()">
                         @csrf
                         <button type="submit" class="delete-hitbox">

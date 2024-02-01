@@ -10,7 +10,7 @@
 @foreach ($patches as $patch)
     <div class="library-Card">
         <p class="section-content"> Version {{$patch->version}}:</p>
-        <a href="/patchShow/{{$patch->id}}">
+        <a href="/showPatch/{{$patch->id}}">
             <p class="sectiontitle">{{$patch->title}}</p>
         </a>
     </div>
