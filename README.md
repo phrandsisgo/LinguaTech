@@ -6,7 +6,8 @@ Bei Fragen zögern sie nicht mich zu kontaktieren.
 
 ## Live-Demo
 Die App ist noch unter bearbeitung. 
-Die App ist unter folgender Adresse verfügbar: 206.81.26.17 (domain folgt noch)
+Zur Zeit befindet sich die App noch in einem MVP stadium. Falls Sie die App ausprobieren wollen, dann probieren sie  [Linguatech](http://206.81.26.17) aus.
+
 
 ## Funktionen
 - Textsuche in verschiedenen Sprachen.
