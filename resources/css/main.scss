@@ -155,6 +155,21 @@ body {
     font-weight: bold;
     margin: auto;
     user-select: none;
+
+}
+.NavFont{
+
+    font-size: 3.3rem;
+    font-weight: bold;
+    margin: auto;
+    user-select: none;
+    color: $approve;
+    
+    text-decoration: underline;
+
+    &:hover{
+        color: $background;
+    }
 }
 .footer_box{
     color: $approve;

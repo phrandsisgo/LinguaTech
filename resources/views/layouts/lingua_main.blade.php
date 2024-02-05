@@ -20,12 +20,17 @@
         <div class="horizontal-fill"></div>
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
-        <a href="/about_project" class="iconWrapper">
-            <img src="{{ asset('svg-icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
-        </a>
-        <a href="/library" class="iconWrapper">
-            <img src="{{ asset('svg-icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
-        </a>
+
+        @if (auth()->check())
+            <a href="/about_project" class="iconWrapper">
+                <img src="{{ asset('svg-icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
+            </a>
+            <a href="/library" class="iconWrapper">
+                <img src="{{ asset('svg-icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
+            </a>
+        @else
+        <a href="/register" class="NavFont">Login</a>
+        @endif
         <!-- <img src="{{ asset('svg-svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
          -->
          <div class="btn-group">

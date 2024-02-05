@@ -88,7 +88,7 @@
                 </select>
             </div>
             <br>
-            <button type="submit" onclick="prevDef(event)" class="standartButton">Einfügen</button>
+            <button type="submit" class="standartButton">Einfügen</button>
             <button type="button" onclick="closeModal()"class="standartDangerButton standartButton">Schliessen</button>
         </form>
     </div>
