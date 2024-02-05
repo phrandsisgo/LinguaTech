@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class patchnotesSeed extends Seeder
 {
@@ -225,8 +226,8 @@ class patchnotesSeed extends Seeder
                 Francisco Wohlgemuth
               </p>',
             'version' => '0.2',
-            'created_at' => '2024-02-30 09:43:00',
-            'updated_at' => '2024-02-30 15:23:00',
+            'created_at' => '2024-02-28 09:43:00',
+            'updated_at' => '2024-02-28 15:23:00',
             ],
 
         ]);
