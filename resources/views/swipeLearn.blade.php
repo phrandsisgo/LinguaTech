@@ -22,7 +22,7 @@
         <div class="flashCardContent frontface" id="flashCardContent">
             <div class="countZeile">
                 <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigB">0</p></div>
-                <div class="countAnzeige" id="countAnzeigeB">1/{{count($liste->words)}}Wörter</div>
+                <div class="countAnzeige" id="countAnzeigeB">1/{{count($liste->words)}} Wörter</div>
                 <div class="doneCountBox"><p class="anzeigemargin" id="doneAnzeigeB">0</p></div>
             </div>
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
@@ -39,7 +39,7 @@
         <div class="flashCardContent backface" id="flashCardContent">
             <div class="countZeile">
                 <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigA">0</p></div>
-                <div class="countAnzeige" id="countAnzeigeA">1/{{count($liste->words)}}Wörter</div>
+                <div class="countAnzeige" id="countAnzeigeA">1/{{count($liste->words)}} Wörter</div>
                 <div class="doneCountBox"><p class="anzeigemargin" id="doneAnzeigeA">0</p></div>
             </div>
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
@@ -64,7 +64,7 @@
         <p>Anzahl richtige Antworten: <span id="rightSwipeCount"></span></p>
         <br><br>
         <div style="height:4rem;"></div>
-        <a href="#"><button onclick="location.reload();" class="standartButton">von vorne lernen</button></a>
+        <a href="#"><button onclick="location.reload();" class="standartButton">Von vorne lernen</button></a>
         <a href="/library"><button onclick="document.getElementById('swipeStatistikModal').style.display = 'none';" class="modalclose" >Schliessen</button></a>
     </div>
 </div>

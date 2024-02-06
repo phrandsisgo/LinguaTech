@@ -32,14 +32,14 @@
 <p class="pagetitle">{{ __('about_project.discoverLinguaTech') }}</p>
 
 <p class="sectiontitle">Was ist LinguaTech?</p>
-<p class="section-content">LinguaTech ist ein Lernplattform die das Ziel hat Sprachen den Benutzer beizubringen. Es wurde von Francisco Wohlgemuth entwickelt als Abschlussprojekt in einem coding Bootcamp</p>
+<p class="section-content">LinguaTech ist ein Lernplattform die das Ziel hat Sprachen den Benutzer beizubringen. Es wurde von Francisco Wohlgemuth entwickelt als Abschlussprojekt in einem Coding Bootcamp.</p>
 <br>
 
 <p class="sectiontitle">{{ __('about_project.smartWayToLearn') }}</p>
 <p class="section-content">{{ __('about_project.welcomeMessage') }}</p>
-
+<!-- 
 <p class="sectiontitle">{{ __('about_project.learnWithCognates') }}</p>
-<p class="section-content">{{ __('about_project.cognatesDescription') }}</p>
+<p class="section-content">{{ __('about_project.cognatesDescription') }}</p> -->
 
 <p class="sectiontitle">{{ __('about_project.contextMatters') }}</p>
 <p class="section-content">{{ __('about_project.contextDescription') }}</p>
@@ -51,8 +51,8 @@
 <p class="section-content">{{ __('about_project.registerNow') }}</p>
 
 <p class="sectiontitle">{{ __('about_project.contactMe') }}</p>
-<p class="section-content">{{ __('about_project.moreAboutMe') }} <a href="/about_me">{{ __('about_project.clickHere') }}</a></p>
-<p class="section-content">{{ __('about_project.questionsFeedback') }} <a href="#">{{ __('about_project.contactDiscord') }}</a></p>
+<p class="section-content">{{ __('about_project.moreAboutMe') }} <a href="/about_me">{{ __('about_project.clickHere') }}</a>.</p>
+<p class="section-content">{{ __('about_project.questionsFeedback') }} <a href="#">{{ __('about_project.contactDiscord') }}</a>.</p>
 
 <p class="sectiontitle">{{ __('about_project.followMe') }}</p>
 <p class="section-content">{{ __('about_project.followOnSocial') }}</p>

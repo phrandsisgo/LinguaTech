@@ -14,19 +14,19 @@
     @csrf
     <div class="displayFlex">
         <div class="horizontal-fill"></div>
-        <button onclick="createLibraryCard(karten); anzahlplus();" class="standartButton"> weiterer Begriff hinzufügen.</button>
+        <button onclick="createLibraryCard(karten); anzahlplus();" class="standartButton"> Weiterer Begriff hinzufügen.</button>
         <button type="submit" class="approveButton">Änderungen abspeichern</button>
 
     </div>
 
-    <p class="section-content">Dein Titel:</p>
+    <p class="section-content">Dein Titel</p>
     <input type="text" name="listTitle" id="listTitle" value="{{$liste->name}}" placeholder="Titel" class="inputField">
     @error('listTitle' )
     <p class="formHelper">Der Titel muss zwischen 3 und 20 Zeichen lang sein.</p>
     @enderror
-    <br>
+    <br><br><br>
 
-    <p class="section-content">Die Beschreibung (optional).</p>
+    <p class="section-content">Beschreibung (optional)</p>
     <input type="text" name="listDescription" id="listDescription" value="{{$liste->description}}" placeholder="Beschreibung (optional)." class="inputField">
     @error('listDescription' )
     <p class="formHelper">Die Beschreibung darf nicht länger als 200 Zeichen sein.</p>
@@ -42,10 +42,10 @@
         @error('baseWord.' . $loop->index)
             <p class="errorMessages">Das Basiswort muss zwischen 1 und 50 Zeichen lang sein.</p>
         @enderror
-        <p class="formHelper">Base Language</p>
+        <p class="formHelper">Basis Sprache</p>
 
         <input type="text" name="targetWord[]" value="{{ $begriffe->target_word }}" class="inputField">
-        <p class="formHelper">Target Language</p>
+        <p class="formHelper">Ziel Sprache</p>
         @error('targetWord.' . $loop->index)
             <p class="errorMessages">Das Zielwort muss zwischen 1 und 50 Zeichen lang sein.</p>
         @enderror
@@ -53,7 +53,7 @@
     @endforeach
      </div>
 
-    <button onclick="createLibraryCard(karten); anzahlplus();" class="standartButton"> weiterer Begriff hinzufügen.</button>
+    <button onclick="createLibraryCard(karten); anzahlplus();" class="standartButton"> Weiterer Begriff hinzufügen</button>
     <button type="submit" class="approveButton">Änderungen abspeichern</button>
 </form>
 
