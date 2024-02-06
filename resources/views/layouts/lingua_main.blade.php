@@ -29,7 +29,7 @@
                 <img src="{{ asset('svg-icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
             </a>
         @else
-        <a href="/register" class="NavFont">Login</a>
+        <a href="/login" class="NavFont">Login</a>
         @endif
         <!-- <img src="{{ asset('svg-svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
          -->

@@ -37,23 +37,23 @@
         <p class="sectiontitle">Willkommen!</p>
         <div class="lauf-Text">
             <p class="section-content">Hallo! Es freut mich, dass Sie zur Seite von Linguatech gefunden haben.
-                Hier Legen wir Wert Darauf, dass Sie Sprachenlernen können mit dem Fokus auf Vokabular erweiterung.
-                Sie Können selbst Ihr Wissen Testen in dem sie die SwipeLearn Funktion ausprobieren. 
+                Hier legen wir Wert darauf, dass Sie Sprachen lernen können mit dem Fokus auf Vokabularerweiterung.
+                Sie können selbst Ihr Wissen testen indem Sie die SwipeLearn Funktion ausprobieren. 
             </p>
-            <img src="{{ asset('Images/SwipeLearn.gif')}}" alt="Eine Animation die Zeigt wie die Swipe funktionalität funktioniert auf dem SwipeLearn">
-            <p>Eine Darstellung der SwipeFunktion die beim drauf klicken auch die Übersetzung zeigt.</p>
+            <img src="{{ asset('Images/SwipeLearn.gif')}}" alt="Eine Animation, die zeigt wie die swipe Funktionalität funktioniert auf dem SwipeLearn">
+            <p>Eine Darstellung der Swipe Funktion, die beim drauf klicken auch die Übersetzung zeigt.</p>
 
             <br><br><br>
 
             <p class="section-content">Ausserdem gibt es eine Bibliothek mit Texten in verschiedenen Schwierigkeitsstufen in derzeit 5 Sprachen: Deutsch, Englisch, Russisch, Französisch und Portugiesisch.
-                Mit diesen Texten können sie leicht und effektiv Wörter die sie nicht kennen, simpel übersetzen lassen. Und damit nicht genug, Sie können diese Wörter auch gleich Ihrer Lernliste hinzufügen.
+                Mit diesen Texten können Sie leicht und effektiv Wörter, die sie nicht kennen, simpel übersetzen lassen. Und damit nicht genug, Sie können diese Wörter auch gleich Ihrer Lernliste hinzufügen.
             </p>
             <img src="{{ asset('Images/apiGif.gif')}}" alt="Eine Animation um zu Zeigen wie es mit den Texten Funktioniert.">
             <p>Eine Darstellung der Textfunktion die beim drauf klicken auch die Übersetzung zeigt.</p>
             <br><br><br>
             <p class="section-content">
-                Spricht sie diese Lernmethode an, dann <a href="/register">Registrieren sie sich</a> doch gleich und fangen an zu lernen.<br>
-                Oder falls sie schon ein Konto haben, dann <a href="/login">loggen sie sich ein</a> und fangen an zu lernen.
+                Spricht Sie diese Lernmethode an, dann <a href="/register">registrieren Sie sich</a> doch gleich und fangen an zu lernen.<br>
+                Oder falls Sie schon ein Konto haben, dann <a href="/login">loggen Sie sich ein</a> und fangen an zu lernen.
             </p>
         </div>
 
