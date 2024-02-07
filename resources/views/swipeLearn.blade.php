@@ -163,7 +163,6 @@ function triggerRight(){
 }
 
 function showUebersetzung(){
-    alert("flipping heck");
     var flipcard = document.getElementById('flip-card-inner');
     
     if(flipcard.classList.contains('turnCard')){
