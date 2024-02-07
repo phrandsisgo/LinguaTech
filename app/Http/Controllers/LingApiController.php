@@ -23,7 +23,7 @@ class LingApiController extends Controller
             //'request_word' => $text
         ]);
 
-        //dd($response->json());
+        dd($response->json());
         $translation = $response->json()['translations'][0]['text'];
 
         return response()->json(['translation' => $translation, 'request' => $text]);
