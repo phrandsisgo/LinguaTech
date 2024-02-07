@@ -13,6 +13,25 @@ Als Abschlussprojekt wollte ich dann meine eigene Sprachapp entwickeln mit funkt
 ## Live-Demo
 Zur Zeit befindet sich die App noch in einem MVP stadium. Falls Sie die App ausprobieren wollen, dann probieren sie  [Linguatech](http://206.81.26.17) aus.
 
+## Quickinstall 
+ - Sie brauchen zuerst Composer (den packet manager für php)
+ - Dann können Sie dieses Projekt clonen.
+ - Um alle dependencies zu installieren eignet sich dann am besten der 
+ ```
+ composer install
+ ```
+ befehl. 
+
+ Zuerst müssen Sie eine .env datei einrichten. Als Beispiel können Sie gerne das .env.example verwenden und gegebnfalls zu Ihrer präferenzen einrichten.
+ Dezu müssen Sie noch einen API Schlüssel hinzufügen sodass sie alle Funktionen ausprobieren können.
+
+
+ Danach können sie das Projekt starten mit dem sie den Befehl
+ ```
+ ./vendor/bin/sail up 
+ ``` 
+ das Projekt lokal starten und ausprobieren.
+
 
 ## TechStack
 - Backend: PHP mit Laravel
