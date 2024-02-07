@@ -24,7 +24,6 @@ class LingApiController extends Controller
         ]);
 
         //dd($response->json());
-        dd(strlen(env('DEEPL_API_KEY')));
         $translation = $response->json()['translations'][0]['text'];
 
         return response()->json(['translation' => $translation, 'request' => $text]);
