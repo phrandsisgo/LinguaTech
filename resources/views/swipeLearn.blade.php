@@ -29,9 +29,9 @@
                 <p class="flipcardWord" id="baseWord">word</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="triggerLeft()">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="triggerRight()">
             </div>
 
         </div>
@@ -46,9 +46,9 @@
                 <p class="flipcardWord" id="targetWord">Wort</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="handleLeftClickLeft(); triggerAnimationLeft();">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="triggerLeft()">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer">
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="triggerRight()">
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@ var listLength={{count($liste->words)}};
 var listProgress=0;
 var doneAnzeige=0;
 var repAzeig=0;
-
+let aktuelleKarteIndex = 0;
 
 
 function handleSwipe(direction, wordId) {
@@ -106,8 +106,64 @@ function handleSwipe(direction, wordId) {
     .catch(error => console.error('Error:', error));
         
 }
+const karteContent = document.getElementById('flip-card-inner');
+function triggerLeft(){
+    karteContent.classList.add('animate__rollOut__left');
+
+    //  class has to be removed after the animation ends to allow it to be triggered again
+    karteContent.addEventListener('animationend', function(){
+        karteContent.classList.remove('animate__rollOut__left','flipInY', 'flipOutY');
+    });    
+    aktuelleKarteIndex++;
+    if (aktuelleKarteIndex >= woerterbuch.length) {
+        zeigeStatistikModal();
+        //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
+    }
+    console.log("Aktuelle Karte ID:" +woerterbuch[aktuelleKarteIndex][2])
+    var countAnzeigeA = document.getElementById('countAnzeigeA');
+    var countAnzeigeB = document.getElementById('countAnzeigeB');
+    countAnzeigeA.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
+    countAnzeigeB.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
+
+
+    const kartenTextBase = document.getElementById('baseWord');
+    const kartenTextTarget = document.getElementById('targetWord');
+    kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex][0];
+    kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex][1];
+    repAzeig++;
+    document.getElementById('repAzeigA').innerHTML=repAzeig;
+    document.getElementById('repAzeigB').innerHTML=repAzeig;
+    handleSwipe("left", woerterbuch[aktuelleKarteIndex][2]);
+}
+function triggerRight(){
+    karteContent.classList.add('animate__rollOut__right');
+    //  class has to be removed after the animation ends to allow it to be triggered again
+    karteContent.addEventListener('animationend', function(){
+        karteContent.classList.remove('animate__rollOut__right','flipInY', 'flipOutY');
+    });
+    aktuelleKarteIndex++;
+    if (aktuelleKarteIndex >= woerterbuch.length) {
+        zeigeStatistikModal();
+        //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
+    }
+    console.log("Aktuelle Karte ID:" +woerterbuch[aktuelleKarteIndex][2])
+    var countAnzeigeA = document.getElementById('countAnzeigeA');
+    var countAnzeigeB = document.getElementById('countAnzeigeB');
+    countAnzeigeA.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
+    countAnzeigeB.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
+
+    const kartenTextBase = document.getElementById('baseWord');
+    const kartenTextTarget = document.getElementById('targetWord');
+    kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex][0];
+    kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex][1];
+    doneAnzeige++;
+    document.getElementById('doneAnzeigeA').innerHTML=doneAnzeige;
+    document.getElementById('doneAnzeigeB').innerHTML=doneAnzeige;
+    handleSwipe("right", woerterbuch[aktuelleKarteIndex][2]);
+}
 
 function showUebersetzung(){
+    alert("flipping heck");
     var flipcard = document.getElementById('flip-card-inner');
     
     if(flipcard.classList.contains('turnCard')){

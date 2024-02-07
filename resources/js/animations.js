@@ -1,5 +1,7 @@
 const karteContent = document.getElementById('flip-card-inner');
-
+function printMe(){
+    console.log("I am here");
+}
 document.addEventListener('DOMContentLoaded', function() {
     var hammertime = new Hammer(karteContent);
     hammertime.on('swipe', function(ev) {
@@ -13,6 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
             handleRightClick();
         }
     });
+
+    function triggerRight(){
+        triggerAnimationRight();
+        handleRightClick();
+    }
 
     function handleLeftClickLeft() {
         //this direction is when the User fails
