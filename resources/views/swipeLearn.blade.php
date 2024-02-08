@@ -76,7 +76,15 @@ var doneAnzeige=0;
 var repAzeig=0;
 let aktuelleKarteIndex = 0;
 
+var woerterbuch = @json($liste->words->map(function ($word) {
+    return [$word->base_word, $word->target_word, $word->id]; 
+}));
 
+function zeigeStatistikModal() {
+    document.getElementById('leftSwipeCount').textContent = repAzeig;
+    document.getElementById('rightSwipeCount').textContent = doneAnzeige;
+    document.getElementById('swipeStatistikModal').style.display = 'block';
+}
 function handleSwipe(direction, wordId) {
         event.preventDefault();
         const requestData = {
@@ -115,10 +123,12 @@ function triggerLeft(){
         karteContent.classList.remove('animate__rollOut__left','flipInY', 'flipOutY');
     });    
     aktuelleKarteIndex++;
+    repAzeig++;
     if (aktuelleKarteIndex >= woerterbuch.length) {
         zeigeStatistikModal();
         //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
     }
+    console.log(aktuelleKarteIndex, woerterbuch.length);
     console.log("Aktuelle Karte ID:" +woerterbuch[aktuelleKarteIndex][2])
     var countAnzeigeA = document.getElementById('countAnzeigeA');
     var countAnzeigeB = document.getElementById('countAnzeigeB');
@@ -130,7 +140,6 @@ function triggerLeft(){
     const kartenTextTarget = document.getElementById('targetWord');
     kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex][0];
     kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex][1];
-    repAzeig++;
     document.getElementById('repAzeigA').innerHTML=repAzeig;
     document.getElementById('repAzeigB').innerHTML=repAzeig;
     handleSwipe("left", woerterbuch[aktuelleKarteIndex][2]);
@@ -142,6 +151,7 @@ function triggerRight(){
         karteContent.classList.remove('animate__rollOut__right','flipInY', 'flipOutY');
     });
     aktuelleKarteIndex++;
+    doneAnzeige++;
     if (aktuelleKarteIndex >= woerterbuch.length) {
         zeigeStatistikModal();
         //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
@@ -156,7 +166,6 @@ function triggerRight(){
     const kartenTextTarget = document.getElementById('targetWord');
     kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex][0];
     kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex][1];
-    doneAnzeige++;
     document.getElementById('doneAnzeigeA').innerHTML=doneAnzeige;
     document.getElementById('doneAnzeigeB').innerHTML=doneAnzeige;
     handleSwipe("right", woerterbuch[aktuelleKarteIndex][2]);
@@ -171,9 +180,7 @@ function showUebersetzung(){
         flipcard.classList.add('turnCard');
     }
 }
-var woerterbuch = @json($liste->words->map(function ($word) {
-    return [$word->base_word, $word->target_word, $word->id]; 
-}));
+
 document.addEventListener('DOMContentLoaded', function() {
     var baseWord = document.getElementById('baseWord');
     var targetWord = document.getElementById('targetWord');
