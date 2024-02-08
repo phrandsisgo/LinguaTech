@@ -11,7 +11,7 @@ Als Abschlussprojekt wollte ich dann meine eigene Sprachapp entwickeln mit funkt
 
 
 ## Live-Demo
-Zur Zeit befindet sich die App noch in einem MVP stadium. Falls Sie die App ausprobieren wollen, dann probieren sie  [Linguatech](http://206.81.26.17) aus.
+Zur Zeit befindet sich die App noch in einem MVP stadium. Falls Sie die App ausprobieren wollen, dann probieren sie  [Linguatech](http://linguatech.ch) aus.
 
 ## Quickinstall 
  - Sie brauchen zuerst Composer (den packet manager für php)
@@ -35,7 +35,7 @@ Zur Zeit befindet sich die App noch in einem MVP stadium. Falls Sie die App ausp
 
 ## TechStack
 - Backend: PHP mit Laravel
-- Frontend: Bootstrap, SCSS, HTML, JavaScript
+- Frontend:SCSS, HTML, JavaScript,  Bootstrap
 - Weitere: DeepL API, Figma für das Design
 
 ## Über den Entwickler
