@@ -4,6 +4,8 @@
 <style>
 
 </style>
+
+@vite(['resources/css/library.scss'])
 @endsection
 @section('content')
     
@@ -21,11 +23,53 @@
 <br>
 <p class="sectiontitle"><b>Meine technischen Fähigkeiten:</b></p>
 
+<div class="displayFlex" style="flex-wrap:wrap; justify-content:center;">
+    <div class="library-Card displayFlex media-Card">
+        <div class="aboutCardsIcons">
 
+            <img src="{{asset('svg-icons/codingLogo.svg')}}" alt="Icon für coding">
+        </div>
+        <div class="card-title-about">
+            <p class="cardTitle">Techstack</p>
+            <p>SCSS, HTML, JS,CSS  <br> Laravel(PHP) Python <br> Einbindung diverser APIs</p>
+        </div>
 
-<p class="tech-skill">Frontend-Entwicklung: Umfassende Kenntnisse in HTML, JavaScript und CSS.</p>
-<p class="tech-skill">Backend-Entwicklung: Erfahrung mit Python und Flask-Anwendungen sowie PHP, hauptsächlich im Rahmen von Laravel-Projekten.</p>
-<p class="tech-skill">Mobile Entwicklung: Praktische Erfahrungen mit Dart und Flutter für cross-plattform mobile Anwendungen.</p>
-<p class="tech-skill">Grundlagen in Java: Solide Kenntnisse in objektorientierter Programmierung durch Java.</p>
+    </div>
+    <div class="library-Card displayFlex media-Card">
+        <div class="aboutCardsIcons">
+
+            <img src="{{asset('svg-icons/globeIcon.svg')}}" alt="Icon für coding">
+        </div>
+        <div class="card-title-about">
+            <p class="cardTitle">Nationalität & Sprachkenntnisse</p>
+            <p>Schweizer  <br> Fliessend: Deutsch Englisch Porugiesisch <br> A1-A2: Französisch, Russisch, Spanisch</p>
+        </div>
+
+    </div>
+    <br><br>
+    <div class="library-Card displayFlex media-Card">
+        <div class="aboutCardsIcons">
+
+            <img src="{{asset('svg-icons/educationIcon.svg')}}" alt="Icon für coding">
+        </div>
+        <div class="card-title-about">
+            <p class="cardTitle">Ausbildung</p>
+            <p>Grundausbildung: Elektroinstallateur  <br> 6 Monate Codingbootcamp für WebDev</p>
+        </div>
+
+    </div>
+    <div class="library-Card displayFlex media-Card">
+        <div class="aboutCardsIcons">
+
+            <img src="{{asset('svg-icons/brushIcon.svg')}}" alt="Icon für coding">
+        </div>
+        <div class="card-title-about">
+            <p class="cardTitle">Interessen neben der IT</p>
+            <p>Schach spielen<br> Video spiele <br> Geige</p>
+        </div>
+
+    </div>
+    
+</div>
 
     @endsection
