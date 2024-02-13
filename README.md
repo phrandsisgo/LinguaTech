@@ -39,7 +39,7 @@ Zur Zeit befindet sich die App noch in einem MVP stadium. Falls Sie die App ausp
 - Weitere: DeepL API, Figma für das Design
 
 ## Über den Entwickler
-Mein Name ist [Francisco Wohlgemuth](http://206.81.26.17/about_me). Ich lebe in Zürich und bin 29 Jahre alt.
+Mein Name ist [Francisco Wohlgemuth](http://linguatech.ch/about_me). Ich lebe in Zürich und bin 29 Jahre alt.
 Ich habe schon ein wenig vorherige Erfahrung mit Flutter-Dart (siehe mein HouseHold projekt auf github) und auch schon Erfahrungen mit Python-Flask (Projekt nicht öffentlich).
 
 
