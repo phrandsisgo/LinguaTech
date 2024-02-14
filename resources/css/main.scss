@@ -629,6 +629,9 @@ $iconSize: 4rem; //gehört zu IconSize
     font-weight: bold;
     margin: 10px;
     text-align: left;
+    p{
+        font-size: 20px;
+    }
 }
 .media-Card{
     flex: 0 0 100%;
