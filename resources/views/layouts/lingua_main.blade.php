@@ -28,13 +28,13 @@
             <a href="/library" class="iconWrapper">
                 <img src="{{ asset('svg-icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
             </a>
-        @else
+        @else       
         <a href="/login" class="NavFont">Login</a>
         @endif
         <!-- <img src="{{ asset('svg-svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
          -->
          <div class="btn-group">
-            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn menuBtn" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
             </button>
             <ul class="dropdown-menu dropdown-menu-end z-index-up">

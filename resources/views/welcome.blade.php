@@ -40,7 +40,7 @@
                 Hier legen wir Wert darauf, dass Sie Sprachen lernen können mit dem Fokus auf Vokabularerweiterung.
                 Sie können selbst Ihr Wissen testen indem Sie die SwipeLearn Funktion ausprobieren. 
             </p>
-            <img src="{{ asset('Images/SwipeLearn.gif')}}" alt="Eine Animation, die zeigt wie die swipe Funktionalität funktioniert auf dem SwipeLearn">
+            <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="Eine Animation, die zeigt wie die swipe Funktionalität funktioniert auf dem SwipeLearn">
             <p>Eine Darstellung der Swipe Funktion, die beim drauf klicken auch die Übersetzung zeigt.</p>
 
             <br><br><br>
@@ -48,7 +48,7 @@
             <p class="section-content">Ausserdem gibt es eine Bibliothek mit Texten in verschiedenen Schwierigkeitsstufen in derzeit 5 Sprachen: Deutsch, Englisch, Russisch, Französisch und Portugiesisch.
                 Mit diesen Texten können Sie leicht und effektiv Wörter, die sie nicht kennen, simpel übersetzen lassen. Und damit nicht genug, Sie können diese Wörter auch gleich Ihrer Lernliste hinzufügen.
             </p>
-            <img src="{{ asset('Images/apiGif.gif')}}" alt="Eine Animation um zu Zeigen wie es mit den Texten Funktioniert.">
+            <img id="gif2" src="{{ asset('Images/apiGif.gif')}}" alt="Eine Animation um zu Zeigen wie es mit den Texten Funktioniert.">
             <p>Eine Darstellung der Textfunktion die beim drauf klicken auch die Übersetzung zeigt.</p>
             <br><br><br>
             <p class="section-content">

@@ -33,7 +33,31 @@ body {
 .anker-no-underline{
     text-decoration: none;
 }
+#gif1{
+    @media screen and (max-width: 450px) {
+        width: 150px;
+        
+    }
+    @media  screen and (max-width: 650px)  {
+        width: 270px;
+        
+    }
+}
 
+#gif2{
+    @media screen and (max-width: 450px) {
+        width: 150px;
+        
+    }
+    @media  screen and (max-width: 650px) and (max-width: 850px) {
+        width: 270px;
+        
+    }
+    @media  screen and (max-width: 850px)  {
+        width: 370px;
+        
+    }
+}
 .Card-Wrapper{
     //border: 5px solid green;
         display: grid;
@@ -156,6 +180,13 @@ body {
     margin: auto;
     user-select: none;
 
+    @media  screen and (max-width: 600px) and (max-width: 850px) {
+        font-size: 2.5rem;
+        
+    }
+    @media screen and (max-width: 400px) {
+        font-size: 1.4rem;
+    }
 }
 .NavFont{
 
@@ -169,6 +200,14 @@ body {
 
     &:hover{
         color: $background;
+    }
+
+    @media  screen and (max-width: 600px) and (max-width: 850px) {
+        font-size: 2.5rem;
+        
+    }
+    @media screen and (max-width: 400px) {
+        font-size: 1.4rem;
     }
 }
 .footer_box{
@@ -456,6 +495,7 @@ $iconSize: 4rem; //gehört zu IconSize
         color: $background10;
     }
 }
+
 .standartSelect{
     background-color: $background10;
     color: $contrast;
