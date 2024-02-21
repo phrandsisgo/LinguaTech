@@ -45,4 +45,16 @@ class LingApiController extends Controller
         $allTexts = Text::with("langOption")->get();
         return view('api-stuff/displayAllTexts',['allTexts' => $allTexts]);
     }
+    public function addText(){
+        return view('api-stuff/newText');
+    }
+    //wurde noch nicht getestet:
+    public function createNewText(Request $request){
+        $text = new Text();
+        $text->title = $request->input('title');
+        $text->text = $request->input('add-text-field');
+        $text->lang = $request->input('lang');
+        $text->save();
+        return redirect('/textPlay');
+    }
 }

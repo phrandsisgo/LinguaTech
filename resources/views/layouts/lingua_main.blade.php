@@ -26,7 +26,7 @@
                 <img src="{{ asset('svg-icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
             </a>
             <a href="/library" class="iconWrapper">
-                <img src="{{ asset('svg-icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
+                <img  src="{{ asset('svg-icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
             </a>
         @else       
         <a href="/login" class="NavFont">Login</a>
@@ -35,7 +35,7 @@
          -->
          <div class="btn-group">
             <button type="button" class="btn menuBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
+                <img style="width:40px" src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
             </button>
             <ul class="dropdown-menu dropdown-menu-end z-index-up">
                 <li class="mob-only"><a class="dropdown-item" href="/library">Bibliothek</a></li>
