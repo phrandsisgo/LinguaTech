@@ -21,7 +21,8 @@ textarea {
 
 <p class="pagetitle">Text hinzufügen</p>
 
-<form action="/createNewText">
+<form action="/createNewText" method="POST">
+    @csrf
     <div class="form-group">
         <label for="title">TextTitel</label>
         <input type="text" class="form-control" id="add-title-field" name="title" required>
@@ -30,6 +31,17 @@ textarea {
         <label for="text">Text</label>
         <textarea class="form-control" id="text" name="add-text-field" rows="3" required></textarea>
     </div>
+    <div class="form-group"><label for="language" class="section-content">Neue Sprache hinzufügen:</label>
+        <br>
+        <select id="lang" name="lang[]" class="standartSelect">
+            @foreach ($languages as $language)
+                <option value="{{ $language->id }}">{{ $language->language_name }}</option>
+                
+            @endforeach
+        </select>
+        <br><br>
+    
+
     <div class="submit-wrapper-addText ">
         <button type="submit" class="approveButton">Submit</button>
     </div>

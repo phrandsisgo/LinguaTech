@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\WordList;
 use App\Models\Text;
+use App\Models\LangOption;
 
 class LingApiController extends Controller
 {
@@ -46,15 +47,20 @@ class LingApiController extends Controller
         return view('api-stuff/displayAllTexts',['allTexts' => $allTexts]);
     }
     public function addText(){
-        return view('api-stuff/newText');
+        $languages = LangOption::all();
+        return view('api-stuff/newText',['languages' => $languages]);
     }
     //wurde noch nicht getestet:
     public function createNewText(Request $request){
-        $text = new Text();
+        $text = new Text();/* 
+        $lang_option_id = $request->input('lang');
+        $lang_option_id = lang_option_id[0]; */
         $text->title = $request->input('title');
         $text->text = $request->input('add-text-field');
-        $text->lang = $request->input('lang');
+        $text->lang_option_id = $request->input('lang')[0];
+        $text->created_by = auth()->user()->id;
         $text->save();
+        
         return redirect('/textPlay');
     }
 }
