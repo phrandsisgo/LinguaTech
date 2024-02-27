@@ -113,13 +113,10 @@ Route::middleware('auth')->group(function () {
 });
 //die liste der Middlewares mit den Zuweisungen findet man unter app/Http/Kernel.php
 
-
+Route::get('/addText', [LingApiController::class, 'addText'])->name('addText');
+Route::post('/createNewText', [LingApiController::class, 'createNewText'])->name('createNewText');
 //hier fangen die routen an für die API sachen:
-/* //diese route kann gelöscht werden
-Route::get('/textPlay', function () {
-    return view('api-stuff/textPlay');
-})->middleware('auth');
- */
+
 Route::get('/textPlay', [LingApiController::class, 'textPlay'])
 ->middleware('auth');
 
