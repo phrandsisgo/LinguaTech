@@ -15,7 +15,7 @@
 <nav>
    <div class="nav-wrapper">
     <a href="/library" class="iconWrapper">
-        <img src="{{ asset('svg-icons/home-icon.svg')}}" alt="home Icon" class="icons">
+        <img src="{{ asset('svg-icons/home-icon.svg')}}" alt="home Icon" class="icons navIcons">
     </a>
         <div class="horizontal-fill"></div>
         <p id="navText">LinguaTech</p>
@@ -35,7 +35,7 @@
          -->
          <div class="btn-group">
             <button type="button" class="btn menuBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                <img style="width:40px" src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
+                <img  src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
             </button>
             <ul class="dropdown-menu dropdown-menu-end z-index-up">
                 <li class="mob-only"><a class="dropdown-item" href="/library">Bibliothek</a></li>

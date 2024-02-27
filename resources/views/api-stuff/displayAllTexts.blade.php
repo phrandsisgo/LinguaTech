@@ -8,7 +8,7 @@
 @section('content')
 
 <p class="pagetitle">Alle verfügbare Texte</p>
-<a href="/addText">Neuer Text hinzufügen</a>
+<a href="/addText" class="section-content">Neuer Text hinzufügen</a>
 <div class="textSortierer">
 
     <div class="language-spez-text">

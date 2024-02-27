@@ -29,7 +29,15 @@ body {
     user-select: none;
     z-index: 2;
 }
+.navIcons{
+    @media screen and (max-width: 450px) {
+        width:38px;
+    }
 
+    @media screen and (max-width: 620px) {
+        width:50px;
+    }
+}
 .anker-no-underline{
     text-decoration: none;
 }
@@ -190,8 +198,8 @@ body {
         font-size: 2.5rem;
         
     }
-    @media screen and (max-width: 400px) {
-        font-size: 1.4rem;
+    @media screen and (max-width: 450px) {
+        display:none;
     }
 }
 .NavFont{
