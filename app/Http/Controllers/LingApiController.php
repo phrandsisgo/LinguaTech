@@ -52,15 +52,13 @@ class LingApiController extends Controller
     }
     //wurde noch nicht getestet:
     public function createNewText(Request $request){
-        $text = new Text();/* 
-        $lang_option_id = $request->input('lang');
-        $lang_option_id = lang_option_id[0]; */
+        $text = new Text();
         $text->title = $request->input('title');
         $text->text = $request->input('add-text-field');
         $text->lang_option_id = $request->input('lang')[0];
         $text->created_by = auth()->user()->id;
         $text->save();
-        
-        return redirect('/textPlay');
+        $text_id = $text->id;
+        return redirect('/textShow/'.$text_id);
     }
 }
