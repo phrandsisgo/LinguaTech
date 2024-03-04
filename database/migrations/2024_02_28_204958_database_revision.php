@@ -8,10 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
-        $emtriesCreatedByUser = DB::table('user_word_list')
-        ->foreign('created_by')
-        ->references('id')
-        ->on('users');
+        //drop the table user_word_list if it exists
+        Schema::dropIfExists('user_word_list');
     }
 
     /**
