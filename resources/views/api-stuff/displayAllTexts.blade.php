@@ -19,7 +19,7 @@
             <p>Eigene Texte</p>
         </button>
         <div id="eigeneTexte" style="display: none;" class="text-container">
-            @foreach($allTexts as $text)
+            @foreach($allTexts->reverse() as $text)
                 @if ($text->created_by == Auth::user()->id) 
                     <a href="/textShow/{{$text->id}}">
                         <div class="Texts-Card">
