@@ -10,6 +10,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * This is about deleting the pivot table user_words and migrating the user_id column to the words table.
      */
     public function up(): void
     {
@@ -33,12 +34,14 @@ return new class extends Migration
                 $wordId = $word->word_id;
                 $userCount = $word->user_count;
                 echo "migration not worked run ´php artisan migrate:rollback´ and migrate it again. \n word_id: $wordId, user_count: $userCount\n";
+                throw new Exception("Migration not worked");
             }
         }else{
-            //adding "created_by" column to "words" table
+            //adding "created_by" column to "words" table and add "count" column to "words" table
             echo "migration should worke\n";
             Schema::table('words', function (Blueprint $table) {
                 $table->foreignId('created_by')->nullable()->constrained('users');
+                $table->integer('count')->default(0);
             });
             //migrate user_id from user_words to words
             $userWords = DB::table('user_words')->get();
@@ -51,6 +54,7 @@ return new class extends Migration
             }
             //drop the table user_words
             Schema::dropIfExists('user_words');
+
         }
 
     }

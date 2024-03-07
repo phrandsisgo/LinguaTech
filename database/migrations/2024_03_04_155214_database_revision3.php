@@ -10,6 +10,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * This is about deleting the pivot table word_list_wods and migrating the word_list_id column to the words table.
      */
     public function up(): void
     {
@@ -23,6 +24,7 @@ return new class extends Migration
         */
 
         // Überprüfe, ob es Wörter gibt, die zu mehreren Listen gehören
+        echo "Migrating to delete pivotTable´word_list_wods´ and revision ´words´ column...\n";
         $wordsInMultipleLists = DB::table('word_list_words')
             ->select('word_id', DB::raw('COUNT(DISTINCT word_list_id) AS list_count'))
             ->groupBy('word_id')
@@ -34,6 +36,7 @@ return new class extends Migration
             foreach ($wordsInMultipleLists as $word) {
                 echo "Word ID {$word->word_id} belongs to multiple lists ({$word->list_count} lists). Migration not performed. Please run 'php artisan migrate:rollback' and correct the data.\n";
             }
+            throw new Exception("Migration not worked");
         } else {
             // Wenn keine Überschneidungen vorhanden sind, füge die word_list_id Spalte zur words Tabelle hinzu
             Schema::table('words', function (Blueprint $table) {
