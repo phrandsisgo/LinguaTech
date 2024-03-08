@@ -98,8 +98,7 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             </div>
             <div></div>
             <div>
-                <!-- give me the amount of words next-->
-                <p class="begriffCount">{{$libraryListe->words->count()}} {{__('library.begriff') }}</p> 
+                <p class="begriffCount">{{ \App\Models\Word::where('word_list_id', $libraryListe->id)->count() }} {{__('library.begriff') }}</p> 
             </div> 
             <div class="leading-library">
                 <p class="leadingText"> {{__('library.begriff') }} {{$libraryListe->creator->name}}</p>
@@ -149,10 +148,9 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             </form>
         <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline">
         </div>
-        <div></div>
         <div>
             <!-- give me the amount of words next-->
-            <p class="begriffCount">{{$privateList->words->count()}} {{__('library.begriff') }}</p> 
+            <p class="begriffCount">{{ \App\Models\Word::where('word_list_id', $privateList->id)->count() }} {{__('library.begriff') }}</p> 
         </div> 
         <div class="leading-library">
             <p class="leadingText"> {{__('library.createdBy') }} {{$privateList->creator->name}}</p>

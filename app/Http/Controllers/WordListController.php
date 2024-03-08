@@ -88,39 +88,33 @@ class WordListController extends Controller{
 
     public function list_create_function(Request $request){
         //diese Funktion sollte nicht nur eine Liste erstellen sondern auch die Wörter aus dem Formular in die Datenbank schreiben.
-        //und dann auch die dazugehöriegen Verknüpfungen in der many-to-many Tabelle erstellen.
-        //dd($request);
         $request->validate([
             'listTitle' => 'required|min:3|max:40',
             'baseWord.*' => 'required|min:1|max:50',
             'targetWord.*' => 'required|min:1|max:50',
             'listDescription' => 'max:200',
         ]);
+    
         $liste = new WordList;
         $liste->name = $request->listTitle;
         $liste->description = $request->listDescription;
         $liste->created_by = auth()->user()->id;
         $liste->save();
-
-
+    
         foreach ($request->baseWord as $index => $baseWord) {
             $word = new Word;
             $word->base_word = $baseWord;
             $word->target_word = $request->targetWord[$index];
-            $word->base_language_id = 1;//muss noch zu einem späteren Zeitpunkt angepasst werden.
-            $word->target_language_id = 2;//muss noch zu einem späteren Zeitpunkt angepasst werden.
+            $word->base_language_id = 1; // muss noch zu einem späteren Zeitpunkt angepasst werden.
+            $word->target_language_id = 2; // muss noch zu einem späteren Zeitpunkt angepasst werden.
+            $word->word_list_id = $liste->id; // Setze den word_list_id auf die ID der neu erstellten WordList.
             $word->save();
-            $liste->words()->attach($word->id);
-
-            
-            //der pivot Table wird noch erstellt
-            $currentUser = auth()->user();
-
-            // Create a new pivot entry between the User and Word models
-            $currentUser->words()->attach($word);
+    
         }
+    
         return redirect('/library');
     }
+    
 
     public function list_delete_function($id){
         $liste = WordList::find($id);
