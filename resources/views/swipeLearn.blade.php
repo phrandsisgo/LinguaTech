@@ -60,8 +60,8 @@
     <div class="modal-content">
         
         <h2>Swipe Statistik</h2>
-        <p>Anzahl falsche Antworten: <span id="leftSwipeCount"></span></p>
-        <p>Anzahl richtige Antworten: <span id="rightSwipeCount"></span></p>
+        <p>Anzahl nicht gewusste Antworten: <span id="leftSwipeCount"></span></p>
+        <p>Anzahl gewusste Antworten: <span id="rightSwipeCount"></span></p>
         <br><br>
         <div style="height:4rem;"></div>
         <a href="#"><button onclick="location.reload();" class="standartButton">Von vorne lernen</button></a>

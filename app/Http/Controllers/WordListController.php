@@ -34,10 +34,10 @@ class WordListController extends Controller{
         $word->target_word = $request->targetWord;
         $word->base_language_id = 1;//muss noch zu einem späteren Zeitpunkt angepasst werden.
         $word->target_language_id = 2;//muss noch zu einem späteren Zeitpunkt angepasst werden.
+        $word->word_list_id = $request->list;
         $word->save();
         $id=$request->list;
         $liste = WordList::find($id);
-        $liste->words()->attach($word->id);
         return redirect('/list_show/'.$id);//redirect wird gar nicht gebraucht, da es ein event.preventDefault request ist.
     }
 
@@ -48,6 +48,7 @@ class WordListController extends Controller{
             'targetWord.*' => 'required|min:1|max:50',
             'listDescription' => 'max:200',
         ]);
+        //dd($request);
 
         $liste = WordList::find($id);
         $baseWords = $request->baseWord;
@@ -59,17 +60,16 @@ class WordListController extends Controller{
                 $word = new Word;
                 $word->base_word = $baseWords[$index];
                 $word->target_word = $targetWords[$index];
-                /* $word->base_language_id = 1;
-                $word->target_language_id = 2; */
+                 $word->base_language_id = 1;
+                $word->target_language_id = 2; 
+                $word->word_list_id = $liste->id;
                 $word->save();
-                $liste->words()->attach($word->id);
             } else {
                 $word = Word::find($wordId);
                 if ($word) { // Stellen Sie sicher, dass das Wort gefunden wurde
                     $word->base_word = $baseWords[$index];
                     $word->target_word = $targetWords[$index];
                     $word->save();
-                    $liste->words()->syncWithoutDetaching($word->id);
                 }
             }
         }
