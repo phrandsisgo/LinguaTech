@@ -15,44 +15,51 @@ return new class extends Migration
     public function up()
     {
         echo "Migrating to update word_list_id in words table and remove pivot table word_list_words...\n";
-
+    
         // Dupliziere Wörter, die in mehreren Listen vorkommen
         $wordsInMultipleLists = DB::table('word_list_words')
             ->select('word_id')
             ->groupBy('word_id')
             ->havingRaw('COUNT(DISTINCT word_list_id) > 1')
             ->pluck('word_id');
-
+    
         foreach ($wordsInMultipleLists as $wordId) {
-            // Dupliziere das Wort für jede Liste, in der es vorkommt
             $listsForWord = DB::table('word_list_words')->where('word_id', $wordId)->pluck('word_list_id');
+            $wordData = DB::table('words')->where('id', $wordId)->first();
+    
+            // Für jede Liste, in der das Wort vorkommt, erstelle ein Duplikat des Worts
             foreach ($listsForWord as $listId) {
-                $wordData = DB::table('words')->where('id', $wordId)->first();
-                // Erstelle ein neues Wort-Duplikat für jede Liste
                 $newWordId = DB::table('words')->insertGetId([
-                    // Übernimm alle notwendigen Daten aus dem bestehenden Wort
-                    'content' => $wordData->content,
+                    'base_language_id' => $wordData->base_language_id,
+                    'target_language_id' => $wordData->target_language_id,
+                    'base_word' => $wordData->base_word,
+                    'target_word' => $wordData->target_word,
+                    'created_by' => $wordData->created_by,
+                    'count' => $wordData->count,
                     'word_list_id' => $listId,
-                    // Füge weitere Spalten hinzu, wie benötigt
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
             }
-            // Lösche das alte Wort, nachdem Duplikate erstellt wurden
+    
+            // Lösche das ursprüngliche Wort, um Duplikate zu vermeiden
             DB::table('words')->where('id', $wordId)->delete();
         }
-
-        // Entferne Wörter, die in keiner Liste vorkommen
-        $orphanWords = DB::table('words')
-            ->whereNotIn('id', DB::table('word_list_words')->select('word_id'))
-            ->delete();
-
-        // Entferne die Pivot-Tabelle, da sie nicht mehr benötigt wird
+    
+        // Lösche Wörter, die in keiner Liste vorkommen
+        $orphanWordIds = DB::table('words')
+            ->whereNull('word_list_id')
+            ->pluck('id');
+    
+        DB::table('words')->whereIn('id', $orphanWordIds)->delete();
+    
+        // Entferne die Pivot-Tabelle
         Schema::dropIfExists('word_list_words');
-
+    
         echo "Migration completed successfully.\n";
     }
-
+    
+    
     /**
      * Reverse the migrations.
      */
