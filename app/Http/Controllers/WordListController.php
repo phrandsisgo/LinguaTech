@@ -115,21 +115,29 @@ class WordListController extends Controller{
         return redirect('/library');
     }
     
-
     public function list_delete_function($id){
         $liste = WordList::find($id);
-        $liste->subscribers()->detach(); 
-
-        $liste->words()->detach(); 
-
+    
+        // Prüfe, ob die Liste existiert
+        if (!$liste) {
+            // Optional: Füge eine Fehlermeldung hinzu, wenn die Liste nicht gefunden wurde
+            return redirect('/library')->withErrors(['Die gesuchte Liste existiert nicht.']);
+        }
+    
+        // Lösche alle Wörter, die zur Liste gehören
+        foreach ($liste->words as $word) {
+            $word->delete();
+        }
+    
+        // Jetzt kann die Liste selbst gelöscht werden
         $liste->delete();
+    
         return redirect('/library');
     }
+    
 
     public function word_delete_function($id, $listId){
         $word = Word::find($id);
-        $word->lists()->detach();
-        $word->users()->detach();
         $word->delete();
         return redirect('/list_show/'.$listId);
     }
