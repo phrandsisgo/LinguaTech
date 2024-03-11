@@ -108,36 +108,33 @@ class ProfileController extends Controller
     public function addLanguageInitiate(Request $request){
         $user = $request->user();
         $languages = $request->input('language', []);
-        $user->languages()->attach($languages);
-        //dd($request->all());
-        //search database for all Wordlists that have the language in it and are created from the user_id =1 and store it in a variable
-        $wordlists = WordList::where('created_by', 1)->where('base_language', $languages)->orWhere('target_language', $languages)->get();
-        //dd();
-        //and now it has to copy the wordlists and change the user_id to the current user_id
+        $user->languages()->syncWithoutDetaching($languages);
+    
+        // Sucht in der Datenbank nach allen WordLists, die die Sprache enthalten und vom Benutzer mit ID = 1 erstellt wurden
+        $wordlists = WordList::where('created_by', 1)
+                     ->where(function($query) use ($languages) {
+                         $query->whereIn('base_language', $languages)
+                               ->orWhereIn('target_language', $languages);
+                     })
+                     ->get();
+
+    
         foreach($wordlists as $wordlist){
-            $newWordlist = new WordList;
-            $newWordlist->name = $wordlist->name;
-            $newWordlist->description = $wordlist->description;
+            $newWordlist = $wordlist->replicate(['created_by', 'created_at', 'updated_at']);
             $newWordlist->created_by = $user->id;
-            $newWordlist->base_language = $wordlist->base_language;
-            $newWordlist->target_language = $wordlist->target_language;
             $newWordlist->save();
-            $newWordListId = $newWordlist->id;
-            $newWordlist->created_at = now();
-            $wordListWords = WordListWord::where('word_list_id', $wordlist->id)->get();
-            foreach($wordListWords as $wordListWord){
-                $newWordListWord = new WordListWord;
-                $newWordListWord->word_list_id = $newWordListId;
-                $newWordListWord->word_id = $wordListWord->word_id;
-                $newWordListWord->created_at = now();
-                $newWordListWord->save();
+    
+            // Kopiere alle Wörter der originalen WordList in die neue WordList
+            foreach($wordlist->words as $word){
+                $newWord = $word->replicate();
+                $newWord->word_list_id = $newWordlist->id; // Setze die ID der neuen WordList
+                $newWord->save();
             }
-        
         }
         
         return redirect('/initiateProfile');
-        
     }
+    
     public function removeLanguage(Request $request, $id){
         $user = $request->user();
         $user->languages()->detach($id);

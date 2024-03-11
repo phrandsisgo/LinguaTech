@@ -34,10 +34,10 @@ class WordListController extends Controller{
         $word->target_word = $request->targetWord;
         $word->base_language_id = 1;//muss noch zu einem späteren Zeitpunkt angepasst werden.
         $word->target_language_id = 2;//muss noch zu einem späteren Zeitpunkt angepasst werden.
+        $word->word_list_id = $request->list;
         $word->save();
         $id=$request->list;
         $liste = WordList::find($id);
-        $liste->words()->attach($word->id);
         return redirect('/list_show/'.$id);//redirect wird gar nicht gebraucht, da es ein event.preventDefault request ist.
     }
 
@@ -48,6 +48,7 @@ class WordListController extends Controller{
             'targetWord.*' => 'required|min:1|max:50',
             'listDescription' => 'max:200',
         ]);
+        //dd($request);
 
         $liste = WordList::find($id);
         $baseWords = $request->baseWord;
@@ -59,17 +60,16 @@ class WordListController extends Controller{
                 $word = new Word;
                 $word->base_word = $baseWords[$index];
                 $word->target_word = $targetWords[$index];
-                /* $word->base_language_id = 1;
-                $word->target_language_id = 2; */
+                 $word->base_language_id = 1;
+                $word->target_language_id = 2; 
+                $word->word_list_id = $liste->id;
                 $word->save();
-                $liste->words()->attach($word->id);
             } else {
                 $word = Word::find($wordId);
                 if ($word) { // Stellen Sie sicher, dass das Wort gefunden wurde
                     $word->base_word = $baseWords[$index];
                     $word->target_word = $targetWords[$index];
                     $word->save();
-                    $liste->words()->syncWithoutDetaching($word->id);
                 }
             }
         }
@@ -88,54 +88,56 @@ class WordListController extends Controller{
 
     public function list_create_function(Request $request){
         //diese Funktion sollte nicht nur eine Liste erstellen sondern auch die Wörter aus dem Formular in die Datenbank schreiben.
-        //und dann auch die dazugehöriegen Verknüpfungen in der many-to-many Tabelle erstellen.
-        //dd($request);
         $request->validate([
             'listTitle' => 'required|min:3|max:40',
             'baseWord.*' => 'required|min:1|max:50',
             'targetWord.*' => 'required|min:1|max:50',
             'listDescription' => 'max:200',
         ]);
+    
         $liste = new WordList;
         $liste->name = $request->listTitle;
         $liste->description = $request->listDescription;
         $liste->created_by = auth()->user()->id;
         $liste->save();
-
-
+    
         foreach ($request->baseWord as $index => $baseWord) {
             $word = new Word;
             $word->base_word = $baseWord;
             $word->target_word = $request->targetWord[$index];
-            $word->base_language_id = 1;//muss noch zu einem späteren Zeitpunkt angepasst werden.
-            $word->target_language_id = 2;//muss noch zu einem späteren Zeitpunkt angepasst werden.
+            $word->base_language_id = 1; // muss noch zu einem späteren Zeitpunkt angepasst werden.
+            $word->target_language_id = 2; // muss noch zu einem späteren Zeitpunkt angepasst werden.
+            $word->word_list_id = $liste->id; // Setze den word_list_id auf die ID der neu erstellten WordList.
             $word->save();
-            $liste->words()->attach($word->id);
-
-            
-            //der pivot Table wird noch erstellt
-            $currentUser = auth()->user();
-
-            // Create a new pivot entry between the User and Word models
-            $currentUser->words()->attach($word);
+    
         }
+    
         return redirect('/library');
     }
-
+    
     public function list_delete_function($id){
         $liste = WordList::find($id);
-        $liste->subscribers()->detach(); 
-
-        $liste->words()->detach(); 
-
+    
+        // Prüfe, ob die Liste existiert
+        if (!$liste) {
+            // Optional: Füge eine Fehlermeldung hinzu, wenn die Liste nicht gefunden wurde
+            return redirect('/library')->withErrors(['Die gesuchte Liste existiert nicht.']);
+        }
+    
+        // Lösche alle Wörter, die zur Liste gehören
+        foreach ($liste->words as $word) {
+            $word->delete();
+        }
+    
+        // Jetzt kann die Liste selbst gelöscht werden
         $liste->delete();
+    
         return redirect('/library');
     }
+    
 
     public function word_delete_function($id, $listId){
         $word = Word::find($id);
-        $word->lists()->detach();
-        $word->users()->detach();
         $word->delete();
         return redirect('/list_show/'.$listId);
     }

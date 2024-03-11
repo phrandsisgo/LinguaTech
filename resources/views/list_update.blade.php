@@ -22,14 +22,14 @@
     <p class="section-content">Dein Titel</p>
     <input type="text" name="listTitle" id="listTitle" value="{{$liste->name}}" placeholder="Titel" class="inputField">
     @error('listTitle' )
-    <p class="formHelper">Der Titel muss zwischen 3 und 20 Zeichen lang sein.</p>
+    <p class="formHelper colorDanger">Der Titel muss zwischen 3 und 20 Zeichen lang sein.</p>
     @enderror
     <br><br><br>
 
     <p class="section-content">Beschreibung (optional)</p>
     <input type="text" name="listDescription" id="listDescription" value="{{$liste->description}}" placeholder="Beschreibung (optional)." class="inputField">
     @error('listDescription' )
-    <p class="formHelper">Die Beschreibung darf nicht länger als 200 Zeichen sein.</p>
+    <p class="formHelper colorDanger">Die Beschreibung darf nicht länger als 200 Zeichen sein.</p>
     @enderror
     <div id="luis">
     
@@ -40,14 +40,14 @@
         <input type="hidden" name="wordIds[]" value="{{ $begriffe->id }}">
         <input type="text" name="baseWord[]" value="{{ $begriffe->base_word }}" class="inputField">
         @error('baseWord.' . $loop->index)
-            <p class="errorMessages">Das Basiswort muss zwischen 1 und 50 Zeichen lang sein.</p>
+            <p class="errorMessages  colorDanger">Das Basiswort muss zwischen 1 und 50 Zeichen lang sein.</p>
         @enderror
         <p class="formHelper">Basis Sprache</p>
 
         <input type="text" name="targetWord[]" value="{{ $begriffe->target_word }}" class="inputField">
         <p class="formHelper">Ziel Sprache</p>
         @error('targetWord.' . $loop->index)
-            <p class="errorMessages">Das Zielwort muss zwischen 1 und 50 Zeichen lang sein.</p>
+            <p class="errorMessages colorDanger">Das Zielwort muss zwischen 1 und 50 Zeichen lang sein.</p>
         @enderror
     </div>
     @endforeach

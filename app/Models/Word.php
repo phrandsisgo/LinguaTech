@@ -32,6 +32,10 @@ class Word extends Model
         return $this->belongsToMany(User::class,'user_words', 'word_id', 'user_id')->withPivot('count');
     }
 
+    public function wordList(){
+        return $this->belongsTo(WordList::class, 'word_list_id', 'id');
+    }
+
     public function count(){
         $userId = auth()->id();
         $wordId = $this->id;
