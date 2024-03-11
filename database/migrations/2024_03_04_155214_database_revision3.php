@@ -12,49 +12,47 @@ return new class extends Migration
      * Run the migrations.
      * This is about deleting the pivot table word_list_wods and migrating the word_list_id column to the words table.
      */
-    public function up(): void
+    public function up()
     {
-        /*
-        SELECT word_list_id, COUNT(DISTINCT word_list_id) AS word_list_count
-        FROM word_list_words
-        GROUP BY word_list_id
-        HAVING word_list_count > 1;
+        echo "Migrating to update word_list_id in words table and remove pivot table word_list_words...\n";
 
-        //possible that this has to be freshly migrated after recieving the error message
-        */
-
-        // Überprüfe, ob es Wörter gibt, die zu mehreren Listen gehören
-        echo "Migrating to delete pivotTable´word_list_wods´ and revision ´words´ column...\n";
+        // Dupliziere Wörter, die in mehreren Listen vorkommen
         $wordsInMultipleLists = DB::table('word_list_words')
-            ->select('word_id', DB::raw('COUNT(DISTINCT word_list_id) AS list_count'))
+            ->select('word_id')
             ->groupBy('word_id')
             ->havingRaw('COUNT(DISTINCT word_list_id) > 1')
-            ->get();
+            ->pluck('word_id');
 
-        if ($wordsInMultipleLists->isNotEmpty()) {
-            // Wenn es Wörter gibt, die zu mehreren Listen gehören, gib eine Warnung aus.
-            foreach ($wordsInMultipleLists as $word) {
-                echo "Word ID {$word->word_id} belongs to multiple lists ({$word->list_count} lists). Migration not performed. Please run 'php artisan migrate:rollback' and correct the data.\n";
+        foreach ($wordsInMultipleLists as $wordId) {
+            // Dupliziere das Wort für jede Liste, in der es vorkommt
+            $listsForWord = DB::table('word_list_words')->where('word_id', $wordId)->pluck('word_list_id');
+            foreach ($listsForWord as $listId) {
+                $wordData = DB::table('words')->where('id', $wordId)->first();
+                // Erstelle ein neues Wort-Duplikat für jede Liste
+                $newWordId = DB::table('words')->insertGetId([
+                    // Übernimm alle notwendigen Daten aus dem bestehenden Wort
+                    'content' => $wordData->content,
+                    'word_list_id' => $listId,
+                    // Füge weitere Spalten hinzu, wie benötigt
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             }
-            throw new Exception("Migration not worked");
-        } else {
-            // Wenn keine Überschneidungen vorhanden sind, füge die word_list_id Spalte zur words Tabelle hinzu
-            Schema::table('words', function (Blueprint $table) {
-                $table->unsignedBigInteger('word_list_id')->nullable()->after('id');
-                $table->foreign('word_list_id')->references('id')->on('word_lists')->onDelete('set null');
-            });
-
-            // Migrate die Beziehungen von word_list_words zu words
-            DB::table('word_list_words')->get()->each(function ($wordListWord) {
-                DB::table('words')
-                    ->where('id', $wordListWord->word_id)
-                    ->update(['word_list_id' => $wordListWord->word_list_id]);
-            });
-
-            // Lösche die Pivot-Tabelle
-            Schema::dropIfExists('word_list_words');
+            // Lösche das alte Wort, nachdem Duplikate erstellt wurden
+            DB::table('words')->where('id', $wordId)->delete();
         }
+
+        // Entferne Wörter, die in keiner Liste vorkommen
+        $orphanWords = DB::table('words')
+            ->whereNotIn('id', DB::table('word_list_words')->select('word_id'))
+            ->delete();
+
+        // Entferne die Pivot-Tabelle, da sie nicht mehr benötigt wird
+        Schema::dropIfExists('word_list_words');
+
+        echo "Migration completed successfully.\n";
     }
+
     /**
      * Reverse the migrations.
      */
