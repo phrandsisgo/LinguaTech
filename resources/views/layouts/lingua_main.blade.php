@@ -20,6 +20,22 @@
         <div class="horizontal-fill"></div>
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
+        <!-- make a dropdown menu for the following links -->
+        <div class="langDropdownMenu">
+                <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
+                <label for="dropdownCheckbox" class="dropdownLabel">
+                    <div class="displayFlex">
+                        <p>LG</p>
+                        <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}" style="height:30px;"alt="icon für Spracheinstellung">
+                    </div>
+            </label>
+            <ul class="dropdown-content">
+                <li><a href="#">Deutsch</a></li>
+                <li><a href="#">English</a></li>
+            </ul>
+        </div>
+
+
 
         @if (auth()->check())
             <a href="/about_project" class="iconWrapper">
@@ -65,25 +81,6 @@
 @yield('content')
 </div>
 <div class="heightbox"></div>
-<footer>
-    <!--
-    <div class="footer-Wrapper">
-        <div class="gradiant-box"></div>
-        <div class="desktop-gradiant"></div>
-        <div class="footer_box">
-            <p>lingua tech</p>
-            <div class="horizontal-fill"></div>
-            <a href="/about_me">
-                <img src="{{ asset('svg-icons/info-icon.svg')}}" alt="impressum Icon" class="icons">
-            </a>
-            <div class="horizontal-fill"></div>
-            <a href="/library">
-                <img src="{{ asset('svg-icons/library-icon.svg')}}" alt="library Icon" class="icons ">
-            </a>
-            <div class="horizontal-fill"></div>
-        </div>
-    </div>-->
-</footer>
 
 </body>
 </html>

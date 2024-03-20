@@ -171,8 +171,39 @@ body {
         border: 6px solid $approve;
         margin: 10px auto;
         display: block;
+        cursor: copy;
     }
 }
+.langDropdownMenu {
+    position: relative;
+    display: inline-block;
+    margin: 40px;
+    padding: 20px;
+    border: 2px solid $approve;
+}
+
+.dropdownCheckbox {
+    display: none; /* Versteckt die Checkbox */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:  $contrast;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdownCheckbox:checked ~ ul.dropdown-content {
+    display: block;
+}
+
+.dropdownLabel {
+    display: block; /* Macht das Label klickbar */
+    cursor: pointer;
+}
+
 
 .icons{
     margin:5px;
