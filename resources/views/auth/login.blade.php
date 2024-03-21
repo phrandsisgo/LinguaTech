@@ -4,7 +4,6 @@
 <!-- ich muss noch fragen wesswegen library.scss nicht funktioniert-->
 @vite(['resources/css/library.scss','resources/js/list-create.js'])
 @endsection
-
 @section('content')
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -17,10 +16,10 @@
 
         </div>
         
-        <div class="leftSideAuth"><p class="pagetitle">Login</p>
+        <div class="leftSideAuth"><p class="pagetitle">{{ __('auth.login') }}</p>
             <!-- Email Address -->
             <div>
-                <x-input-label for="email" :value="__('Email')" class="section-content"/>
+                <x-input-label for="email" :value="__('auth.email')" class="section-content"/>
                 <br>
                 <input id="email" class="authTextField" type="email" name="email"  required autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -28,7 +27,7 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" class="section-content" />
+                <x-input-label for="password" :value="__('auth.password')" class="section-content" />
                 <br>
                 <x-text-input id="password" class="authTextField"
                                 type="password"
@@ -42,7 +41,7 @@
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                    <span  class="section-content">{{ __('Remember me') }}</span>
+                    <span  class="section-content">{{ __('auth.remember_me') }}</span>
                 </label>
             </div>
         </div>
@@ -52,17 +51,17 @@
         
         <div class="flex items-center justify-end mt-4 rightSideAuth"><br><br>
             <a class="sectiontitle" href="/register">
-                    {{ __('Noch kein Benutzerkonto?') }}
+                    {{ __('auth.no_account_yet') }}
                 </a>
                 <br><br>
             @if (Route::has('password.request'))
                 <a class="sectiontitle" href="{{ route('password.request') }}">
-                    {{ __('Passwort Vergessen?') }}
+                    {{ __('auth.forgot_password') }}
                 </a>
             @endif
             <br><br><br>
             <x-primary-button class="approveButton">
-                {{ __('Log in') }}
+                {{ __('auth.log_in') }}
             </x-primary-button>
         </div>
         <div class="horizontal-fill">
