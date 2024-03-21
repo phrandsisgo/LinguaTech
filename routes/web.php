@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WordListController;
 use App\Http\Controllers\PatchNotesController;
 use App\Http\Controllers\LingApiController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------

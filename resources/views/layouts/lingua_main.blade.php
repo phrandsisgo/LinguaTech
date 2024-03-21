@@ -30,8 +30,8 @@
                     </div>
             </label>
             <ul class="dropdown-content">
-                <li><a href="#">Deutsch</a></li>
-                <li><a href="#">English</a></li>
+                <li><a href="{{ route('language.change', 'de') }}">Deutsch</a></li>
+                <li><a href="{{ route('language.change', 'en') }}">English</a></li>
             </ul>
         </div>
 
