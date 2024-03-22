@@ -74,7 +74,7 @@
                     </x-primary-button>
                 </div>
         <p class="section-content maxwidthXY">
-            Hallo, da diese Seite sich zur Zeit noch in Entwicklung befindet und ich nicht möchte, dass jeder sich hier anmelden kann, habe ich ein Passwort eingebaut. Falls du dich gerne registrieren möchtest, dann kontaktier mich doch über Discord (phrandsisgo) und ich gebe dir das Passwort.
+            Kleine Warnung, diese Seite befinded sich noch in der Entwicklungsphase. Es kann sein, dass noch nicht alles funktioniert. Falls Sie auf Probleme stoßen, schreiben Sie mir bitte eine Email an: francisco.wohlgemuth@hotmail.com
         </p>
             </div>
             <div class="horizontal-fill"></div>
