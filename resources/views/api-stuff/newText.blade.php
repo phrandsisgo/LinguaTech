@@ -19,19 +19,19 @@ textarea {
 @endsection
 @section('content')
 
-<p class="pagetitle">Text hinzufügen</p>
+<p class="pagetitle">{{ __('api_texts.addNewText') }}</p>
 
 <form action="/createNewText" method="POST">
     @csrf
     <div class="form-group">
-        <label for="title">TextTitel</label>
+        <label for="title">{{ __('api_texts.text-title') }}</label>
         <input type="text" class="form-control" id="add-title-field" name="title" required>
     </div>
     <div class="form-group">
-        <label for="text">Text</label>
+        <label for="text">{{ __('api_texts.text') }}</label>
         <textarea class="form-control" id="text" name="add-text-field" rows="3" required></textarea>
     </div>
-    <div class="form-group"><label for="language" class="section-content">Neue Sprache hinzufügen:</label>
+    <div class="form-group"><label for="language" class="section-content">{{ __('api_texts.add-language') }}</label>
         <br>
         <select id="lang" name="lang[]" class="standartSelect">
             @foreach ($languages as $language)

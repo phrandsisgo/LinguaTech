@@ -2,6 +2,8 @@
 
 return [
     'discoverLinguaTech' => 'Entdecke Lingua Tech',
+    'whatIsLinguaTech' => 'Was ist LinguaTech?',
+    'linguaTechDescription' => 'LinguaTech ist eine Lernplattform, die es sich zum Ziel gesetzt hat, Sprachen zu vermitteln. Sie wurde von Francisco Wohlgemuth als Abschlussprojekt in einem Coding Bootcamp entwickelt.',
     'smartWayToLearn' => 'Die smarte Art, Sprachen zu lernen',
     'welcomeMessage' => 'Willkommen bei LinguaTech, der zukunftsorientierten Web-App, die dein Sprachlernen revolutioniert. Egal, ob du gerade erst anfängst oder deine Mehrsprachigkeit perfektionieren möchtest, LinguaTech bietet dir eine intuitive und effektive Methode, um Sprachen schneller zu lernen und dabei Spass zu haben.',
     'learnWithCognates' => 'Lerne mit Kognaten',

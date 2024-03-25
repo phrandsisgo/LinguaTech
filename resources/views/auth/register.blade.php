@@ -12,9 +12,8 @@
             <div class="horizontal-fill"></div>
 
             <div class="leftSideAuth">
-                <!-- Name -->
                 <div>
-                    <x-input-label for="name" :value="__('Name')" class="section-content" />
+                    <x-input-label for="name" :value="__('auth.name')" class="section-content" />
                     <br>
                     <x-text-input id="name" class="authTextField" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -22,7 +21,7 @@
 
                 <!-- Email Address -->
                 <div class="mt-4">
-                    <x-input-label for="email" :value="__('Email')" class="section-content" />
+                    <x-input-label for="email" :value="__('auth.email')" class="section-content" />
                     <br>
                     <x-text-input id="email" class="authTextField" type="email" name="email" :value="old('email')" required autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -30,7 +29,7 @@
 
                 <!-- Password -->
                 <div class="mt-4">
-                    <x-input-label for="password" :value="__('Password')" class="section-content" />
+                    <x-input-label for="password" :value="__('auth.password')" class="section-content" />
                     <br>
                     <x-text-input id="password" class="authTextField"
                                     type="password"
@@ -42,7 +41,7 @@
 
                 <!-- Confirm Password -->
                 <div class="mt-4">
-                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="section-content" />
+                    <x-input-label for="password_confirmation" :value="__('auth.confirm_password')" class="section-content" />
                     <br>
                     <x-text-input id="password_confirmation" class="authTextField"
                                     type="password"
@@ -66,15 +65,15 @@
                     
                 <div class="flex items-center justify-end mt-4">
                     <a class="sectiontitle" href="{{ route('login') }}">
-                        {{ __('Already registered?') }}
+                        {{ __('auth.already_registered') }}
                     </a><br><br><br><b></b>
 
                     <x-primary-button class="approveButton">
-                        {{ __('Register') }}
+                        {{ __('auth.register') }}
                     </x-primary-button>
                 </div>
         <p class="section-content maxwidthXY">
-            Kleine Warnung, diese Seite befinded sich noch in der Entwicklungsphase. Es kann sein, dass noch nicht alles funktioniert. Falls Sie auf Probleme stoßen, schreiben Sie mir bitte eine Email an: francisco.wohlgemuth@hotmail.com
+            {{ __('auth.development_warning') }}
         </p>
             </div>
             <div class="horizontal-fill"></div>
