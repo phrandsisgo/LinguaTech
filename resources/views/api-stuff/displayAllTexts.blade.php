@@ -7,8 +7,8 @@
 @endsection
 @section('content')
 
-<p class="pagetitle">Alle verfügbare Texte</p>
-<a href="/addText" class="section-content">Neuer Text hinzufügen</a>
+<p class="pagetitle">{{ __('api_texts.allAvailableTexts') }}</p>
+<a href="/addText" class="section-content">{{ __('api_texts.addNewText') }}</a>
 <div class="textSortierer">
 
     <div class="language-spez-text">
@@ -16,7 +16,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#073B4C" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" fill="#073B4C"/>
             </svg>
-            <p>Eigene Texte</p>
+            <p>{{ __('api_texts.ownTexts') }}</p>
         </button>
         <div id="eigeneTexte" style="display: none;" class="text-container">
             @foreach($allTexts->reverse() as $text)
@@ -38,7 +38,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#073B4C" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" fill="#073B4C"/>
             </svg>
-            <p>Deutsch</p>
+            <p>{{ __('api_texts.german') }}</p>
         </button>
         <div id="DE" style="display: none;" class="text-container">
             @foreach($allTexts as $text)
@@ -60,7 +60,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#073B4C" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" fill="#073B4C"/>
             </svg>
-            <p>Französisch</p>
+            <p>{{ __('api_texts.french') }}</p>
         </button>
         <div id="FR" style="display: none;" class="text-container">
             @foreach($allTexts as $text)
@@ -81,7 +81,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#073B4C" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" fill="#073B4C"/>
             </svg>
-            <p>Russisch</p>
+            <p>{{ __('api_texts.russian') }}</p>
         </button>
         <div id="RU" style="display: none;" class="text-container">
             @foreach($allTexts as $text)
@@ -102,7 +102,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#073B4C" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" fill="#073B4C"/>
             </svg>
-            <p>English</p>
+            <p>{{ __('api_texts.english') }}</p>
         </button>
         <div id="EN" style="display: none;" class="text-container">
             @foreach($allTexts as $text)
@@ -123,7 +123,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#073B4C" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" fill="#073B4C"/>
             </svg>
-            <p>Portuguese</p>
+            <p>{{ __('api_texts.portuguese') }}</p>
         </button>
         <div id="PT" style="display: none;" class="text-container">
             @foreach($allTexts as $text)
@@ -139,19 +139,6 @@
             @endforeach
         </div>
     </div> 
-<!--
-<div class="Card-Wrapper">
-    @foreach($allTexts as $text)
-    <a href="/textShow/{{$text->id}}">
-        <div class="Texts-Card">
-        <p>{{ $text->title }}</p>
-            <p>{{$text->langOption->language_name}}</p>
-            <br>
-        </div>
-    </a>
-    @endforeach
-</div>
--->
 <script>
 
 function changeArrowDirection(lang_code) {

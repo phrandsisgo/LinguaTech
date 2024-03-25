@@ -1,40 +1,34 @@
 @extends('layouts.lingua_main')
-@section('title', 'Home')
+@section('title', __('list_create.create_new_list'))
 @section('head')
-<!-- ich muss noch fragen wesswegen library.scss nicht funktioniert-->
 @vite(['resources/css/library.scss','resources/js/list-create.js'])
 @endsection
 
 @section('content')
-<!--ich muss daraus ein component machen--->
-<p class="pagetitle">Eine Neue Liste erstellen</p>
-
-
+<p class="pagetitle">{{ __('list_create.create_new_list') }}</p>
 
 <form action="/list_create_function" method="POST" id="list_create_form">
     @csrf
 
-    <p class="section-content" id="listTitleInput">Bitte fügen sie ein Titel ein</p>
-    <input type="text" name="listTitle" id="listTitle" placeholder="Titel" class="inputField">
+    <p class="section-content" id="listTitleInput">{{ __('list_create.insert_title') }}</p>
+    <input type="text" name="listTitle" id="listTitle" placeholder="{{ __('list_create.title_placeholder') }}" class="inputField">
     @error("listTitle")
     <p class="error">{{$message}}</p>
-
-    
     @enderror
     <br><br>
-    <p class="section-content">Sie können der Liste eine Beschreibung einfügen die jedoch optional ist.</p>
-    <input type="text" name="listDescription" id="listDescription" placeholder="Beschreibung (optional)" class="inputField">
+    <p class="section-content">{{ __('list_create.description_optional') }}</p>
+    <input type="text" name="listDescription" id="listDescription" placeholder="{{ __('list_create.description_placeholder') }}" class="inputField">
 
     @error("listDescription")
     <p class="error">{{$message}}</p>
     @enderror
     <div id="luis">
         <div class="library-Card">
-            <input type="text" name="baseWord[]" id="baseWord" placeholder="Basiswort" class="inputField">
-            <p class="formHelper">Base Language</p>
+            <input type="text" name="baseWord[]" id="baseWord" placeholder="{{ __('list_create.base_word_placeholder') }}" class="inputField">
+            <p class="formHelper">{{ __('list_create.base_language') }}</p>
 
-            <input type="text" name="targetWord[]" id="targetWord" placeholder="Zielwort" class="inputField">
-            <p class="formHelper">Target Language</p>
+            <input type="text" name="targetWord[]" id="targetWord" placeholder="{{ __('list_create.target_word_placeholder') }}" class="inputField">
+            <p class="formHelper">{{ __('list_create.target_language') }}</p>
         </div>
     </div>
     @error("baseWord.*")
@@ -43,8 +37,8 @@
     @error("targetWord.*")
     <p class="error">{{$message}}</p>
     @enderror 
-    <button onclick="createLibraryCard(karten); anzahlplus();" class="standartButton"> weiterer Begriff hinzufügen.</button>
-    <button type="submit" class="approveButton">Liste erstellen</button>
+    <button onclick="createLibraryCard(karten); anzahlplus();" class="standartButton">{{ __('list_create.add_another_term') }}</button>
+    <button type="submit" class="approveButton">{{ __('list_create.create_list') }}</button>
 </form>
 <script>
 document.getElementById('list_create_form').addEventListener('submit', function(event) {

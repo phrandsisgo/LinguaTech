@@ -55,7 +55,7 @@
 @section('content')
 
 <a href="/displayAllTexts">
-    <button class="standartButton">Alle Texte</button>
+    <button class="standartButton">{{ __('api_texts.all-texts') }}</button>
 </a>
 <p class="pagetitle ">{{$text->title}}</p>
 <p id="textContainer" class="section-content"> </p>

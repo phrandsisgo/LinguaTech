@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WordListController;
 use App\Http\Controllers\PatchNotesController;
 use App\Http\Controllers\LingApiController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,7 +129,10 @@ Route::get('/displayAllTexts', [LingApiController::class, 'displayAllTexts'])
 
 Route::post('/translate', [LingApiController::class, 'translate'])
 ->name('translate');
-
+//Rout to change the UI language of the app
+Route::get('/language/{lang}',[LanguageController::class, 'changeLanguage'])
+    ->middleware('SetLanguageMiddleware')
+    ->name('language.change');
 
 
 require __DIR__.'/auth.php';

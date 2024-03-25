@@ -148,47 +148,30 @@ class WordListController extends Controller{
     }
     public function copyList($id){
         $liste = WordList::with('words')->find($id);
-        $newList = new WordList;
-        $newList->name = $liste->name;
-        $newList->description = $liste->description;
-        $newList->created_by = auth()->user()->id;
-        $newList->base_language= $liste->base_language;
-        $newList->target_language = $liste->target_language;
-        $newList->save();
-        $newListId = $newList->id;
-        $newList->created_at = now();
-        $wordListWords = WordListWord::where('word_list_id', $liste->id)->get();
-        foreach($wordListWords as $wordListWord){ 
-            $originalWordId = Word::where('id', $wordListWord->word_id)->first();
-            //if($originalWord){
-                $newWord = new Word;
-                $newWord->base_word = $originalWordId->base_word;
-                $newWord->target_word = $originalWordId->target_word;
-                $newWord->base_language_id = $originalWordId->base_language_id;
-                $newWord->target_language_id = $originalWordId->target_language_id;
-                $newWord->created_at = now();
-                $newWord->save();
-
-                $newWordId = $newWord->id; // Store the ID of the marked word in a variable
-
-                $newWordListWord = new WordListWord;
-                $newWordListWord->word_list_id = $newListId;
-                $newWordListWord->word_id = $newWordId;
-                $newWordListWord->created_at = now();
-                $newWordListWord->save();
-            
-                //der pivot Table wird noch erstellt
-                $currentUser = auth()->user();
-
-                // Create a new pivot entry between the User and Word models
-                $currentUser->words()->attach($newWordId);
-            //}
-
-// Continue with the rest of your code...
-
+        if (!$liste) {
+            // Optional: Rückmeldung geben, dass die Liste nicht gefunden wurde
+            return redirect('/library')->withErrors('Liste nicht gefunden.');
         }
+    
+        $newList = $liste->replicate();
+        $newList->created_by = auth()->user()->id;
+        // Setze created_at und updated_at auf die aktuelle Zeit
+        $newList->created_at = now();
+        $newList->updated_at = now();
+        $newList->save();
+    
+        foreach($liste->words as $word){
+            $newWord = $word->replicate();
+            $newWord->word_list_id = $newList->id;
+            // Setze auch hier created_at und updated_at auf die aktuelle Zeit
+            $newWord->created_at = now();
+            $newWord->updated_at = now();
+            $newWord->save();
+        }
+    
         return redirect('/library');
     }
+    
 
     public function swipeHandle(Request $request){
         $request->validate([
