@@ -49,31 +49,32 @@
         @endif
         <!-- <img src="{{ asset('svg-svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
          -->
-         <div class="btn-group">
+        <div class="btn-group">
             <button type="button" class="btn menuBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                <img  src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
+                <img src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
             </button>
             <ul class="dropdown-menu dropdown-menu-end z-index-up">
-                <li class="mob-only"><a class="dropdown-item" href="/library">Bibliothek</a></li>
-                <li><a class="dropdown-item" href="/about_me">Über den Entwickler</a></li>
-                <li><a class="dropdown-item" href="/about_project">Über das Projekt</a></li>
-                <li><a class="dropdown-item" href="/showPatch/2">Patchnotizen</a></li>
+                <li class="mob-only"><a class="dropdown-item" href="/library">{{ __('menu.library') }}</a></li>
+                <li><a class="dropdown-item" href="/about_me">{{ __('menu.aboutDeveloper') }}</a></li>
+                <li><a class="dropdown-item" href="/about_project">{{ __('menu.aboutProject') }}</a></li>
+                <li><a class="dropdown-item" href="/showPatch/2">{{ __('menu.patchNotes') }}</a></li>
 
                 @if (auth()->check())
-                    <li><a class="dropdown-item" href="/displayAllTexts">Texte</a></li>
-                    <li><a class="dropdown-item" href="/profile">Profil: {{auth()->user()->name}}</a></li>
+                    <li><a class="dropdown-item" href="/displayAllTexts">{{ __('menu.texts') }}</a></li>
+                    <li><a class="dropdown-item" href="/profile">{{ __('menu.profile', ['name' => auth()->user()->name]) }}</a></li>
                     <li>
-                    <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="dropdown-item">Ausloggen</button>
+                            <button type="submit" class="dropdown-item">{{ __('menu.logout') }}</button>
                         </form>
                     </li>
                 @else
-                    <li><a class="dropdown-item" href="/login">Login</a></li>
-                    <li><a class="dropdown-item" href="/register">Register</a></li>
+                    <li><a class="dropdown-item" href="/login">{{ __('menu.login') }}</a></li>
+                    <li><a class="dropdown-item" href="/register">{{ __('menu.register') }}</a></li>
                 @endif
             </ul>
         </div>
+
 
    </div> 
 </nav>
