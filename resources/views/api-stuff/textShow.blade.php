@@ -23,24 +23,31 @@
 
             let sentences = text.split(/(?<=[.\?!])/);
 
-
-
             sentences.forEach(sentence => {
-                sentence.split(/([\p{L}'’]+)/gu).forEach(part => {
-                    const span = document.createElement('span');
-                    span.textContent = part;
-                    span.className = 'word';
+                // Ersetze Zeilenumbrüche im Satz direkt mit <br> Tags vor der weiteren Verarbeitung
+                const parts = sentence.replace(/\r?\n/g, '<br>').split(/(<br>|[\p{L}'’]+)/gu);
 
-                    if (/\p{L}|['’]/u.test(part)) {
-                        span.addEventListener('mouseover', () => span.classList.add('highlighted'));
-                        span.addEventListener('mouseout', () => span.classList.remove('highlighted'));
-                        span.addEventListener('click', (e) => handleClick(part, sentence, e));
+                parts.forEach(part => {
+                    if (part === '<br>') {
+                        // Füge direkt ein BR Element hinzu, wenn der Teil ein Zeilenumbruch ist
+                        const br = document.createElement('br');
+                        textContainer.appendChild(br);
+                    } else {
+                        // Behandle normale Textteile wie zuvor
+                        const span = document.createElement('span');
+                        span.innerHTML = part;
+                        span.className = 'word';
+                        if (/\p{L}|['’]/u.test(part)) {
+                            span.addEventListener('mouseover', () => span.classList.add('highlighted'));
+                            span.addEventListener('mouseout', () => span.classList.remove('highlighted'));
+                            span.addEventListener('click', (e) => handleClick(part, sentence, e));
+                        }
+                        textContainer.appendChild(span);
                     }
-
-                    textContainer.appendChild(span);
                 });
             });
         });
+
 
        
        /*  function handleClick(word, sentence) {
