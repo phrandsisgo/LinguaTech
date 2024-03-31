@@ -22,16 +22,16 @@
         <div class="flashCardContent frontface" id="flashCardContent">
             <div class="countZeile">
                 <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigB">0</p></div>
-                <div class="countAnzeige" id="countAnzeigeB">1/{{count($liste->words)}} Wörter</div>
+                <div class="countAnzeige" id="countAnzeigeB">1/{{count($liste->words)}} {{ __('swipe.words') }}</div>
                 <div class="doneCountBox"><p class="anzeigemargin" id="doneAnzeigeB">0</p></div>
             </div>
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
                 <p class="flipcardWord" id="baseWord">word</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="triggerLeft()">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerLeft()">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="triggerRight()">
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerRight()">
             </div>
 
         </div>
@@ -39,33 +39,33 @@
         <div class="flashCardContent backface" id="flashCardContent">
             <div class="countZeile">
                 <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigA">0</p></div>
-                <div class="countAnzeige" id="countAnzeigeA">1/{{count($liste->words)}} Wörter</div>
+                <div class="countAnzeige" id="countAnzeigeA">1/{{count($liste->words)}} {{ __('swipe.words') }}</div>
                 <div class="doneCountBox"><p class="anzeigemargin" id="doneAnzeigeA">0</p></div>
             </div>
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
-                <p class="flipcardWord" id="targetWord">Wort</p>
+                <p class="flipcardWord" id="targetWord">{{ __('swipe.word') }}</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="triggerLeft()">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerLeft()">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="confirm Icon" class="iconSpacer" onclick="triggerRight()">
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerRight()">
             </div>
         </div>
     </div>
 </div>
 
-<p class="section-content swipeContent">Beschreibung: {{$liste->description}}</p>
+<p class="section-content swipeContent">{{ __('swipe.description') }} {{$liste->description}}</p>
 
 <div id="swipeStatistikModal" style="display:none;">
     <div class="modal-content">
         
-        <h2>Swipe Statistik</h2>
-        <p>Anzahl nicht gewusste Antworten: <span id="leftSwipeCount"></span></p>
-        <p>Anzahl gewusste Antworten: <span id="rightSwipeCount"></span></p>
+        <h2>{{ __('swipe.swipeStatistics') }}</h2>
+        <p>{{ __('swipe.unknownAnswersCount')}} <span id="leftSwipeCount"></span></p>
+        <p>{{ __('swipe.knownAnswersCount')}} <span id="rightSwipeCount"></span></p>
         <br><br>
         <div style="height:4rem;"></div>
-        <a href="#"><button onclick="location.reload();" class="standartButton">Von vorne lernen</button></a>
-        <a href="/library"><button onclick="document.getElementById('swipeStatistikModal').style.display = 'none';" class="modalclose" >Schliessen</button></a>
+        <a href="#"><button onclick="location.reload();" class="standartButton">{{ __('swipe.learnAgain') }}</button></a>
+        <a href="/library"><button onclick="document.getElementById('swipeStatistikModal').style.display = 'none';" class="modalclose" >{{ __('swipe.close') }}</button></a>
     </div>
 </div>
 
