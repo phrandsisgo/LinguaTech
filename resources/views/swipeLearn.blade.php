@@ -64,17 +64,20 @@
         <p>{{ __('swipe.knownAnswersCount')}} <span id="rightSwipeCount"></span></p>
         <br><br>
         <div style="height:4rem;"></div>
+        <a href="#"><button onclick="restartWithUnknownAnswers();" class="standartButton">repeat wrong Answers</button></a>
         <a href="#"><button onclick="location.reload();" class="standartButton">{{ __('swipe.learnAgain') }}</button></a>
         <a href="/library"><button onclick="document.getElementById('swipeStatistikModal').style.display = 'none';" class="modalclose" >{{ __('swipe.close') }}</button></a>
     </div>
 </div>
 
 <script>
+
 var listLength={{count($liste->words)}};
 var listProgress=0;
 var doneAnzeige=0;
 var repAzeig=0;
 let aktuelleKarteIndex = 0;
+let unknownAnswers = [];
 
 var woerterbuch = @json($liste->words->map(function ($word) {
     return [$word->base_word, $word->target_word, $word->id]; 
@@ -86,13 +89,13 @@ function zeigeStatistikModal() {
     document.getElementById('swipeStatistikModal').style.display = 'block';
 }
 function handleSwipe(direction, wordId) {
-        event.preventDefault();
-        const requestData = {
-            wordId: wordId,
-            direction: direction
-        };
-        var csrf = document.querySelector('meta[name="_token"]').content;
-        //console.log(csrf)
+    event.preventDefault();
+    const requestData = {
+        wordId: wordId,
+        direction: direction
+    };
+    var csrf = document.querySelector('meta[name="_token"]').content;
+    //console.log(csrf)
 
     const formData = JSON.stringify(requestData);
     //let translatedWord='';
@@ -114,20 +117,79 @@ function handleSwipe(direction, wordId) {
     .catch(error => console.error('Error:', error));
         
 }
+function updateUI() {
+    // Aktualisiere die Wortzähler
+    var countAnzeigeA = document.getElementById('countAnzeigeA');
+    var countAnzeigeB = document.getElementById('countAnzeigeB');
+    countAnzeigeA.textContent = "1/" + woerterbuch.length + " Wörter";
+    countAnzeigeB.textContent = "1/" + woerterbuch.length + " Wörter";
+
+    // Zeige das erste Wort der neuen Liste an
+    const kartenTextBase = document.getElementById('baseWord');
+    const kartenTextTarget = document.getElementById('targetWord');
+    if (woerterbuch.length > 0) {
+        kartenTextBase.textContent = woerterbuch[0][0];
+        kartenTextTarget.textContent = woerterbuch[0][1];
+    } else {
+        // Zeige eine Meldung an, wenn keine Wörter übrig sind
+        kartenTextBase.textContent = "Keine Wörter übrig.";
+        kartenTextTarget.textContent = "";
+    }
+
+    // Setze die Anzeigen zurück
+    document.getElementById('repAzeigA').textContent = "0";
+    document.getElementById('repAzeigB').textContent = "0";
+    document.getElementById('doneAnzeigeA').textContent = "0";
+    document.getElementById('doneAnzeigeB').textContent = "0";
+
+    // Zurücksetzen der Fortschrittsvariablen
+    aktuelleKarteIndex = 0;
+    repAzeig = 0;
+    doneAnzeige = 0;
+
+    // Zusätzliche UI-Elemente, die aktualisiert werden müssen, können hier hinzugefügt werden
+}
+
+
+function restartWithUnknownAnswers(){
+    if (unknownAnswers.length > 0) {
+         // Filtere das Wörterbuch, um nur die falsch beantworteten Wörter zu behalten
+         woerterbuch = woerterbuch.filter(word => unknownAnswers.includes(word[2]));
+        aktuelleKarteIndex = 0;
+        repAzeig = 0;
+        doneAnzeige = 0;
+        listLength = woerterbuch.length; // Aktualisiere die Gesamtzahl der Wörter
+        // Aktualisiere die UI entsprechend
+        updateUI();
+        // Schließe das Modal
+        document.getElementById('swipeStatistikModal').style.display = 'none';
+    } else {
+        alert("Es gibt keine falsch beantworteten Wörter zum Wiederholen.");
+    }
+    
+}
 const karteContent = document.getElementById('flip-card-inner');
 function triggerLeft(){
+
+    if (!unknownAnswers.includes(woerterbuch[aktuelleKarteIndex][2])) {
+        unknownAnswers.push(woerterbuch[aktuelleKarteIndex][2]);
+        console.log("ID des nicht gewussten Wortes gespeichert:", woerterbuch[aktuelleKarteIndex][2]);
+    }
+
     karteContent.classList.add('animate__rollOut__left');
 
     //  class has to be removed after the animation ends to allow it to be triggered again
     karteContent.addEventListener('animationend', function(){
         karteContent.classList.remove('animate__rollOut__left','flipInY', 'flipOutY');
     });    
+    
     aktuelleKarteIndex++;
     repAzeig++;
     if (aktuelleKarteIndex >= woerterbuch.length) {
         zeigeStatistikModal();
         //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
     }
+    
     console.log(aktuelleKarteIndex, woerterbuch.length);
     console.log("Aktuelle Karte ID:" +woerterbuch[aktuelleKarteIndex][2])
     var countAnzeigeA = document.getElementById('countAnzeigeA');
