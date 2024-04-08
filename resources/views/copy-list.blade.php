@@ -18,23 +18,23 @@ function confirmDelete() {
     @if (Auth::user()->id == $liste->created_by)
 
     <div>
-        <a href="/list_show/{{$liste->id}}"><p class="pagetitle noUnderline">Listen Ansicht</p></a>
+        <a href="/list_show/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.list-view') }}</p></a>
     </div>
         
     <div class="space"></div>
     @endif
     <div class="space"></div>
     <div>
-        <a href="/swipeLearn/{{$liste->id}}"><p class="pagetitle noUnderline">Lernen</p></a>
+        <a href="/swipeLearn/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.learn') }}</p></a>
     </div>
 </div>
 
 <!-- Großes Textfeld und Kopierbutton -->
 <div class="json-container">
     <div class="textTopping">
-        <p>Kopiere dein JSON</p>
+        <p>{{ __('learn-lists.copy-your-JSON') }}</p>
         <div class="horizontal-fill"> </div>
-        <button onClick="copyFunction()">Kopieren</button>
+        <button onClick="copyFunction()">{{ __('learn-lists.copy') }}</button>
     </div>
     <textarea id="jsonTextarea" style="font-family: 'Source Code Pro', monospace; width: 100%; height: 300px;">{
     Titel: "{{$liste->name}}",
@@ -48,7 +48,7 @@ function confirmDelete() {
         @endforeach
     ]
 }</textarea>
-    <button onclick="copyToClipboard()" style="position: absolute; top: 0; right: 0;">Kopieren</button>
+    <button onclick="copyToClipboard()" style="position: absolute; top: 0; right: 0;">{{ __('learn-lists.copy') }}</button>
 </div>
 
 <script>

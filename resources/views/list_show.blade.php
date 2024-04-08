@@ -21,17 +21,17 @@ function confirmDelete() {
     @if (Auth::user()->id == $liste->created_by)
 
     <div>
-        <a href="/copy_list/{{$liste->id}}"><p class="pagetitle noUnderline">Liste Kopieren</p></a>
+        <a href="/copy_list/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.list-copy') }}</p></a>
     </div>
         
     <div class="space"></div>
     <div>
-        <a href="/list_update/{{$liste->id}}"><p class="pagetitle noUnderline">Bearbeiten</p></a>
+        <a href="/list_update/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.edit') }}</p></a>
     </div>
     @endif
     <div class="space"></div>
     <div>
-        <a href="/swipeLearn/{{$liste->id}}"><p class="pagetitle noUnderline">Lernen</p></a>
+        <a href="/swipeLearn/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.learn') }}</p></a>
     </div>
 </div>
 
