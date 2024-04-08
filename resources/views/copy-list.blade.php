@@ -37,9 +37,9 @@ function confirmDelete() {
         <button onClick="copyFunction()">{{ __('learn-lists.copy') }}</button>
     </div>
     <textarea id="jsonTextarea" style="font-family: 'Source Code Pro', monospace; width: 100%; height: 300px;">{
-    Titel: "{{$liste->name}}",
-    Beschreibung: "{{$liste->description}}",
-    Wörter: [
+    Title: "{{$liste->name}}",
+    Description: "{{$liste->description}}",
+    Words: [
         @foreach ($liste->words as $word)
         {
             Base: "{{$word->base_word}}",

@@ -13,7 +13,8 @@ class LingApiController extends Controller
     public function translate(Request $request){
         //dd($request->all());
         $text = $request->input('word');
-        $targetLang = 'DE'; // oder eine andere Sprache Ihrer Wahl
+        $targetLang = $request->input('targetLang');
+        $sourceLang = $request->input('baseLang');
 
         $response = Http::asForm()->withHeaders([
             'Authorization' => 'DeepL-Auth-Key ' . env('DEEPL_API_KEY'),
@@ -21,7 +22,7 @@ class LingApiController extends Controller
         ])->post('https://api-free.deepl.com/v2/translate', [
             'text' => $text,
             'target_lang' => $targetLang,
-            //'request_word' => $text
+            'source_lang' => $sourceLang,
         ]);
 
         //dd($response->json());

@@ -109,9 +109,15 @@
 let anfrageWort=' ';
 
 function handleClick(word, sentence, event) {
+        const localLanguage = "{{ session('locale', 'defaultFallbackLanguage') }}";
+/*      console.log(localLanguage);
+        console.log('the language is:');
+        console.log("{{$text -> langOption -> language_code}}"); */
         event.preventDefault();
         const translateWord = {
-            word: word
+            word: word,
+            baseLang: "{{$text -> langOption -> language_code}}",
+            targetLang: localLanguage,
         };
         var csrf = document.querySelector('meta[name="_token"]').content;
         //console.log(csrf)
