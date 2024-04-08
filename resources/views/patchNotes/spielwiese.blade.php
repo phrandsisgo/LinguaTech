@@ -7,8 +7,7 @@
 
 <p class="section-content">
 
-Wow, es ist schon wieder eine Weile her, seitdem ich das letzte Mal ein Update veröffentlicht habe. <br>
-Ich kann nun stolz verkünden, dass dies die erste Version ist von LinguaTech.  <br>
+So, es sind schon wieder 2 Monate vergangen seit dem letzten Update. <br>
 
 <br><br>
 </p>
