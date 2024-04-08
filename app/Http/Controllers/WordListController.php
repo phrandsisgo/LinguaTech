@@ -21,6 +21,10 @@ class WordListController extends Controller{
         $liste = WordList::with('words')->find($id);
         return view('list_update',['liste' => $liste]);
     }
+    public function copyListLoad($id){
+        $liste = WordList::with('words')->find($id);
+        return view('copy-list',['liste' => $liste]);
+    }
 
     public function list_add_word(Request $request){
         //dd($request);

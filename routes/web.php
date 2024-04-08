@@ -51,6 +51,9 @@ Route::get('/list_update/{id}', [WordListController::class,'listLoad'])
 //->middleware('checkListAuthor')
 ->name('list_load');
 
+Route::get('/copy_list/{id}', [WordListController::class,'copyListLoad'])
+->name('copyListLoad');
+
 Route::get('/showPatch/{id}', [PatchNotesController::class,'showPatch'])
 ->name('showPatch');
 
