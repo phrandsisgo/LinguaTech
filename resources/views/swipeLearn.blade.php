@@ -64,7 +64,7 @@
         <p>{{ __('swipe.knownAnswersCount')}} <span id="rightSwipeCount"></span></p>
         <br><br>
         <div style="height:4rem;"></div>
-        <a href="#"><button onclick="restartWithUnknownAnswers();" class="standartButton">repeat wrong Answers</button></a>
+        <a href="#"><button onclick="restartWithUnknownAnswers();" class="standartButton">{{ __('swipe.repeat-wrong-answers') }}</button></a>   
         <a href="#"><button onclick="location.reload();" class="standartButton">{{ __('swipe.learnAgain') }}</button></a>
         <a href="/library"><button onclick="document.getElementById('swipeStatistikModal').style.display = 'none';" class="modalclose" >{{ __('swipe.close') }}</button></a>
     </div>
