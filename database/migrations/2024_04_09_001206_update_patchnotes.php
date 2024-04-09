@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('patchnotes', function (Blueprint $table) {
+        Schema::table('release_notes', function (Blueprint $table) {
             //add as a foreign key a language Option id
             $table->foreignId('lang_option_id')->nullable()->constrained('lang_options');
         });
