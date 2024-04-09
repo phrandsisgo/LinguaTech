@@ -8,101 +8,64 @@
 <p class="section-content">
 
 So, es sind schon wieder 2 Monate vergangen seit dem letzten Update. <br>
-
+Bei Linguatech hat sich so einiges getan. 
 <br><br>
 </p>
 <p class="sectiontitle">
-Der aktuelle Stand: <br>
+Was sich verändert hat. <br>
 </p> <br>
 <div class="sectionWrapper">
     <p class="sectionSubTitle">
-        Funktionalität:
+        Übersetzung:
     </p>
     <p class="section-content">
-        Grundsätzlich bin ich ja mit dem Projekt sehr zufrieden. Natürlich hätte ich gerne weitere Funktionalitäten implementiert, aber ich muss auch realistisch bleiben. <br>
-        Was bisher gut gegangen ist, ist dass man Texte nachlesen Kann und die mir auch 
+        Mittlerweile ist die Seite auch komplett auf Englisch verfügbar. <br>
+        Und somit ist die Seite Bilingual verfügbar. Theoretisch könnte ich jetzt die seite auch auf weitere Sprachen überwetzen was aber jedoch noch nicht geplant ist, falls Ihnen das wichtig ist, lassen sie es mich wissen. <br>
         <br><br>
     </p>
     <p class="sectionSubTitle">
-        Neue Funktionalitäten: 
+       Übungswiederhulungen: 
     </p>
     <p class="section-content">
-            Als erstes dürfte vielleicht aufgefallen sein, dass nun auch Texte in verschiedenen Schwierigkeitsstufen verfügbar sind. <br>
+            ANun sind die Lernlisten auch zur wiederholung geignet <br>
             Das Tolle daran ist, dass man sich nicht nur die Übersetzung anzeigen lassen kann sondern man kann auch gleich die Begriffe in einer bestehenden Liste einfügen. Für die Übersetzung wird der Dienst von Deep<l verwendet. <br>
         <br><br>
     </p>
     <p class="sectionSubTitle">
-        Was leider nicht geklappt hat:
+        Stolpersteine:
     </p>
     <p class="section-content">
-        Ich hatte mir fest vorgenommen, die Seite auch in Englisch verfügbar zu machen.
-        Der Grund, warum dies nicht geklappt hat, ist, dass sich die Übersetzungen sich als sehr Zeitintensiv herausgestellt haben und ich doch lieber den Fokus auf weitere Funktionalitäten gelegt habe. <br>
-        Was ich aus Zeitgründen auch nicht implementiert habe ist, dass Benutzer ihre eigene Texte hochladen können. 
+        Ich hatte mir ja wie in der letzten Patchnotes vorgenommen eine Datenbank überarbeitung zu durchnehmen. Dies hat leider nur teilweise geklappt. <br>
+        Mir ist leider beim migrieren der Datenbank (techn. für die Datenbank über programm code zu ändern) ein Fehler unterlaufen. Leider musste ich die Datenbank zurücksetzen und habe einige Daten verloren. <br>
+        Das war mir auch ein guter Lernprozess, da ich nun weiss viel besser wie ich in Zukunft vorgehen muss. <br>
         <br><br>
     </p>
 </div>
-
-
 <br>
-<p class="sectiontitle">
-    Auf welche Probleme ich gestossen bin:
-</p>
-<p class="section-content">
-     Natürlich ist es klar, dass mir Fehler passieren werden, wenn ich meine erste Fullstack-App baue. <br>
-        Was ich nicht erwartet habe ist, dass ich so viele Probleme mit der Datenbank haben werde. <br>
-        Oder um es anders zu sagen, ich habe die Datenbankstruktur am Anfang falsch aufgebaut, was mir Schwierigkeiten bereitet hat.
-<br><br>
-    </p>
-<div class="sectionWrapper">
-    <p class="sectionSubTitle">
-        Datenbank:
-    </p>
-    <p class="section-content">
-        Was die Datenbank betrifft, so habe ich die Struktur am Anfang leider viel zu kompliziert aufgebaut. 
-        Mein Nächster Schritt müsste sein diese aufzuarbeiten und zu vereinfachen. <br>
-        Die derzeitige Datenbankstruktur verursacht leider auch sicherheitsrelevante Fehler (Middle ware)
-        Jedoch mache mich mir diesbezüglich nicht viele Sorgen, da ich keinen einzigen aktiven Nutzer habe. (stand Januar 2024) <br> 
-    <br><br>
-    </p>
-    <p class="sectionSubTitle"> Mehrsprachige Unterstützung:</p>
-    <p class="section-content">
-        Ich habe tatsächlich ein paar Seiten übersetzt (siehe Pfad: LinguaTech/lang/en) <br>
-        Jedoch kann man es nicht auf der Seite Anzeigen lassen. Ich habe dies bewusst getan da es nicht Vollständig ist.
-        Da ich gemerkt habe, dass es sehr zeitaufwändig ist und werde deshalb in näherer Zukunft nicht daran weiterarbeiten. <br>
-    </p>
-
-
-    <br><br>
-</div>
 
 <p class="sectiontitle">
-    Wie sieht die Zukunft aus?
+    Was habe ich mir für die zukunft vorgenommen?
 </p>
         
 
 <div class="sectionWrapper">
     <p class="section-content">
-        Also als erstes werde ich mir eine kleine Auszeit von diesem Projekt gönnen. <br> 
-        Ich habe nun die vergangenen 3 Monaten an diesem Projekt gearbeitet und ich könnte gut mal einen frischen Wind vertragen. <br>
-        Ich werde mich in der Zwischenzeit mit anderen Projekten beschäftigen (namentlich ein Django Fullstack-Projekt). <br> 
-        Und natürlich werde ich auch Linguatech dazu verwenden, das ich es als Bewerbungsprojekt verwenden kann. <br>
-    </p>
-    <br><br>
-    <p class ="sectionSubTitle">
-        Die Zukunft von LinguaTech: <br>
-    </p>
-    <p class="section-content">
-        Ich möchte damit anfangen, dass ich noch unzählige Ideen habe was man noch alles implementieren könnte. <br>
-        Dennoch werde ich eher in naher Zukunft versuchen, gute Rückmeldungen zu bekommen um zu schauen wo es am meisten Sinn macht weiter zu arbeiten.
-        Persönlich denke ich mir, dass es ein sehr interessantes Projekt ist, jedoch nocht nicht ganz meiner Vorstellung entspricht von einer sehr guten Sprachlern-Plattform. <br>
+        Nun. Ich habe mir fast alle Funktionen die ich mir vorgenommen habe implementiert. <br>
+        Das einzige was noch fehlt ist eine grössere Sprachenauswahl für die Benutzerinnen zur Verfügung zu stellen. <br>
+        Auch etwas ist den Aufwand für die Benutzer zu reduzieren, sodass gewisse Funktionen ausprobiert werden können ohne überhaupt ein Konto zu erstellen. <br> 
 
+        Abgesehen davon gibt es nur noch ein paar kleinigkeiten und ideen die ich noch umsetzen könnte. Jedoch denke ich, dass ich nun eher eine Pause mit der aktiven Entwicklung einlegen werde. <br>
+        <br>
+        Denn nun möchte ich Userfeedback einholen und schauen was ich noch verbessern könnte. <br>
+        Desswegen wird mein nächster Schritt sein, hauptsächlich die Seite zu promoten und Feedback einzuholen. <br>
+        <br>
+        Ich habe schon viel Zeit investiert um das Projekt nach meiner persönlichen Vorstellung zu entwickeln. Jetzt ist es nun an der Zeit nach Tester/innen zu suchen und die Seite nach ihren Bedürfnissen an zu passen. <br>
+        Falls Ihr grossartige Ideen oder Rückmeldungen habt, dann schreibt sie mir gerne auf francisco.wohlgemuth@hotmail.com oder hier unten in die Kommentar sektion. <br>
     </p>
 </div>
 <br><br>  
 <p class="section-content">
-    Ich freue mich über  eure Rückmeldungen und Vorschläge.
-    <br>
-    Vielen Dank für eure Unterstützung und euer Interesse an diesem Projekt.
+    Vielen Dank im voraus für eure Unterstützung und euer Interesse an diesem Projekt.
       
       <br><br>  
     Beste Grüsse, <br>
