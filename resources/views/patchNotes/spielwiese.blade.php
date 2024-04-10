@@ -19,16 +19,27 @@ Was sich verändert hat. <br>
         Übersetzung:
     </p>
     <p class="section-content">
-        Mittlerweile ist die Seite auch komplett auf Englisch verfügbar. <br>
-        Und somit ist die Seite Bilingual verfügbar. Theoretisch könnte ich jetzt die seite auch auf weitere Sprachen überwetzen was aber jedoch noch nicht geplant ist, falls Ihnen das wichtig ist, lassen sie es mich wissen. <br>
+        Mittlerweile ist die Seite auch vollständig ins Englische übersetzt worden. <br>
+        Und somit ist die Seite Bilingual verfügbar. Theoretisch könnte ich jetzt die seite auch auf weitere Sprachen übersetzen was aber jedoch noch nicht geplant ist, falls Ihnen das wichtig ist, lassen sie es mich wissen. <br>
         <br><br>
     </p>
     <p class="sectionSubTitle">
        Übungswiederhulungen: 
     </p>
     <p class="section-content">
-            ANun sind die Lernlisten auch zur wiederholung geignet <br>
-            Das Tolle daran ist, dass man sich nicht nur die Übersetzung anzeigen lassen kann sondern man kann auch gleich die Begriffe in einer bestehenden Liste einfügen. Für die Übersetzung wird der Dienst von Deep<l verwendet. <br>
+            Nun sind die Lernlisten auch zur wiederholung geignet <br>
+            Das Tolle daran ist, dass man sich nicht nur die Übersetzung anzeigen lassen kann sondern man kann auch gleich die Begriffe in einer bestehenden Liste einfügen. Für die Übersetzung wird der Dienst von Deepl verwendet. <br>
+        <br><br>
+    </p>
+    <p class="sectionSubTitle">
+       Funktionen die hinzugefügt wurden:
+    </p>
+    <p class="section-content">
+        Es wurde beim Swipe-learn die Funktion hinzugefügt, worden, dass man nach dem beenden eines Übungszyklus man erneut nur die Wörter üben kann die beim ersten zyklus nicht gewusst wurden. <br>
+        Dann habe ich auch schon darüber geschrieben, dasss Linguatech nun auch auf Englisch verfügbar ist. <br>
+        Und die Texte können genauer auf die jeweilige Sprache berücksichtigt werden.
+        <br><br>
+        Dazu möchte ich noch mitteilen, dass nun auch alle listen als JSON objekt exportiert werden können. Sodass man mit dem LLM seiner Wahl einen neuen Text erstellen kann.
         <br><br>
     </p>
     <p class="sectionSubTitle">
@@ -50,7 +61,7 @@ Was sich verändert hat. <br>
 
 <div class="sectionWrapper">
     <p class="section-content">
-        Nun. Ich habe mir fast alle Funktionen die ich mir vorgenommen habe implementiert. <br>
+        Nun habe ich fast alle geplanten Funktionen umgesetzt. <br>
         Das einzige was noch fehlt ist eine grössere Sprachenauswahl für die Benutzerinnen zur Verfügung zu stellen. <br>
         Auch etwas ist den Aufwand für die Benutzer zu reduzieren, sodass gewisse Funktionen ausprobiert werden können ohne überhaupt ein Konto zu erstellen. <br> 
 
@@ -64,8 +75,24 @@ Was sich verändert hat. <br>
     </p>
 </div>
 <br><br>  
-<p class="section-content">
-    Vielen Dank im voraus für eure Unterstützung und euer Interesse an diesem Projekt.
+
+    <p class="sectiontitle">
+        Ein herzliches Dankeschön:
+    </p>
+<div class="sectionWrapper">
+    <p class="section-content">
+        An dieser Stelle möchte ich einen Moment innehalten, um jedem Einzelnen von euch zu danken. Eure Unterstützung, Geduld und das wertvolle Feedback haben es möglich gemacht, LinguaTech stetig zu verbessern und weiterzuentwickeln. Es ist eine Reise, die ich ohne euch nicht hätte antreten können. <br><br>
+        Ich bin unendlich dankbar für die Gemeinschaft, die sich um LinguaTech gebildet hat. Eure Begeisterung und euer Engagement sind für mich nicht nur eine Motivationsquelle, sondern auch ein ständiger Ansporn, die Plattform zu perfektionieren und neue Funktionen zu implementieren, die eure Sprachlernreise noch bereichernder machen. <br><br>
+    
+        Bitte wisst, dass eure Meinungen und Ideen immer willkommen sind und dass ich mich darauf freue, LinguaTech gemeinsam mit euch weiter zu gestalten. Lasst uns gemeinsam in eine Zukunft gehen, in der das Erlernen neuer Sprachen nicht nur einfacher, sondern auch inspirierender und freudvoller wird. <br><br>
+        
+        Vielen Dank im voraus für eure Unterstützung und euer Interesse an diesem Projekt. 
+        
+    </p>
+</div>
+<br>
+
+        <p class="section-content">
       
       <br><br>  
     Beste Grüsse, <br>
