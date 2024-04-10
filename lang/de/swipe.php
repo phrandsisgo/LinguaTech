@@ -13,4 +13,5 @@ return [
     'words' => 'Wörter',
     'word' => 'Wort',
     'description' => 'Beschreibung:',
+    'repeat-wrong-answers' => 'Wiederhole die falschen Antworten',
 ];

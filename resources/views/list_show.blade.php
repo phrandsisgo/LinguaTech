@@ -1,5 +1,5 @@
 @extends('layouts.lingua_main')
-@section('title', 'Home')
+@section('title',  $liste->name )
 @section('head')
 <!-- ich muss noch fragen wesswegen library.scss nicht funktioniert-->
 @vite('resources/css/library.scss')
@@ -19,14 +19,19 @@ function confirmDelete() {
     </div>
     <div class="horizontal-fill"></div>
     @if (Auth::user()->id == $liste->created_by)
-        
+
     <div>
-        <a href="/list_update/{{$liste->id}}"><p class="pagetitle noUnderline">Bearbeiten</p></a>
+        <a href="/copy_list/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.list-copy') }}</p></a>
+    </div>
+        
+    <div class="space"></div>
+    <div>
+        <a href="/list_update/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.edit') }}</p></a>
     </div>
     @endif
     <div class="space"></div>
     <div>
-        <a href="/swipeLearn/{{$liste->id}}"><p class="pagetitle noUnderline">Lernen</p></a>
+        <a href="/swipeLearn/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.learn') }}</p></a>
     </div>
 </div>
 

@@ -13,4 +13,5 @@ return [
     'words' => 'Words',
     'word' => 'Word',
     'description' => 'Description:',
+    'repeat-wrong-answers' => 'Repeat wrong answers',
 ];
