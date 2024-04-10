@@ -29,8 +29,10 @@ Was sich verändert hat. <br>
     <p class="section-content">
             Nun sind die Lernlisten auch zur wiederholung geignet <br>
             Das Tolle daran ist, dass man sich nicht nur die Übersetzung anzeigen lassen kann sondern man kann auch gleich die Begriffe in einer bestehenden Liste einfügen. Für die Übersetzung wird der Dienst von Deepl verwendet. <br>
-        <br><br>
+      
     </p>
+    <img src="/Images/EndScreen.png" alt="Endscreen of swipelearn as a screenshot" />
+    <br><br><br>
     <p class="sectionSubTitle">
        Funktionen die hinzugefügt wurden:
     </p>
@@ -40,8 +42,13 @@ Was sich verändert hat. <br>
         Und die Texte können genauer auf die jeweilige Sprache berücksichtigt werden.
         <br><br>
         Dazu möchte ich noch mitteilen, dass nun auch alle listen als JSON objekt exportiert werden können. Sodass man mit dem LLM seiner Wahl einen neuen Text erstellen kann.
-        <br><br>
+
     </p>
+    <br><br><br>
+    <img src="/Images/learncycle.png" alt="Ein Bild vom Zyklus wie man auf Linguatech lernen kann."style="width:90%">
+    <p class="section-content">Hier eine darstellung wie man Linguatech zum Sprachenlernen verwenden kann.</p>
+    <br><br><br>
+    
     <p class="sectionSubTitle">
         Stolpersteine:
     </p>
@@ -51,8 +58,11 @@ Was sich verändert hat. <br>
         Das war mir auch ein guter Lernprozess, da ich nun weiss viel besser wie ich in Zukunft vorgehen muss. <br>
         <br><br>
     </p>
+    <img src="/Images/DatabaseInfo.png" alt="Eine Bildnerische Darstellung wie die Datenbank strukturiert ist." style="width:90%">
+    <p class="section-content">Hier eine Darstellung wie die Datenbank von Linguatech aufgebaut ist. </p>
+    
 </div>
-<br>
+<br><br>
 
 <p class="sectiontitle">
     Was habe ich mir für die zukunft vorgenommen?
