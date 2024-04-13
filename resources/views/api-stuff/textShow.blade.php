@@ -109,7 +109,7 @@
 let anfrageWort=' ';
 
 function handleClick(word, sentence, event) {
-        const localLanguage = "{{ session('locale', 'defaultFallbackLanguage') }}";
+        const localLanguage = "{{ session('locale', 'de') }}";
 /*      console.log(localLanguage);
         console.log('the language is:');
         console.log("{{$text -> langOption -> language_code}}"); */
