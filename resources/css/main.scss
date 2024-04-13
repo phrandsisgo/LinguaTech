@@ -177,9 +177,11 @@ body {
 .langDropdownMenu {
     position: relative;
     display: inline-block;
-    margin: 40px;
-    padding: 20px;
-    border: 2px solid $approve;
+    margin: 30px;
+    padding-top: 11px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    border: 6px solid $approve;
 }
 
 .dropdownCheckbox {
