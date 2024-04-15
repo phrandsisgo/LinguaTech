@@ -25,7 +25,7 @@
                 <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
                 <label for="dropdownCheckbox" class="dropdownLabel">
                     <div class="displayFlex">
-                        <p>{{ strtoupper(App::getLocale()) }}</p>
+                        <p id="currentLocalLanuguage">{{ strtoupper(App::getLocale()) }}</p>
                         <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}" style="height:30px;"alt="icon für Spracheinstellung">
                     </div>
             </label>

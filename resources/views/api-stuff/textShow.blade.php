@@ -40,6 +40,7 @@
                         if (/\p{L}|['’]/u.test(part)) {
                             span.addEventListener('mouseover', () => span.classList.add('highlighted'));
                             span.addEventListener('mouseout', () => span.classList.remove('highlighted'));
+                            
                             span.addEventListener('click', (e) => handleClick(part, sentence, e));
                         }
                         textContainer.appendChild(span);
@@ -50,11 +51,6 @@
 
 
        
-       /*  function handleClick(word, sentence) {
-            document.getElementById('wordInput').value = word;
-            document.getElementById('wordTranslateForm').submit();
-        } */
-
     </script>
     <meta name="_token" content="{{ csrf_token() }}">
 
@@ -106,13 +102,11 @@
         /*
         document.getElementById('wordAddForm').submit(); */
     }
-let anfrageWort=' ';
 
 function handleClick(word, sentence, event) {
-        const localLanguage = "{{ session('locale', 'de') }}";
-/*      console.log(localLanguage);
-        console.log('the language is:');
-        console.log("{{$text -> langOption -> language_code}}"); */
+        
+
+        const localLanguage = document.getElementById('currentLocalLanuguage').innerText;
         event.preventDefault();
         const translateWord = {
             word: word,
