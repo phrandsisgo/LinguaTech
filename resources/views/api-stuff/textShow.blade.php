@@ -72,7 +72,7 @@
         <p>Das Wort bedeutet übersetzt: </p>
         <p id="translationText" class="sectiontitle"></p>
         <br>
-        <p >Das Wort nach dem Sie gefragt haben: </p>
+        <p >{{ __('api_texts.wordYouAskedFor') }}</p>
         <p id="originalWord" class="sectiontitle"></p>
         <br>
         
@@ -80,7 +80,7 @@
         <form action="/list_add_word"method="post" id="wordAddForm">
             @csrf
             <!-- muss zu einem späteren Zeitpunkt noch angeben, welche Sprache die base und targetLang ist. -->
-            <p >Wollen sie dies einer Liste hinzufügen?</p>
+            <p >{{ __('api_texts.add-to-list') }}</p>
             <div class="dropdown">
                 <select name="list" id="list">
                     @foreach ($ownLibraryList as $ownLibraryList)
