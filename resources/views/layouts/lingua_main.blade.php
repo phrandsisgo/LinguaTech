@@ -21,13 +21,18 @@
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
         <!-- make a dropdown menu for the following links -->
+
+        @if (auth()->check())
+        @else
+        <a href="/register" class="NavFont">{{ __('menu.register') }}</a>
+        @endif
         <div class="langDropdownMenu">
-                <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
-                <label for="dropdownCheckbox" class="dropdownLabel">
-                    <div class="displayFlex">
-                        <p id="currentLocalLanuguage">{{ strtoupper(App::getLocale()) }}</p>
-                        <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}" style="height:30px;"alt="icon für Spracheinstellung">
-                    </div>
+            <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
+            <label for="dropdownCheckbox" class="dropdownLabel">
+                <div class="displayFlex">
+                    <p id="currentLocalLanuguage">{{ strtoupper(App::getLocale()) }}</p>
+                    <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}" style="height:30px;"alt="icon für Spracheinstellung">
+                </div>
             </label>
             <ul class="dropdown-content">
                 <li><a href="{{ route('language.change', 'de') }}">Deutsch</a></li>
@@ -44,8 +49,6 @@
             <a href="/library" class="iconWrapper">
                 <img  src="{{ asset('svg-icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
             </a>
-        @else       
-        <a href="/login" class="NavFont">Login</a>
         @endif
         <!-- <img src="{{ asset('svg-svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
          -->
