@@ -2,12 +2,12 @@
 <p class="pagetitle">Welche Sprachen können Sie schon?</p>
 
 @elseif($path == 'initiate')
-<p class="pagetitle">Danke dass Sie ein Profil angelegt haben.</p>
-<p class="section-content"> Geben sie nun Die Sprachen an die sie gerne Lernen möchten und noch das Niveau dazu.</p>
+<p class="pagetitle">Toll, dass Sie ein Profil bei Linguatech.</p>
+<p class="section-content"> Um Lernlisten aus dem Katalog auf Ihr Profil zu laden, wäre es toll, wenn sie die Sprachen angeben könnten die sie lernen.</p>
 @endif
 <div class="sectionWrapper">
     <div class="interestsWrapper">
-        <p class="sectiontitle"> Diese Sprachen haben sie schon Ausgewählt:</p>
+        <p class="sectiontitle"> Wählen sie die Sprachen aus die Sie vorhaben zu lernen.</p>
         
        @foreach ($user->languages as $language)
         
@@ -34,7 +34,7 @@
     <form action="/addLanguageInitiate" method="post">
 @endif
         @csrf
-        <label for="language" class="section-content">Neue Sprache hinzufügen:</label>
+        <label for="language" class="section-content">Sprache hinzufügen:</label>
         <br>
         <select id="language" name="language[]" class="standartSelect">
             @foreach ($languages as $language)
