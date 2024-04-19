@@ -41,6 +41,38 @@ body {
 .anker-no-underline{
     text-decoration: none;
 }
+
+
+.mainHero {
+    @media screen and (max-width: 450px) {
+        
+        background-image: url("{{ asset('Images/hero.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        text-align: center;
+    
+    }
+    //bei mindesdens 450px gibt es display flex dazu
+    @media screen and (min-width: 450px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        text-align: center;
+        background-image: url("{{ asset('Images/hero.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+    }
+}
+
 #gif1{
     @media screen and (max-width: 450px) {
         width: 150px;

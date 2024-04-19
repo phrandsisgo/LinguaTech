@@ -26,14 +26,14 @@
         a:hover {
             text-decoration: underline;
         }
-        .lauf-Text{
-            text-align: left;
-        }
-
     </style>
 @endsection
 @section('content')
-    <div class="container">
+<div class="mainHero">
+    <p class="sectiontitle">Willkommen bei Linguatech</p>
+    <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="{{ __('welcomepage.swipe_function') }}">
+
+</div>
         <p class="sectiontitle">{{ __('welcomepage.section_title') }}</p>
         <div class="lauf-Text">
             <p class="section-content">{{ __('welcomepage.welcome_text') }}</p>
@@ -49,6 +49,5 @@
             <p class="section-content">
                 {{ __('welcomepage.signup_invitation') }}
             </p>
-        </div>
 @endsection
 
