@@ -1,13 +1,14 @@
+
 @if ($path == 'profile')
-<p class="pagetitle">Welche Sprachen können Sie schon?</p>
+<p class="pagetitle">{{ __('profile.whatLanguagesCanYouAlready') }}</p>
 
 @elseif($path == 'initiate')
-<p class="pagetitle">Danke dass Sie ein Profil angelegt haben.</p>
-<p class="section-content"> Geben sie nun Die Sprachen an die sie gerne Lernen möchten und noch das Niveau dazu.</p>
+<p class="pagetitle">{{ __('profile.greatToHaveProfile') }}</p>
+<p class="section-content">{{ __('profile.loadLearningLists') }}</p>
 @endif
 <div class="sectionWrapper">
     <div class="interestsWrapper">
-        <p class="sectiontitle"> Diese Sprachen haben sie schon Ausgewählt:</p>
+        <p class="sectiontitle">{{ __('profile.chooseLanguagesToLearn') }}</p>
         
        @foreach ($user->languages as $language)
         
@@ -21,7 +22,7 @@
                    @csrf
                    @method('delete')
                    
-                   <button type="submit"><img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon"></button>
+                   <button type="submit"><img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="{{ __('profile.deleteIconAlt') }}"></button>
                </form>
            </div>
            
@@ -34,7 +35,7 @@
     <form action="/addLanguageInitiate" method="post">
 @endif
         @csrf
-        <label for="language" class="section-content">Neue Sprache hinzufügen:</label>
+        <label for="language" class="section-content">{{ __('profile.addLanguage') }}</label>
         <br>
         <select id="language" name="language[]" class="standartSelect">
             @foreach ($languages as $language)
@@ -44,27 +45,11 @@
         </select>
         <br><br>
         
-
-        <input type="submit" value="Hinzufügen" class="approveButton">
+        <input type="submit" value="{{ __('profile.add') }}" class="approveButton">
         @if ($path == 'initiate')
         <button class="standartButton">
-            <a href="/library"  style="text-decoration: none;">Weiter</a>
+            <a href="/library"  style="text-decoration: none;">{{ __('profile.continue') }}</a>
         </button>
         @endif
     </form>
-    <script>
-function addLanguage() {
-    var language = document.getElementById('language').value;
-    var level = document.getElementById('level').value;
-
-    // Fügen Sie die Sprache zur Liste hinzu
-}
-
-function removeLanguage(language, level) {
-    // Entfernen Sie die Sprache aus der Liste
-}
-
-
-</script>
 </div>
-

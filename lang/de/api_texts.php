@@ -14,4 +14,6 @@ return [
     'text' => 'Text',
     'add-language' => 'Neue Sprache hinzufügen',
     'submit' => 'Eingeben',
+    'add-to-list' => 'Wollen Sie den Begriff Zu einer Liste hinzufügen?',
+    'wordYouAskedFor' => 'Das Wort, das Sie gesucht haben: ',
 ];

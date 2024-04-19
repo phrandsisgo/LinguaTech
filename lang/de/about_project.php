@@ -21,4 +21,6 @@ return [
     'contactDiscord' => 'discord: phrandsisgo',
     'followMe' => 'Folge mir',
     'followOnSocial' => 'Folge mir auf Twitter und Instagram für Updates und Neuigkeiten.',
+    'linkedIn' => 'Besuchen Sie mein LinkedIn-Profil hier:',
+    'github' => 'Besuchen Sie den Quellcode dieses Projekts auf GitHub hier: ',
 ];

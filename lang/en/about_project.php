@@ -21,4 +21,6 @@ return [
     'contactDiscord' => 'discord: phrandsisgo',
     'followMe' => 'Follow me',
     'followOnSocial' => 'Follow me on Twitter and Instagram for updates and news.',
+    'linkedIn' => 'Visit my LinkedIn profile here:',
+    'github' => 'Visit the source code of this project on GitHub here: ',
 ];

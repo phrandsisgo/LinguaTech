@@ -24,7 +24,8 @@
 
 <p class="sectiontitle">{{ __('about_project.contactMe') }}</p>
 <p class="section-content">{{ __('about_project.moreAboutMe') }} <a href="/about_me">{{ __('about_project.clickHere') }}</a>.</p>
-<p class="section-content">{{ __('about_project.questionsFeedback') }} <a href="#">{{ __('about_project.contactDiscord') }}</a>.</p>
+<p class="section-content">{{ __('about_project.linkedIn') }} <a href="https://www.linkedin.com/in/francisco-wohlgemuth/">LinkedIn</a>.</p>
+<p class="section-content">{{ __('about_project.github') }} <a href="https://github.com/phrandsisgo/LinguaTech">GitHub</a>.</p>
 <!-- sollte erst nach erfolgreicher Sozialen Medien angezeigt werden.
 <p class="sectiontitle">{{ __('about_project.followMe') }}</p>
 <p class="section-content">{{ __('about_project.followOnSocial') }}</p>

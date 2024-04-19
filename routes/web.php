@@ -20,7 +20,7 @@ use App\Http\Controllers\LanguageController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+}) ->name('welcome');
 
 Route::get('/spielwiese', function () {
     return view('patchNotes/spielwiese');
