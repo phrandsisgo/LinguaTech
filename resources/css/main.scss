@@ -44,9 +44,11 @@ body {
 
 
 .mainHero {
+    display:flex;
+    //border: 2px solid $contrast60;
+    margin: 0;
     @media screen and (max-width: 450px) {
         
-        background-image: url("{{ asset('Images/hero.jpg') }}");
         background-size: cover;
         background-position: center;
         height: 100vh;
@@ -63,14 +65,35 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
-        color: white;
-        text-align: center;
-        background-image: url("{{ asset('Images/hero.jpg') }}");
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
+        height: 70vh;
+
+        & > * {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
     }
+}
+.heroFontSection{
+    //border: 2px solid $contrast60;
+    @media screen and (min-width: 450px) {
+        text-align: left;
+        flex:7;
+    }
+    @media screen and (max-width: 450px) {
+        text-align: center;
+        
+    }
+}
+.problemsection{
+    text-align: center;
+    background-color: $contrast;
+}
+.landingFont2{
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+    color: $background10;
 }
 
 #gif1{
@@ -78,7 +101,10 @@ body {
         width: 150px;
     }
     @media  screen and (max-width: 650px)  {
-        width: 270px;
+        width: 250px;
+    }
+    @media  screen and (min-width: 650px) {
+        width: 340px;
     }
 }
 
@@ -371,6 +397,11 @@ $iconSize: 4rem; //gehört zu IconSize
 }
 
 //fonts are gonne be colored here
+.supertitle{
+    color: $contrast;
+    font-size: 3.3rem;
+    font-weight: bold;
+}
 .pagetitle{
     color: $contrast;
     font-size: 2.7rem;

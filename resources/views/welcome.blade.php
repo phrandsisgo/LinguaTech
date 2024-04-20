@@ -3,12 +3,7 @@
 @section('title', 'under construction')
 @section('head')
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+
 
         .container {
             background-color: #fff;
@@ -29,25 +24,36 @@
     </style>
 @endsection
 @section('content')
-<div class="mainHero">
-    <p class="sectiontitle">Willkommen bei Linguatech</p>
-    <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="{{ __('welcomepage.swipe_function') }}">
+    <div class="mainHero">
+        <div class="heroFontSection">
+    
+            <p class="pagetitle">Linguatech, der Ort, an dem Sie Ihr Laseverständnis perfektionieren können!</p>
+            <p class="sectiontitle">Hier können Sie eigene Texte einbringen oder mit Ihren Wortlisten lernen.</p>
+            <a href="register">
+                <button class="approveButton">Jetzt registrieren</button>
+            </a>
+        </div>
+        <div class="horizontal-fill"></div>
+        <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="{{ __('welcomepage.swipe_function') }}" class="horizontal-fill">
+    </div>
+    <div class="problemsection">
+        <p class="landingFont2">Stell dir vor, du müsstest niemals mehr nach passende Inhalte suchen um deine Zielsprache zu lernen.</p>
+    </div>
+    <p class="sectiontitle">{{ __('welcomepage.section_title') }}</p>
+    <div class="lauf-Text">
+        <p class="section-content">{{ __('welcomepage.welcome_text') }}</p>
+        <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="{{ __('welcomepage.swipe_function') }}">
+        <p>{{ __('welcomepage.swipe_function') }}</p>
 
-</div>
-        <p class="sectiontitle">{{ __('welcomepage.section_title') }}</p>
-        <div class="lauf-Text">
-            <p class="section-content">{{ __('welcomepage.welcome_text') }}</p>
-            <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="{{ __('welcomepage.swipe_function') }}">
-            <p>{{ __('welcomepage.swipe_function') }}</p>
+        <br><br><br>
 
-            <br><br><br>
-
-            <p class="section-content">{{ __('welcomepage.library_text') }}</p>
-            <img id="gif2" src="{{ asset('Images/apiGif.gif')}}" alt="{{ __('welcomepage.text_function') }}">
-            <p>{{ __('welcomepage.text_function') }}</p>
-            <br><br><br>
-            <p class="section-content">
-                {{ __('welcomepage.signup_invitation') }}
-            </p>
+        <p class="section-content">{{ __('welcomepage.library_text') }}</p>
+        <img id="gif2" src="{{ asset('Images/apiGif.gif')}}" alt="{{ __('welcomepage.text_function') }}">
+        <p>{{ __('welcomepage.text_function') }}</p>
+        <br><br><br>
+        <p class="section-content">
+            {{ __('welcomepage.signup_invitation') }}
+        </p>
+    </div>
 @endsection
 
