@@ -41,8 +41,14 @@ body {
 .anker-no-underline{
     text-decoration: none;
 }
-
-
+//MARK: /Landingpage::
+ .solutionGraph{
+    background-color: white;
+ }
+.problemsection{
+    text-align: center;
+    background-color: $contrast;
+}
 .mainHero {
     display:flex;
     //border: 2px solid $contrast60;
@@ -83,10 +89,6 @@ body {
         text-align: center;
         
     }
-}
-.problemsection{
-    text-align: center;
-    background-color: $contrast;
 }
 .landingFont2{
     font-size: 2.7rem;
@@ -750,6 +752,7 @@ $iconSize: 4rem; //gehört zu IconSize
 .dropdown:focus{
     outline: 3px solid $approve60;
 }
+
 .dropdown-content{
     display: none;
     position: absolute;
@@ -767,7 +770,7 @@ $iconSize: 4rem; //gehört zu IconSize
 }
 
 
-// about_me spezifisch::
+//MARK: /about_me spezifisch::
 .aboutCardsIcons{
     padding-right: 1rem;
     border-right: 2px solid $contrast60;
