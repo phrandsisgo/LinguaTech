@@ -21,6 +21,12 @@
         a:hover {
             text-decoration: underline;
         }
+        .carousel-wrapper{
+            padding-left: 10%;
+            padding-right: 10%;
+            
+        }
+        
     </style>
 @endsection
 @section('content')
@@ -37,48 +43,41 @@
         <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="{{ __('welcomepage.swipe_function') }}" class="horizontal-fill">
     </div>
     <br>
-    <div id="carouselExample" class="carousel slide">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-            <p class="pagetitle">Linguatech, der Ort, an dem Sie Ihr Laseverständnis perfektionieren können!</p>
-            <p class="sectiontitle">Hier können Sie eigene Texte einbringen oder mit Ihren Wortlisten lernen.</p>
-    </div>
-    <div class="carousel-item">
-            <p class="pagetitle">Linguatech, der Ort, an dem Sie Ihr Laseverständnis perfektionieren können!</p>
-            <p class="sectiontitle">Hier können Sie eigene Texte einbringen oder mit Ihren Wortlisten lernen.</p>
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-    <div class="problemsection">
-        <p class="landingFont2">Stellen Sie sich vor, Sie müssten niemals mehr nach passenden Inhalten suchen, um Ihre Zielsprache zu lernen.</p>
-        <div class="solutionGraph">
-            <p class="sectiontitle">Haben Sie Mühe, genügend Ressourcen für Ihre Zielsprache zu finden?</p>
-            <p class="section-content">Hier können Sie alle Texte der Welt verwenden und für Ihre Bedürfnisse anpassen.</p>
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" style="height:60vh;">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="carousel-wrapper">
+                    <p class="pagetitle">Haben Sie mühe, genügend Ressourcen für Ihre Zielsprache zu finden?</p>
+                    <p class="sectiontitle">Hier können Sie alle Texte der Welt verwenden und für Ihre Bedürfnisse anpassen.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-wrapper">
+                    <p class="pagetitle">Sie haben so viele Wörter, dass Sie nicht mehr wissen, wie man sie in einem Text verwendet?</p>
+                    <p class="sectiontitle">Erstellen Sie Texte mittels KI, die auf Ihren Schwierigkeitsgrad angepasst werden, damit Sie Ihre Fremdwortsammlung perfekt lernen können.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-wrapper">
+                    <p class="pagetitle">Sie haben keine Zeit, um Ihre eigene Lerntexte zu schreiben?</p>
+                    <p class="sectiontitle">Kein Problem, wir haben eine Bibliothek mit Texten, die Sie verwenden können.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-wrapper">
+                    <p class="pagetitle">Haben Sie Mühe, relevante Zeitungsartikel in Ihrer Sprache und Schwierigkeitsstufe zu finden?</p>
+                    <p class="sectiontitle">An diesem Problem wird zurzeit gearbeitet, sodass Sie in Kürze Wissenswertes aus aller Welt hier konsumieren können.</p>
+                </div>
+            </div>
         </div>
-        <div class="solutionGraph">
-            <p class="sectiontitle">Sie haben so viele Wörter, dass Sie nicht mehr wissen, wie man sie in einem Text verwendet?</p>
-            <p class="section-content">Erstellen Sie Texte mittels KI, die auf Ihren Schwierigkeitsgrad angepasst werden, damit Sie Ihre Fremdwortsammlung perfekt lernen können.</p>
-        </div>
-        <div class="solutionGraph">
-            <p class="sectiontitle">Sie haben keine Zeit, um Texte zu schreiben?</p>
-            <p class="section-content">Kein Problem, wir haben eine Bibliothek mit Texten, die Sie verwenden können.</p>
-        </div>
-        <div class="solutionGraph">
-            <p class="sectiontitle">Haben Sie Mühe, relevante Zeitungsartikel in Ihrer Sprache und Schwierigkeitsstufe zu finden?</p>
-            <p class="section-content">An diesem Problem wird zurzeit gearbeitet, sodass Sie in Kürze Wissenswertes aus aller Welt hier konsumieren können.</p>
-        </div>
-
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style=" margin-left: -20px;">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="42" height="42"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="#073B4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" style=" margin-right: -20px;">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="42" height="42"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#073B4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
     <p class="sectiontitle">{{ __('welcomepage.section_title') }}</p>
     <div class="lauf-Text">
