@@ -21,29 +21,26 @@
         a:hover {
             text-decoration: underline;
         }
-        .carousel-wrapper{
-            padding-left: 10%;
-            padding-right: 10%;
-            
-        }
         
     </style>
 @endsection
 @section('content')
     <div class="mainHero">
         <div class="heroFontSection">
-    <p class="pagetitle">Linguatech, der Ort, an dem Sie Ihr Leseverständnis perfektionieren können!</p>
-    <p class="sectiontitle">Hier können Sie eigene Texte einbringen oder mit Ihren Wortlisten lernen.</p>
-    <a href="register">
-        <button class="approveButton">Jetzt registrieren</button>
-    </a>
+            <p class="pagetitle">Linguatech, der Ort, an dem Sie Ihr Leseverständnis perfektionieren können!</p>
+            <p class="sectiontitle">Hier können Sie eigene Texte einbringen oder mit Ihren Wortlisten lernen!</p>
+            <a href="register">
+                <button class="approveButton">Jetzt registrieren</button>
             </a>
         </div>
         <div class="horizontal-fill"></div>
         <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="{{ __('welcomepage.swipe_function') }}" class="horizontal-fill">
     </div>
     <br>
-    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" style="height:60vh;">
+    <div class="colorBreak">
+        <p>Folgende Probleme haben mich beschäftigt bevor ich Linguatech gegründed habe:</p>
+    </div>
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4500" >
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="carousel-wrapper">
