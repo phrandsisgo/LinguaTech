@@ -41,12 +41,141 @@ body {
 .anker-no-underline{
     text-decoration: none;
 }
+//MARK: /Landingpage::
+.colorBreak{
+    background-color: $contrast;
+    color: $background10;
+    
+    margin-top: 13vh;
+    p{
+        font-size: 4vw;
+        font-weight: bold;
+        padding-bottom: 6vw;
+        padding-top: 6vw;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 500px) {
+    #carouselExample{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 68vw;
+    }
+}
+
+.carousel-wrapper{
+    padding-left: 10%;
+    padding-right: 10%;
+    
+    @media screen and (max-width: 500px) {
+        .pagetitle{
+            font-size: 5vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 4vw;
+            font-weight: bold;
+        }
+    }
+    @media screen and (min-width: 500px) {
+        .pagetitle{
+            font-size: 3.5vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 2.5vw;
+            font-weight: bold;
+        }
+        
+    }
+}
+ .solutionGraph{
+    background-color: white;
+ }
+.problemsection{
+    text-align: center;
+    background-color: $contrast;
+}
+//for the Herosections of the Landingpage.
+$switchwidth: 530px;
+.mainHero {
+    display:flex;
+    //border: 2px solid $contrast60;
+    margin: 0;
+    @media screen and (max-width: $switchwidth) {
+        
+        background-size: cover;
+        background-position: center;
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        text-align: center;
+    
+    }
+    //bei mindesdens 450px gibt es display flex dazu
+    @media screen and (min-width: $switchwidth) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+
+        & > * {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+}
+.heroFontSection{
+    //border: 2px solid $contrast60;
+    @media screen and (min-width: $switchwidth) {
+        text-align: left;
+        flex:7;
+        
+        .pagetitle{
+            font-size: 4vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 3.6vw;
+            font-weight: normal;
+        }
+    }
+    @media screen and (max-width: $switchwidth) {
+        text-align: center;
+        
+        .pagetitle{
+            font-size: 5vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 3.9vw;
+            font-weight: normal;
+        }
+        
+    }
+}
+.landingFont2{
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+    color: $background10;
+}
+
 #gif1{
+    padding-top: 0;
+    margin-top: 0;
     @media screen and (max-width: 450px) {
         width: 150px;
     }
     @media  screen and (max-width: 650px)  {
-        width: 270px;
+        width: 250px;
+    }
+    @media  screen and (min-width: 650px) {
+        width: 340px;
     }
 }
 
@@ -339,6 +468,11 @@ $iconSize: 4rem; //gehört zu IconSize
 }
 
 //fonts are gonne be colored here
+.supertitle{
+    color: $contrast;
+    font-size: 3.3rem;
+    font-weight: bold;
+}
 .pagetitle{
     color: $contrast;
     font-size: 2.7rem;
@@ -687,6 +821,7 @@ $iconSize: 4rem; //gehört zu IconSize
 .dropdown:focus{
     outline: 3px solid $approve60;
 }
+
 .dropdown-content{
     display: none;
     position: absolute;
@@ -704,7 +839,7 @@ $iconSize: 4rem; //gehört zu IconSize
 }
 
 
-// about_me spezifisch::
+//MARK: /about_me spezifisch::
 .aboutCardsIcons{
     padding-right: 1rem;
     border-right: 2px solid $contrast60;
