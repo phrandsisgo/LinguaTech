@@ -76,18 +76,32 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    <br><br><br>
+
+    <div class="mainHero">
+        <div class="heroFontSection">
+            <p class="pagetitle">Linguatech, der Ort, an dem Sie Ihr Leseverständnis perfektionieren können!</p>
+            <p class="sectiontitle">Hier können Sie eigene Texte einbringen oder mit Ihren Wortlisten lernen!</p>
+            <a href="register">
+                <button class="approveButton">Jetzt registrieren</button>
+            </a>
+        </div>
+        <div class="horizontal-fill"></div>
+        <img id="gif2" src="{{ asset('Images/apiGif.gif')}}" alt="{{ __('welcomepage.text_function') }}"style="border: 4px solid #555; ">
+    </div>
+        <br><br><br>
     <p class="sectiontitle">{{ __('welcomepage.section_title') }}</p>
     <div class="lauf-Text">
-        <p class="section-content">{{ __('welcomepage.welcome_text') }}</p>
-        <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="{{ __('welcomepage.swipe_function') }}">
-        <p>{{ __('welcomepage.swipe_function') }}</p>
 
         <br><br><br>
 
         <p class="section-content">{{ __('welcomepage.library_text') }}</p>
-        <img id="gif2" src="{{ asset('Images/apiGif.gif')}}" alt="{{ __('welcomepage.text_function') }}">
         <p>{{ __('welcomepage.text_function') }}</p>
         <br><br><br>
+        <br><br><br>
+    
+   
+        <br><br>
         <p class="section-content">
             {{ __('welcomepage.signup_invitation') }}
         </p>

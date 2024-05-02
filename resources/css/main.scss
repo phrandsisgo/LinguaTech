@@ -96,11 +96,13 @@ body {
     text-align: center;
     background-color: $contrast;
 }
+//for the Herosections of the Landingpage.
+$switchwidth: 530px;
 .mainHero {
     display:flex;
     //border: 2px solid $contrast60;
     margin: 0;
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: $switchwidth) {
         
         background-size: cover;
         background-position: center;
@@ -114,11 +116,11 @@ body {
     
     }
     //bei mindesdens 450px gibt es display flex dazu
-    @media screen and (min-width: 450px) {
+    @media screen and (min-width: $switchwidth) {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 70vh;
+        height: 90vh;
 
         & > * {
             margin-left: 10px;
@@ -128,22 +130,31 @@ body {
 }
 .heroFontSection{
     //border: 2px solid $contrast60;
-    @media screen and (min-width: 450px) {
+    @media screen and (min-width: $switchwidth) {
         text-align: left;
         flex:7;
+        
+        .pagetitle{
+            font-size: 4vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 3.6vw;
+            font-weight: normal;
+        }
     }
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: $switchwidth) {
         text-align: center;
         
+        .pagetitle{
+            font-size: 5vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 3.9vw;
+            font-weight: normal;
+        }
         
-    }
-    .pagetitle{
-        font-size: 5.4vw;
-        font-weight: bold;
-    }
-    .sectiontitle{
-        font-size: 4.4vw;
-        font-weight: normal;
     }
 }
 .landingFont2{
