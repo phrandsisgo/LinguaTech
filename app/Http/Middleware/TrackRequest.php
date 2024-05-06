@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\Tracker;
 
-class trackRequests
+class TrackRequest
 {
     /**
      * Handle an incoming request.
@@ -15,6 +16,13 @@ class trackRequests
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Protokollieren der Anfrage
+        $tracker = new Tracker();
+        $tracker->ip_address = $request->ip();
+        $tracker->route = $request->getPathInfo();
+        $tracker->user_id = auth()->id(); // Falls ein Benutzer angemeldet ist, ansonsten NULL
+        $tracker->save();
+
         return $next($request);
     }
 }
