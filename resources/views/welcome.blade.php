@@ -1,6 +1,6 @@
 
 @extends('layouts.lingua_main')
-@section('title', 'under construction')
+@section('title', 'Landing Paged')
 @section('head')
     <style>
         body {

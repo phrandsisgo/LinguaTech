@@ -119,6 +119,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/addText', [LingApiController::class, 'addText'])->name('addText');
 Route::post('/createNewText', [LingApiController::class, 'createNewText'])->name('createNewText');
+Route::post('/updateText/{id}',[LingApiController::class, 'updateText'])->name('updateText');
+
 //hier fangen die routen an für die API sachen:
 
 Route::get('/textPlay', [LingApiController::class, 'textPlay'])

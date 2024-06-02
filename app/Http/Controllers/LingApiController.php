@@ -62,4 +62,15 @@ class LingApiController extends Controller
         $text_id = $text->id;
         return redirect('/textShow/'.$text_id);
     }
+    public function updateText(Request $request, $id){
+        /*
+        $text = Text::find($id);
+        $text->title = $request->input('title');
+        $text->text = $request->input('add-text-field');
+        $text->lang_option_id = $request->input('lang')[0];
+        $text->save();
+*/
+       // return redirect('/textShow/'.$id);
+       return view('api-stuff/updateText');//for now it's just a simple view
+    }
 }
