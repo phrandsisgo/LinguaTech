@@ -29,6 +29,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if ($request->has('remember')) {
+            Auth::login(Auth::user(), true);
+        }
+
         //return redirect()->intended(RouteServiceProvider::HOME);
         return redirect()->intended('/library');
     }
