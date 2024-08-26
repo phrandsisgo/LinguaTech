@@ -6,6 +6,7 @@ use App\Http\Controllers\WordListController;
 use App\Http\Controllers\PatchNotesController;
 use App\Http\Controllers\LingApiController;
 use App\Http\Controllers\LanguageController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,21 @@ Route::get('/', function () {
 Route::get('/spielwiese', function () {
     return view('patchNotes/spielwiese');
 });
+
+/*Route to verify E-mail process*/
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/library');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::get('/swipeTest', function () {
     return view('swipeTest');
@@ -132,7 +148,7 @@ Route::get('/displayAllTexts', [LingApiController::class, 'displayAllTexts'])
 
 Route::post('/translate', [LingApiController::class, 'translate'])
 ->name('translate');
-//Rout to change the UI language of the app
+//Route to change the UI language of the app
 Route::get('/language/{lang}',[LanguageController::class, 'changeLanguage'])
     ->middleware('SetLanguageMiddleware')
     ->name('language.change');
