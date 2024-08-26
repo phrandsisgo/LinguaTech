@@ -7,6 +7,7 @@ use App\Http\Controllers\PatchNotesController;
 use App\Http\Controllers\LingApiController;
 use App\Http\Controllers\LanguageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Mailgun\Mailgun;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,23 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+/*Route to try out the e-mail process*/
+Route::get('/testEmail', function () {
+    // API-Schlüssel und Domain von Mailgun
+    $mgClient = Mailgun::create(env('MAIL_GUN_KEY'));
+    $domain = env('MAILGUN_DOMAIN');
+
+    // Sende die Test-E-Mail
+    $result = $mgClient->messages()->send($domain, [
+        'from'    => 'Excited User <mailgun@sandbox2a4ecfcdb9d2440193362d0fc39f497a.mailgun.org>',
+        'to'      => 'Baz <francisco.wohlgemuth@hotmail.com>',
+        'subject' => 'Hello',
+        'text'    => 'Testing some Mailgun awesomeness!'
+    ]);
+
+    return 'Test-E-Mail wurde gesendet!';
+});
 
 Route::get('/swipeTest', function () {
     return view('swipeTest');
