@@ -46,10 +46,15 @@
         <br><br>
         
         <input type="submit" value="{{ __('profile.add') }}" class="approveButton">
-        @if ($path == 'initiate')
+        @if ($path == 'initiate'&& count($user->languages) > 0)
         <button class="standartButton">
             <a href="/library"  style="text-decoration: none;">{{ __('profile.continue') }}</a>
         </button>
+        @elseif($path == 'initiate'&& count($user->languages) == 0)
+        <button class="standartButton">
+            <a href="/library"  style="text-decoration: none;">{{ __('profile.skipOption') }}</a>
+        </button>
         @endif
+
     </form>
 </div>
