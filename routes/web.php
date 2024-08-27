@@ -43,22 +43,20 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-/*Route to try out the e-mail process*/
-Route::get('/testEmail', function () {
-    // API-Schlüssel und Domain von Mailgun
-    $mgClient = Mailgun::create(env('MAIL_GUN_KEY'));
-    $domain = env('MAILGUN_DOMAIN');
-
-    // Sende die Test-E-Mail
-    $result = $mgClient->messages()->send($domain, [
-        'from'    => 'Excited User <mailgun@sandbox2a4ecfcdb9d2440193362d0fc39f497a.mailgun.org>',
-        'to'      => 'Baz <francisco.wohlgemuth@hotmail.com>',
-        'subject' => 'Hello',
-        'text'    => 'Testing some Mailgun awesomeness!'
-    ]);
-
+/*Route to try out the e-mail process
+Route::get('/test-email', function () {
+    $details = [
+        "subject" => "Test-E-Mail by mailtrap",
+        "body" => "This is a test e-mail sent by mailtrap."
+    ];
+    Mail::raw($details['body'], function ($message) use ($details) {
+        $message->from('no-reply@linguatech.ch', 'Linguatech no-reply');
+        $message->to('the-email@test.com');
+        $message->subject($details['subject']);
+    });
     return 'Test-E-Mail wurde gesendet!';
 });
+/*bis hierher wieder löschen sobald die Tests abgeschlossen sind */
 
 Route::get('/swipeTest', function () {
     return view('swipeTest');
