@@ -6,6 +6,8 @@ use App\Http\Controllers\WordListController;
 use App\Http\Controllers\PatchNotesController;
 use App\Http\Controllers\LingApiController;
 use App\Http\Controllers\LanguageController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Mailgun\Mailgun;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,36 @@ Route::get('/', function () {
 Route::get('/spielwiese', function () {
     return view('patchNotes/spielwiese');
 });
+
+/*Route to verify E-mail process*/
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/library');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+/*Route to try out the e-mail process
+Route::get('/test-email', function () {
+    $details = [
+        "subject" => "Test-E-Mail by mailtrap",
+        "body" => "This is a test e-mail sent by mailtrap."
+    ];
+    Mail::raw($details['body'], function ($message) use ($details) {
+        $message->from('no-reply@linguatech.ch', 'Linguatech no-reply');
+        $message->to('the-email@test.com');
+        $message->subject($details['subject']);
+    });
+    return 'Test-E-Mail wurde gesendet!';
+});
+/*bis hierher wieder löschen sobald die Tests abgeschlossen sind */
 
 Route::get('/swipeTest', function () {
     return view('swipeTest');
@@ -132,7 +164,7 @@ Route::get('/displayAllTexts', [LingApiController::class, 'displayAllTexts'])
 
 Route::post('/translate', [LingApiController::class, 'translate'])
 ->name('translate');
-//Rout to change the UI language of the app
+//Route to change the UI language of the app
 Route::get('/language/{lang}',[LanguageController::class, 'changeLanguage'])
     ->middleware('SetLanguageMiddleware')
     ->name('language.change');
