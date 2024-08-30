@@ -128,6 +128,12 @@ $switchwidth: 530px;
         }
     }
 }
+//just for font color
+.font-color-main{
+    color: $contrast;
+}
+
+//for the carousel of the new Landing Page 30.Aug 2024
 .heroFontSection{
     //border: 2px solid $contrast60;
     @media screen and (min-width: $switchwidth) {

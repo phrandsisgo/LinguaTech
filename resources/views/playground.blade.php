@@ -21,14 +21,14 @@
         <img id="gif1" src="{{ asset('Images/SwipeLearn.gif')}}" alt="{{ __('welcomepage.swipe_function') }}" class="horizontal-fill">
       </div>
       <div class="col-lg-6">
-      <h1 class="display-5 fw-bold lh-1 mb-3">  
+      <h1 class="display-5 fw-bold lh-1 mb-3 font-color-main">  
       Master Languages with Custom Flashcards & Personalized Texts
         </h1>
-        <p class="lead">Level up your language skills with flahcards tailored to you, and texts generated from the words you're learning. Choose your topics, set your pace, and watch your fluency grow.</p>
+        <p class="lead font-color-main">Level up your language skills with flahcards tailored to you, and texts generated from the words you're learning. Choose your topics, set your pace, and watch your fluency grow.</p>
 
         
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Start Learning now</button>
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 approveButton">Start Learning now</button>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
 
   {{-- carousel of features spotlighted --}}
   
-<div id="featureCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="2000">
+<div id="featureCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="4000" >
     <!-- Indicators/Dots -->
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#featureCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -47,31 +47,31 @@
     </div>
 
     <!-- Slides -->
-    <div class="carousel-inner">
+    <div class="carousel-inner" style="padding:10%">
         <!-- Slide 1 -->
         <div class="carousel-item active">
-            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: #e9ecef;">
+            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: rgba(206, 212, 218, 0.1);">
                 <div class="text-center">
-                    <h3>Choose Topics that Matter to You</h3>
-                    <p>Select from a wide range of topics to focus your learning. Whether it’s business, travel, or everyday conversation, we’ve got you covered.</p>
+                    <h3 class="font-color-main">Choose Topics that Matter to You</h3>
+                    <p class="font-color-main">Select from a wide range of topics to focus your learning. Whether it’s business, travel, or everyday conversation, we’ve got you covered.</p>
                 </div>
             </div>
         </div>
         <!-- Slide 2 -->
         <div class="carousel-item">
-            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: #dee2e6;">
+            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: rgba(206, 212, 218, 0.1);">
                 <div class="text-center">
-                    <h3>Read Texts at Your Level and Interests</h3>
-                    <p>Dive into AI-generated or selfprovided texts that match your language proficiency. Learn in context with materials that grow with your skills.</p>
+                    <h3 class="font-color-main">Read Texts at Your Level and Interests</h3>
+                    <p class="font-color-main">Dive into AI-generated or selfprovided texts that match your language proficiency. Learn in context with materials that grow with your skills.</p>
                 </div>
             </div>
         </div>
         <!-- Slide 3 -->
         <div class="carousel-item">
-            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: #ced4da;">
+            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: rgba(206, 212, 218, 0.1);">
                 <div class="text-center">
-                    <h3>Effortlessly Add Words from Texts to Your Learning List</h3>
-                    <p>Found a new word? Just tap to add it to your learning list. Build your vocabulary directly from the texts you’re reading.</p>
+                    <h3 class="font-color-main">Effortlessly Add Words from Texts to Your Learning List</h3>
+                    <p class="font-color-main">Found a new word? Just tap to add it to your learning list. Build your vocabulary directly from the texts you’re reading.</p>
                 </div>
             </div>
         </div>
@@ -88,6 +88,8 @@
     </button>
 </div>
 
+<br><br>
+<br><br>
 
 {{-- reverse Hero --}}
 
@@ -96,18 +98,18 @@
     <img class="rounded-lg-3" src="your-image.jpg" alt="Feature image" width="720">
   </div>
   <div class="col-lg-7 offset-lg-1 p-3 p-lg-5 pt-lg-3">
-    <h1 class="display-4 fw-bold lh-1">Custom Texts and Flashcards: Learn the Language Your Way</h1>
-    <p class="lead">Unlock your language learning potential with custom flashcards and texts tailored to your needs. Swipe through your learning lists and expand your vocabulary with ease.</p>
+    <h1 class="display-4 fw-bold lh-1 font-color-main">Custom Texts and Flashcards: Learn the Language Your Way</h1>
+    <p class="lead font-color-main">Unlock your language learning potential with custom flashcards and texts tailored to your needs. Swipe through your learning lists and expand your vocabulary with ease.</p>
     <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Start Learning</button>
-      <button type="button" class="btn btn-outline-secondary btn-lg px-4">Explore Features</button>
+      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold approveButton">Register to your learning experience</button>
     </div>
   </div>
 </div>
 
 
-<h1>How to use Linguatech to improve your language skills:</h1>
+<h1 class="font-color-main">How to use Linguatech to improve your language skills:</h1>
 <script>
+  //maby put the script behind the npm view
     const scrollContainer = document.querySelector('.scroll-content');
 
 scrollContainer.addEventListener('mouseover', () => {
@@ -158,24 +160,20 @@ scrollContainer.addEventListener('mouseout', () => {
   <div class="scroll-container">
     <div class="scroll-content">
       <div class="scroll-item">
-        <img src="icon-list.svg" alt="Create Word List" width="60">
-        <h5>Create Word List</h5>
-        <p>Start your journey by building your learning list.</p>
+        <h5 class="align-items-center">Create Word List</h5>
+        <p class="align-items-center">Start your journey by building your learning list.</p>
       </div>
       <div class="scroll-item">
-        <img src="icon-swipe.svg" alt="Swipe to Learn" width="60">
-        <h5>Swipe to Learn</h5>
-        <p>Swipe through flashcards to solidify your memory.</p>
+        <h5 class="align-items-center">Swipe to Learn</h5>
+        <p class="align-items-center">Swipe through flashcards to solidify your memory.</p>
       </div>
       <div class="scroll-item">
-        <img src="icon-text.svg" alt="Generate Text" width="60">
-        <h5>Generate Text</h5>
-        <p>Create customized texts for immersive learning.</p>
+        <h5 class="align-items-center">Generate Text</h5>
+        <p class="align-items-center">Create customized texts for immersive learning.</p>
       </div>
       <div class="scroll-item">
-        <img src="icon-add.svg" alt="Add New Words" width="60">
-        <h5>Add New Words</h5>
-        <p>Loop back by adding new words from your texts.</p>
+        <h5 class="align-items-center">Add New Words</h5>
+        <p class="align-items-center">Loop back by adding new words from your texts.</p>
       </div>
     </div>
   </div>
