@@ -1,5 +1,5 @@
 @extends('layouts.lingua_main')
-@section('title', 'Home')
+@section('title', 'Playground')
 @section('head')
 
 
@@ -10,7 +10,6 @@
     />
 @vite(['resources/js/animations.js', 'resources/css/application.scss', 'resources/css/playground.scss'])
 @endsection
-{{-- landingpage --}}
 
 @section('content')
 
