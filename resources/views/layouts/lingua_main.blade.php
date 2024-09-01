@@ -14,7 +14,7 @@
 <body>
 <nav>
    <div class="nav-wrapper">
-    <a href="/library" class="iconWrapper">
+    <a href="/library" class="iconWrapper" style="margin-left:2px;">
         <img src="{{ asset('svg-icons/home-icon.svg')}}" alt="home Icon" class="icons navIcons">
     </a>
         <div class="horizontal-fill"></div>
@@ -24,14 +24,14 @@
 
         @if (auth()->check())
         @else
-        <a href="/register" class="NavFont">{{ __('menu.register') }}</a>
+        <a href="/register" class="NavFont" >{{ __('menu.register') }}</a>
         @endif
         <div class="langDropdownMenu">
             <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
-            <label for="dropdownCheckbox" class="dropdownLabel">
+            <label for="dropdownCheckbox" id="nav-lang-label" class="dropdownLabel">
                 <div class="displayFlex">
                     <p id="currentLocalLanuguage">{{ strtoupper(App::getLocale()) }}</p>
-                    <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}" style="height:30px;"alt="icon für Spracheinstellung">
+                    <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}" id="nav-label-icon"alt="icon für Spracheinstellung">
                 </div>
             </label>
             <ul class="dropdown-content">
