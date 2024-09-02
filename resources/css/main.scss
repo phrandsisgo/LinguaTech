@@ -20,6 +20,12 @@ body {
     font-size: 1rem;
     font-weight: bold;
 }
+#register-nav{
+    @media screen and (max-width: 400px) {
+        display: none;
+        
+    }
+}
 .nav-wrapper {
     background-color: $contrast;
     color: $approve;
@@ -29,6 +35,9 @@ body {
     padding-left: 0px;
     user-select: none;
     z-index: 2;
+    @media screen and (min-width:400) and (max-width: 500px) {
+        width:105vw;
+    }
 }
 .navIcons{
     @media screen and (max-width: 450px) {

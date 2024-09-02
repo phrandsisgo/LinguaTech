@@ -32,7 +32,7 @@
 
         @if (auth()->check())
         @else
-        <a href="/register" class="NavFont" >{{ __('menu.register') }}</a>
+        <a href="/register"id="register-nav" class="NavFont" >{{ __('menu.register') }}</a>
         @endif
         <div class="langDropdownMenu">
             <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
