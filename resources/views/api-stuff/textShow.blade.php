@@ -56,67 +56,67 @@
 
 @endsection
 @section('content')
+<div class="text-learn-wrapper">
+    <a href="/displayAllTexts" style="text-decoration: none;">
+        <button class="standartButton">{{ __('api_texts.all-texts') }}</button>
+    </a>
+    <a href="/updateText/{{ $text->id}}"style="text-decoration: none;">
+        <button class="standartButton">{{ __('api_texts.edit-text') }}</button>
+    </a>
+    <button onclick="openDeleteModal()" class="standartDangerButton standartButton">{{ __('api_texts.delete-text') }}</button>
 
-<a href="/displayAllTexts">
-    <button class="standartButton">{{ __('api_texts.all-texts') }}</button>
-</a>
-<a href="/updateText/{{ $text->id}}">
-    <button class="standartButton">{{ __('api_texts.edit-text') }}</button>
-</a>
-<button onclick="openDeleteModal()" class="standartDangerButton standartButton">{{ __('api_texts.delete-text') }}</button>
-
-<p class="pagetitle ">{{$text->title}}</p>
-<p id="textContainer" class="section-content"> </p>
-<br><br><br>
+    <p class="pagetitle ">{{$text->title}}</p>
+    <p id="textContainer" class="section-content"> </p>
+    <br><br><br>
 
 
 
-<!-- Modal-Struktur -->
-<div id="translationModal">
-    <div class="modal-content">
-        <p>{{ __('api_texts.word-translated') }}</p>
-        <p id="translationText" class="sectiontitle"></p>
-        <br>
-        <p >{{ __('api_texts.wordYouAskedFor') }}</p>
-        <p id="originalWord" class="sectiontitle"></p>
-        <br>
-        
-        <br>
-        <form action="/list_add_word"method="post" id="wordAddForm">
-            @csrf
-            <!-- muss zu einem späteren Zeitpunkt noch angeben, welche Sprache die base und targetLang ist. -->
-            <p >{{ __('api_texts.add-to-list') }}</p>
-            <div class="dropdown">
-                <select name="list" id="list">
-                    @foreach ($ownLibraryList as $ownLibraryList)
-                    <option value="{{$ownLibraryList->id}}">{{$ownLibraryList->name}}</option>
-                    @endforeach
-                    <input type="hidden" id="baseWordForm" name="baseWord" value="#">
-                    <input type="hidden" id="targetWordForm" name="targetWord" value="#">
-                </select>
-            </div>
+    <!-- Modal-Struktur -->
+    <div id="translationModal">
+        <div class="modal-content">
+            <p>{{ __('api_texts.word-translated') }}</p>
+            <p id="translationText" class="sectiontitle"></p>
             <br>
-            <button type="submit" class="standartButton">{{ __('api_texts.add-to-list') }}</button>
-            <button type="button" onclick="closeModal()"class="standartDangerButton standartButton">{{ __('api_texts.close') }}</button>
-        </form>
+            <p >{{ __('api_texts.wordYouAskedFor') }}</p>
+            <p id="originalWord" class="sectiontitle"></p>
+            <br>
+            
+            <br>
+            <form action="/list_add_word"method="post" id="wordAddForm">
+                @csrf
+                <!-- muss zu einem späteren Zeitpunkt noch angeben, welche Sprache die base und targetLang ist. -->
+                <p >{{ __('api_texts.add-to-list') }}</p>
+                <div class="dropdown">
+                    <select name="list" id="list">
+                        @foreach ($ownLibraryList as $ownLibraryList)
+                        <option value="{{$ownLibraryList->id}}">{{$ownLibraryList->name}}</option>
+                        @endforeach
+                        <input type="hidden" id="baseWordForm" name="baseWord" value="#">
+                        <input type="hidden" id="targetWordForm" name="targetWord" value="#">
+                    </select>
+                </div>
+                <br>
+                <button type="submit" class="standartButton">{{ __('api_texts.add-to-list') }}</button>
+                <button type="button" onclick="closeModal()"class="standartDangerButton standartButton">{{ __('api_texts.close') }}</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- delete modal -->
+    
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <p>{{ __('api_texts.delete-text') }}</p>
+            <p>{{ __('api_texts.delete-text-question') }}</p>
+            <form action="/deleteText" method="post">
+                @csrf
+                <input type="hidden" name="textId" value="{{$text->id}}">
+                <button type="submit" class="standartDangerButton standartButton">{{ __('api_texts.delete') }}</button>
+                <button type="button" onclick="closeDeleteModal()" class=" standartButton">{{ __('api_texts.cancel') }}</button>
+            </form>
+        </div>
     </div>
 </div>
-
-<!-- delete modal -->
- 
-<div id="deleteModal" class="modal">
-    <div class="modal-content">
-        <p>{{ __('api_texts.delete-text') }}</p>
-        <p>{{ __('api_texts.delete-text-question') }}</p>
-        <form action="/deleteText" method="post">
-            @csrf
-            <input type="hidden" name="textId" value="{{$text->id}}">
-            <button type="submit" class="standartButton">{{ __('api_texts.delete') }}</button>
-            <button type="button" onclick="closeDeleteModal()" class="standartDangerButton standartButton">{{ __('api_texts.cancel') }}</button>
-        </form>
-    </div>
-</div>
-
 <script>
     function prevDef(event){
         event.preventDefault();
@@ -182,6 +182,12 @@ document.getElementById('translationModal').addEventListener('click', function(e
         closeModal();
     }
 });
+document.getElementById('deleteModal').addEventListener('click', function(event) {
+    if (event.target === this) {
+        closeDeleteModal();
+    }
+});
+
 
 
 </script>

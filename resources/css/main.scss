@@ -854,6 +854,21 @@ $iconSize: 4rem; //gehört zu IconSize
 }
 
 // -/textPlay fängt hier an
+
+.text-learn-wrapper{
+    @media screen and (min-width: 1500px) {
+        margin:0px 20vw;
+    }
+    @media screen and (min-width: 1200px) and (max-width: 1499px) {
+        margin:0px 15vw;
+    }
+    @media screen and (min-width: 1000px) and (max-width: 1199px) {
+        margin:0px 10vw;
+    }
+    @media screen and (min-width: 800px) and (max-width: 999px) {
+        margin:0px 5vw;
+    }
+}
 .dropdown-wrapper{
     display: inline-block;
     position: relative;

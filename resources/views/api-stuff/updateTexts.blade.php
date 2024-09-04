@@ -20,29 +20,31 @@ textarea {
 @section('content')
 
 
-<p class="pagetitle">Den Text mit dem Titel "{{ $text->title }}" bearbeiten.</p>
+<div class="text-learn-wrapper">
+    <p class="pagetitle">Den Text mit dem Titel "{{ $text->title }}" bearbeiten.</p>
 
-<form action="/updateTextFunction/{{ $text->id }}" method="post" class="text-form">
-    @csrf
-    <input type="hidden" name="id" value="{{ $text->id }}">
-    <div class="form-group">
-        <label for="title">Titel</label>
-        <input type="text" class="form-control" id="title" name="title" value="{{ $text->title }}" required>
-    </div>
-    <div class="form-group">
-        <label for="text">Text</label>
-        <textarea class="form-control" id="text" name="text" rows="3" required>{{ $text->text }}</textarea>
-    </div>
-    <div class="form-group">
-        <label for="language">Sprache</label>
-        <select id="lang" name="lang" class="standartSelect">
-            @foreach ($languages as $language)
-                <option value="{{ $language->id }}" @if ($language->id == $text->language_id) selected @endif>{{ $language->language_name }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="submit-wrapper-addText">
-        <button type="submit" class="approveButton">Speichern</button>
-    </div>
-</form>
+    <form action="/updateTextFunction/{{ $text->id }}" method="post" class="text-form">
+        @csrf
+        <input type="hidden" name="id" value="{{ $text->id }}">
+        <div class="form-group">
+            <label for="title">Titel</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ $text->title }}" required>
+        </div>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <textarea class="form-control" id="text" name="text" rows="3" required>{{ $text->text }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="language">Sprache</label>
+            <select id="lang" name="lang" class="standartSelect">
+                @foreach ($languages as $language)
+                    <option value="{{ $language->id }}" @if ($language->id == $text->language_id) selected @endif>{{ $language->language_name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="submit-wrapper-addText">
+            <button type="submit" class="approveButton">Speichern</button>
+        </div>
+    </form>
+</div>
 @endsection
