@@ -148,6 +148,12 @@ function openModal(data) {
 function closeModal() {
     document.getElementById('translationModal').style.display = 'none';
 }
+document.getElementById('translationModal').addEventListener('click', function(event) {
+    if (event.target === this) {
+        closeModal();
+    }
+});
+
 
 </script>
 @endsection
