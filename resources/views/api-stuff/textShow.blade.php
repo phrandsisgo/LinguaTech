@@ -1,5 +1,5 @@
 @extends('layouts.lingua_main')
-@section('title', 'textPlay')
+@section('title', 'text')
 @section('head')
 <style>
         p {
@@ -8,7 +8,7 @@
         }
 
         .highlighted {
-            background-color: yellow;
+            background-color: #FFD166;
         }
 
         .word {
@@ -60,7 +60,7 @@
 <a href="/displayAllTexts">
     <button class="standartButton">{{ __('api_texts.all-texts') }}</button>
 </a>
-<a href="/updateText">
+<a href="/updateText/{{ $text->id}}">
     <button class="standartButton">{{ __('api_texts.edit-text') }}</button>
 </a>
 <button onclick="openDeleteModal()" class="standartDangerButton standartButton">{{ __('api_texts.delete-text') }}</button>

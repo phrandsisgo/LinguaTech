@@ -60,6 +60,23 @@ class LingApiController extends Controller
         $languages = LangOption::all();
         return view('api-stuff/newText',['languages' => $languages]);
     }
+    public function updateText($id){
+        $text = Text::with("langOption")->find($id);
+        $languages = LangOption::all();
+        return view('api-stuff/updateTexts',['text' => $text, 'languages' => $languages]);
+    }
+
+    public function updateTextFunction(Request $request){
+        //dd($request->all());
+        $id = $request->input('id');
+        $text = Text::find($id);
+        $text->title = $request->input('title');
+        $text->text = $request->input('text');
+        $text->lang_option_id = $request->input('lang')[0];
+        $text->updated_at = now();
+        $text->save();
+        return redirect('/textShow/'.$id);
+    }
     //wurde noch nicht getestet:
     public function createNewText(Request $request){
         $text = new Text();
