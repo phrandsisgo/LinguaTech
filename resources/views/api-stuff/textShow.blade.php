@@ -69,7 +69,7 @@
 <!-- Modal-Struktur -->
 <div id="translationModal">
     <div class="modal-content">
-        <p>Das Wort bedeutet übersetzt: </p>
+        <p>{{ __('api_texts.word-translated') }}</p>
         <p id="translationText" class="sectiontitle"></p>
         <br>
         <p >{{ __('api_texts.wordYouAskedFor') }}</p>
@@ -91,8 +91,8 @@
                 </select>
             </div>
             <br>
-            <button type="submit" class="standartButton">Einfügen</button>
-            <button type="button" onclick="closeModal()"class="standartDangerButton standartButton">Schliessen</button>
+            <button type="submit" class="standartButton">{{ __('api_texts.add-to-list') }}</button>
+            <button type="button" onclick="closeModal()"class="standartDangerButton standartButton">{{ __('api_texts.close') }}</button>
         </form>
     </div>
 </div>
