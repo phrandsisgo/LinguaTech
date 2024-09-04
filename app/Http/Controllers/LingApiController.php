@@ -42,6 +42,15 @@ class LingApiController extends Controller
         $ownLibraryList = WordList::where('created_by', auth()->user()->id)->get();
         return view('api-stuff/textShow',['text' => $text, 'allTexts' => $allTexts, 'ownLibraryList' => $ownLibraryList]);
     }
+    public function destroyText(Request $request,){
+        $id = $request->input('textId');
+        $text = Text::find($id);
+        if (!$text) {
+            return redirect()->back()->with('error', 'Text not found.');
+        }
+        $text->delete();
+        return redirect()->route('displayAllTexts')->with('success', 'Text deleted successfully.');
+    }
     
     public function displayAllTexts(){
         $allTexts = Text::with("langOption")->get();

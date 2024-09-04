@@ -60,6 +60,11 @@
 <a href="/displayAllTexts">
     <button class="standartButton">{{ __('api_texts.all-texts') }}</button>
 </a>
+<a href="/updateText">
+    <button class="standartButton">{{ __('api_texts.edit-text') }}</button>
+</a>
+<button onclick="openDeleteModal()" class="standartDangerButton standartButton">{{ __('api_texts.delete-text') }}</button>
+
 <p class="pagetitle ">{{$text->title}}</p>
 <p id="textContainer" class="section-content"> </p>
 <br><br><br>
@@ -96,6 +101,22 @@
         </form>
     </div>
 </div>
+
+<!-- delete modal -->
+ 
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <p>{{ __('api_texts.delete-text') }}</p>
+        <p>{{ __('api_texts.delete-text-question') }}</p>
+        <form action="/deleteText" method="post">
+            @csrf
+            <input type="hidden" name="textId" value="{{$text->id}}">
+            <button type="submit" class="standartButton">{{ __('api_texts.delete') }}</button>
+            <button type="button" onclick="closeDeleteModal()" class="standartDangerButton standartButton">{{ __('api_texts.cancel') }}</button>
+        </form>
+    </div>
+</div>
+
 <script>
     function prevDef(event){
         event.preventDefault();
@@ -143,6 +164,14 @@ function openModal(data) {
     document.getElementById('originalWord').textContent = data.request;
     document.getElementById('baseWordForm').value = data.request;
     document.getElementById('targetWordForm').value = data.translation;
+}
+
+function openDeleteModal() {
+    document.getElementById('deleteModal').style.display = 'block';
+}
+
+closeDeleteModal = function() {
+    document.getElementById('deleteModal').style.display = 'none';
 }
 
 function closeModal() {
