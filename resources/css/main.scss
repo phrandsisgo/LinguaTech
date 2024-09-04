@@ -820,7 +820,7 @@ $iconSize: 4rem; //gehört zu IconSize
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 15.5rem;
+    padding-top: calc(39vh - 105px);
     left: 0;
     top: 0;
     width: 100%;
@@ -835,6 +835,10 @@ $iconSize: 4rem; //gehört zu IconSize
     border: 1px solid $contrast;
     width: 80%;
     border-radius: 10px;
+    @media screen and (min-width: 650px) {
+        width: 400px;
+        
+    }
 }
 
 // -/textPlay fängt hier an
