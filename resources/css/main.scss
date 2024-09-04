@@ -753,7 +753,19 @@ $iconSize: 4rem; //gehört zu IconSize
     resize: none;
 
     &:focus {
-        border-color: green;
+        border-color: #06D6A0;
+    }
+}
+
+//auth for mobil users
+.authDisplayFlex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    @media screen and (max-width: 650px)  {
+        
+    flex-direction: column;
     }
 }
 

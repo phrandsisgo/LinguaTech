@@ -11,7 +11,7 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-    <div class="displayFlex">
+    <div class="authDisplayFlex">
         <div class="horizontal-fill">
 
         </div>
@@ -37,6 +37,23 @@
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
+            <!-- Show Password Checkbox -->
+            <div class="mt-2">
+                <input type="checkbox" id="show-password" onclick="togglePassword()">
+                <label for="show-password" class="section-content">{{ __('Show Password') }}</label>
+            </div>
+
+            <!-- JavaScript to toggle password visibility -->
+            <script>
+                function togglePassword() {
+                    var passwordField = document.getElementById('password');
+                    if (passwordField.type === 'password') {
+                        passwordField.type = 'text';
+                    } else {
+                        passwordField.type = 'password';
+                    }
+                }
+            </script>
             <!-- Remember Me -->
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
@@ -49,7 +66,7 @@
 
         </div>
         
-        <div class="flex items-center justify-end mt-4 rightSideAuth"><br><br>
+        <div class="items-center justify-end mt-4 rightSideAuth"><br><br>
             <a class="sectiontitle" href="/register">
                     {{ __('auth.no_account_yet') }}
                 </a>
