@@ -16,4 +16,7 @@ return [
     'submit' => 'Submit',
     'add-to-list' => 'Do you want to add the term to a list?',
     'wordYouAskedFor' => 'Word you asked for: ',
+    'word-translated' => 'The word means translated: ',
+    'add-to-list' => 'Add the term to list',
+    'close' => 'Close',
 ];

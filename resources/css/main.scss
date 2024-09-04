@@ -20,6 +20,12 @@ body {
     font-size: 1rem;
     font-weight: bold;
 }
+#register-nav{
+    @media screen and (max-width: 400px) {
+        display: none;
+        
+    }
+}
 .nav-wrapper {
     background-color: $contrast;
     color: $approve;
@@ -29,6 +35,9 @@ body {
     padding-left: 0px;
     user-select: none;
     z-index: 2;
+    @media screen and (min-width:400) and (max-width: 500px) {
+        width:105vw;
+    }
 }
 .navIcons{
     @media screen and (max-width: 450px) {
@@ -744,7 +753,19 @@ $iconSize: 4rem; //gehört zu IconSize
     resize: none;
 
     &:focus {
-        border-color: green;
+        border-color: #06D6A0;
+    }
+}
+
+//auth for mobil users
+.authDisplayFlex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    @media screen and (max-width: 650px)  {
+        
+    flex-direction: column;
     }
 }
 
@@ -799,7 +820,7 @@ $iconSize: 4rem; //gehört zu IconSize
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 15.5rem;
+    padding-top: calc(39vh - 105px);
     left: 0;
     top: 0;
     width: 100%;
@@ -814,6 +835,10 @@ $iconSize: 4rem; //gehört zu IconSize
     border: 1px solid $contrast;
     width: 80%;
     border-radius: 10px;
+    @media screen and (min-width: 650px) {
+        width: 400px;
+        
+    }
 }
 
 // -/textPlay fängt hier an
