@@ -60,10 +60,12 @@
     <a href="/displayAllTexts" style="text-decoration: none;">
         <button class="standartButton">{{ __('api_texts.all-texts') }}</button>
     </a>
+    @if($text->created_by == auth()->user()->id)
     <a href="/updateText/{{ $text->id}}"style="text-decoration: none;">
         <button class="standartButton">{{ __('api_texts.edit-text') }}</button>
     </a>
-    <button onclick="openDeleteModal()" class="standartDangerButton standartButton">{{ __('api_texts.delete-text') }}</button>
+        <button onclick="openDeleteModal()" class="standartDangerButton standartButton">{{ __('api_texts.delete-text') }}</button>
+    @endif
 
     <p class="pagetitle ">{{$text->title}}</p>
     <p id="textContainer" class="section-content"> </p>

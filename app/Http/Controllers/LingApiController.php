@@ -48,8 +48,12 @@ class LingApiController extends Controller
         if (!$text) {
             return redirect()->back()->with('error', 'Text not found.');
         }
+        //check if userid and $text created_by are the same
+        if ($text->created_by != auth()->user()->id) {
+            return abort(403, "unauthorized");
+        }
         $text->delete();
-        return redirect()->route('displayAllTexts')->with('success', 'Text deleted successfully.');
+        return redirect('/textPlay');
     }
     
     public function displayAllTexts(){
@@ -70,6 +74,14 @@ class LingApiController extends Controller
         //dd($request->all());
         $id = $request->input('id');
         $text = Text::find($id);
+
+        if (!$text) {
+            return redirect()->back()->with('error', 'Text not found.');
+        }
+        //check if userid and $text created_by are the same
+        if ($text->created_by != auth()->user()->id) {
+            return abort(403, "unauthorized");
+        }
         $text->title = $request->input('title');
         $text->text = $request->input('text');
         $text->lang_option_id = $request->input('lang')[0];
