@@ -42,6 +42,19 @@ class LingApiController extends Controller
         $ownLibraryList = WordList::where('created_by', auth()->user()->id)->get();
         return view('api-stuff/textShow',['text' => $text, 'allTexts' => $allTexts, 'ownLibraryList' => $ownLibraryList]);
     }
+    public function destroyText(Request $request,){
+        $id = $request->input('textId');
+        $text = Text::find($id);
+        if (!$text) {
+            return redirect()->back()->with('error', 'Text not found.');
+        }
+        //check if userid and $text created_by are the same
+        if ($text->created_by != auth()->user()->id) {
+            return abort(403, "unauthorized");
+        }
+        $text->delete();
+        return redirect('/textPlay');
+    }
     
     public function displayAllTexts(){
         $allTexts = Text::with("langOption")->get();
@@ -50,6 +63,31 @@ class LingApiController extends Controller
     public function addText(){
         $languages = LangOption::all();
         return view('api-stuff/newText',['languages' => $languages]);
+    }
+    public function updateText($id){
+        $text = Text::with("langOption")->find($id);
+        $languages = LangOption::all();
+        return view('api-stuff/updateTexts',['text' => $text, 'languages' => $languages]);
+    }
+
+    public function updateTextFunction(Request $request){
+        //dd($request->all());
+        $id = $request->input('id');
+        $text = Text::find($id);
+
+        if (!$text) {
+            return redirect()->back()->with('error', 'Text not found.');
+        }
+        //check if userid and $text created_by are the same
+        if ($text->created_by != auth()->user()->id) {
+            return abort(403, "unauthorized");
+        }
+        $text->title = $request->input('title');
+        $text->text = $request->input('text');
+        $text->lang_option_id = $request->input('lang')[0];
+        $text->updated_at = now();
+        $text->save();
+        return redirect('/textShow/'.$id);
     }
     //wurde noch nicht getestet:
     public function createNewText(Request $request){

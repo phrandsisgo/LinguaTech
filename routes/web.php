@@ -149,8 +149,10 @@ Route::middleware('auth')->group(function () {
 });
 //die liste der Middlewares mit den Zuweisungen findet man unter app/Http/Kernel.php
 
-Route::get('/addText', [LingApiController::class, 'addText'])->name('addText');
-Route::post('/createNewText', [LingApiController::class, 'createNewText'])->name('createNewText');
+Route::get('/addText', [LingApiController::class, 'addText'])->name('addText')->middleware('auth');
+Route::post('/createNewText', [LingApiController::class, 'createNewText'])->name('createNewText')->middleware('auth');
+Route::post('/deleteText', [LingApiController::class, 'destroyText'])->name('text.destroy')->middleware('auth');
+
 //hier fangen die routen an für die API sachen:
 
 Route::get('/textPlay', [LingApiController::class, 'textPlay'])
@@ -159,11 +161,17 @@ Route::get('/textPlay', [LingApiController::class, 'textPlay'])
 Route::get('/textShow/{id}', [LingApiController::class, 'textShow'])
 ->name('textShow')->middleware('auth');
 
+Route::get('/updateText/{id}', [LingApiController::class, 'updateText'])
+->name('updateText')->middleware('auth');
+
+Route::post('/updateTextFunction/{id}', [LingApiController::class, 'updateTextFunction'])
+->name('updateTextFunction')->middleware('auth');
+
 Route::get('/displayAllTexts', [LingApiController::class, 'displayAllTexts'])
 ->name('displayAllTexts')->middleware('auth');
 
 Route::post('/translate', [LingApiController::class, 'translate'])
-->name('translate');
+->name('translate')->middleware('auth');
 //Route to change the UI language of the app
 Route::get('/language/{lang}',[LanguageController::class, 'changeLanguage'])
     ->middleware('SetLanguageMiddleware')

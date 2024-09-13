@@ -19,4 +19,13 @@ return [
     'word-translated' => 'Das Wort bedeutet übersetzt: ',
     'add-to-list' => 'Begriff zur Liste hinzufügen.',
     'close' => 'Schliessen',
+    'edit-text' => 'Text bearbeiten',
+    'delete-text' => 'Text löschen',
+    'delete-text-question' => 'Sind Sie sicher, dass Sie diesen Text löschen möchten?',
+    'delete' => 'Löschen',
+    'cancel' => 'Abbrechen',
+    'language' => 'Sprache',
+    'save' => 'Speichern',
+    "überschrift1" => "Den Text mit dem Titel ",
+    "überschrift2" => " bearbeiten.",
 ];
