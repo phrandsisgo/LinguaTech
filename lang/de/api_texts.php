@@ -24,4 +24,8 @@ return [
     'delete-text-question' => 'Sind Sie sicher, dass Sie diesen Text löschen möchten?',
     'delete' => 'Löschen',
     'cancel' => 'Abbrechen',
+    'language' => 'Sprache',
+    'save' => 'Speichern',
+    "überschrift1" => "Den Text mit dem Titel ",
+    "überschrift2" => " bearbeiten.",
 ];

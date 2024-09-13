@@ -20,8 +20,12 @@ return [
     'add-to-list' => 'Add the term to list',
     'close' => 'Close',
     'edit-text' => 'Edit Text',
-    'delete-text-' => 'Delete Text',
+    'delete-text' => 'Delete Text',
     'delete-text-question' => 'Are you sure you want to delete this text?',
     'delete' => 'Delete',
     'cancel' => 'Cancel',
+    'language' => 'Language',
+    'save' => 'Save',
+    'überschrift1' => "Edit the text with the title ",
+    "überschrift2" => ".",
 ];
