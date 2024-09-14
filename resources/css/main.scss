@@ -321,18 +321,23 @@ $switchwidth: 530px;
 }
 .langDropdownMenu {
     position: relative;
-    display: inline-block;
-    margin: 0.5rem;
-    padding-top: 11px;
-    padding-bottom: 5px;
-    padding-left: 8px;
-    border: 4px solid $approve;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1.3rem;
+    border: 6px solid $approve;
+    height: 66px;
+    width: 66px;
 }
 #nav-lang-label{
     font-size: 1.2rem;
     font-weight: bold;
     color: $approve;
-    margin: 0;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     @media screen and (max-width: 450px) {
         font-size: 0.8rem;
         

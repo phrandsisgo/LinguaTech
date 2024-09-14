@@ -37,7 +37,7 @@
         <div class="langDropdownMenu">
             <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
             <label for="dropdownCheckbox" id="nav-lang-label" class="dropdownLabel">
-                <div class="displayFlex">
+                <div class="displayFlex"style="justify-content: center; align-items: center;">
                     <p id="currentLocalLanuguage">{{ strtoupper(App::getLocale()) }}</p>
                     <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}" id="nav-label-icon"alt="icon für Spracheinstellung">
                 </div>
