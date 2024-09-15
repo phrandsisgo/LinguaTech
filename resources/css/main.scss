@@ -355,7 +355,16 @@ $switchwidth: 530px;
 }
 
 .dropdownCheckbox {
-    display: none; /* Versteckt die Checkbox */
+    display: none; 
+}
+.dropdown-color{
+    color: $approve;
+    background-color: $contrast;
+    //change textcolor
+    color: $background10;
+}
+.approvetext{
+    color: $approve;
 }
 
 .dropdown-content {
@@ -365,6 +374,7 @@ $switchwidth: 530px;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    top:70px;
 }
 
 .dropdownCheckbox:checked ~ ul.dropdown-content {
@@ -372,7 +382,7 @@ $switchwidth: 530px;
 }
 
 .dropdownLabel {
-    display: block; /* Macht das Label klickbar */
+    display: block;
     cursor: pointer;
 }
 
