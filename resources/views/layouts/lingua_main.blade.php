@@ -44,7 +44,6 @@
 
         @if (auth()->check())
         @else
-        <a href="/register"id="register-nav" class="NavFont" >{{ __('menu.register') }}</a>
         @endif
         <div class="langDropdownMenu">
             <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
@@ -90,7 +89,7 @@
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="dropdown-item">{{ __('menu.logout') }}</button>
+                            <button type="submit" class="approvetext dropdown-item">{{ __('menu.logout') }}</button>
                         </form>
                     </li>
                 @else
@@ -103,7 +102,25 @@
 
    </div> 
 </nav>
-<div class="mainContent">
+<div class="mainContent"
+@if (auth()->check())
+>
+@else
+    style="padding-top: 0px;
+    margin-top: 3rem;
+    "
+>
+
+    <div class="displayFlex">
+        <div class="horizontal-fill"></div>
+        <a href="/login">
+            <button class="standartButton">{{ __('menu.login') }} </button>
+        </a>
+        <a href="/register">
+            <button class="approveButton">{{ __('menu.register') }}</button>
+        </a>
+    </div>
+@endif
 @yield('content')
 </div>
 <div class="heightbox"></div>
