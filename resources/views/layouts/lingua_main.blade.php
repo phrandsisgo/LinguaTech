@@ -11,6 +11,18 @@
     <!--FAVICON -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     @vite(['resources/css/main.scss', 'resources/js/app.js'])
+    <script>
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.langDropdownMenu');
+            const checkbox = document.getElementById('dropdownCheckbox');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            // Überprüfen, ob der Klick außerhalb des Dropdowns stattgefunden hat
+            if (!dropdown.contains(event.target) && checkbox.checked) {
+                checkbox.checked = false; // Schließt das Dropdown
+            }
+        });
+    </script>
     @yield('head')
     
 </head>
@@ -32,14 +44,13 @@
 
         @if (auth()->check())
         @else
-        <a href="/register"id="register-nav" class="NavFont" >{{ __('menu.register') }}</a>
         @endif
         <div class="langDropdownMenu">
             <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
             <label for="dropdownCheckbox" id="nav-lang-label" class="dropdownLabel">
-                <div class="displayFlex">
+                <div class="displayFlex"style="justify-content: center; align-items: center;">
                     <p id="currentLocalLanuguage">{{ strtoupper(App::getLocale()) }}</p>
-                    <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}" id="nav-label-icon"alt="icon für Spracheinstellung">
+                    <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}"id="nav-label-icon"alt="icon für Spracheinstellung">
                 </div>
             </label>
             <ul class="dropdown-content">
@@ -64,24 +75,26 @@
             <button type="button" class="btn menuBtn" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ asset('svg-icons/menu-icon.svg')}}" alt="menu Icon" class="navIcons">
             </button>
-            <ul class="dropdown-menu dropdown-menu-end z-index-up">
-                <li class="mob-only"><a class="dropdown-item" href="/library">{{ __('menu.library') }}</a></li>
-                <li><a class="dropdown-item" href="/about_me">{{ __('menu.aboutDeveloper') }}</a></li>
-                <li><a class="dropdown-item" href="/about_project">{{ __('menu.aboutProject') }}</a></li>
-                <li><a class="dropdown-item" href="/showPatch/2">{{ __('menu.patchNotes') }}</a></li>
+            <ul class="dropdown-color dropdown-menu dropdown-menu-end z-index-up">
+                @if (auth()->check())
+                    <li class="mob-only"><a class="approvetext dropdown-item" href="/library">{{ __('menu.library') }}</a></li>
+                @endif
+                <li><a class="approvetext dropdown-item" href="/about_me">{{ __('menu.aboutDeveloper') }}</a></li>
+                <li><a class="approvetext dropdown-item" href="/about_project">{{ __('menu.aboutProject') }}</a></li>
+                <li><a class="approvetext dropdown-item" href="/showPatch/2">{{ __('menu.patchNotes') }}</a></li>
 
                 @if (auth()->check())
-                    <li><a class="dropdown-item" href="/displayAllTexts">{{ __('menu.texts') }}</a></li>
-                    <li><a class="dropdown-item" href="/profile">{{ __('menu.profile', ['name' => auth()->user()->name]) }}</a></li>
+                    <li><a class="approvetext dropdown-item" href="/displayAllTexts">{{ __('menu.texts') }}</a></li>
+                    <li><a class="approvetext dropdown-item" href="/profile">{{ __('menu.profile', ['name' => auth()->user()->name]) }}</a></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="dropdown-item">{{ __('menu.logout') }}</button>
+                            <button type="submit" class="approvetext dropdown-item">{{ __('menu.logout') }}</button>
                         </form>
                     </li>
                 @else
-                    <li><a class="dropdown-item" href="/login">{{ __('menu.login') }}</a></li>
-                    <li><a class="dropdown-item" href="/register">{{ __('menu.register') }}</a></li>
+                    <li><a class="approvetext dropdown-item" href="/login">{{ __('menu.login') }}</a></li>
+                    <li><a class="approvetext dropdown-item" href="/register">{{ __('menu.register') }}</a></li>
                 @endif
             </ul>
         </div>
@@ -89,7 +102,25 @@
 
    </div> 
 </nav>
-<div class="mainContent">
+<div class="mainContent"
+@if (auth()->check())
+>
+@else
+    style="padding-top: 0px;
+    margin-top: 3rem;
+    "
+>
+
+    <div class="displayFlex">
+        <div class="horizontal-fill"></div>
+        <a href="/login">
+            <button class="standartButton">{{ __('menu.login') }} </button>
+        </a>
+        <a href="/register">
+            <button class="approveButton">{{ __('menu.register') }}</button>
+        </a>
+    </div>
+@endif
 @yield('content')
 </div>
 <div class="heightbox"></div>

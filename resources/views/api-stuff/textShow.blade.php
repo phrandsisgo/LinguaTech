@@ -1,7 +1,7 @@
 @extends('layouts.lingua_main')
 @section('title', 'text')
 @section('head')
-<style>
+    <style>
         p {
             font-family: 'Arial', sans-serif;
             font-size: 16px;
@@ -14,6 +14,12 @@
         .word {
             cursor: pointer;
             display: inline;
+        }
+
+        #selectionDropdown {
+            position: absolute;
+            background-color: white;
+            display: none;
         }
     </style>
     <script defer>
@@ -41,13 +47,65 @@
                             span.addEventListener('mouseover', () => span.classList.add('highlighted'));
                             span.addEventListener('mouseout', () => span.classList.remove('highlighted'));
                             
-                            span.addEventListener('click', (e) => handleClick(part, sentence, e));
+                            span.addEventListener('click', (e) => handleClick(part, e));
                         }
                         textContainer.appendChild(span);
                     }
                 });
             });
+            document.addEventListener('mouseup', handleSelection);
         });
+
+        function handleSelection() {
+            const selection = window.getSelection();
+            const selectedText = selection.toString().trim();
+
+            if (selectedText.length > 0) {
+                const range = selection.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
+
+                const dropdown = document.getElementById('selectionDropdown');
+                dropdown.style.left = `${rect.left}px`;
+                dropdown.style.top = `${rect.bottom + window.scrollY}px`;
+                dropdown.style.display = 'block';
+            } else {
+                document.getElementById('selectionDropdown').style.display = 'none';
+            }
+        }
+
+        function translateSelection() {
+            console.log("translateSelection");
+            event.preventDefault(); //kann vielleicht auskommentiert werrden.
+            const selectedText = window.getSelection().toString().trim();
+
+            if (selectedText) {
+                console.log(selectedText);// Use the same logic as handleClick, but without the event parameter
+                const localLanguage = document.getElementById('currentLocalLanuguage').innerText;
+                const translateWord = {
+                    word: selectedText,
+                    baseLang: "{{$text -> langOption -> language_code}}",
+                    targetLang: localLanguage,
+                };
+                var csrf = document.querySelector('meta[name="_token"]').content;
+
+                const formData = JSON.stringify(translateWord);
+
+                fetch('/translate/', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrf
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    openModal(data);
+                })
+                .catch(error => console.error('Error:', error));
+                    }
+                    document.getElementById('selectionDropdown').style.display = 'none';
+                }
 
 
        
@@ -70,6 +128,9 @@
     <p class="pagetitle ">{{$text->title}}</p>
     <p id="textContainer" class="section-content"> </p>
     <br><br><br>
+    <div id="selectionDropdown">
+        <button onclick="translateSelection()" class="standartButton" style="padding:4px">{{ __('api_texts.translate') }}</button>
+    </div>
 
 
 
@@ -126,18 +187,18 @@
         document.getElementById('wordAddForm').submit(); */
     }
 
-function handleClick(word, sentence, event) {
+function handleClick(word, event) {
         
 
-        const localLanguage = document.getElementById('currentLocalLanuguage').innerText;
-        event.preventDefault();
-        const translateWord = {
-            word: word,
-            baseLang: "{{$text -> langOption -> language_code}}",
-            targetLang: localLanguage,
-        };
-        var csrf = document.querySelector('meta[name="_token"]').content;
-        //console.log(csrf)
+    const localLanguage = document.getElementById('currentLocalLanuguage').innerText;
+    event.preventDefault();
+    const translateWord = {
+        word: word,
+        baseLang: "{{$text -> langOption -> language_code}}",
+        targetLang: localLanguage,
+    };
+    var csrf = document.querySelector('meta[name="_token"]').content;
+    //console.log(csrf)
 
     const formData = JSON.stringify(translateWord);
     let translatedWord='';
