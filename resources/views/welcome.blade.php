@@ -58,7 +58,7 @@ scrollContainer.addEventListener('mouseout', () => {
   <div class="row align-items-center g-5 py-5">
     <!-- Title and Text Block -->
     <div class="col-lg-6">
-      <h1 class="display-5 fw-bold lh-1 mb-3 font-color-main">
+      <h1 class="display-6 fw-bold lh-1 mb-3 font-color-main">
         {{ __('welcomepage.title') }}
       </h1>
       <!-- Image (Visible on smaller screens) -->
@@ -95,7 +95,7 @@ scrollContainer.addEventListener('mouseout', () => {
         <!-- Slide 1 -->
         <div class="carousel-item active">
             <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: rgba(206, 212, 218, 0.1);">
-                <div class="text-center">
+                <div class="text-center text-carousel-welcome">
                     <h3 class="font-color-main">{{ __('welcomepage.carousel_slide1_title') }}</h3>
                     <p class="font-color-main">{{ __('welcomepage.carousel_slide1_text') }}</p>
                 </div>
@@ -104,7 +104,7 @@ scrollContainer.addEventListener('mouseout', () => {
         <!-- Slide 2 -->
         <div class="carousel-item">
             <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: rgba(206, 212, 218, 0.1);">
-                <div class="text-center">
+                <div class="text-center text-carousel-welcome">
                     <h3 class="font-color-main">{{ __('welcomepage.carousel_slide2_title') }}</h3>
                     <p class="font-color-main">{{ __('welcomepage.carousel_slide2_text') }}</p>
                 </div>
@@ -113,7 +113,7 @@ scrollContainer.addEventListener('mouseout', () => {
         <!-- Slide 3 -->
         <div class="carousel-item">
             <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: rgba(206, 212, 218, 0.1);">
-                <div class="text-center">
+                <div class="text-center text-carousel-welcome">
                     <h3 class="font-color-main">{{ __('welcomepage.carousel_slide3_title') }}</h3>
                     <p class="font-color-main">{{ __('welcomepage.carousel_slide3_text') }}</p>
                 </div>
@@ -141,7 +141,7 @@ scrollContainer.addEventListener('mouseout', () => {
     <img id="gif2" class="rounded-lg-3" src="{{ asset('Images/apiGif.gif')}}" alt="{{ __('welcomepage.text_function') }}" style="padding-bottom:5px; max-width: 100%; height: auto;">
   </div>
   <div class="col-lg-7 offset-lg-1 p-3 p-lg-5 pt-lg-3">
-    <h1 class="display-4 fw-bold lh-1 font-color-main">{{ __('welcomepage.reverse_hero_title') }}</h1>
+    <h1 class="display-6 fw-bold lh-1 font-color-main">{{ __('welcomepage.reverse_hero_title') }}</h1>
     <p class="lead font-color-main">{{ __('welcomepage.reverse_hero_text') }}</p>
     <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
       <a href="/register">
