@@ -50,6 +50,31 @@
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
 
+                <!-- Show Password Checkbox -->
+                <div class="mt-2">
+                    <input type="checkbox" id="show-password" onclick="togglePassword()">
+                    <label for="show-password" class="section-content">{{ __('Show Password') }}</label>
+                </div>
+
+                <!-- JavaScript to toggle password visibility --><!-- JavaScript to toggle password visibility -->
+                <script>
+                    function togglePassword() {
+                        // Access both the password field and the confirmation field
+                        var passwordField = document.getElementById('password');
+                        var confirmPasswordField = document.getElementById('password_confirmation');
+
+                        // Check the current type of the fields and switch between 'password' and 'text'
+                        if (passwordField.type === 'password' || confirmPasswordField.type === 'password') {
+                            passwordField.type = 'text';
+                            confirmPasswordField.type = 'text';
+                        } else {
+                            passwordField.type = 'password';
+                            confirmPasswordField.type = 'password';
+                        }
+                    }
+                </script>
+
+
                 <!-- Remember Me -->
                 <div class="block mt-4">
                     <label for="remember_me" class="inline-flex items-center">

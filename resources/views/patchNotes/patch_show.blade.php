@@ -22,6 +22,7 @@
     <br>
     <br>
     <br>
+    {{-- 
    <p class="sectiontitle">Kommentarsektion:</p>
     <br>
     <div class="showComments">
@@ -60,4 +61,5 @@
        </div>
     </form>
     @endif
+    --}}
  @endsection
