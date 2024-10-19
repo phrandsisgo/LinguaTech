@@ -6,6 +6,7 @@ use App\Http\Controllers\WordListController;
 use App\Http\Controllers\PatchNotesController;
 use App\Http\Controllers\LingApiController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Mailgun\Mailgun;
 
@@ -169,6 +170,20 @@ Route::post('/updateTextFunction/{id}', [LingApiController::class, 'updateTextFu
 
 Route::get('/displayAllTexts', [LingApiController::class, 'displayAllTexts'])
 ->name('displayAllTexts')->middleware('auth');
+
+//routes for the Stripe payment
+Route::get('/stripe', [StripeController::class, 'index'])->
+name('stripe.index');
+
+
+Route::post('/checkout', [StripeController::class, 'checkout'])
+->name('checkout');
+
+Route::get('/success', [StripeController::class, 'success'])->
+name('checkout.success');
+
+Route::get('/cancel', [StripeController::class, 'cancel'])->
+name('checkout.cancel');
 
 Route::post('/translate', [LingApiController::class, 'translate'])
 ->name('translate')->middleware('auth');
