@@ -187,6 +187,10 @@ name('checkout.cancel');
 
 Route::post('/translate', [LingApiController::class, 'translate'])
 ->name('translate')->middleware('auth');
+
+Route::post('/profile/cancel-subscription', [ProfileController::class, 'cancelSubscription'])
+->name('profile.cancel-subscription');
+
 //Route to change the UI language of the app
 Route::get('/language/{lang}',[LanguageController::class, 'changeLanguage'])
     ->middleware('SetLanguageMiddleware')

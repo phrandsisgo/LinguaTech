@@ -29,6 +29,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        //to save the last login
+        $user = $request->user();
+        $user->last_logged_in = now();
+        $user->save();
+
         if ($request->has('remember')) {
             Auth::login(Auth::user(), true);
         }
