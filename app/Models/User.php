@@ -45,6 +45,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'subscribed_until',
+
+    ];
 
 
     public function createdWordLists(){

@@ -41,10 +41,11 @@ $path = "profile";
             <div class="mt-4">
                 <h3 class="sectiontitle">Abonnement Details</h3>
                 <p class="section-content"><strong>Credits übrig:</strong> {{ $user->credits }}</p>
-                <p class="section-content"><strong>Abonnement läuft bis:</strong> {{ $user->subscribed_until ? $user->subscribed_until->format('d.m.Y H:i') : 'Kein aktives Abonnement' }}</p>
+                <p class="section-content"><strong>Abonnement läuft bis:</strong> {{ $user->subscribed_until ? \Carbon\Carbon::parse($user->subscribed_until)->toFormattedDateString() : 'Kein aktives Abonnement' }}</p>
+
 
                 @if($user->subscribed_until && now()->lessThanOrEqualTo($user->subscribed_until))
-                    <p class="section-content">Du kannst dein Abo noch bis zum {{ $user->subscribed_until->format('d.m.Y') }} nutzen.</p>
+                    <p class="section-content">Du kannst dein Abo noch bis zum {{ $user->subscribed_until}} nutzen.</p>
 
                     <form action="{{ route('profile.cancel-subscription') }}" method="POST">
                         @csrf
@@ -55,6 +56,29 @@ $path = "profile";
                 @endif
             </div>
         </div>
+    </div>
+
+    <div class="mt-4">
+        <h3>Abonnement Details</h3>
+
+        @if($user->stripe_subscription_id)
+            <p><strong>Status:</strong> {{ ucfirst($user->subscription_status) }}</p>
+            
+            <p class="section-content"><strong>Abonnement läuft bis:</strong> {{ $user->subscribed_until }}</p>
+
+
+            @if($user->subscription_status === 'active')
+                <form action="{{ route('profile.cancel-subscription') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Abo kündigen</button>
+                </form>
+            @else
+                <p>Dein Abonnement ist {{ $user->subscription_status }}.</p>
+            @endif
+        @else
+            <p>Du hast kein aktives Abonnement.</p>
+            <a href="{{ route('stripe.index') }}" class="btn btn-primary">Abonnement abschließen</a>
+        @endif
     </div>
    
 @endsection
