@@ -146,5 +146,29 @@ class ProfileController extends Controller
         return redirect('/initiateProfile');
     }
 
+    public function cancelSubscription(Request $request){
+        $user = $request->user();
+
+        if ($user->stripe_subscription_id) {
+            \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET'));
+
+            try {
+                // Abonnement bei Stripe kündigen
+                $subscription = \Stripe\Subscription::retrieve($user->stripe_subscription_id);
+                $subscription->cancel();
+
+                // Abonnementstatus aktualisieren
+                $user->subscription_status = 'canceled';
+                $user->save();
+
+                return redirect('/profile')->with('status', 'Dein Abonnement wurde gekündigt.');
+            } catch (\Exception $e) {
+                return redirect('/profile')->with('error', 'Fehler bei der Kündigung des Abonnements: ' . $e->getMessage());
+            }
+        }
+
+        return redirect('/profile')->with('error', 'Du hast kein aktives Abonnement.');
+    }
+
     
 }
