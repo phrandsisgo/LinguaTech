@@ -38,47 +38,49 @@ $path = "profile";
                     {{ session('status') }}
                 </div>
             @endif
+
             <div class="mt-4">
-                <h3 class="sectiontitle">Abonnement Details</h3>
-                <p class="section-content"><strong>Credits übrig:</strong> {{ $user->credits }}</p>
-                <p class="section-content"><strong>Abonnement läuft bis:</strong> {{ $user->subscribed_until ? \Carbon\Carbon::parse($user->subscribed_until)->toFormattedDateString() : 'Kein aktives Abonnement' }}</p>
-
-
+                <h3 class="sectiontitle">{{ __('profile.subscription_details') }}</h3>
+                <p class="section-content"><strong>{{ __('profile.credits_remaining') }}</strong> {{ $user->credits }}</p>
                 @if($user->subscribed_until && now()->lessThanOrEqualTo($user->subscribed_until))
-                    <p class="section-content">Du kannst dein Abo noch bis zum {{ $user->subscribed_until}} nutzen.</p>
+                    <p class="section-content"><strong>{{ __('profile.subscription_expires_on') }}</strong> {{ $user->subscribed_until ? \Carbon\Carbon::parse($user->subscribed_until)->toFormattedDateString() : __('profile.no_active_subscription') }}</p>
 
-                    <form action="{{ route('profile.cancel-subscription') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Abo kündigen</button>
-                    </form>
+                    <p class="section-content">{{ __('profile.subscription_valid_until', ['subscribed_until' => \Carbon\Carbon::parse($user->subscribed_until)->toFormattedDateString()]) }}</p>
+
+                    @if($user->subscription_status === 'active')
+                        <form action="{{ route('profile.cancel-subscription') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">{{ __('profile.cancel_subscription') }}</button>
+                        </form>
+                    @elseif (ucfirst($user->subscription_status) === 'Canceled')
+                        <a href="/stripe" class="standartButton" style="text-decoration: none;">{{ __('profile.renew_subscription') }}</a>
+                    @endif
                 @else
-                    <p class="section-content">Du hast kein aktives Abonnement.</p>
+                    <p class="section-content">{{ __('profile.no_active_subscription') }}</p>
                 @endif
             </div>
-        </div>
-    </div>
 
-    <div class="mt-4">
-        <h3>Abonnement Details</h3>
+            <div class="mt-4">
+                <h3 class="sectiontitle">{{ __('profile.subscription_status') }}</h3>
 
-        @if($user->stripe_subscription_id)
-            <p><strong>Status:</strong> {{ ucfirst($user->subscription_status) }}</p>
-            
-            <p class="section-content"><strong>Abonnement läuft bis:</strong> {{ $user->subscribed_until }}</p>
+                @if($user->stripe_subscription_id)
+                    <p class="section-content"><strong>{{ __('profile.status') }}</strong> {{ ucfirst($user->subscription_status) }}</p>
+                    
+                    <p class="section-content"><strong>{{ __('profile.subscription_expires_on') }}</strong> {{ $user->subscribed_until ? \Carbon\Carbon::parse($user->subscribed_until)->toFormattedDateString() : __('profile.no_active_subscription') }}</p>
 
+                    @if($user->subscription_status === 'active')
+                        <form action="{{ route('profile.cancel-subscription') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">{{ __('profile.cancel_subscription') }}</button>
+                        </form>
+                    @else
+                        <p class="section-content">{{ __('profile.your_subscription_is', ['subscription_status' => $user->subscription_status]) }}</p>
+                    @endif
+                @else
+                    <p class="section-content">{{ __('profile.no_active_subscription') }}</p>
+                    <a href="{{ route('stripe.index') }}" class="btn btn-primary">{{ __('profile.subscribe_now') }}</a>
+                @endif
+            </div>
 
-            @if($user->subscription_status === 'active')
-                <form action="{{ route('profile.cancel-subscription') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Abo kündigen</button>
-                </form>
-            @else
-                <p>Dein Abonnement ist {{ $user->subscription_status }}.</p>
-            @endif
-        @else
-            <p>Du hast kein aktives Abonnement.</p>
-            <a href="{{ route('stripe.index') }}" class="btn btn-primary">Abonnement abschließen</a>
-        @endif
-    </div>
    
 @endsection

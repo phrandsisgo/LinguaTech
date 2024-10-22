@@ -184,6 +184,7 @@ name('checkout.success');
 
 Route::get('/cancel', [StripeController::class, 'cancel'])->
 name('checkout.cancel');
+
 Route::post('/profile/cancel-subscription', [ProfileController::class, 'cancelSubscription'])
 ->name('profile.cancel-subscription');
 
