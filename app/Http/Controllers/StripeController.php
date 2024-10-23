@@ -52,7 +52,7 @@ class StripeController extends Controller
         $session_id = $request->get('session_id');
     
         if (!$session_id) {
-            return redirect('/')->with('error', 'Keine Session ID gefunden.');
+            return view('payments/payment-failed');
         }
     
         \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET'));
@@ -79,7 +79,14 @@ class StripeController extends Controller
     
         $user->save();
     
-        return redirect('/profile')->with('status', 'Abonnement erfolgreich aktiviert.');
+        $amount = '10.00 EUR';
+        $subscriptionEndDate = $user->subscribed_until->format('Y-m-d');
+
+        return view('payments/success-payment', [
+            'user' => $user,
+            'amount' => $amount,
+            'subscriptionEndDate' => $subscriptionEndDate,
+        ]);
     }
     public function cancel()
     {

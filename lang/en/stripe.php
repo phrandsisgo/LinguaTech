@@ -19,4 +19,12 @@ return [
     'go_to_dashboard' => 'Go to Dashboard',
     'go_to_library' => 'Go to Library',
     'subscribe_now' => 'Subscribe Now',
+    'payment_failed' => 'Payment failed',
+    'try_again' => 'Try again',
+    'back_main_page' => 'Back to main page',
+    'successfull_payment' => 'Payment was successful.',
+    'thanks for purchase' => 'Thank you for your purchase!',
+    'recieve_payment' => 'We have received your payment of :amount.',
+    'subscription_active_until' => 'Your subscription is now paid until :date.',
+    'close' => 'Close',
 ];
