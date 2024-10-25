@@ -22,7 +22,7 @@ class AdminAccessMiddleware
         if (Auth::check() && in_array(Auth::id(), $allowedUserIds)) {
             return $next($request);
         }
-        dd($request);
-        abort(403);
+        //dd($request);
+        abort(403, $request->user()->id . ' is not allowed to access Filament');
     }
 }
