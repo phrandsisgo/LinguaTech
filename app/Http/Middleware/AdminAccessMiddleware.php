@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AdminAccessMiddleware
 {
@@ -16,6 +17,8 @@ class AdminAccessMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        //log datas for debugging
+        Log::info('AdminAccessMiddleware: User ID - ' . $request->user()->id . ', Request - ' . json_encode($request->all()));
         //define user IDS that are allowed to access Filament
         $allowedUserIds = [1,9];
         //check if the user is allowed to access Filament
