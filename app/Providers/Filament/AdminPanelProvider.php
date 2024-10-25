@@ -17,6 +17,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\Gate;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -50,9 +52,23 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                \App\Http\Middleware\AdminAccessMiddleware::class
             ])
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+
+    protected function shouldRegisterNavigation(): bool
+    {
+        // Gate-Definition für das Whitelisting basierend auf Benutzer-IDs
+        Gate::define('viewAdminPanel', function ($user) {
+            // Liste der erlaubten User-IDs
+            $allowedUserIds = [1, 2, 3]; // Beispiel-IDs, hier kannst du die richtigen IDs einfügen
+            return in_array($user->id, $allowedUserIds);
+        });
+
+        // Beschränkung des Zugriffs auf das Panel nur für Whitelisted-Benutzer
+        return Gate::allows('viewAdminPanel');
     }
 }
