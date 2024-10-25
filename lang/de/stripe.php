@@ -19,4 +19,12 @@ return [
     'go_to_dashboard' => 'Zum Dashboard',
     'go_to_library' => 'Zur Bibliothek',
     'subscribe_now' => 'Jetzt abonnieren',
+    'payment_failed' => 'Zahlung fehlgeschlagen',
+    'try_again' => 'Erneut versuchen',
+    'back_main_page' => 'Zurück zur Startseite',
+    'successfull_payment' => 'Die Zahlung war erfolgreich.',
+    'thanks_for_purchase' => 'Vielen Dank für Ihren Kauf!',
+    'recieve_payment' => 'Wir haben Ihre Bezahlung im Wert von :amount erhalten.',
+    'subscription_active_until' => 'Ihr Abonnement ist ist nun bis :date bezahlt.',
+    'close' => 'Schließen',
 ];

@@ -705,6 +705,30 @@ $iconSize: 4rem; //gehört zu IconSize
 
     }
 }   
+
+.successButton{
+
+    //das wäre ein guter Ansatz bei color invert
+    
+    background-color: $approve;
+    color: $contrast;
+    border: 2px solid $approve;
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    margin-left:0;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    //height: 5.1rem;
+    text-decoration: none;
+
+    &:hover{
+        background-color: $approve60;
+        color: white;
+    }
+
+}   
 .approveButton{
     background-color: $contrast;
     color: $background10;
