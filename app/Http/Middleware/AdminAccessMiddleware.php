@@ -22,6 +22,7 @@ class AdminAccessMiddleware
         if (Auth::check() && in_array(Auth::id(), $allowedUserIds)) {
             return $next($request);
         }
+        dd($request);
         abort(403);
     }
 }
