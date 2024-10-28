@@ -99,20 +99,18 @@ function naechsteKarte() {
     updateKarte();
 }
 
-
 function updateKarte() {
     var countAnzeigeA = document.getElementById('countAnzeigeA');
     var countAnzeigeB = document.getElementById('countAnzeigeB');
-    countAnzeigeA.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
-    countAnzeigeB.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
-
+    countAnzeigeA.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length;
+    countAnzeigeB.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length;
 
     const kartenTextBase = document.getElementById('baseWord');
     const kartenTextTarget = document.getElementById('targetWord');
-    kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex][0];
-    kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex][1];
-
+    kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex].base_word;
+    kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex].target_word;
 }
+
 document.getElementById('zurueckBtn').addEventListener('click', function() {
     document.getElementById('karteModal').style.display = 'none';
 });

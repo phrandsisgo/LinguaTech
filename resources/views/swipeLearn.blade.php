@@ -2,14 +2,12 @@
 @section('title', 'Home')
 @section('head')
 
-
 <script src="https://hammerjs.github.io/dist/hammer.js"></script> 
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
 @vite(['resources/css/application.scss', 'resources/css/animations.scss', 'resources/js/animations.js'])
-
 
 <meta name="_token" content="{{ csrf_token() }}">
 @endsection
@@ -18,7 +16,7 @@
 <p class="sectiontitle swipeLearnTitle">{{$liste->name}}</p>
 
 <div class="karteContent">
-    <div class="flip-card-inner"id="flip-card-inner">
+    <div class="flip-card-inner" id="flip-card-inner">
         <div class="flashCardContent frontface" id="flashCardContent">
             <div class="countZeile">
                 <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigB">0</p></div>
@@ -33,7 +31,6 @@
                 <div class="horizontal-fill"></div>
                 <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerRight()">
             </div>
-
         </div>
 
         <div class="flashCardContent backface" id="flashCardContent">
@@ -58,7 +55,6 @@
 
 <div id="swipeStatistikModal" style="display:none;">
     <div class="modal-content">
-        
         <h2>{{ __('swipe.swipeStatistics') }}</h2>
         <p>{{ __('swipe.unknownAnswersCount')}} <span id="leftSwipeCount"></span></p>
         <p>{{ __('swipe.knownAnswersCount')}} <span id="rightSwipeCount"></span></p>
@@ -71,23 +67,34 @@
 </div>
 
 <script>
+// Globale Variablen
+var listLength = {{count($liste->words)}};
+var listProgress = 0;
+var doneAnzeige = 0;
+var repAzeig = 0;
+var aktuelleKarteIndex = 0;
+var unknownAnswers = [];
 
-var listLength={{count($liste->words)}};
-var listProgress=0;
-var doneAnzeige=0;
-var repAzeig=0;
-let aktuelleKarteIndex = 0;
-let unknownAnswers = [];
+@php
+$woerterbuch = $liste->words->map(function ($word) {
+    return [
+        'base_word' => $word->base_word,
+        'target_word' => $word->target_word,
+        'id' => $word->id,
+        'learned' => false,
+    ];
+});
+@endphp
 
-var woerterbuch = @json($liste->words->map(function ($word) {
-    return [$word->base_word, $word->target_word, $word->id]; 
-}));
+var woerterbuch = @json($woerterbuch);
 
+// Funktionen
 function zeigeStatistikModal() {
     document.getElementById('leftSwipeCount').textContent = repAzeig;
     document.getElementById('rightSwipeCount').textContent = doneAnzeige;
     document.getElementById('swipeStatistikModal').style.display = 'block';
 }
+
 function handleSwipe(direction, wordId) {
     event.preventDefault();
     const requestData = {
@@ -95,10 +102,8 @@ function handleSwipe(direction, wordId) {
         direction: direction
     };
     var csrf = document.querySelector('meta[name="_token"]').content;
-    //console.log(csrf)
 
     const formData = JSON.stringify(requestData);
-    //let translatedWord='';
 
     fetch('/swipeHandle/', {
             method: 'POST',
@@ -110,13 +115,11 @@ function handleSwipe(direction, wordId) {
         })
     .then(response => response.json())
     .then(data => {
-
-           // openModal(data);
-            // return data;
+           // Handle response if needed
     })
-    .catch(error => console.error('Error:', error));
-        
+    .catch(error => console.error('Error:', error));   
 }
+
 function updateUI() {
     // Aktualisiere die Wortzähler
     var countAnzeigeA = document.getElementById('countAnzeigeA');
@@ -124,12 +127,12 @@ function updateUI() {
     countAnzeigeA.textContent = "1/" + woerterbuch.length + " Wörter";
     countAnzeigeB.textContent = "1/" + woerterbuch.length + " Wörter";
 
-    // Zeige das erste Wort der neuen Liste an
+    // Zeige das erste Wort an
     const kartenTextBase = document.getElementById('baseWord');
     const kartenTextTarget = document.getElementById('targetWord');
     if (woerterbuch.length > 0) {
-        kartenTextBase.textContent = woerterbuch[0][0];
-        kartenTextTarget.textContent = woerterbuch[0][1];
+        kartenTextBase.textContent = woerterbuch[0].base_word;
+        kartenTextTarget.textContent = woerterbuch[0].target_word;
     } else {
         // Zeige eine Meldung an, wenn keine Wörter übrig sind
         kartenTextBase.textContent = "Keine Wörter übrig.";
@@ -146,96 +149,49 @@ function updateUI() {
     aktuelleKarteIndex = 0;
     repAzeig = 0;
     doneAnzeige = 0;
-
-    // Zusätzliche UI-Elemente, die aktualisiert werden müssen, können hier hinzugefügt werden
 }
-
 
 function restartWithUnknownAnswers(){
-    if (unknownAnswers.length > 0) {
-         // Filtere das Wörterbuch, um nur die falsch beantworteten Wörter zu behalten
-         woerterbuch = woerterbuch.filter(word => unknownAnswers.includes(word[2]));
-        aktuelleKarteIndex = 0;
+    var unlearnedWords = woerterbuch.filter(word => !word.learned);
+    if (unlearnedWords.length > 0) {
+        aktuelleKarteIndex = woerterbuch.findIndex(word => !word.learned);
+        // Zähler zurücksetzen
         repAzeig = 0;
         doneAnzeige = 0;
-        listLength = woerterbuch.length; // Aktualisiere die Gesamtzahl der Wörter
-        // Aktualisiere die UI entsprechend
-        updateUI();
-        // Schließe das Modal
+        listLength = unlearnedWords.length;
+        updateKarte();
         document.getElementById('swipeStatistikModal').style.display = 'none';
     } else {
-        alert("Es gibt keine falsch beantworteten Wörter zum Wiederholen.");
+        alert("Herzlichen Glückwunsch! Du hast alle Wörter gelernt.");
     }
-    
 }
-const karteContent = document.getElementById('flip-card-inner');
-function triggerLeft(){
 
-    if (!unknownAnswers.includes(woerterbuch[aktuelleKarteIndex][2])) {
-        unknownAnswers.push(woerterbuch[aktuelleKarteIndex][2]);
-        console.log("ID des nicht gewussten Wortes gespeichert:", woerterbuch[aktuelleKarteIndex][2]);
-    }
-
-    karteContent.classList.add('animate__rollOut__left');
-
-    //  class has to be removed after the animation ends to allow it to be triggered again
-    karteContent.addEventListener('animationend', function(){
-        karteContent.classList.remove('animate__rollOut__left','flipInY', 'flipOutY');
-    });    
-    
+function showNextWord() {
     aktuelleKarteIndex++;
-    repAzeig++;
+    while (aktuelleKarteIndex < woerterbuch.length && woerterbuch[aktuelleKarteIndex].learned) {
+        aktuelleKarteIndex++;
+    }
     if (aktuelleKarteIndex >= woerterbuch.length) {
         zeigeStatistikModal();
-        //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
+    } else {
+        updateKarte();
     }
-    
-    console.log(aktuelleKarteIndex, woerterbuch.length);
-    console.log("Aktuelle Karte ID:" +woerterbuch[aktuelleKarteIndex][2])
+}
+
+function updateKarte() {
     var countAnzeigeA = document.getElementById('countAnzeigeA');
     var countAnzeigeB = document.getElementById('countAnzeigeB');
-    countAnzeigeA.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
-    countAnzeigeB.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
-
+    countAnzeigeA.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length + " Wörter";
+    countAnzeigeB.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length + " Wörter";
 
     const kartenTextBase = document.getElementById('baseWord');
     const kartenTextTarget = document.getElementById('targetWord');
-    kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex][0];
-    kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex][1];
-    document.getElementById('repAzeigA').innerHTML=repAzeig;
-    document.getElementById('repAzeigB').innerHTML=repAzeig;
-    handleSwipe("left", woerterbuch[aktuelleKarteIndex][2]);
-}
-function triggerRight(){
-    karteContent.classList.add('animate__rollOut__right');
-    //  class has to be removed after the animation ends to allow it to be triggered again
-    karteContent.addEventListener('animationend', function(){
-        karteContent.classList.remove('animate__rollOut__right','flipInY', 'flipOutY');
-    });
-    aktuelleKarteIndex++;
-    doneAnzeige++;
-    if (aktuelleKarteIndex >= woerterbuch.length) {
-        zeigeStatistikModal();
-        //aktuelleKarteIndex = 0; // Zurück zum Anfang, wenn das Ende erreicht ist
-    }
-    console.log("Aktuelle Karte ID:" +woerterbuch[aktuelleKarteIndex][2])
-    var countAnzeigeA = document.getElementById('countAnzeigeA');
-    var countAnzeigeB = document.getElementById('countAnzeigeB');
-    countAnzeigeA.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
-    countAnzeigeB.textContent = aktuelleKarteIndex+1+"/"+woerterbuch.length;
-
-    const kartenTextBase = document.getElementById('baseWord');
-    const kartenTextTarget = document.getElementById('targetWord');
-    kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex][0];
-    kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex][1];
-    document.getElementById('doneAnzeigeA').innerHTML=doneAnzeige;
-    document.getElementById('doneAnzeigeB').innerHTML=doneAnzeige;
-    handleSwipe("right", woerterbuch[aktuelleKarteIndex][2]);
+    kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex].base_word;
+    kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex].target_word;
 }
 
 function showUebersetzung(){
     var flipcard = document.getElementById('flip-card-inner');
-    
     if(flipcard.classList.contains('turnCard')){
         flipcard.classList.remove('turnCard');
     }else{
@@ -243,11 +199,46 @@ function showUebersetzung(){
     }
 }
 
+function triggerLeft(){
+    // Animation hinzufügen
+    console.log('triggerLeft');
+    var karteContent = document.getElementById('flip-card-inner');
+    karteContent.classList.add('animate__rollOut__left');
+    karteContent.addEventListener('animationend', function(){
+        karteContent.classList.remove('animate__rollOut__left');
+    });
+
+    repAzeig++;
+    document.getElementById('repAzeigA').innerHTML = repAzeig;
+    document.getElementById('repAzeigB').innerHTML = repAzeig;
+    handleSwipe("left", woerterbuch[aktuelleKarteIndex].id);
+
+    // Nächste Karte anzeigen
+    showNextWord();
+}
+
+function triggerRight(){
+    // Animation hinzufügen
+    var karteContent = document.getElementById('flip-card-inner');
+    karteContent.classList.add('animate__rollOut__right');
+    karteContent.addEventListener('animationend', function(){
+        karteContent.classList.remove('animate__rollOut__right');
+    });
+
+    // Lernstatus aktualisieren
+    woerterbuch[aktuelleKarteIndex].learned = true;
+    doneAnzeige++;
+    document.getElementById('doneAnzeigeA').innerHTML = doneAnzeige;
+    document.getElementById('doneAnzeigeB').innerHTML = doneAnzeige;
+    handleSwipe("right", woerterbuch[aktuelleKarteIndex].id);
+
+    // Nächste Karte anzeigen
+    showNextWord();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    var baseWord = document.getElementById('baseWord');
-    var targetWord = document.getElementById('targetWord');
-    baseWord.innerHTML=woerterbuch[0][0];
-    targetWord.innerHTML=woerterbuch[0][1];
+    // Initialisiere die UI
+    updateUI();
 });
 </script>
 @endsection
