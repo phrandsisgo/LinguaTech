@@ -539,7 +539,11 @@ $iconSize: 4rem; //gehört zu IconSize
 .pagetitle{
     color: $contrast;
     font-size: 2.7rem;
-    font-weight: bold;
+    font-weight: 500;
+
+    @media screen and (max-width: 450px) {
+        font-size: 2rem;
+    }
 }
 .sectiontitle{
     color: $contrast;

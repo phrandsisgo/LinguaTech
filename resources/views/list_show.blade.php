@@ -12,27 +12,54 @@ function confirmDelete() {
 
 @section('content')
 <!--ich muss daraus ein component machen--->
-<div class="displayFlex">
+<div id="titleFlex">
     <div>
         <p class="pagetitle">{{$liste->name}}</p>
         <p class="section-content">{{$liste->description}}</p>
     </div>
+    <br>
     <div class="horizontal-fill"></div>
+    <div class="action-links">
     @if (Auth::user()->id == $liste->created_by)
-
-    <div>
-        <a href="/copy_list/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.list-copy') }}</p></a>
-    </div>
-        
-    <div class="space"></div>
-    <div>
-        <a href="/list_update/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.edit') }}</p></a>
-    </div>
+        <div>
+            <a href="/copy_list/{{$liste->id}}"><p class="sectiontitle noUnderline">{{ __('learn-lists.list-copy') }}</p></a>
+        </div>
+            
+        <div class="space"></div>
+        <div>
+            <a href="/list_update/{{$liste->id}}"><p class="sectiontitle noUnderline">{{ __('learn-lists.edit') }}</p></a>
+        </div>
     @endif
-    <div class="space"></div>
-    <div>
-        <a href="/swipeLearn/{{$liste->id}}"><p class="pagetitle noUnderline">{{ __('learn-lists.learn') }}</p></a>
+        <div class="space"></div>
+        <div>
+            <a href="/swipeLearn/{{$liste->id}}"><p class="sectiontitle noUnderline">{{ __('learn-lists.learn') }}</p></a>
+        </div>
     </div>
+
+    <style>
+    #titleFlex {
+        margin-bottom: 20px;
+    }
+    @media (min-width: 751px) {
+        #titleFlex {
+            display: flex;
+        }
+        .action-links {
+            display: flex;
+        }
+    }
+    @media (max-width: 750px) {
+        #titleFlex {
+            display: block;
+        }
+        .action-links {
+            display: block;
+        }
+        #titleFlex > div {
+            margin-bottom: 10px;
+        }
+    }
+    </style>
 </div>
 
 
