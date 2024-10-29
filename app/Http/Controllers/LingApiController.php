@@ -84,7 +84,7 @@ class LingApiController extends Controller
         }
         $text->title = $request->input('title');
         $text->text = $request->input('text');
-        $text->lang_option_id = $request->input('lang')[0];
+        $text->lang_option_id = $request->input('lang');
         $text->updated_at = now();
         $text->save();
         return redirect('/textShow/'.$id);
