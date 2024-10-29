@@ -53,7 +53,7 @@
                     }
                 });
             });
-            document.addEventListener('mouseup', handleSelection);
+            document.addEventListener('selectionchange', handleSelection);
         });
 
         function handleSelection() {
@@ -65,13 +65,14 @@
                 const rect = range.getBoundingClientRect();
 
                 const dropdown = document.getElementById('selectionDropdown');
-                dropdown.style.left = `${rect.left}px`;
+                dropdown.style.left = `${rect.left + window.scrollX}px`;
                 dropdown.style.top = `${rect.bottom + window.scrollY}px`;
                 dropdown.style.display = 'block';
             } else {
                 document.getElementById('selectionDropdown').style.display = 'none';
             }
         }
+
 
         function translateSelection() {
             console.log("translateSelection");

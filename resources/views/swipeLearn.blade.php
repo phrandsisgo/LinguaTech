@@ -15,6 +15,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 @section('content')
 <p class="sectiontitle swipeLearnTitle">{{$liste->name}}</p>
 
+<div class="learning-mode-selector">
+    <p>Lernmodus:</p>
+    <label>
+        <input type="radio" name="learningMode" value="base" checked> Basiswörter lernen
+    </label>
+    <label>
+        <input type="radio" name="learningMode" value="target"> Zielwörter lernen
+    </label>
+</div>
+
+
 <div class="karteContent">
     <div class="flip-card-inner" id="flip-card-inner">
         <div class="flashCardContent frontface" id="flashCardContent">
@@ -87,6 +98,16 @@ $woerterbuch = $liste->words->map(function ($word) {
 @endphp
 
 var woerterbuch = @json($woerterbuch);
+var learningMode = 'target'; // Standardmäßig Zielwörter lernen
+
+// Event Listener für die Auswahl des Lernmodus
+document.querySelectorAll('input[name="learningMode"]').forEach((elem) => {
+    elem.addEventListener("change", function(event) {
+        learningMode = event.target.value;
+        updateKarte(); // Aktualisiere die Karte entsprechend
+    });
+});
+
 
 // Funktionen
 function zeigeStatistikModal() {
@@ -186,8 +207,13 @@ function updateKarte() {
 
     const kartenTextBase = document.getElementById('baseWord');
     const kartenTextTarget = document.getElementById('targetWord');
-    kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex].base_word;
-    kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex].target_word;
+    if (learningMode === 'base') {
+        kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex].base_word;
+        kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex].target_word;
+    } else {
+        kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex].target_word;
+        kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex].base_word;
+    }
 }
 
 function showUebersetzung(){

@@ -38,7 +38,12 @@ textarea {
             <label for="language">{{ __('api_texts.language') }}</label>
             <select id="lang" name="lang" class="standartSelect">
                 @foreach ($languages as $language)
+                    @if ($language->id == $text->langOption->id)
+                    
+                        <option selected="true" value="{{ $language->id }}" >{{ $language->language_name }}</option>
+                    @else
                     <option value="{{ $language->id }}" @if ($language->id == $text->language_id) selected @endif>{{ $language->language_name }}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
