@@ -32,7 +32,7 @@ Route::get('/spielwiese', function () {
 /*Route to verify E-mail process*/
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice'); //name ist doppelt vergeben 
+})->middleware('auth')->name('verification.mail'); //name Wurde verändert könnte in Zukunft Probleme aufweisen
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();

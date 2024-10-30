@@ -1,5 +1,4 @@
 <?php
-
 return [
     'allAvailableTexts' => 'All Available Texts',
     'addNewText' => 'Add New Text',
@@ -12,7 +11,7 @@ return [
     'all-texts' => 'All Texts',
     'text-title' => 'Text Title',
     'text' => 'Text',
-    'add-language' => 'Add New Language',
+    'add-language' => 'Add Language',
     'submit' => 'Submit',
     'add-to-list' => 'Do you want to add the term to a list?',
     'wordYouAskedFor' => 'Word you asked for: ',
