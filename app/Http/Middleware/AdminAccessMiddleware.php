@@ -26,6 +26,6 @@ class AdminAccessMiddleware
             return $next($request);
         }
         //dd($request);
-        abort(403, $request->user()->id . ' is not allowed to access Filament');
+        abort(403, $request->user()->id . ' you are not allowed to access Filament');
     }
 }
