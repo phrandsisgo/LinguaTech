@@ -28,4 +28,10 @@ return [
     'save' => 'Speichern',
     "überschrift1" => "Den Text mit dem Titel ",
     "überschrift2" => " bearbeiten.",
+    'generateNewText' => 'Neuen Text generieren',
+    'textDescription' => 'Beschreibung des Textes:',
+    'textDescriptionHelper' => 'Geben Sie eine Beschreibung des Textes ein. Sie dürfen Sachen wie Themen und ',
+    'showExplenation' => 'Erklärung anzeigen',
+    'explanation' => 'Erklärung',
+    'preferableTitle' => 'Bevorzugter Titel',
 ];

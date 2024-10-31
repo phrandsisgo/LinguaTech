@@ -28,4 +28,6 @@ return [
     'save' => 'Save',
     'überschrift1' => "Edit the text with the title ",
     "überschrift2" => ".",
+    'generateNewText' => 'Generate New Text',
+    'textDescription' => 'Description of the text:',
 ];

@@ -175,15 +175,22 @@ Route::get('/displayAllTexts', [LingApiController::class, 'displayAllTexts'])
 Route::get('/stripe', [StripeController::class, 'index'])->
 name('stripe.index');
 
-
 Route::post('/checkout', [StripeController::class, 'checkout'])
-->name('checkout');
+    ->middleware('auth')
+    ->name('checkout');
 
-Route::get('/success', [StripeController::class, 'success'])->
-name('checkout.success');
+Route::get('/success', [StripeController::class, 'success'])
+    ->middleware('auth')
+    ->name('checkout.success');
 
-Route::get('/cancel', [StripeController::class, 'cancel'])->
-name('checkout.cancel');
+Route::get('/cancel', [StripeController::class, 'cancel'])
+    ->middleware('auth')
+    ->name('checkout.cancel');
+
+
+Route::get('/generate-text', function(){
+    return view('api-stuff/generateText');
+});
 
 Route::post('/profile/cancel-subscription', [ProfileController::class, 'cancelSubscription'])
 ->name('profile.cancel-subscription');
