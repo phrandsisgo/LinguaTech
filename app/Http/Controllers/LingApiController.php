@@ -70,6 +70,25 @@ class LingApiController extends Controller
         return view('api-stuff/updateTexts',['text' => $text, 'languages' => $languages]);
     }
 
+    public function generateTextView(){
+        $languages = LangOption::all();
+        $decks = WordList::where('created_by', auth()->user()->id)->get();
+        return view('api-stuff/generateText',['languages' => $languages, 'decks' => $decks]);
+    }
+
+    public function generateText(Request $request){
+        $title = $request->input('title');
+        $text = $request->input('text');
+        $lang_option_id = $request->input('lang_option_id');
+        $deck_id = $request->input('deck_id');
+    
+        // Hier rufst muss noch geschrieben werden. Entferne den dd() um es ins laufen zu bringen
+        dd("app/Http/Controllers/LingApiController.php: generateText() ändern zum beheben");
+        $text_id = createAPIRequest($title, $text, $lang_option_id, $deck_id);
+    
+        return redirect('/textShow/'.$text_id);
+    }
+
     public function updateTextFunction(Request $request){
         //dd($request->all());
         $id = $request->input('id');
