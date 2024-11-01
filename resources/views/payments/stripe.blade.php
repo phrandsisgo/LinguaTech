@@ -103,7 +103,11 @@
     });
 </script>
 <script type="text/javascript">
-    var stripe = Stripe('{{ env('STRIPE_TEST_PUBLIC') }}');
+    @if (app()->environment('production'))
+        var stripe = Stripe('{{ env('STRIPE_KEY') }}');
+    @else
+        var stripe = Stripe('{{ env('STRIPE_TEST_PUBLIC') }}');
+    @endif
 
     var checkoutButton = document.getElementById('checkout-button');
 

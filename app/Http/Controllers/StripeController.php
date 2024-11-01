@@ -13,7 +13,11 @@ class StripeController extends Controller
     }
     public function checkout()
     {
-        \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET'));
+        if(app()->environment('production')){
+            \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        } else {
+            \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET'));
+        }
 
             try{
             $session = \Stripe\Checkout\Session::create([
