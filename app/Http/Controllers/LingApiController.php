@@ -80,8 +80,9 @@ class LingApiController extends Controller
     }
 
     public function generateText(Request $request){
+        //dd("this is the request {$request->input('add-text-field')}");
         $title = $request->input('title');
-        $text = $request->input('text');
+        $text = $request->input('add-text-field');
         $lang_option_id = $request->input('lang_option_id');
         $deck_id = $request->input('deck_id');
     
@@ -99,7 +100,6 @@ class LingApiController extends Controller
     }
 
     public function updateTextFunction(Request $request){
-        //dd($request->all());
         $id = $request->input('id');
         $text = Text::find($id);
 
@@ -114,7 +114,6 @@ class LingApiController extends Controller
         $text->text = $request->input('text');
         $text->lang_option_id = $request->input('lang');
         $text->updated_at = now();
-        dd($text);
         $text->save();
         return redirect('/textShow/'.$id);
     }
@@ -134,6 +133,7 @@ class LingApiController extends Controller
     {
         // Get the target language from lang_option_id
         $languageOption = LangOption::find($lang_option_id);
+        $langdifficulty = $languageOption->difficulty;
         $targetLanguage = $languageOption ? $languageOption->language_name : 'English';
     
         // Retrieve words from the user's deck if deck_id is provided
@@ -164,10 +164,12 @@ class LingApiController extends Controller
         }
     
         // Generate the prompt
-        $prompt = $this->generateStoryPrompt($targetLanguage, 'Intermediate', $textDescription, $wordlistJSON);
+        //intermediate has to be swapped for the level of$languageOption
+        $prompt = $this->generateStoryPrompt($targetLanguage, $langdifficulty, $textDescription, $title, $wordlistJSON);
     
         // Initialize the OpenAI client
         $client = OpenAI::client(env('OPENAI_SECRET_KEY'));
+        //dd("das ist der Prompt:  {$prompt}");
     
         // Make the API call using Chat Completion endpoint
         $apiResponse = $client->chat()->create([
@@ -188,8 +190,9 @@ class LingApiController extends Controller
         return $parsedResponse; // ['title' => ..., 'story' => ...]
     }
 
-    private function generateStoryPrompt($targetLanguage, $level, $storyTopic, $wordlistJSON = null)
+    private function generateStoryPrompt($targetLanguage, $level, $storyTopic, $title, $wordlistJSON = null)
     {
+        //dd("this is the target language: {$storyTopic}");
         $basePrompt = "
     Create an engaging story in {$targetLanguage} based on the following topic and requirements:
     
@@ -207,6 +210,7 @@ class LingApiController extends Controller
     4. Include a variety of sentence structures typical for {$level}, unless the topic specifies a focus on particular structures.
     5. Ensure the story has a clear beginning, middle, and end.
     6. Aim for a story length of approximately 250-300 words. Feel free to aim for a shorter story if the user requests it in their requirements.
+    7. Mention the title \"{$title}\" in the story in a way that it is clear this is the title the user wished for. At the end of the story, translate the title into {$targetLanguage}.
     ";
     
         if ($wordlistJSON) {
