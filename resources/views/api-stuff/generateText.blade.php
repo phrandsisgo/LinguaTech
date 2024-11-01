@@ -46,9 +46,10 @@ textarea {
         <br>
         <select id="lang_option_id" name="lang_option_id" class="standartSelect">
 
-            @for ($i = 0; $i < 5; $i++)
-                <option value="language{{ $i }}">Language {{ $i + 1 }}</option>
-            @endfor
+        @foreach ($languages as $language)
+            <option value="{{ $language->id }}">{{ $language->language_name }}</option>
+                
+        @endforeach
         </select>
         <br><br>
     </div>
