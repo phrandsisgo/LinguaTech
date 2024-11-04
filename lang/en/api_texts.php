@@ -30,4 +30,9 @@ return [
     "überschrift2" => ".",
     'generateNewText' => 'Generate New Text',
     'textDescription' => 'Description of the text:',
+    'showExplenation' => 'Show Explanation',
+    'explanation' => 'Explanation',
+    'preferableTitle' => 'Preferable Title:',
+    'preferableTitleHelper' => 'Enter a preferable title for the text. This title will be shown in the list of texts.',
+    'generate_your_text' => 'Generate your text using Artificial Intelligence here.'
 ];

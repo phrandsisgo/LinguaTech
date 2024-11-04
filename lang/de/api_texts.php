@@ -33,5 +33,8 @@ return [
     'textDescriptionHelper' => 'Geben Sie eine Beschreibung des Textes ein. Sie dürfen Sachen wie Themen und ',
     'showExplenation' => 'Erklärung anzeigen',
     'explanation' => 'Erklärung',
-    'preferableTitle' => 'Bevorzugter Titel',
+    'preferableTitle' => 'Bevorzugter Titel:',
+    'preferableTitleHelper' => 'Geben Sie einen bevorzugten Titel für den Text ein. Dieser Titel wird in der Liste der Texte angezeigt.',
+    'generate_your_text' => 'Genereiere deinen Text mithilfe von Künstlicher Intelligenz hier.'
 ];
+

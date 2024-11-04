@@ -24,7 +24,8 @@ textarea {
 <form action="/generate-text" method="POST">
     @csrf
     <br>
-        <p class="section-content">Hier können Sie beschreiben was Sie genau in Ihrem Text haben wollen und was alles im Text vorkommen sollte.
+        <p class="section-content">
+            {{ __('api_texts.preferableTitleHelper') }}
             
         </p>
         <!--
@@ -35,12 +36,13 @@ textarea {
         </div>
 -->
     <div class="form-group">
+        <label for="description">{{ __('api_texts.preferableTitle') }}</label>
+        <input type="description" class="form-control" id="add-title-field" name="title" required>
+    </div>
+    <div class="form-group">
         <label for="text">{{ __('api_texts.textDescription') }}</label>
 
         <textarea class="form-control" id="text" name="add-text-field" rows="3" required></textarea>
-    <div class="form-group">
-        <label for="description">{{ __('api_texts.preferableTitle') }}</label>
-        <input type="description" class="form-control" id="add-title-field" name="title" required>
     </div>
     <div class="form-group"><label for="language" class="section-content">{{ __('api_texts.add-language') }}</label>
         <br>
@@ -65,7 +67,7 @@ textarea {
     </div>
 
     <div class="submit-wrapper-addText ">
-        <button type="submit" class="approveButton">Submit</button>
+        <button type="submit" class="approveButton">{{ __('api_texts.submit') }}</button>
     </div>
     
 </form>

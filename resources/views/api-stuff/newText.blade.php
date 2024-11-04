@@ -21,12 +21,24 @@ textarea {
 
 <p class="pagetitle">{{ __('api_texts.addNewText') }}</p>
 
+    @php
+        $subscribedUntil = \Carbon\Carbon::parse(auth()->user()->subscribed_until);
+    @endphp
+
+
+    @if($subscribedUntil && $subscribedUntil->isAfter(now()))
+        <a href="/generate-text">
+            <button class="approveButton">{{ __('api_texts.generateNewText') }}</button>
+        </a>
+    @else
+    @endif
 <form action="/createNewText" method="POST">
     @csrf
     <div class="form-group">
         <label for="title">{{ __('api_texts.text-title') }}</label>
         <input type="text" class="form-control" id="add-title-field" name="title" required>
     </div>
+
     <div class="form-group">
         <label for="text">{{ __('api_texts.text') }}</label>
         <textarea class="form-control" id="text" name="add-text-field" rows="3" required></textarea>
@@ -43,7 +55,7 @@ textarea {
     
 
     <div class="submit-wrapper-addText ">
-        <button type="submit" class="approveButton">Submit</button>
+        <button type="submit" class="approveButton">{{ __('api_texts.submit') }}</button>
     </div>
     
 </form>
