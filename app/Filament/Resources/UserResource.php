@@ -37,6 +37,14 @@ class UserResource extends Resource
                 ->dehydrateStateUsing(fn ($state) => !empty($state) ? Hash::make($state) : null)
                 ->required(fn ($livewire) => $livewire instanceof Pages\CreateUser) // Passwort nur beim Erstellen erforderlich
                 ->dehydrated(fn ($state) => !empty($state)), // Nur speichern, wenn ein Wert eingegeben wurde
+            Forms\Components\DateTimePicker::make('email_verified_at')
+                ->required()
+                ->format('Y-m-d H:i:s')
+                ->nullable(),
+            Forms\Components\DateTimePicker::make('subscribed_until')
+                ->required()
+                ->format('Y-m-d H:i:s')
+                ->nullable(),
             // Weitere Felder nach Bedarf...
         ]);
     }
@@ -50,6 +58,8 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('email_verified_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('subscribed_until')->dateTime()->sortable(),    
                 // Weitere Spalten nach Bedarf...
             ])
             ->filters([

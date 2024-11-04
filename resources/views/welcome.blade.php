@@ -231,7 +231,7 @@ scrollContainer.addEventListener('mouseout', () => {
                         <li>{{ __('stripe.unlimited_stories') }}</li>
                         <li>{{ __('stripe.unlimited_decks') }}</li>
                         <li>{{ __('stripe.unlimited_story_generation') }}</li>
-                        <li>{{ __('stripe.audiobooks_included') }}</li>
+                        
                     </ul>
                     @guest
                         <a href="/register" class="approveButton" style="text-decoration: none;">{{ __('stripe.sign_up') }}</a>
