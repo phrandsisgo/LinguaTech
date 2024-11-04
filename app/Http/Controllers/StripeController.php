@@ -28,7 +28,7 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => 'Basic Subscription Linguatech',
                         ],
-                        'unit_amount' => 1000, // 10.00 eur
+                        'unit_amount' => 300, // 3.00 eur
                         'recurring' => [
                             'interval' => 'month',
                         ],

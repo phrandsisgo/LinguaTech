@@ -55,7 +55,7 @@
                     <h4 class="my-0 font-weight-normal">{{ __('stripe.plan_premium') }}</h4>
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title pricing-card-title">8€ <small class="text-muted">/ {{ __('stripe.per_month') }}</small></h1>
+                    <h1 class="card-title pricing-card-title">3€ <small class="text-muted">/ {{ __('stripe.per_month') }}</small></h1>
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>{{ __('stripe.unlimited_stories') }}</li>
                         <li>{{ __('stripe.unlimited_decks') }}</li>
