@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'checkListAuthor' => \App\Http\Middleware\checkListAuthor::class,
         'ensure.user' => \App\Http\Middleware\EnsureUser::class,
         'SetLanguageMiddleware' => \App\Http\Middleware\SetLanguageMiddleware::class,
+        'Checksubscription' => \App\Http\Middleware\Checksubscription::class,
     ];
 }

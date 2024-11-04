@@ -29,11 +29,20 @@ function confirmDelete() {
         <div>
             <a href="/list_update/{{$liste->id}}"><p class="sectiontitle noUnderline">{{ __('learn-lists.edit') }}</p></a>
         </div>
+        <div class="space"></div>
+
+        @php
+            $subscribedUntil = \Carbon\Carbon::parse(auth()->user()->subscribed_until);
+        @endphp
+
+
+        @if($subscribedUntil && $subscribedUntil->isAfter(now()))
+            <a href="/generate-text"><p class="sectiontitle noUnderline">{{ __('api_texts.generateNewText') }}</p></a>
+        @else
+    @endif
     @endif
         <div class="space"></div>
-        <div>
             <a href="/swipeLearn/{{$liste->id}}"><p class="sectiontitle noUnderline">{{ __('learn-lists.learn') }}</p></a>
-        </div>
     </div>
 
     <style>

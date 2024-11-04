@@ -13,7 +13,11 @@ class StripeController extends Controller
     }
     public function checkout()
     {
-        \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET'));
+        if(app()->environment('production')){
+            \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        } else {
+            \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET'));
+        }
 
             try{
             $session = \Stripe\Checkout\Session::create([
@@ -24,7 +28,7 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => 'Basic Subscription Linguatech',
                         ],
-                        'unit_amount' => 1000, // 10.00 eur
+                        'unit_amount' => 300, // 3.00 eur
                         'recurring' => [
                             'interval' => 'month',
                         ],
