@@ -1,146 +1,125 @@
 @extends('layouts.lingua_main')
-@section('title', 'text')
+@section('title', __('Dashboard'))
 @section('head')
-<style>
-    p {
-        font-family: 'Arial', sans-serif;
-        font-size: 16px;
-    }
-
-    .highlighted {
-        background-color: #FFD166;
-    }
-
-    .word {
-        cursor: pointer;
-        display: inline;
-    }
-
-    #selectionDropdown {
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ddd;
-        padding: 5px;
-        display: none;
-        z-index: 1000;
-    }
-</style>
-<script defer>
-    document.addEventListener('DOMContentLoaded', function() {
-        const textContainer = document.getElementById('textContainer');
-        const text = {!! json_encode($text->text) !!};
-
-        let sentences = text.split(/(?<=[.\?!])/);
-
-        sentences.forEach(sentence => {
-            const parts = sentence.replace(/\r?\n/g, '<br>').split(/(<br>|[\p{L}'']+)/gu);
-
-            parts.forEach(part => {
-                if (part === '<br>') {
-                    const br = document.createElement('br');
-                    textContainer.appendChild(br);
-                } else {
-                    const span = document.createElement('span');
-                    span.innerHTML = part;
-                    span.className = 'word';
-                    if (/\p{L}|['']/u.test(part)) {
-                        span.addEventListener('mouseover', () => span.classList.add('highlighted'));
-                        span.addEventListener('mouseout', () => span.classList.remove('highlighted'));
-                        
-                        span.addEventListener('click', (e) => handleClick(part, e));
-                    }
-                    textContainer.appendChild(span);
-                }
-            });
-        });
-
-        // New functionality for text selection
-        document.addEventListener('mouseup', handleSelection);
-    });
-
-    function handleSelection(event) {
-        const selection = window.getSelection();
-        const selectedText = selection.toString().trim();
-
-        if (selectedText.length > 0 && !event.target.classList.contains('word')) {
-            const range = selection.getRangeAt(0);
-            const rect = range.getBoundingClientRect();
-
-            const dropdown = document.getElementById('selectionDropdown');
-            dropdown.style.left = `${rect.left}px`;
-            dropdown.style.top = `${rect.bottom + window.scrollY}px`;
-            dropdown.style.display = 'block';
-        } else {
-            document.getElementById('selectionDropdown').style.display = 'none';
-        }
-    }
-
-    function translateSelection() {
-        const selectedText = window.getSelection().toString().trim();
-        if (selectedText) {
-            handleTranslation(selectedText);
-        }
-        document.getElementById('selectionDropdown').style.display = 'none';
-    }
-
-    function handleClick(word, event) {
-        event.preventDefault();
-        handleTranslation(word);
-    }
-
-    function handleTranslation(text) {
-        const localLanguage = document.getElementById('currentLocalLanuguage').innerText;
-        const translateWord = {
-            word: text,
-            baseLang: "{{$text -> langOption -> language_code}}",
-            targetLang: localLanguage,
-        };
-        var csrf = document.querySelector('meta[name="_token"]').content;
-
-        const formData = JSON.stringify(translateWord);
-
-        fetch('/translate/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrf
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            openModal(data);
-        })
-        .catch(error => console.error('Error:', error));
-    }
-
-    function openModal(data) {
-        document.getElementById('translationText').textContent = data.translation;
-        document.getElementById('translationModal').style.display = 'block';
-        document.getElementById('originalWord').textContent = data.request;
-        document.getElementById('baseWordForm').value = data.request;
-        document.getElementById('targetWordForm').value = data.translation;
-    }
-
-    function closeModal() {
-        document.getElementById('translationModal').style.display = 'none';
-    }
-
-    // Other functions (openDeleteModal, closeDeleteModal) remain unchanged
-</script>
-<meta name="_token" content="{{ csrf_token() }}">
+@vite(['resources/css/library.scss'])
 @endsection
-
 @section('content')
-<div class="text-learn-wrapper">
-    <!-- Existing content remains unchanged -->
-    <p id="textContainer" class="section-content"></p>
 
-    <!-- New dropdown menu for text selection -->
-    <div id="selectionDropdown">
-        <button onclick="translateSelection()" class="standartButton">Übersetzen</button>
+<div class="titleMargin">
+    <div class="displayFlex">
+        <p class="pagetitle">{{ __('Welcome back, ') }}{{ Auth::user()->name }}!</p>
+        <div class="horizontal-fill"></div>
+    </div>
+</div>
+
+<!-- Display Recent Decks -->
+<div class="titleMargin">
+    <div class="title-flex">
+        <p class="pagetitle">{{ __('Your Recent Decks') }}</p>
+        <div class="button-group">
+            <a href="/library" class="noUnderline">
+                <button class="standartButton">
+                    {{ __('View All Decks') }}
+                </button>
+            </a>
+            <a href="/list_create" class="noUnderline">
+                <button class="standartButton">
+                    {{ __('Create a new deck') }}
+                </button>
+            </a>
+        </div>
     </div>
 
-    <!-- Existing modals remain unchanged -->
+    @if ($decks->isEmpty())
+        <p class="section-content">{{ __('You have not created any decks yet.') }}</p>
+        <a href="/list_create" class="anker-no-underline">{{ __('Click here to create your first deck.') }}</a>
+    @else
+        @foreach ($decks as $deck)
+            <div class="library-Card">
+                <div class="displayFlex">
+                    <a href="/list_show/{{ $deck->id }}" class="anker-no-underline displayFlex">
+                        <p class="cardTitle">{{ $deck->name }}</p>
+                    </a>
+                    <div class="horizontal-fill"></div>
+                    <a href="/swipeLearn/{{ $deck->id }}">
+                        <img src="{{ asset('svg-icons/learnIcon.svg') }}" alt="Learn Icon" class="libraryIcon">
+                    </a>
+                    <a href="/list_update/{{ $deck->id }}">
+                        <img src="{{ asset('svg-icons/pencil-icon.svg') }}" alt="Edit Icon" class="libraryIcon">
+                    </a>
+                    <form action="/list_delete_function/{{ $deck->id }}" method="POST" onsubmit="return confirmDeleteDeck()">
+                        @csrf
+                        <button type="submit" class="delete-hitbox">
+                            <img src="{{ asset('svg-icons/trash-icon.svg') }}" alt="Delete Icon" class="libraryIcon">
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    <p class="begriffCount">{{ $deck->words()->count() }} {{ __('words') }}</p>
+                </div>
+                <div class="leading-library">
+                    <p class="leadingText">{{ date('d.m.y', strtotime($deck->updated_at)) }}</p>
+                </div>
+            </div>
+        @endforeach
+    @endif
 </div>
+
+<!-- Display Recent Texts -->
+<div class="titleMargin">
+    <div class="title-flex">
+        <p class="pagetitle">{{ __('Your Recent Texts') }}</p>
+        <div class="button-group">
+            <a href="/displayAllTexts" class="noUnderline">
+                <button class="standartButton">
+                    {{ __('View All Texts') }}
+                </button>
+            </a>
+            <a href="/addText" class="noUnderline">
+                <button class="standartButton">
+                    {{ __('Add a new text') }}
+                </button>
+            </a>
+        </div>
+    </div>
+
+    @if ($texts->isEmpty())
+        <p class="section-content">{{ __('You have not created any texts yet.') }}</p>
+        <a href="/addText" class="anker-no-underline">{{ __('Click here to add your first text.') }}</a>
+    @else
+        @foreach ($texts as $text)
+            <div class="library-Card">
+                <div class="displayFlex">
+                    <a href="/textShow/{{ $text->id }}" class="anker-no-underline displayFlex">
+                        <p class="cardTitle">{{ $text->title }}</p>
+                    </a>
+                    <div class="horizontal-fill"></div>
+                    <a href="/updateText/{{ $text->id }}">
+                        <img src="{{ asset('svg-icons/pencil-icon.svg') }}" alt="Edit Icon" class="libraryIcon">
+                    </a>
+                    <form action="/deleteText" method="POST" onsubmit="return confirmDeleteText()">
+                        @csrf
+                        <input type="hidden" name="textId" value="{{ $text->id }}">
+                        <button type="submit" class="delete-hitbox">
+                            <img src="{{ asset('svg-icons/trash-icon.svg') }}" alt="Delete Icon" class="libraryIcon">
+                        </button>
+                    </form>
+                </div>
+                <div class="leading-library">
+                    <p class="leadingText">{{ date('d.m.y', strtotime($text->updated_at)) }}</p>
+                </div>
+            </div>
+        @endforeach
+    @endif
+</div>
+
+<script>
+    function confirmDeleteDeck() {
+        return confirm('{{ __('Are you sure you want to delete this deck?') }}');
+    }
+    function confirmDeleteText() {
+        return confirm('{{ __('Are you sure you want to delete this text?') }}');
+    }
+</script>
+
 @endsection

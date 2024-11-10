@@ -261,4 +261,23 @@ class LingApiController extends Controller
         ];
     }
 
+    public function showLandingPage()
+    {
+        $userId = Auth::id();
+
+        // Get last 5 decks created by the user
+        $decks = WordList::where('created_by', $userId)
+            ->orderBy('updated_at', 'desc')
+            ->take(3)
+            ->get();
+
+        // Get last 5 texts created by the user
+        $texts = Text::where('created_by', $userId)
+            ->orderBy('updated_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('playground', compact('decks', 'texts'));
+    }
+
 }
