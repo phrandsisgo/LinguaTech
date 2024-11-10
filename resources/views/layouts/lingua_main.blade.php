@@ -49,7 +49,7 @@
             <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
             <label for="dropdownCheckbox" id="nav-lang-label" class="dropdownLabel">
                 <div class="displayFlex"style="justify-content: center; align-items: center;">
-                    <p id="currentLocalLanuguage">{{ strtoupper(App::getLocale()) }}</p>
+                    <p id="currentLocalLanuguage" style="transform: translate(3px, 10px);">{{ strtoupper(App::getLocale()) }}</p>
                     <img src="{{ asset('svg-icons/arrow-down-icon.svg')}}"id="nav-label-icon"alt="icon für Spracheinstellung">
                 </div>
             </label>
