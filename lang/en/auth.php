@@ -11,7 +11,7 @@ return [
     'no_account_yet' => 'No account yet?',
     'forgot_password' => 'Forgot your password?',
     'log_in' => 'Log in',
-
+    'show_password' => 'Show Password',
 
     'register' => 'Register',
     'name' => 'Name',

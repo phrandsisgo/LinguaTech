@@ -40,7 +40,7 @@
             <!-- Show Password Checkbox -->
             <div class="mt-2">
                 <input type="checkbox" id="show-password" onclick="togglePassword()">
-                <label for="show-password" class="section-content">{{ __('Show Password') }}</label>
+                <label for="show-password" class="section-content">{{ __('auth.show_password') }}</label>
             </div>
 
             <!-- JavaScript to toggle password visibility -->

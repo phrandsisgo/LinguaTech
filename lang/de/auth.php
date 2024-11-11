@@ -8,7 +8,7 @@ return [
     'no_account_yet' => 'Noch kein Benutzerkonto?',
     'forgot_password' => 'Passwort vergessen?',
     'log_in' => 'Einloggen',
-
+    'show_password' => 'Passwort anzeigen',
 
     'register' => 'Registrieren',
     'name' => 'Name',

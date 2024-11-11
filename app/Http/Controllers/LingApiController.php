@@ -277,7 +277,7 @@ class LingApiController extends Controller
             ->take(3)
             ->get();
 
-        return view('playground', compact('decks', 'texts'));
+        return view('home', compact('decks', 'texts'));
     }
 
 }
