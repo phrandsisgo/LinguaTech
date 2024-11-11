@@ -64,17 +64,17 @@ class LingApiController extends Controller
         return view('api-stuff/displayAllTexts',['allTexts' => $allTexts]);
     }
     public function addText(){
-        $languages = LangOption::all();
+        $languages = LangOption::whereBetween('id', [2, 8])->get();
         return view('api-stuff/newText',['languages' => $languages]);
     }
     public function updateText($id){
         $text = Text::with("langOption")->find($id);
-        $languages = LangOption::all();
+        $languages = LangOption::whereBetween('id', [2, 8])->get();
         return view('api-stuff/updateTexts',['text' => $text, 'languages' => $languages]);
     }
 
     public function generateTextView(){
-        $languages = LangOption::all();
+        $languages = LangOption::whereBetween('id', [2, 8])->get();
         $decks = WordList::where('created_by', auth()->user()->id)->get();
         return view('api-stuff/generateText',['languages' => $languages, 'decks' => $decks]);
     }
@@ -259,6 +259,25 @@ class LingApiController extends Controller
             'title' => $title,
             'story' => $story,
         ];
+    }
+
+    public function showLandingPage()
+    {
+        $userId = Auth::id();
+
+        // Get last 5 decks created by the user
+        $decks = WordList::where('created_by', $userId)
+            ->orderBy('updated_at', 'desc')
+            ->take(3)
+            ->get();
+
+        // Get last 5 texts created by the user
+        $texts = Text::where('created_by', $userId)
+            ->orderBy('updated_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('home', compact('decks', 'texts'));
     }
 
 }

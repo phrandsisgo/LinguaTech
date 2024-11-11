@@ -1,5 +1,5 @@
 @extends('layouts.lingua_main')
-@section('title', __('Dashboard'))
+@section('title', 'home')
 @section('head')
 @vite(['resources/css/library.scss'])
 @endsection
@@ -7,7 +7,7 @@
 
 <div class="titleMargin">
     <div class="displayFlex">
-        <p class="pagetitle">{{ __('Welcome back, ') }}{{ Auth::user()->name }}!</p>
+        <p class="pagetitle">{{ __('home.welcome_back', ['name' => Auth::user()->name]) }}</p>
         <div class="horizontal-fill"></div>
     </div>
 </div>
@@ -15,24 +15,24 @@
 <!-- Display Recent Decks -->
 <div class="titleMargin">
     <div class="title-flex">
-        <p class="pagetitle">{{ __('Your Recent Decks') }}</p>
+        <p class="pagetitle">{{ __('home.your_recent_decks') }}</p>
         <div class="button-group">
             <a href="/library" class="noUnderline">
                 <button class="standartButton">
-                    {{ __('View All Decks') }}
+                    {{ __('home.view_all_decks') }}
                 </button>
             </a>
             <a href="/list_create" class="noUnderline">
                 <button class="standartButton">
-                    {{ __('Create a new deck') }}
+                    {{ __('home.create_new_deck') }}
                 </button>
             </a>
         </div>
     </div>
 
     @if ($decks->isEmpty())
-        <p class="section-content">{{ __('You have not created any decks yet.') }}</p>
-        <a href="/list_create" class="anker-no-underline">{{ __('Click here to create your first deck.') }}</a>
+        <p class="section-content">{{ __('home.no_decks_yet') }}</p>
+        <a href="/list_create" class="anker-no-underline">{{ __('home.click_here_to_create_first_deck') }}</a>
     @else
         @foreach ($decks as $deck)
             <div class="library-Card">
@@ -55,7 +55,7 @@
                     </form>
                 </div>
                 <div>
-                    <p class="begriffCount">{{ $deck->words()->count() }} {{ __('words') }}</p>
+                    <p class="begriffCount">{{ $deck->words()->count() }} {{ __('home.words') }}</p>
                 </div>
                 <div class="leading-library">
                     <p class="leadingText">{{ date('d.m.y', strtotime($deck->updated_at)) }}</p>
@@ -68,24 +68,24 @@
 <!-- Display Recent Texts -->
 <div class="titleMargin">
     <div class="title-flex">
-        <p class="pagetitle">{{ __('Your Recent Texts') }}</p>
+        <p class="pagetitle">{{ __('home.your_recent_texts') }}</p>
         <div class="button-group">
             <a href="/displayAllTexts" class="noUnderline">
                 <button class="standartButton">
-                    {{ __('View All Texts') }}
+                    {{ __('home.view_all_texts') }}
                 </button>
             </a>
             <a href="/addText" class="noUnderline">
                 <button class="standartButton">
-                    {{ __('Add a new text') }}
+                    {{ __('home.add_new_text') }}
                 </button>
             </a>
         </div>
     </div>
 
     @if ($texts->isEmpty())
-        <p class="section-content">{{ __('You have not created any texts yet.') }}</p>
-        <a href="/addText" class="anker-no-underline">{{ __('Click here to add your first text.') }}</a>
+        <p class="section-content">{{ __('home.no_texts_yet') }}</p>
+        <a href="/addText" class="anker-no-underline">{{ __('home.click_here_to_add_first_text') }}</a>
     @else
         @foreach ($texts as $text)
             <div class="library-Card">
@@ -115,10 +115,10 @@
 
 <script>
     function confirmDeleteDeck() {
-        return confirm('{{ __('Are you sure you want to delete this deck?') }}');
+        return confirm('{{ __('home.confirm_delete_deck') }}');
     }
     function confirmDeleteText() {
-        return confirm('{{ __('Are you sure you want to delete this text?') }}');
+        return confirm('{{ __('home.confirm_delete_text') }}');
     }
 </script>
 

@@ -127,9 +127,10 @@ Route::get('/list_create', function () {
 Route::get('/swipePlay', function () {
     return view('swipePlay');
 })->middleware('auth');
-Route::get('/playground', function () {
-    return view('playground');
-});
+
+Route::get('/playground', [LingApiController::class, 'showLandingPage'])
+    ->middleware('auth')
+    ->name('playground');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -147,6 +148,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/initiateProfile', [ProfileController::class, 'postInitiate'])->name('postInitiate');
     Route::post('addLanguageInitiate', [ProfileController::class, 'addLanguageInitiate'])->name('addLanguageInitiate');
     Route::post('/copyList/{listId}', [WordListController::class, 'copyList'])->name('copyList');
+    Route::get('/home', [LingApiController::class, 'showLandingPage'])->name('home');
 });
 //die liste der Middlewares mit den Zuweisungen findet man unter app/Http/Kernel.php
 

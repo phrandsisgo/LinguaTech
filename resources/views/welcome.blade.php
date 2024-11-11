@@ -245,7 +245,7 @@ scrollContainer.addEventListener('mouseout', () => {
 </div>
 <!-- Stripe JS -->
 <script src="https://js.stripe.com/v3/"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
     var stripe = Stripe('{{ env('STRIPE_KEY') }}');
 
     var checkoutButton = document.getElementById('checkout-button');

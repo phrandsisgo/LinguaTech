@@ -1,4 +1,4 @@
- @import"colorsNvariables.scss";
+@import"colorsNvariables.scss";
 
 
 //als erstes ändere ich die hintergrudfarbe der Seite
@@ -1017,4 +1017,35 @@ $iconSize: 4rem; //gehört zu IconSize
     padding: 5px;
     display: flex;
     align-items: center;
+}
+
+.title-flex {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 750px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.button-group {
+    display: flex;
+
+    @media screen and (max-width: 750px) {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+.viewAllButton, .addButton {
+    // ...existing styles...
+    margin-left: 10px;
+
+    @media screen and (max-width: 750px) {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
 }
