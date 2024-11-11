@@ -65,7 +65,7 @@
             <a href="/about_project" class="iconWrapper">
                 <img src="{{ asset('svg-icons/info-icon.svg')}}" alt="impressum Icon" class="icons des-only">
             </a>
-            <a href="/library" class="iconWrapper">
+            <a href="/home" class="iconWrapper">
                 <img  src="{{ asset('svg-icons/library-icon.svg')}}" alt="library Icon" class="icons navIcons des-only">
             </a>
         @endif
