@@ -56,7 +56,7 @@ class LingApiController extends Controller
             return abort(403, "unauthorized");
         }
         $text->delete();
-        return redirect('/textPlay');
+        return redirect('/displayAllTexts');
     }
     
     public function displayAllTexts(){
