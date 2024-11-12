@@ -38,9 +38,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                 <p class="flipcardWord" id="baseWord">word</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerLeft()">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerLeft(event)">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerRight()">
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerRight(event)">
             </div>
         </div>
 
@@ -54,9 +54,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                 <p class="flipcardWord" id="targetWord">{{ __('swipe.word') }}</p>
             </div>
             <div class="displayFlex">
-                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerLeft()">
+                <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerLeft(event)">
                 <div class="horizontal-fill"></div>
-                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerRight()">
+                <img src="{{ asset('svg-icons/confirmIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerRight(event)">
             </div>
         </div>
     </div>
@@ -225,41 +225,39 @@ function showUebersetzung(){
     }
 }
 
-function triggerLeft(){
-    // Animation hinzufügen
-    console.log('triggerLeft');
+function triggerLeft(event){
+    event.stopPropagation();
     var karteContent = document.getElementById('flip-card-inner');
     karteContent.classList.add('animate__rollOut__left');
     karteContent.addEventListener('animationend', function(){
         karteContent.classList.remove('animate__rollOut__left');
-    });
+        showNextWord(); // Show next word after animation
+    }, { once: true });
 
     repAzeig++;
     document.getElementById('repAzeigA').innerHTML = repAzeig;
     document.getElementById('repAzeigB').innerHTML = repAzeig;
     handleSwipe("left", woerterbuch[aktuelleKarteIndex].id);
 
-    // Nächste Karte anzeigen
-    showNextWord();
+    // Removed immediate call to showNextWord()
 }
 
-function triggerRight(){
-    // Animation hinzufügen
+function triggerRight(event){
+    event.stopPropagation();
     var karteContent = document.getElementById('flip-card-inner');
     karteContent.classList.add('animate__rollOut__right');
     karteContent.addEventListener('animationend', function(){
         karteContent.classList.remove('animate__rollOut__right');
-    });
+        showNextWord(); // Show next word after animation
+    }, { once: true });
 
-    // Lernstatus aktualisieren
     woerterbuch[aktuelleKarteIndex].learned = true;
     doneAnzeige++;
     document.getElementById('doneAnzeigeA').innerHTML = doneAnzeige;
     document.getElementById('doneAnzeigeB').innerHTML = doneAnzeige;
     handleSwipe("right", woerterbuch[aktuelleKarteIndex].id);
 
-    // Nächste Karte anzeigen
-    showNextWord();
+    // Removed immediate call to showNextWord()
 }
 
 document.addEventListener('DOMContentLoaded', function() {
