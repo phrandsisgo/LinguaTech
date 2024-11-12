@@ -158,7 +158,8 @@ Route::post('/deleteText', [LingApiController::class, 'destroyText'])->name('tex
 
 //hier fangen die routen an für die API sachen:
 
-Route::get('/textPlay', [LingApiController::class, 'textPlay'])
+//should not exist anymore
+Route::get('/textPlay', [LingApiController::class, 'textShow'])
 ->middleware('auth');
 
 Route::get('/textShow/{id}', [LingApiController::class, 'textShow'])
