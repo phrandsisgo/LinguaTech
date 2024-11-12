@@ -14,4 +14,9 @@ return [
     'word' => 'Word',
     'description' => 'Description:',
     'repeat-wrong-answers' => 'Repeat wrong answers',
+    'learning_mode' => 'Learning Mode:',
+    'learn_base_words' => 'Learn Base Words',
+    'learn_target_words' => 'Learn Target Words',
+    'no_words_left' => 'No words left.',
+    'all_words_learned' => 'Congratulations! You have learned all the words.',
 ];

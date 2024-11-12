@@ -16,12 +16,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 <p class="sectiontitle swipeLearnTitle">{{$liste->name}}</p>
 
 <div class="learning-mode-selector">
-    <p>Lernmodus:</p>
+    <p>{{ __('swipe.learning_mode') }}</p>
     <label>
-        <input type="radio" name="learningMode" value="base" checked> Basiswörter lernen
+        <input type="radio" name="learningMode" value="base"> {{ __('swipe.learn_base_words') }}
     </label>
     <label>
-        <input type="radio" name="learningMode" value="target"> Zielwörter lernen
+        <input type="radio" name="learningMode" value="target" checked> {{ __('swipe.learn_target_words') }}
     </label>
 </div>
 
@@ -105,6 +105,7 @@ document.querySelectorAll('input[name="learningMode"]').forEach((elem) => {
     elem.addEventListener("change", function(event) {
         learningMode = event.target.value;
         updateKarte(); // Aktualisiere die Karte entsprechend
+        resetFlipCard(); // Reset flip state when learning mode changes
     });
 });
 
@@ -155,8 +156,8 @@ function updateUI() {
         kartenTextBase.textContent = woerterbuch[0].base_word;
         kartenTextTarget.textContent = woerterbuch[0].target_word;
     } else {
-        // Zeige eine Meldung an, wenn keine Wörter übrig sind
-        kartenTextBase.textContent = "Keine Wörter übrig.";
+        // Show a message when no words are left
+        kartenTextBase.textContent = "{{ __('swipe.no_words_left') }}";
         kartenTextTarget.textContent = "";
     }
 
@@ -183,7 +184,7 @@ function restartWithUnknownAnswers(){
         updateKarte();
         document.getElementById('swipeStatistikModal').style.display = 'none';
     } else {
-        alert("Herzlichen Glückwunsch! Du hast alle Wörter gelernt.");
+        alert("{{ __('swipe.all_words_learned') }}");
     }
 }
 
@@ -214,15 +215,17 @@ function updateKarte() {
         kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex].target_word;
         kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex].base_word;
     }
+    resetFlipCard(); // Reset flip state when updating the card
+}
+
+function resetFlipCard(){
+    var flipcard = document.getElementById('flip-card-inner');
+    flipcard.classList.remove('turnCard');
 }
 
 function showUebersetzung(){
     var flipcard = document.getElementById('flip-card-inner');
-    if(flipcard.classList.contains('turnCard')){
-        flipcard.classList.remove('turnCard');
-    }else{
-        flipcard.classList.add('turnCard');
-    }
+    flipcard.classList.toggle('turnCard');
 }
 
 function triggerLeft(event){
