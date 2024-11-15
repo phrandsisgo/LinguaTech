@@ -8,23 +8,30 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(ev+" is the direction");
         // alert(ev.direction);
         if(ev.direction === Hammer.DIRECTION_LEFT){
-            triggerAnimationLeft();
+            triggerAnimationLeft(function() {
+                naechsteKarte();
+            });
             handleLeftClickLeft();
         }else if(ev.direction === Hammer.DIRECTION_RIGHT){
-            triggerAnimationRight();
+            triggerAnimationRight(function() {
+                naechsteKarte();
+            });
             handleRightClick();
         }
     });
 
     function triggerRight(){
-        triggerAnimationRight();
+        triggerAnimationRight(function() {
+            naechsteKarte();
+        });
         handleRightClick();
     }
 
     function handleLeftClickLeft() {
         //this direction is when the User fails
-        triggerAnimationLeft();
-        naechsteKarte();
+        triggerAnimationLeft(function() {
+            naechsteKarte();
+        });
         repAzeig++;
         document.getElementById('repAzeigA').innerHTML=repAzeig;
         document.getElementById('repAzeigB').innerHTML=repAzeig;
@@ -34,8 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function handleRightClick() {
         //this direction is when the User succeeds
-        triggerAnimationRight();
-        naechsteKarte();
+        triggerAnimationRight(function() {
+            naechsteKarte();
+        });
         doneAnzeige++;
         document.getElementById('doneAnzeigeA').innerHTML=doneAnzeige;
         document.getElementById('doneAnzeigeB').innerHTML=doneAnzeige;
@@ -43,22 +51,20 @@ document.addEventListener('DOMContentLoaded', function() {
  }
 });
 
-function triggerAnimationRight(){
-    //const karteContent = document.querySelector('.flashCardContent');
+function triggerAnimationRight(callback){
     karteContent.classList.add('animate__rollOut__right');
-
-    //  class has to be removed after the animation ends to allow it to be triggered again
     karteContent.addEventListener('animationend', function(){
         karteContent.classList.remove('animate__rollOut__right');
-    });
+        if (callback) callback();
+    }, { once: true });
 }
-function triggerAnimationLeft(){
-    karteContent.classList.add('animate__rollOut__left');
 
-    //  class has to be removed after the animation ends to allow it to be triggered again
+function triggerAnimationLeft(callback){
+    karteContent.classList.add('animate__rollOut__left');
     karteContent.addEventListener('animationend', function(){
-        karteContent.classList.remove('animate__rollOut__left','flipInY', 'flipOutY');
-    });
+        karteContent.classList.remove('animate__rollOut__left', 'flipInY', 'flipOutY');
+        if (callback) callback();
+    }, { once: true });
 }
 
 
