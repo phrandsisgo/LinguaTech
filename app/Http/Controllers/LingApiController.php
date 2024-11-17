@@ -28,7 +28,7 @@ class LingApiController extends Controller
             'target_lang' => $targetLang,
             'source_lang' => $sourceLang,
         ]);
-
+        //dd($response->json());
         $translation = $response->json()['translations'][0]['text'];
 
         return response()->json(['translation' => $translation, 'request' => $text]);
@@ -43,7 +43,14 @@ class LingApiController extends Controller
         $text = Text::with("langOption")->find($id);
         $allTexts = Text::with("langOption")->get();
         $ownLibraryList = WordList::where('created_by', auth()->user()->id)->get();
-        return view('api-stuff/textShow',['text' => $text, 'allTexts' => $allTexts, 'ownLibraryList' => $ownLibraryList]);
+        $languages = LangOption::whereBetween('id', [2, 8])->get();
+
+        return view('api-stuff/textShow', [
+            'text' => $text,
+            'allTexts' => $allTexts,
+            'ownLibraryList' => $ownLibraryList,
+            'languages' => $languages
+        ]);
     }
     public function destroyText(Request $request,){
         $id = $request->input('textId');

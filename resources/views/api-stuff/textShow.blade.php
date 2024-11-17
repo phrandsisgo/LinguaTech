@@ -78,14 +78,14 @@
             console.log("translateSelection");
             event.preventDefault(); //kann vielleicht auskommentiert werrden.
             const selectedText = window.getSelection().toString().trim();
+            const targetLanguage = document.getElementById('targetLanguage').value;
 
             if (selectedText) {
                 console.log(selectedText);// Use the same logic as handleClick, but without the event parameter
-                const localLanguage = document.getElementById('currentLocalLanuguage').innerText;
                 const translateWord = {
                     word: selectedText,
                     baseLang: "{{$text -> langOption -> language_code}}",
-                    targetLang: localLanguage,
+                    targetLang: targetLanguage,
                 };
                 var csrf = document.querySelector('meta[name="_token"]').content;
 
@@ -125,6 +125,19 @@
         </a>
         <button onclick="openDeleteModal()" class="standartDangerButton standartButton">{{ __('api_texts.delete-text') }}</button>
     @endif
+
+    <!-- Language selection dropdown -->
+    <div>
+        <label for="targetLanguage">{{ __('Select Target Language') }}:</label>
+        <select id="targetLanguage">
+            @foreach($languages as $language)
+                <option value="{{ $language->language_code }}"
+                    @if($language->language_code == App::getLocale()) selected @endif>
+                    {{ $language->language_name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
     <p class="pagetitle ">{{$text->title}}</p>
     <p id="textContainer" class="section-content"> </p>
@@ -193,10 +206,11 @@ function handleClick(word, event) {
 
     const localLanguage = document.getElementById('currentLocalLanuguage').innerText;
     event.preventDefault();
+    const targetLanguage = document.getElementById('targetLanguage').value;
     const translateWord = {
         word: word,
         baseLang: "{{$text -> langOption -> language_code}}",
-        targetLang: localLanguage,
+        targetLang: targetLanguage,
     };
     var csrf = document.querySelector('meta[name="_token"]').content;
     //console.log(csrf)
