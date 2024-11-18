@@ -10,6 +10,7 @@ use App\Models\Text;
 use App\Models\LangOption;
 use OpenAI;
 use App\Models\Word;
+use App\Models\ApiUsageLog;
 
 
 
@@ -187,12 +188,29 @@ class LingApiController extends Controller
             ],
             'temperature' => 0.7,
         ]);
+        //dd($apiResponse);
     
         // Extract the response
         $storyContent = $apiResponse['choices'][0]['message']['content'];
-    
+        
         // Parse the response to separate title and story
         $parsedResponse = $this->parseStoryResponse($storyContent);
+
+        // Save the new text to the database
+        $newText = new Text();
+        $newText->title = $parsedResponse['title'];
+        $newText->text = $parsedResponse['story'];
+        $newText->lang_option_id = $lang_option_id;
+        $newText->created_by = auth()->user()->id;
+        $newText->save();
+
+        // Log the API usage with the text_id
+        ApiUsageLog::create([
+            'user_id' => Auth::id(),
+            'text_id' => $newText->id, // Include the text ID
+            'prompt_tokens' => $apiResponse['usage']['prompt_tokens'],
+            'completion_tokens' => $apiResponse['usage']['completion_tokens'],
+        ]);
     
         return $parsedResponse; // ['title' => ..., 'story' => ...]
     }
