@@ -60,7 +60,9 @@ textarea {
         <select id="deck_id" name="deck_id" class="standartSelect">
         <option value="null">Kein Deck ausgewählt</option>
         @foreach($decks as $deck)
-            <option value="{{ $deck->id }}">{{ $deck->name }}</option>
+            <option value="{{ $deck->id }}" {{ isset($selectedDeckId) && $selectedDeckId == $deck->id ? 'selected' : '' }}>
+                {{ $deck->name }}
+            </option>
         @endforeach
         </select>
         <br><br>

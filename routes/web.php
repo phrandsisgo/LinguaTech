@@ -190,7 +190,7 @@ Route::get('/cancel', [StripeController::class, 'cancel'])
     ->middleware('auth')
     ->name('checkout.cancel');
 
-Route::get('/generate-text', [LingApiController::class, 'generateTextView'])
+Route::get('/generate-text/{deck_id?}', [LingApiController::class, 'generateTextView'])
     ->middleware(['auth', 'Checksubscription'])
     ->name('generate-text');
 

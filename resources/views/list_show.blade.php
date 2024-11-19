@@ -37,9 +37,8 @@ function confirmDelete() {
 
 
         @if($subscribedUntil && $subscribedUntil->isAfter(now()))
-            <a href="/generate-text"><p class="sectiontitle noUnderline">{{ __('api_texts.generateNewText') }}</p></a>
-        @else
-    @endif
+            <a href="/generate-text/{{ $liste->id }}"><p class="sectiontitle noUnderline">{{ __('api_texts.generateNewText') }}</p></a>
+        @endif
     @endif
         <div class="space"></div>
             <a href="/swipeLearn/{{$liste->id}}"><p class="sectiontitle noUnderline">{{ __('learn-lists.learn') }}</p></a>
