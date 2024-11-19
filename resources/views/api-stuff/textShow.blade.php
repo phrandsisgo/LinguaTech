@@ -43,6 +43,7 @@
                         const span = document.createElement('span');
                         span.innerHTML = part;
                         span.className = 'word';
+                        span.setAttribute('data-sentence', sentence.trim()); // Add sentence context
                         if (/\p{L}|['’]/u.test(part)) {
                             span.addEventListener('mouseover', () => span.classList.add('highlighted'));
                             span.addEventListener('mouseout', () => span.classList.remove('highlighted'));
@@ -79,6 +80,7 @@
             event.preventDefault(); //kann vielleicht auskommentiert werrden.
             const selectedText = window.getSelection().toString().trim();
             const targetLanguage = document.getElementById('targetLanguage').value;
+            const context = getSentenceFromSelection(); // Extract sentence context
 
             if (selectedText) {
                 console.log(selectedText);// Use the same logic as handleClick, but without the event parameter
@@ -86,6 +88,7 @@
                     word: selectedText,
                     baseLang: "{{$text -> langOption -> language_code}}",
                     targetLang: targetLanguage,
+                    context: context
                 };
                 var csrf = document.querySelector('meta[name="_token"]').content;
 
@@ -108,8 +111,28 @@
                     document.getElementById('selectionDropdown').style.display = 'none';
                 }
 
+        function getSentenceFromSelection() {
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                let container = range.commonAncestorContainer;
+                if (container.nodeType !== 1) {
+                    container = container.parentNode;
+                }
+                // Collect text from sibling nodes to construct the sentence
+                let sentence = '';
+                const siblings = container.parentNode.childNodes;
+                siblings.forEach(node => {
+                    sentence += node.textContent;
+                    if (node.textContent.includes('.')) {
+                        sentence += ' ';
+                    }
+                });
+                return sentence.trim();
+            }
+            return '';
+        }
 
-       
     </script>
     <meta name="_token" content="{{ csrf_token() }}">
 
@@ -207,10 +230,12 @@ function handleClick(word, event) {
     const localLanguage = document.getElementById('currentLocalLanuguage').innerText;
     event.preventDefault();
     const targetLanguage = document.getElementById('targetLanguage').value;
+    const sentence = event.target.getAttribute('data-sentence'); // Get sentence context
     const translateWord = {
         word: word,
         baseLang: "{{$text -> langOption -> language_code}}",
         targetLang: targetLanguage,
+        context: sentence
     };
     var csrf = document.querySelector('meta[name="_token"]').content;
     //console.log(csrf)

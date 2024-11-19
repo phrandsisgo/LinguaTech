@@ -20,6 +20,7 @@ class LingApiController extends Controller
         $text = $request->input('word');
         $targetLang = $request->input('targetLang');
         $sourceLang = $request->input('baseLang');
+        $context = $request->input('context'); // Accept context
 
         $response = Http::asForm()->withHeaders([
             'Authorization' => 'DeepL-Auth-Key ' . env('DEEPL_API_KEY'),
@@ -28,8 +29,9 @@ class LingApiController extends Controller
             'text' => $text,
             'target_lang' => $targetLang,
             'source_lang' => $sourceLang,
+            'context' => $context // Include context in API request
         ]);
-        //dd($response->json());
+        //dd(['response' => $response->json(),'context' => $context]);
         $translation = $response->json()['translations'][0]['text'];
 
         return response()->json(['translation' => $translation, 'request' => $text]);
