@@ -25,8 +25,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     </label>
 </div>
 
-
 <button id="shuffleFlashCards" class="standartButton" onclick="shuffleAndReloadCards();">mix</button>
+<button id="undoLastSwipe" class="standartButton" onclick="undoLastSwipe();">Undo</button>
+
 <div class="karteContent">
     <div class="flip-card-inner" id="flip-card-inner">
         <div class="flashCardContent frontface" id="flashCardContent">
@@ -86,6 +87,7 @@ var doneAnzeige = 0;
 var repAzeig = 0;
 var aktuelleKarteIndex = 0;
 var unknownAnswers = [];
+let swipeHistory = [];
 
 @php
 $woerterbuch = $liste->words->map(function ($word) {
@@ -238,12 +240,11 @@ function triggerLeft(event){
         showNextWord(); // Show next word after animation
     }, { once: true });
 
+    swipeHistory.push(aktuelleKarteIndex); // Save current index to history
     repAzeig++;
     document.getElementById('repAzeigA').innerHTML = repAzeig;
     document.getElementById('repAzeigB').innerHTML = repAzeig;
     handleSwipe("left", woerterbuch[aktuelleKarteIndex].id);
-
-    // Removed immediate call to showNextWord()
 }
 
 function triggerRight(event){
@@ -255,13 +256,12 @@ function triggerRight(event){
         showNextWord(); // Show next word after animation
     }, { once: true });
 
+    swipeHistory.push(aktuelleKarteIndex); // Save current index to history
     woerterbuch[aktuelleKarteIndex].learned = true;
     doneAnzeige++;
     document.getElementById('doneAnzeigeA').innerHTML = doneAnzeige;
     document.getElementById('doneAnzeigeB').innerHTML = doneAnzeige;
     handleSwipe("right", woerterbuch[aktuelleKarteIndex].id);
-
-    // Removed immediate call to showNextWord()
 }
 
 function shuffleArray(array) {
@@ -270,6 +270,15 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+function undoLastSwipe() {
+    if (swipeHistory.length > 0) {
+        aktuelleKarteIndex = swipeHistory.pop(); // Restore last index
+        updateKarte(); // Update the card display
+    } else {
+        console.log("No swipes to undo");
+    }
 }
 
 function shuffleAndReloadCards() {
