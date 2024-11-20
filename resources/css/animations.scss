@@ -128,6 +128,8 @@
         flex:2;
     }
 
+    
+
     .karteContent {
         align-items: center;
        // position: fixed;
@@ -140,14 +142,24 @@
         border-radius: 18px;
         //putting in a helper border
         border: 4px solid $contrast60;
-        width: 60vw;// wird nur auf der Mobile ansicht gebraucht
+        width: 80vw;// wird nur auf der Mobile ansicht gebraucht
         //height:50vh;
         max-width: 30rem;
         aspect-ratio: 3/4;
     }
+
+    @media screen and (min-width: $middlewidth) and (max-width: $bigwidth){
+        .karteContent{
+            width: 60vw;
+        }
+    }
+
     @media screen and (min-width: $bigwidth){
         .karteContent{
             width: 40vw;
         }
-        
+    }
+    .undoButton{
+        margin-left: calc((100% - 50px) / 2);
+        margin-right: calc((100% - 50px) / 2);
     }

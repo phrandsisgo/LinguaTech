@@ -14,19 +14,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 
 @section('content')
 <p class="sectiontitle swipeLearnTitle">{{$liste->name}}</p>
+<button id="openLearningModeModal" class="standartButton" onclick="document.getElementById('learningModeModal').style.display = 'block';">{{ __('swipe.change_learning_mode') }}</button>
 
-<div class="learning-mode-selector">
-    <p>{{ __('swipe.learning_mode') }}</p>
-    <label>
-        <input type="radio" name="learningMode" value="base"> {{ __('swipe.learn_target_words') }}
-    </label>
-    <label>
-        <input type="radio" name="learningMode" value="target" checked> {{ __('swipe.learn_base_words') }}
-    </label>
+<div id="learningModeModal" style="display:none;">
+    <div class="modal-content">
+        <h2>{{ __('swipe.learning_mode') }}</h2>
+        <label>
+            <input type="radio" name="learningMode" value="base"> {{ __('swipe.learn_target_words') }}
+        </label>
+        <label>
+            <input type="radio" name="learningMode" value="target" checked> {{ __('swipe.learn_base_words') }}
+        </label>
+        <br><br>
+        <button id="shuffleFlashCards" class="standartButton" onclick="shuffleAndReloadCards();">mix</button>
+        <a href="#"><button onclick="document.getElementById('learningModeModal').style.display = 'none';" class="modalclose">{{ __('swipe.close') }}</button></a>
+    </div>
 </div>
-
-<button id="shuffleFlashCards" class="standartButton" onclick="shuffleAndReloadCards();">mix</button>
-<button id="undoLastSwipe" class="standartButton" onclick="undoLastSwipe();">Undo</button>
 
 <div class="karteContent">
     <div class="flip-card-inner" id="flip-card-inner">
@@ -63,6 +66,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         </div>
     </div>
 </div>
+
+<button id="undoLastSwipe" class="standartDangerButton undoButton" onclick="undoLastSwipe();">Undo</button>
 
 <p class="section-content swipeContent">{{ __('swipe.description') }} {{$liste->description}}</p>
 
