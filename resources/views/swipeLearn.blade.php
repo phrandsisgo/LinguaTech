@@ -18,14 +18,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 <div class="learning-mode-selector">
     <p>{{ __('swipe.learning_mode') }}</p>
     <label>
-        <input type="radio" name="learningMode" value="base"> {{ __('swipe.learn_base_words') }}
+        <input type="radio" name="learningMode" value="base"> {{ __('swipe.learn_target_words') }}
     </label>
     <label>
-        <input type="radio" name="learningMode" value="target" checked> {{ __('swipe.learn_target_words') }}
+        <input type="radio" name="learningMode" value="target" checked> {{ __('swipe.learn_base_words') }}
     </label>
 </div>
 
 
+<button id="shuffleFlashCards" class="standartButton" onclick="shuffleAndReloadCards();">mix</button>
 <div class="karteContent">
     <div class="flip-card-inner" id="flip-card-inner">
         <div class="flashCardContent frontface" id="flashCardContent">
@@ -262,6 +263,23 @@ function triggerRight(event){
 
     // Removed immediate call to showNextWord()
 }
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function shuffleAndReloadCards() {
+    woerterbuch = shuffleArray(woerterbuch);
+    aktuelleKarteIndex = 0;
+    updateKarte();
+}
+// Beim Laden der Seite das woerterbuch mischen
+//woerterbuch = shuffleArray(woerterbuch);
+
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialisiere die UI

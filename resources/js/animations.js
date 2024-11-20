@@ -74,17 +74,6 @@ let aktuelleKarteIndex = 0;
 
 
 
-function showUebersetzung(){
-    var flipcard = document.getElementsById('flip-card-inner');
-    //I need a function that checks if the class turnCard is already there and if so, removes it
-    
-    if(flipcard.classList.contains('turnCard')){
-        flipcard.classList.remove('turnCard');
-    }else{
-        flipcard.classList.add('turnCard');
-    }
-}
-
 function zeigeStatistikModal() {
     document.getElementById('leftSwipeCount').textContent = repAzeig;
     document.getElementById('rightSwipeCount').textContent = doneAnzeige;
