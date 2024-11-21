@@ -1,16 +1,16 @@
 {
   "resources/css/animations.scss": {
-    "file": "assets/animations-c181ec2e.css",
+    "file": "assets/animations-ff352fa1.css",
     "isEntry": true,
     "src": "resources/css/animations.scss"
   },
   "resources/css/app.css": {
-    "file": "assets/app-cdb814c6.css",
+    "file": "assets/app-1c83a541.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/css/application.scss": {
-    "file": "assets/application-4f6b44e4.css",
+    "file": "assets/application-09440518.css",
     "isEntry": true,
     "src": "resources/css/application.scss"
   },

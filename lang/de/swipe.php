@@ -19,4 +19,7 @@ return [
     'learn_target_words' => 'Zielwörter lernen',
     'no_words_left' => 'Keine Wörter übrig.',
     'all_words_learned' => 'Herzlichen Glückwunsch! Du hast alle Wörter gelernt.',
+    'change_learning_mode' => 'Lernmodus ändern',
+    'mix' => 'Mischen',
+    'no_swipes_to_undo' => 'Keine Swipes zum Rückgängig machen',
 ];

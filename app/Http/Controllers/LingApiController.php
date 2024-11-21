@@ -83,10 +83,14 @@ class LingApiController extends Controller
         return view('api-stuff/updateTexts',['text' => $text, 'languages' => $languages]);
     }
 
-    public function generateTextView(){
+    public function generateTextView($deck_id = null){
         $languages = LangOption::whereBetween('id', [2, 8])->get();
         $decks = WordList::where('created_by', auth()->user()->id)->get();
-        return view('api-stuff/generateText',['languages' => $languages, 'decks' => $decks]);
+        return view('api-stuff/generateText', [
+            'languages' => $languages,
+            'decks' => $decks,
+            'selectedDeckId' => $deck_id
+        ]);
     }
 
     public function generateText(Request $request){
@@ -95,6 +99,9 @@ class LingApiController extends Controller
         $text = $request->input('add-text-field');
         $lang_option_id = $request->input('lang_option_id');
         $deck_id = $request->input('deck_id');
+        if($deck_id === 'null'){
+            $deck_id = null;
+        }
     
         $response = $this->createAPIRequest($title, $text, $lang_option_id, $deck_id);
         $newText = new Text();
