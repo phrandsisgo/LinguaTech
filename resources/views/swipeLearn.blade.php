@@ -34,7 +34,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 
 <div class="karteContent">
     <div class="flip-card-inner" id="flip-card-inner">
-        <div class="flashCardContent frontface" id="flashCardContent">
+        <div class="flashCardContent frontface" id="flashCardFront">
             <div class="countZeile">
                 <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigB">0</p></div>
                 <div class="countAnzeige" id="countAnzeigeB">1/{{count($liste->words)}} {{ __('swipe.words') }}</div>
@@ -50,7 +50,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
             </div>
         </div>
 
-        <div class="flashCardContent backface" id="flashCardContent">
+        <div class="flashCardContent backface" id="flashCardBack">
             <div class="countZeile">
                 <div class="repetitionCountBox"><p class="anzeigemargin" id="repAzeigA">0</p></div>
                 <div class="countAnzeige" id="countAnzeigeA">1/{{count($liste->words)}} {{ __('swipe.words') }}</div>
@@ -162,8 +162,13 @@ function updateUI() {
     const kartenTextBase = document.getElementById('baseWord');
     const kartenTextTarget = document.getElementById('targetWord');
     if (woerterbuch.length > 0) {
-        kartenTextBase.textContent = woerterbuch[0].base_word;
-        kartenTextTarget.textContent = woerterbuch[0].target_word;
+        if (learningMode === 'base') {
+            kartenTextBase.textContent = woerterbuch[0].base_word;
+            kartenTextTarget.textContent = woerterbuch[0].target_word;
+        } else {
+            kartenTextBase.textContent = woerterbuch[0].target_word;
+            kartenTextTarget.textContent = woerterbuch[0].base_word;
+        }
     } else {
         // Show a message when no words are left
         kartenTextBase.textContent = "{{ __('swipe.no_words_left') }}";
