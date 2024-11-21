@@ -77,7 +77,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         <h2>{{ __('swipe.swipeStatistics') }}</h2>
         <p>{{ __('swipe.unknownAnswersCount')}} <span id="leftSwipeCount"></span></p>
         <p>{{ __('swipe.knownAnswersCount')}} <span id="rightSwipeCount"></span></p>
-        <br><br>
+        <br>
         <div style="height:4rem;"></div>
         <a href="#"><button onclick="restartWithUnknownAnswers();" class="standartButton">{{ __('swipe.repeat-wrong-answers') }}</button></a>   
         <a href="#"><button onclick="location.reload();" class="standartButton">{{ __('swipe.learnAgain') }}</button></a>
@@ -192,6 +192,14 @@ function restartWithUnknownAnswers(){
         listLength = unlearnedWords.length;
         updateKarte();
         document.getElementById('swipeStatistikModal').style.display = 'none';
+
+        // Reset counters
+        document.getElementById('repAzeigA').textContent = "0";
+        document.getElementById('repAzeigB').textContent = "0";
+        document.getElementById('doneAnzeigeA').textContent = "0";
+        document.getElementById('doneAnzeigeB').textContent = "0";
+        document.getElementById('countAnzeigeA').textContent = "1/" + listLength + " {{ __('swipe.words') }}";
+        document.getElementById('countAnzeigeB').textContent = "1/" + listLength + " {{ __('swipe.words') }}";
     } else {
         alert("{{ __('swipe.all_words_learned') }}");
     }
