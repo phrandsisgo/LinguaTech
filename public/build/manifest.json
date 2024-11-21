@@ -10,7 +10,7 @@
     "src": "resources/css/app.css"
   },
   "resources/css/application.scss": {
-    "file": "assets/application-4f6b44e4.css",
+    "file": "assets/application-09440518.css",
     "isEntry": true,
     "src": "resources/css/application.scss"
   },
@@ -30,7 +30,7 @@
     "src": "resources/js/animations.js"
   },
   "resources/js/app.js": {
-    "file": "assets/app-318859a0.js",
+    "file": "assets/app-037c606c.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },

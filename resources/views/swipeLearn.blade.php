@@ -26,7 +26,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
             <input type="radio" name="learningMode" value="target" checked> {{ __('swipe.learn_base_words') }}
         </label>
         <br><br>
-        <button id="shuffleFlashCards" class="standartButton" onclick="shuffleAndReloadCards();">mix</button>
+        <button id="shuffleFlashCards" class="standartButton" onclick="shuffleAndReloadCards();">{{ __('swipe.mix') }}</button>
+        <br><br><br>
         <a href="#"><button onclick="document.getElementById('learningModeModal').style.display = 'none';" class="modalclose">{{ __('swipe.close') }}</button></a>
     </div>
 </div>
@@ -40,7 +41,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
                 <div class="doneCountBox"><p class="anzeigemargin" id="doneAnzeigeB">0</p></div>
             </div>
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
-                <p class="flipcardWord" id="baseWord">word</p>
+                <p class="flipcardWord" id="baseWord">{{ __('swipe.word') }}</p>
             </div>
             <div class="displayFlex">
                 <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerLeft(event)">
@@ -154,8 +155,8 @@ function updateUI() {
     // Aktualisiere die Wortzähler
     var countAnzeigeA = document.getElementById('countAnzeigeA');
     var countAnzeigeB = document.getElementById('countAnzeigeB');
-    countAnzeigeA.textContent = "1/" + woerterbuch.length + " Wörter";
-    countAnzeigeB.textContent = "1/" + woerterbuch.length + " Wörter";
+    countAnzeigeA.textContent = "1/" + woerterbuch.length + " {{ __('swipe.words') }}";
+    countAnzeigeB.textContent = "1/" + woerterbuch.length + " {{ __('swipe.words') }}";
 
     // Zeige das erste Wort an
     const kartenTextBase = document.getElementById('baseWord');
@@ -211,8 +212,8 @@ function showNextWord() {
 function updateKarte() {
     var countAnzeigeA = document.getElementById('countAnzeigeA');
     var countAnzeigeB = document.getElementById('countAnzeigeB');
-    countAnzeigeA.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length + " Wörter";
-    countAnzeigeB.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length + " Wörter";
+    countAnzeigeA.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length + " {{ __('swipe.words') }}";
+    countAnzeigeB.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length + " {{ __('swipe.words') }}";
 
     const kartenTextBase = document.getElementById('baseWord');
     const kartenTextTarget = document.getElementById('targetWord');
@@ -282,7 +283,7 @@ function undoLastSwipe() {
         aktuelleKarteIndex = swipeHistory.pop(); // Restore last index
         updateKarte(); // Update the card display
     } else {
-        console.log("No swipes to undo");
+        console.log("{{ __('swipe.no_swipes_to_undo') }}");
     }
 }
 

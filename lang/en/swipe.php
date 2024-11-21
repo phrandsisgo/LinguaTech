@@ -19,4 +19,7 @@ return [
     'learn_target_words' => 'Learn Target Words',
     'no_words_left' => 'No words left.',
     'all_words_learned' => 'Congratulations! You have learned all the words.',
+    'change_learning_mode' => 'Change Learning Mode',
+    'mix' => 'Mix',
+    'no_swipes_to_undo' => 'No swipes to undo',
 ];
