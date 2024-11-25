@@ -102,16 +102,9 @@ class LingApiController extends Controller
         if($deck_id === 'null'){
             $deck_id = null;
         }
-    
-        $response = $this->createAPIRequest($title, $text, $lang_option_id, $deck_id);
-        $newText = new Text();
-        $newText->title = $response['title'];
-        $newText->text = $response['story'];
-        $newText->lang_option_id = $lang_option_id;
-        $newText->created_by = auth()->user()->id;
-        $newText->save();
-        $text_id = $newText->id;
-
+    $response = $this->createAPIRequest($title, $text, $lang_option_id, $deck_id);
+    // New text is being created in the createAPIRequest() function and nowhere else to make it easier to log it.
+    $text_id = $response['id'];
     
         return redirect('/textShow/'.$text_id);
     }
@@ -220,8 +213,8 @@ class LingApiController extends Controller
             'prompt_tokens' => $apiResponse['usage']['prompt_tokens'],
             'completion_tokens' => $apiResponse['usage']['completion_tokens'],
         ]);
-    
-        return $parsedResponse; // ['title' => ..., 'story' => ...]
+        
+        return array_merge($parsedResponse, ['id' => $newText->id]); // Include the new text ID in the response
     }
 
     private function generateStoryPrompt($targetLanguage, $level, $storyTopic, $title, $wordlistJSON = null)
