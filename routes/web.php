@@ -128,9 +128,9 @@ Route::get('/swipePlay', function () {
     return view('swipePlay');
 })->middleware('auth');
 
-Route::get('/playground', [LingApiController::class, 'showLandingPage'])
-    ->middleware('auth')
-    ->name('playground');
+Route::get('/playground', function() {
+    return view('playground');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
