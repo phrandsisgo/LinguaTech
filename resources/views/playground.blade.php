@@ -1,4 +1,3 @@
-
 @extends('layouts.lingua_main')
 @section('title', 'Home')
 @section('head')
@@ -53,30 +52,38 @@ scrollContainer.addEventListener('mouseout', () => {
 @endsection
 @section('content')
 
-{{-- first hero --}}
+{{-- first hero (Text Only) --}}
 <div class="container col-xxl-8 px-4" style="padding-bottom: 1rem;">
   <div class="row align-items-center g-5 py-5">
     <!-- Title and Text Block -->
-    <div class="col-lg-6">
+    <div class="col-lg-12 text-center">
       <h1 class="display-6 fw-bold lh-1 mb-3 font-color-main">
         A new way to create flashcards
       </h1>
-      <!-- Image (Visible on smaller screens) -->
-      <div class="d-lg-none text-center">
-        <img id="gif1" src="{{ asset('Images/SwipeLearn.gif') }}" alt="Swipe Function" class="img-fluid custom-img my-4">
-      </div>
       <p class="lead font-color-main">
         let's make a better way of creating your flashcards so you can spend more time learning and less with fumbling with new vocabulary
       </p>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
         <a href="/register">
           <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 approveButton">Start Creating Now</button>
         </a>
       </div>
     </div>
-    <!-- Image Block (Visible on larger screens) -->
-    <div class="col-lg-6 d-none d-lg-block">
-      <img id="gif1" src="{{ asset('Images/SwipeLearn.gif') }}" alt="Swipe Function" class="horizontal-fill img-fluid">
+  </div>
+</div>
+
+{{-- second hero (Image on Right, Text on Left) --}}
+<div class="container col-xxl-8 px-4" style="padding-bottom: 1rem;">
+  <div class="row align-items-center g-5 py-5">
+    <!-- Title and Text Block -->
+    <div class="col-lg-6">
+      <h1 class="display-6 fw-bold lh-1 mb-3 font-color-main">
+        Enhance Your Vocabulary with Personalized Flashcards
+      </h1>
+    </div>
+    <!-- Image Block -->
+    <div class="col-lg-6 text-center">
+      <img id="gif1" src="{{ asset('Images/SwipeLearn.gif') }}" alt="Swipe Function" class="img-fluid custom-img my-4">
     </div>
   </div>
 </div>
@@ -203,33 +210,36 @@ scrollContainer.addEventListener('mouseout', () => {
                     <h4 class="my-0 font-weight-normal">Free</h4>
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title pricing-card-title">0€ <small class="text-muted">/ month</small></h1>
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li>Unlimited saved stories</li>
-                        <li>Unlimited saved learning decks</li>
-                        <li>Limited story generation</li>
-                        <li>No audiobook generation</li>
-                    </ul>
-                    @guest
-                        <a href="{{ route('register') }}" class="btn btn-lg btn-block btn-outline-primary">Sign Up</a>
-                    @else
-                    <a href="/library" class="standartButton" style="text-decoration: none;">Go to Library</a>
-                    @endguest
+                  <h1 class="card-title pricing-card-title">0€ <small class="text-muted">/ month</small></h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li>✔ Save as many stories as you want</li>
+                    <li>✔ Save as many learning decks as you want</li>
+                    <li>✔ Translate as many words as you want</li>
+                    <li>✘ No text generations</li>
+                    <li>✘ (under development) No audiobook generation</li>
+                  </ul>
+                  @guest
+                    <a href="{{ route('register') }}" class="btn btn-lg btn-block btn-outline-primary">Sign Up</a>
+                  @else
+                    <a href="/library" class="btn btn-lg btn-block btn-outline-primary">Go to Library</a>
+                  @endguest
                 </div>
+              </div>
             </div>
-        </div>
-        <!-- Premium Plan -->
-        <div class="col-md-5">
-            <div class="card mb-5 shadow-sm">
+            <!-- Premium Plan -->
+            <div class="col-md-5">
+              <div class="card mb-5 shadow-sm">
                 <div class="card-header text-center">
-                    <h4 class="my-0 font-weight-normal">Premium</h4>
+                  <h4 class="my-0 font-weight-normal">Premium</h4>
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title pricing-card-title">3€ <small class="text-muted">/ month</small></h1>
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li>Unlimited saved stories</li>
-                        <li>Unlimited saved learning decks</li>
-                        <li>Unlimited story generation</li>
+                  <h1 class="card-title pricing-card-title">3€ <small class="text-muted">/ month</small></h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li>✔ Save as many stories as you want</li>
+                    <li>✔ Save as many learning decks as you want</li>
+                    <li>✔ Translate as many expressions as you want</li>
+                    <li>✔ Generate as many texts as you want</li>
+                    <li>? (Future feature) Audiobook generation</li>
                     </ul>
                     @guest
                         <a href="/register" class="approveButton" style="text-decoration: none;">Sign Up</a>

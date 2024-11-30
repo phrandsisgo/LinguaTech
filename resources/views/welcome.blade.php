@@ -1,4 +1,3 @@
-
 @extends('layouts.lingua_main')
 @section('title', 'Home')
 @section('head')
@@ -53,30 +52,39 @@ scrollContainer.addEventListener('mouseout', () => {
 @endsection
 @section('content')
 
-{{-- first hero --}}
+
+{{-- first hero (Text Only) --}}
+<div class="container col-xxl-8 px-4" style="padding-bottom: 1rem;">
+  <div class="row align-items-center g-5 py-5">
+    <!-- Title and Text Block -->
+    <div class="col-lg-12 text-center">
+      <h1 class="display-6 fw-bold lh-1 mb-3 font-color-main">
+        {{ __('welcomepage.new_flashcards_title') }}
+      </h1>
+      <p class="lead font-color-main">
+        {{ __('welcomepage.new_flashcards_text') }}
+      </p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <a href="/register">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 approveButton">{{ __('welcomepage.start_creating_button') }}</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- second hero (Image on Right, Text on Left) --}}
 <div class="container col-xxl-8 px-4" style="padding-bottom: 1rem;">
   <div class="row align-items-center g-5 py-5">
     <!-- Title and Text Block -->
     <div class="col-lg-6">
       <h1 class="display-6 fw-bold lh-1 mb-3 font-color-main">
-        {{ __('welcomepage.title') }}
+        {{ __('welcomepage.custom_flashcards_title') }}
       </h1>
-      <!-- Image (Visible on smaller screens) -->
-      <div class="d-lg-none text-center">
-        <img id="gif1" src="{{ asset('Images/SwipeLearn.gif') }}" alt="{{ __('welcomepage.swipe_function') }}" class="img-fluid custom-img my-4">
-      </div>
-      <p class="lead font-color-main">
-        {{ __('welcomepage.intro_text') }}
-      </p>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a href="/register">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 approveButton">{{ __('welcomepage.start_learning_button') }}</button>
-        </a>
-      </div>
     </div>
-    <!-- Image Block (Visible on larger screens) -->
-    <div class="col-lg-6 d-none d-lg-block">
-      <img id="gif1" src="{{ asset('Images/SwipeLearn.gif') }}" alt="{{ __('welcomepage.swipe_function') }}" class="horizontal-fill img-fluid">
+    <!-- Image Block -->
+    <div class="col-lg-6 text-center">
+      <img id="gif1" src="{{ asset('Images/SwipeLearn.gif') }}" alt="{{ __('welcomepage.swipe_function') }}" class="img-fluid custom-img my-4">
     </div>
   </div>
 </div>
