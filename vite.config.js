@@ -12,7 +12,6 @@ export default defineConfig({
                 'resources/css/animations.scss',
                 'resources/js/app.js',
                 'resources/js/list-create.js',
-                'resources/js/animations.js',
 
             ],
             refresh: true,
