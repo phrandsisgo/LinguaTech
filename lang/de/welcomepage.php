@@ -36,5 +36,14 @@ return [
     'scroll_add_new_words_text' => 'Fügen Sie neue Wörter aus Ihren Texten zu Ihrer Lernliste hinzu.',
     'start_learning_button' => 'Jetzt lernen',
     'register_cta' => 'Registrieren Sie sich jetzt und starten Sie Ihr Sprachlernabenteuer!',
+    'unlimited_stories' => '✔ Unbegrenzte Geschichten',
+    'unlimited_decks' => '✔ Unbegrenzte Decks',
+    'translate_words' => '✔ Übersetzen Sie so viele Wörter, wie Sie möchten',
+    'limited_story_generation' => '✘ Begrenzte Geschichtengenerierung',
+    'no_text_generations' => '✘ Keine Textgenerierungen',
+    'no_audiobooks' => '✘ Keine Hörbücher',
+    'future_audiobook_generation' => '? (Zukünftige Funktion) Hörbuchgenerierung',
+
+    'generate_texts' => '✔ Unbegrenzte Textgenerierungen',
 
 ];

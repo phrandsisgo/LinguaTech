@@ -65,9 +65,15 @@ scrollContainer.addEventListener('mouseout', () => {
         {{ __('welcomepage.new_flashcards_text') }}
       </p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-        <a href="/register">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 approveButton">{{ __('welcomepage.start_creating_button') }}</button>
-        </a>
+        @if(Auth::check())
+          <a href="/home">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 approveButton">{{ __('welcomepage.start_learning_button') }}</button>
+          </a>
+        @else
+          <a href="/register">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 approveButton">{{ __('welcomepage.start_creating_button') }}</button>
+          </a>
+        @endif
       </div>
     </div>
   </div>
@@ -152,9 +158,15 @@ scrollContainer.addEventListener('mouseout', () => {
     <h1 class="display-6 fw-bold lh-1 font-color-main">{{ __('welcomepage.reverse_hero_title') }}</h1>
     <p class="lead font-color-main">{{ __('welcomepage.reverse_hero_text') }}</p>
     <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-      <a href="/register">
-      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold approveButton">{{ __('welcomepage.register_cta') }}</button>
-    </a>
+      @if(Auth::check())
+        <a href="/home">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold approveButton">{{ __('welcomepage.start_learning_button') }}</button>
+        </a>
+      @else
+        <a href="/register">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold approveButton">{{ __('welcomepage.register_cta') }}</button>
+        </a>
+      @endif
     </div>
   </div>
 </div>
@@ -203,6 +215,7 @@ scrollContainer.addEventListener('mouseout', () => {
             <p class="font-color-main">{{ __('stripe.description_development') }}</p>
         </div>
     </div>
+    <h1></h1>
 
     <div class="row justify-content-center mt-5">
         <!-- Free Plan -->
@@ -214,15 +227,16 @@ scrollContainer.addEventListener('mouseout', () => {
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">0€ <small class="text-muted">/ {{ __('stripe.per_month') }}</small></h1>
                     <ul class="list-unstyled mt-3 mb-4">
-                        <li>{{ __('stripe.unlimited_stories') }}</li>
-                        <li>{{ __('stripe.unlimited_decks') }}</li>
-                        <li>{{ __('stripe.limited_story_generation') }}</li>
-                        <li>{{ __('stripe.no_audiobooks') }}</li>
+                        <li>{{ __('welcomepage.unlimited_stories') }}</li>
+                        <li>{{ __('welcomepage.unlimited_decks') }}</li>
+                        <li>{{ __('welcomepage.translate_words') }}</li>
+                        <li>{{ __('welcomepage.no_text_generations') }}</li>
+                        <li>{{ __('welcomepage.no_audiobooks') }}</li>
                     </ul>
                     @guest
                         <a href="{{ route('register') }}" class="btn btn-lg btn-block btn-outline-primary">{{ __('stripe.sign_up') }}</a>
                     @else
-                    <a href="/library" class="standartButton" style="text-decoration: none;">{{ __('stripe.go_to_library') }}</a>
+                        <a href="/library" class="standartButton" style="text-decoration: none;">{{ __('stripe.go_to_library') }}</a>
                     @endguest
                 </div>
             </div>
@@ -236,10 +250,11 @@ scrollContainer.addEventListener('mouseout', () => {
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">3€ <small class="text-muted">/ {{ __('stripe.per_month') }}</small></h1>
                     <ul class="list-unstyled mt-3 mb-4">
-                        <li>{{ __('stripe.unlimited_stories') }}</li>
-                        <li>{{ __('stripe.unlimited_decks') }}</li>
-                        <li>{{ __('stripe.unlimited_story_generation') }}</li>
-                        
+                        <li>{{ __('welcomepage.unlimited_stories') }}</li>
+                        <li>{{ __('welcomepage.unlimited_decks') }}</li>
+                        <li>{{ __('welcomepage.translate_words') }}</li>
+                        <li>{{ __('welcomepage.generate_texts') }}</li>
+                        <li>{{ __('welcomepage.future_audiobook_generation') }}</li>
                     </ul>
                     @guest
                         <a href="/register" class="approveButton" style="text-decoration: none;">{{ __('stripe.sign_up') }}</a>
