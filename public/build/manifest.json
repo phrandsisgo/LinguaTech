@@ -5,7 +5,7 @@
     "src": "resources/css/animations.scss"
   },
   "resources/css/app.css": {
-    "file": "assets/app-1c83a541.css",
+    "file": "assets/app-3c7a3b55.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -24,13 +24,8 @@
     "isEntry": true,
     "src": "resources/css/main.scss"
   },
-  "resources/js/animations.js": {
-    "file": "assets/animations-b28b70f6.js",
-    "isEntry": true,
-    "src": "resources/js/animations.js"
-  },
   "resources/js/app.js": {
-    "file": "assets/app-037c606c.js",
+    "file": "assets/app-ce6463f1.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },

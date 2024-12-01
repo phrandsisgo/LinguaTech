@@ -8,9 +8,13 @@ return [
     'text_function' => 'Eine Darstellung der Textfunktion die beim drauf klicken auch die Übersetzung zeigt.',
     'signup_invitation' => 'Spricht Sie diese Lernmethode an, dann registrieren Sie sich doch gleich und fangen an zu lernen. Oder falls Sie schon ein Konto haben, dann loggen Sie sich ein und fangen an zu lernen.',
 
+    'new_flashcards_title' => 'Eine neue Art, Lernkarten zu erstellen',
+    'new_flashcards_text' => 'Lassen Sie uns eine bessere Möglichkeit schaffen, Ihre Lernkarten zu erstellen, damit Sie mehr Zeit mit Lernen und weniger mit dem Herumfummeln mit neuem Vokabular verbringen können',
+    'start_creating_button' => 'Jetzt erstellen',
+    'custom_flashcards_title' => 'Erweitern Sie Ihren Wortschatz mit personalisierten Lernkarten',
 
-    'title' => 'Beherrschen Sie Sprachen mit benutzerdefinierten Karteikarten & personalisierten Texten',
-    'intro_text' => 'Verbessern Sie Ihre Sprachkenntnisse mit auf Sie zugeschnittenen Karteikarten und Texten, die aus den von Ihnen erlernten Wörtern erstellt wurden. Wählen Sie Ihre Themen, bestimmen Sie Ihr Tempo und sehen Sie, wie Ihre Sprachgewandtheit wächst.',
+    'title' => 'Beherrschen Sie Sprachen mit benutzerdefinierten Lernkarten & personalisierten Texten',
+    'intro_text' => 'Verbessern Sie Ihre Sprachkenntnisse mit auf Sie zugeschnittenen Lernkarten und Texten, die aus den von Ihnen erlernten Wörtern erstellt wurden. Wählen Sie Ihre Themen, bestimmen Sie Ihr Tempo und sehen Sie, wie Ihre Sprachgewandtheit wächst.',
     'swipe_function' => 'Eine Darstellung der Swipe-Funktion, die auch die Übersetzung beim Anklicken anzeigt.',
     'carousel_slide1_title' => 'Wählen Sie Themen, die Ihnen wichtig sind',
     'carousel_slide1_text' => 'Wählen Sie aus einer Vielzahl von Themen, auf die Sie sich beim Lernen konzentrieren möchten. Ob es um Geschäftliches, Reisen oder alltägliche Gespräche geht, wir haben alles abgedeckt.',
@@ -32,5 +36,14 @@ return [
     'scroll_add_new_words_text' => 'Fügen Sie neue Wörter aus Ihren Texten zu Ihrer Lernliste hinzu.',
     'start_learning_button' => 'Jetzt lernen',
     'register_cta' => 'Registrieren Sie sich jetzt und starten Sie Ihr Sprachlernabenteuer!',
+    'unlimited_stories' => '✔ Unbegrenzte Geschichten',
+    'unlimited_decks' => '✔ Unbegrenzte Decks',
+    'translate_words' => '✔ Übersetzen Sie so viele Wörter, wie Sie möchten',
+    'limited_story_generation' => '✘ Begrenzte Geschichtengenerierung',
+    'no_text_generations' => '✘ Keine Textgenerierungen',
+    'no_audiobooks' => '✘ Keine Hörbücher',
+    'future_audiobook_generation' => '? (Zukünftige Funktion) Hörbuchgenerierung',
+
+    'generate_texts' => '✔ Unbegrenzte Textgenerierungen',
 
 ];

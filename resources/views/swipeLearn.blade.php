@@ -7,9 +7,9 @@
 rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
-@vite(['resources/css/application.scss', 'resources/css/animations.scss', 'resources/js/animations.js'])
-
 <meta name="_token" content="{{ csrf_token() }}">
+
+@vite(['resources/css/application.scss', 'resources/css/animations.scss'])
 @endsection
 
 @section('content')
@@ -94,6 +94,7 @@ var repAzeig = 0;
 var aktuelleKarteIndex = 0;
 var unknownAnswers = [];
 let swipeHistory = [];
+var karteContent = document.getElementById('flip-card-inner'); // Verschoben ins globale Scope
 
 @php
 $woerterbuch = $liste->words->map(function ($word) {
@@ -109,46 +110,15 @@ $woerterbuch = $liste->words->map(function ($word) {
 var woerterbuch = @json($woerterbuch);
 var learningMode = 'target'; // Standardmäßig Zielwörter lernen
 
-// Event Listener für die Auswahl des Lernmodus
-document.querySelectorAll('input[name="learningMode"]').forEach((elem) => {
-    elem.addEventListener("change", function(event) {
-        learningMode = event.target.value;
-        updateKarte(); // Aktualisiere die Karte entsprechend
-        resetFlipCard(); // Reset flip state when learning mode changes
-    });
-});
-
-
 // Funktionen
-function zeigeStatistikModal() {
-    document.getElementById('leftSwipeCount').textContent = repAzeig;
-    document.getElementById('rightSwipeCount').textContent = doneAnzeige;
-    document.getElementById('swipeStatistikModal').style.display = 'block';
+function showUebersetzung(){
+    var flipcard = document.getElementById('flip-card-inner');
+    flipcard.classList.toggle('turnCard');
 }
 
-function handleSwipe(direction, wordId) {
-    event.preventDefault();
-    const requestData = {
-        wordId: wordId,
-        direction: direction
-    };
-    var csrf = document.querySelector('meta[name="_token"]').content;
-
-    const formData = JSON.stringify(requestData);
-
-    fetch('/swipeHandle/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrf
-            }
-        })
-    .then(response => response.json())
-    .then(data => {
-           // Handle response if needed
-    })
-    .catch(error => console.error('Error:', error));   
+function resetFlipCard(){
+    var flipcard = document.getElementById('flip-card-inner');
+    flipcard.classList.remove('turnCard');
 }
 
 function updateUI() {
@@ -187,27 +157,36 @@ function updateUI() {
     doneAnzeige = 0;
 }
 
-function restartWithUnknownAnswers(){
-    var unlearnedWords = woerterbuch.filter(word => !word.learned);
-    if (unlearnedWords.length > 0) {
-        aktuelleKarteIndex = woerterbuch.findIndex(word => !word.learned);
-        // Zähler zurücksetzen
-        repAzeig = 0;
-        doneAnzeige = 0;
-        listLength = unlearnedWords.length;
-        updateKarte();
-        document.getElementById('swipeStatistikModal').style.display = 'none';
+function zeigeStatistikModal() {
+    document.getElementById('leftSwipeCount').textContent = repAzeig;
+    document.getElementById('rightSwipeCount').textContent = doneAnzeige;
+    document.getElementById('swipeStatistikModal').style.display = 'block';
+}
 
-        // Reset counters
-        document.getElementById('repAzeigA').textContent = "0";
-        document.getElementById('repAzeigB').textContent = "0";
-        document.getElementById('doneAnzeigeA').textContent = "0";
-        document.getElementById('doneAnzeigeB').textContent = "0";
-        document.getElementById('countAnzeigeA').textContent = "1/" + listLength + " {{ __('swipe.words') }}";
-        document.getElementById('countAnzeigeB').textContent = "1/" + listLength + " {{ __('swipe.words') }}";
-    } else {
-        alert("{{ __('swipe.all_words_learned') }}");
-    }
+function handleSwipe(direction, wordId) {
+    console.log("handling swipe " + direction);
+    event.preventDefault();
+    const requestData = {
+        wordId: wordId,
+        direction: direction
+    };
+    var csrf = document.querySelector('meta[name="_token"]').content;
+
+    const formData = JSON.stringify(requestData);
+
+    fetch('/swipeHandle/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrf
+            }
+        })
+    .then(response => response.json())
+    .then(data => {
+           // Handle response if needed
+    })
+    .catch(error => console.error('Error:', error));   
 }
 
 function showNextWord() {
@@ -240,47 +219,27 @@ function updateKarte() {
     resetFlipCard(); // Reset flip state when updating the card
 }
 
-function resetFlipCard(){
-    var flipcard = document.getElementById('flip-card-inner');
-    flipcard.classList.remove('turnCard');
-}
+function restartWithUnknownAnswers(){
+    var unlearnedWords = woerterbuch.filter(word => !word.learned);
+    if (unlearnedWords.length > 0) {
+        aktuelleKarteIndex = woerterbuch.findIndex(word => !word.learned);
+        // Zähler zurücksetzen
+        repAzeig = 0;
+        doneAnzeige = 0;
+        listLength = unlearnedWords.length;
+        updateKarte();
+        document.getElementById('swipeStatistikModal').style.display = 'none';
 
-function showUebersetzung(){
-    var flipcard = document.getElementById('flip-card-inner');
-    flipcard.classList.toggle('turnCard');
-}
-
-function triggerLeft(event){
-    event.stopPropagation();
-    var karteContent = document.getElementById('flip-card-inner');
-    karteContent.classList.add('animate__rollOut__left');
-    karteContent.addEventListener('animationend', function(){
-        karteContent.classList.remove('animate__rollOut__left');
-        showNextWord(); // Show next word after animation
-    }, { once: true });
-
-    swipeHistory.push(aktuelleKarteIndex); // Save current index to history
-    repAzeig++;
-    document.getElementById('repAzeigA').innerHTML = repAzeig;
-    document.getElementById('repAzeigB').innerHTML = repAzeig;
-    handleSwipe("left", woerterbuch[aktuelleKarteIndex].id);
-}
-
-function triggerRight(event){
-    event.stopPropagation();
-    var karteContent = document.getElementById('flip-card-inner');
-    karteContent.classList.add('animate__rollOut__right');
-    karteContent.addEventListener('animationend', function(){
-        karteContent.classList.remove('animate__rollOut__right');
-        showNextWord(); // Show next word after animation
-    }, { once: true });
-
-    swipeHistory.push(aktuelleKarteIndex); // Save current index to history
-    woerterbuch[aktuelleKarteIndex].learned = true;
-    doneAnzeige++;
-    document.getElementById('doneAnzeigeA').innerHTML = doneAnzeige;
-    document.getElementById('doneAnzeigeB').innerHTML = doneAnzeige;
-    handleSwipe("right", woerterbuch[aktuelleKarteIndex].id);
+        // Reset counters
+        document.getElementById('repAzeigA').textContent = "0";
+        document.getElementById('repAzeigB').textContent = "0";
+        document.getElementById('doneAnzeigeA').textContent = "0";
+        document.getElementById('doneAnzeigeB').textContent = "0";
+        document.getElementById('countAnzeigeA').textContent = "1/" + listLength + " {{ __('swipe.words') }}";
+        document.getElementById('countAnzeigeB').textContent = "1/" + listLength + " {{ __('swipe.words') }}";
+    } else {
+        alert("{{ __('swipe.all_words_learned') }}");
+    }
 }
 
 function shuffleArray(array) {
@@ -289,6 +248,12 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+function shuffleAndReloadCards() {
+    woerterbuch = shuffleArray(woerterbuch);
+    aktuelleKarteIndex = 0;
+    updateKarte();
 }
 
 function undoLastSwipe() {
@@ -300,18 +265,82 @@ function undoLastSwipe() {
     }
 }
 
-function shuffleAndReloadCards() {
-    woerterbuch = shuffleArray(woerterbuch);
-    aktuelleKarteIndex = 0;
-    updateKarte();
+function triggerAnimationLeft(callback){
+    karteContent.classList.add('animate__rollOut__left');
+    karteContent.addEventListener('animationend', function(){
+        karteContent.classList.remove('animate__rollOut__left');
+        if (callback) callback();
+    }, { once: true });
 }
-// Beim Laden der Seite das woerterbuch mischen
-//woerterbuch = shuffleArray(woerterbuch);
 
+function triggerAnimationRight(callback){
+    karteContent.classList.add('animate__rollOut__right');
+    karteContent.addEventListener('animationend', function(){
+        karteContent.classList.remove('animate__rollOut__right');
+        if (callback) callback();
+    }, { once: true });
+}
 
+function triggerLeft(event){
+    console.log("trigger left");
+    // Check if event is provided and stopPropagation is a function
+    if (event && typeof event.stopPropagation === 'function') {
+        event.stopPropagation();
+    }
+    triggerAnimationLeft(function(){
+        showNextWord();
+    });
+
+    swipeHistory.push(aktuelleKarteIndex); // Aktuellen Index speichern
+    repAzeig++;
+    document.getElementById('repAzeigA').innerHTML = repAzeig;
+    document.getElementById('repAzeigB').innerHTML = repAzeig;
+    handleSwipe("left", woerterbuch[aktuelleKarteIndex].id);
+}
+
+function triggerRight(event){
+    console.log("trigger right");
+    if (event && typeof event.stopPropagation === 'function') {
+        event.stopPropagation();
+    }
+    triggerAnimationRight(function(){
+        showNextWord();
+    });
+
+    swipeHistory.push(aktuelleKarteIndex); // Aktuellen Index speichern
+    woerterbuch[aktuelleKarteIndex].learned = true;
+    doneAnzeige++;
+    document.getElementById('doneAnzeigeA').innerHTML = doneAnzeige;
+    document.getElementById('doneAnzeigeB').innerHTML = doneAnzeige;
+    handleSwipe("right", woerterbuch[aktuelleKarteIndex].id);
+}
+
+// Event Listener für die Auswahl des Lernmodus
+document.querySelectorAll('input[name="learningMode"]').forEach((elem) => {
+    elem.addEventListener("change", function(event) {
+        learningMode = event.target.value;
+        updateKarte(); // Aktualisiere die Karte entsprechend
+        resetFlipCard(); // Kartenrückseite ausblenden
+    });
+});
+
+// Hammer.js Integration
 document.addEventListener('DOMContentLoaded', function() {
     // Initialisiere die UI
     updateUI();
+
+    // 'karteContent' ist bereits global definiert
+    // var karteContent = document.getElementById('flip-card-inner');
+
+    var hammertime = new Hammer(karteContent);
+    hammertime.on('swipe', function(ev) {
+        console.log(ev.type + " in Richtung " + ev.direction);
+        if (ev.direction === Hammer.DIRECTION_LEFT) {
+            triggerLeft(); // Do not pass the 'ev' parameter
+        } else if (ev.direction === Hammer.DIRECTION_RIGHT) {
+            triggerRight(); // Do not pass the 'ev' parameter
+        }
+    });
 });
 </script>
 @endsection

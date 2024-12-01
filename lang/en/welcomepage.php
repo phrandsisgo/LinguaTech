@@ -8,6 +8,10 @@ return [
     'text_function' => 'A representation of the text function that also shows the translation when clicked on.',
     'signup_invitation' => 'If you are attracted to this method of learning, then register now and start learning. Or if you already have an account, then log in and start learning.',
 
+    'new_flashcards_title' => 'A new way to create flashcards',
+    'new_flashcards_text' => 'let\'s make a better way of creating your flashcards so you can spend more time learning and less with fumbling with new vocabulary',
+    'start_creating_button' => 'Start Creating Now',
+    'custom_flashcards_title' => 'Enhance Your Vocabulary with Personalized Flashcards',
 
     'title' => 'Master Languages with Custom Flashcards & Personalized Texts',
     'intro_text' => 'Level up your language skills with flashcards tailored to you, and texts generated from the words you\'re learning. Choose your topics, set your pace, and watch your fluency grow.',
@@ -31,5 +35,14 @@ return [
     'scroll_add_new_words' => 'Add New Words',
     'scroll_add_new_words_text' => 'Loop back by adding new words from your texts.',
     'start_learning_button' => 'Start Learning Now',
+    'start_creating_button' => 'Start Creating Now',
     'register_cta' => 'Register and start your language learning adventure!',
+    'unlimited_stories' => '✔ Unlimited stories',
+    'unlimited_decks' => '✔ Unlimited decks',
+    'translate_words' => '✔ Translate as many words as you want',
+    'limited_story_generation' => '✘ Limited story generation',
+    'no_text_generations' => '✘ No text generations',
+    'no_audiobooks' => '✘ No audiobooks',
+    'future_audiobook_generation' => '? (Future feature) Audiobook generation',
+    'generate_texts' => '✔ Unlimited text generations',
 ];
