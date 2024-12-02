@@ -34,5 +34,11 @@ return [
     'explanation' => 'Explanation',
     'preferableTitle' => 'Preferable Title:',
     'preferableTitleHelper' => 'Enter a preferable title for the text. This title will be shown in the list of texts.',
-    'generate_your_text' => 'Generate your text using Artificial Intelligence here.'
+    'generate_your_text' => 'Generate your text using Artificial Intelligence here.',
+    'validation_error' => 'Validation Error',
+    'provide_text_or_deck' => 'Please provide either a text description or select a deck.',
+    'deck_word_list' => 'Pass a word list from your deck.',
+    'no_deck_selected' => 'No deck selected',
+    'title_placeholder' => 'This field can be left empty',
+    'text_description_placeholder' => 'Enter a description of the story you would like to write',
 ];

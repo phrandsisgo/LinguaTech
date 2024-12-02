@@ -35,6 +35,12 @@ return [
     'explanation' => 'Erklärung',
     'preferableTitle' => 'Bevorzugter Titel:',
     'preferableTitleHelper' => 'Geben Sie einen bevorzugten Titel für den Text ein. Dieser Titel wird in der Liste der Texte angezeigt.',
-    'generate_your_text' => 'Genereiere deinen Text mithilfe von Künstlicher Intelligenz hier.'
+    'generate_your_text' => 'Genereiere deinen Text mithilfe von Künstlicher Intelligenz hier.',
+    'validation_error' => 'Validierungsfehler',
+    'provide_text_or_deck' => 'Bitte geben Sie entweder eine Textbeschreibung ein oder wählen Sie ein Deck aus.',
+    'deck_word_list' => 'Übergeben Sie aus Ihrem Deck eine Wortliste ein.',
+    'no_deck_selected' => 'Kein Deck ausgewählt',
+    'title_placeholder' => 'Dieses Feld kann leer gelassen werden',
+    'text_description_placeholder' => 'Geben Sie eine Beschreibung zu Ihrer Geschichte ein, die Sie gerne schreiben möchten',
 ];
 
