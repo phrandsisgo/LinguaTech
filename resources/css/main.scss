@@ -867,7 +867,6 @@ $iconSize: 4rem; //gehört zu IconSize
 #translationModal{
     display: none;
     position: fixed;
-    z-index: 1;
     padding-top: calc(39vh - 105px);
     left: 0;
     top: 0;
@@ -875,6 +874,8 @@ $iconSize: 4rem; //gehört zu IconSize
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
+    //transform: translateY(-10px);
+    z-index: 7;
 }
 #deleteModal{
     display: none;
@@ -895,6 +896,7 @@ $iconSize: 4rem; //gehört zu IconSize
     border: 1px solid $contrast;
     width: 80%;
     border-radius: 10px;
+    transform: translateY(-10vh);
     @media screen and (min-width: 650px) {
         width: 400px;
         

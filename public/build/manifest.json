@@ -5,7 +5,7 @@
     "src": "resources/css/animations.scss"
   },
   "resources/css/app.css": {
-    "file": "assets/app-3c7a3b55.css",
+    "file": "assets/app-8b3c4d12.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -20,7 +20,7 @@
     "src": "resources/css/library.scss"
   },
   "resources/css/main.scss": {
-    "file": "assets/main-ac1ed0ee.css",
+    "file": "assets/main-eda7e1b9.css",
     "isEntry": true,
     "src": "resources/css/main.scss"
   },
