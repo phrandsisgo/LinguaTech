@@ -19,6 +19,16 @@ class SetLanguageMiddleware
     {
         if (Session::has('locale')) {
             App::setLocale(Session::get('locale'));
+        }else{
+            $preferredLanguage = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+            if($preferredLanguage === 'de' ) {
+                App::setLocale('de');
+                Session::put('locale', 'de');
+            //} elseif ($preferredLanguage === 'en') {
+            } else {
+                App::setLocale('en');
+                Session::put('locale', 'en');
+            }
         }
         return $next($request);
     }
