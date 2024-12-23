@@ -341,6 +341,14 @@ document.addEventListener('DOMContentLoaded', function() {
             triggerRight(); // Do not pass the 'ev' parameter
         }
     });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowLeft') {
+            triggerLeft();
+        } else if (event.key === 'ArrowRight') {
+            triggerRight();
+        }
+    });
 });
 </script>
 @endsection
