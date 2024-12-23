@@ -2,6 +2,7 @@
 
 return [
     'library' => 'Library',
+    'flashcards' => 'Flashcards',
     'aboutDeveloper' => 'About the Developer',
     'aboutProject' => 'About the Project',
     'patchNotes' => 'Patch Notes',
@@ -10,4 +11,5 @@ return [
     'logout' => 'Logout',
     'login' => 'Login',
     'register' => 'Register',
+    'home' => 'Home',
 ];
