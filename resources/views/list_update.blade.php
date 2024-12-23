@@ -66,36 +66,41 @@
         console.log(karten);
     }
     document.getElementById('list_update_form').addEventListener('submit', function(event) {
-    let isValid = true;
-    const baseWords = document.querySelectorAll('input[name="baseWord[]"]');
-    const targetWords = document.querySelectorAll('input[name="targetWord[]"]');
-    const listTitle = document.getElementById('listTitle');
-    const listDescription = document.getElementById('listDescription');
+        let isValid = true;
+        const baseWords = document.querySelectorAll('input[name="baseWord[]"]');
+        const targetWords = document.querySelectorAll('input[name="targetWord[]"]');
+        const listTitle = document.getElementById('listTitle');
+        const listDescription = document.getElementById('listDescription');
 
-    // Validierung für Listentitel
-    if (listTitle.value.trim().length < 3 || listTitle.value.trim().length > 40) {
-        isValid = false;
-        alert('{{ __('list_update.title_length_validation') }}');
-    }
-
-    // Validierung für Listenbeschreibung
-    if (listDescription.value.trim().length > 200) {
-        isValid = false;
-        alert('{{ __('list_update.description_length_validation') }}');
-    }
-
-    // Validierung für baseWord und targetWord
-    baseWords.forEach((element, index) => {
-        if (element.value.trim() === '' || targetWords[index].value.trim() === '') {
+        // Validierung für Listentitel
+        if (listTitle.value.trim().length < 3 || listTitle.value.trim().length > 40) {
             isValid = false;
-            alert('{{ __('list_update.all_base_and_target_words_must_be_filled') }}');
+            alert('{{ __('list_update.title_length_validation') }}');
+        }
+
+        // Validierung für Listenbeschreibung
+        if (listDescription.value.trim().length > 200) {
+            isValid = false;
+            alert('{{ __('list_update.description_length_validation') }}');
+        }
+
+        // Updated validation
+        baseWords.forEach((baseEl, index) => {
+            const targetEl = targetWords[index];
+            if (baseEl.value.trim() === '' && targetEl.value.trim() === '') {
+                // remove from DOM if both are empty
+                const card = baseEl.closest('.library-Card');
+                if (card) card.remove();
+            } else if (baseEl.value.trim() === '' || targetEl.value.trim() === '') {
+                isValid = false;
+                alert('{{ __('list_update.all_base_and_target_words_must_be_filled') }}');
+            }
+        });
+
+        if (!isValid) {
+            event.preventDefault();
         }
     });
-
-    if (!isValid) {
-        event.preventDefault();
-    }
-});
 
     function markForDeletion(button) {
         const card = button.closest('.library-Card');
