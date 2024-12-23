@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -37,14 +38,12 @@
             </svg>
 
         </a>
+        </svg>
         <div class="horizontal-fill"></div>
         <p id="navText">LinguaTech</p>
         <div class="horizontal-fill"></div>
         <!-- make a dropdown menu for the following links -->
 
-        @if (auth()->check())
-        @else
-        @endif
         <div class="langDropdownMenu">
             <input type="checkbox" id="dropdownCheckbox" class="dropdownCheckbox" />
             <label for="dropdownCheckbox" id="nav-lang-label" class="dropdownLabel">
@@ -77,15 +76,18 @@
             </button>
             <ul class="dropdown-color dropdown-menu dropdown-menu-end z-index-up">
                 @if (auth()->check())
-                    <li class="mob-only"><a class="approvetext dropdown-item" href="/library">{{ __('menu.library') }}</a></li>
+                    <li class="mob-only"><a class="approvetext dropdown-item" href="/home">{{ __('menu.home') }}</a></li>
+                    <li class="mob-only"><a class="approvetext dropdown-item" href="/library">{{ __('menu.flashcards') }}</a></li>
+
+                    <li><a class="approvetext dropdown-item" href="/displayAllTexts">{{ __('menu.texts') }}</a></li>
                 @endif
-                <li><a class="approvetext dropdown-item" href="/about_me">{{ __('menu.aboutDeveloper') }}</a></li>
-                <li><a class="approvetext dropdown-item" href="/about_project">{{ __('menu.aboutProject') }}</a></li>
                 <li><a class="approvetext dropdown-item" href="/showPatch/2">{{ __('menu.patchNotes') }}</a></li>
 
                 @if (auth()->check())
-                    <li><a class="approvetext dropdown-item" href="/displayAllTexts">{{ __('menu.texts') }}</a></li>
                     <li><a class="approvetext dropdown-item" href="/profile">{{ __('menu.profile', ['name' => auth()->user()->name]) }}</a></li>
+
+                    <li><a class="approvetext dropdown-item" href="/about_me">{{ __('menu.aboutDeveloper') }}</a></li>
+                    <li><a class="approvetext dropdown-item" href="/about_project">{{ __('menu.aboutProject') }}</a></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -93,6 +95,9 @@
                         </form>
                     </li>
                 @else
+
+                    <li><a class="approvetext dropdown-item" href="/about_me">{{ __('menu.aboutDeveloper') }}</a></li>
+                    <li><a class="approvetext dropdown-item" href="/about_project">{{ __('menu.aboutProject') }}</a></li>
                     <li><a class="approvetext dropdown-item" href="/login">{{ __('menu.login') }}</a></li>
                     <li><a class="approvetext dropdown-item" href="/register">{{ __('menu.register') }}</a></li>
                 @endif
