@@ -57,8 +57,18 @@ class WordListController extends Controller{
         $liste = WordList::find($id);
         $baseWords = $request->baseWord;
         $targetWords = $request->targetWord;
-        $wordIds = $request->wordIds;
-    
+        $wordIds = $request->wordIds ?? [];
+        $deletedWordIds = $request->deletedWordIds ?? [];
+
+        // Loop to delete all words marked for deletion
+        foreach ($deletedWordIds as $wordId) {
+            $word = Word::find($wordId);
+            if ($word) {
+                $word->delete();
+            }
+        }
+
+        // Process remaining words
         foreach ($wordIds as $index => $wordId) {
             if ($wordId === 'new') {
                 $word = new Word;
@@ -77,11 +87,11 @@ class WordListController extends Controller{
                 }
             }
         }
-    
+
         $liste->name = $request->listTitle;
         $liste->description = $request->listDescription;
         $liste->save();
-    
+
         return redirect('/library');
     }
 

@@ -30,19 +30,27 @@
     <div id="luis">
 
     @foreach ($liste->words as $begriffe)
-    <div class="library-Card">
+    <div class="library-Card" data-word-id="{{ $begriffe->id }}">
         <input type="hidden" name="wordIds[]" value="{{ $begriffe->id }}">
-        <input type="text" name="baseWord[]" value="{{ $begriffe->base_word }}" class="inputField">
-        @error('baseWord.' . $loop->index)
-            <p class="errorMessages  colorDanger">{{ __('list_update.the_base_word_must_be_between') }}</p>
-        @enderror
-        <p class="formHelper">{{ __('list_update.base_language') }}</p>
+        <div class="displayFlex">
+            <div>
+                <input type="text" name="baseWord[]" value="{{ $begriffe->base_word }}" class="inputField">
+                @error('baseWord.' . $loop->index)
+                    <p class="errorMessages colorDanger">{{ __('list_update.the_base_word_must_be_between') }}</p>
+                @enderror
+                <p class="formHelper">{{ __('list_update.base_language') }}</p>
 
-        <input type="text" name="targetWord[]" value="{{ $begriffe->target_word }}" class="inputField">
-        <p class="formHelper">{{ __('list_update.target_language') }}</p>
-        @error('targetWord.' . $loop->index)
-            <p class="errorMessages colorDanger">{{ __('list_update.the_target_word_must_be_between') }}</p>
-        @enderror
+                <input type="text" name="targetWord[]" value="{{ $begriffe->target_word }}" class="inputField">
+                <p class="formHelper">{{ __('list_update.target_language') }}</p>
+                @error('targetWord.' . $loop->index)
+                    <p class="errorMessages colorDanger">{{ __('list_update.the_target_word_must_be_between') }}</p>
+                @enderror
+            </div>
+            <div class="horizontal-fill"></div>
+            <button type="button" class="delete-hitbox" onclick="markForDeletion(this)">
+                <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
+            </button>
+        </div>
     </div>
     @endforeach
     </div>
@@ -88,6 +96,17 @@
         event.preventDefault();
     }
 });
+
+    function markForDeletion(button) {
+        const card = button.closest('.library-Card');
+        const wordId = card.getAttribute('data-word-id');
+        card.remove();
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'deletedWordIds[]';
+        input.value = wordId;
+        document.getElementById('list_update_form').appendChild(input);
+    }
 </script>
 
 @endsection
