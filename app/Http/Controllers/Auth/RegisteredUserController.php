@@ -47,6 +47,6 @@ class RegisteredUserController extends Controller
         //trying the remember me function
         Auth::login($user, $request->has('remember'));
 
-        return redirect("/initiateProfile");
+        return redirect("/home");
     }
 }
