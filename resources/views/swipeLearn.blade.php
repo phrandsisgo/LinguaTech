@@ -95,6 +95,7 @@ var aktuelleKarteIndex = 0;
 var unknownAnswers = [];
 let swipeHistory = [];
 var karteContent = document.getElementById('flip-card-inner'); // Verschoben ins globale Scope
+var unlearnedWords = []; // Declare unlearnedWords as a global variable
 
 @php
 $woerterbuch = $liste->words->map(function ($word) {
@@ -204,8 +205,8 @@ function showNextWord() {
 function updateKarte() {
     var countAnzeigeA = document.getElementById('countAnzeigeA');
     var countAnzeigeB = document.getElementById('countAnzeigeB');
-    countAnzeigeA.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length + " {{ __('swipe.words') }}";
-    countAnzeigeB.textContent = (aktuelleKarteIndex + 1) + "/" + woerterbuch.length + " {{ __('swipe.words') }}";
+    countAnzeigeA.textContent = (aktuelleKarteIndex + 1) + "/" + listLength + " {{ __('swipe.words') }}";
+    countAnzeigeB.textContent = (aktuelleKarteIndex + 1) + "/" + listLength + " {{ __('swipe.words') }}";
 
     const kartenTextBase = document.getElementById('baseWord');
     const kartenTextTarget = document.getElementById('targetWord');
@@ -220,14 +221,12 @@ function updateKarte() {
 }
 
 function restartWithUnknownAnswers(){
-    var unlearnedWords = woerterbuch.filter(word => !word.learned);
+    unlearnedWords = woerterbuch.filter(word => !word.learned); // Overwrite unlearnedWords
     if (unlearnedWords.length > 0) {
-        aktuelleKarteIndex = woerterbuch.findIndex(word => !word.learned);
-        // Zähler zurücksetzen
-        repAzeig = 0;
-        doneAnzeige = 0;
-        listLength = unlearnedWords.length;
-        updateKarte();
+        woerterbuch = unlearnedWords; // Update woerterbuch to only contain unlearned words
+        aktuelleKarteIndex = 0; // Reset the current card index
+        listLength = unlearnedWords.length; // Update listLength to the number of unlearned words
+        updateKarte(); // Update the card display
         document.getElementById('swipeStatistikModal').style.display = 'none';
 
         // Reset counters
