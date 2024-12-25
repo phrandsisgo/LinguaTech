@@ -25,6 +25,10 @@ class languageOptionFacilitate extends Seeder
             ['id' => 6, 'language_name' => 'Español', 'language_code' => 'ES'],
             ['id' => 7, 'language_name' => 'Русский', 'language_code' => 'RU'],
             ['id' => 8, 'language_name' => 'Nederlands', 'language_code' => 'NL'],
+            ['id' => 9, 'language_name' => 'Italiano', 'language_code' => 'IT'],
+            ['id' => 10, 'language_name' => 'Українська', 'language_code' => 'UK'],
+            ['id' => 11, 'language_name' => 'Magyar', 'language_code' => 'HU'],
+            ['id' => 12, 'language_name' => 'Polski', 'language_code' => 'PL'],
         ];
 
         // Update or create simplified language options
@@ -50,8 +54,6 @@ class languageOptionFacilitate extends Seeder
             DB::table('texts')->where('id', $text->id)->update(['lang_option_id' => $langOptionId]);
         }
 
-        //then delete all the remaining langoptions
-        LangOption::where('id', '>', 8)->delete();
 
 
     }

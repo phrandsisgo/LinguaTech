@@ -30,19 +30,27 @@
     <div id="luis">
 
     @foreach ($liste->words as $begriffe)
-    <div class="library-Card">
+    <div class="library-Card" data-word-id="{{ $begriffe->id }}">
         <input type="hidden" name="wordIds[]" value="{{ $begriffe->id }}">
-        <input type="text" name="baseWord[]" value="{{ $begriffe->base_word }}" class="inputField">
-        @error('baseWord.' . $loop->index)
-            <p class="errorMessages  colorDanger">{{ __('list_update.the_base_word_must_be_between') }}</p>
-        @enderror
-        <p class="formHelper">{{ __('list_update.base_language') }}</p>
+        <div class="displayFlex">
+            <div>
+                <input type="text" name="baseWord[]" value="{{ $begriffe->base_word }}" class="inputField">
+                @error('baseWord.' . $loop->index)
+                    <p class="errorMessages colorDanger">{{ __('list_update.the_base_word_must_be_between') }}</p>
+                @enderror
+                <p class="formHelper">{{ __('list_update.base_language') }}</p>
 
-        <input type="text" name="targetWord[]" value="{{ $begriffe->target_word }}" class="inputField">
-        <p class="formHelper">{{ __('list_update.target_language') }}</p>
-        @error('targetWord.' . $loop->index)
-            <p class="errorMessages colorDanger">{{ __('list_update.the_target_word_must_be_between') }}</p>
-        @enderror
+                <input type="text" name="targetWord[]" value="{{ $begriffe->target_word }}" class="inputField">
+                <p class="formHelper">{{ __('list_update.target_language') }}</p>
+                @error('targetWord.' . $loop->index)
+                    <p class="errorMessages colorDanger">{{ __('list_update.the_target_word_must_be_between') }}</p>
+                @enderror
+            </div>
+            <div class="horizontal-fill"></div>
+            <button type="button" class="delete-hitbox" onclick="markForDeletion(this)">
+                <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon">
+            </button>
+        </div>
     </div>
     @endforeach
     </div>
@@ -58,36 +66,52 @@
         console.log(karten);
     }
     document.getElementById('list_update_form').addEventListener('submit', function(event) {
-    let isValid = true;
-    const baseWords = document.querySelectorAll('input[name="baseWord[]"]');
-    const targetWords = document.querySelectorAll('input[name="targetWord[]"]');
-    const listTitle = document.getElementById('listTitle');
-    const listDescription = document.getElementById('listDescription');
+        let isValid = true;
+        const baseWords = document.querySelectorAll('input[name="baseWord[]"]');
+        const targetWords = document.querySelectorAll('input[name="targetWord[]"]');
+        const listTitle = document.getElementById('listTitle');
+        const listDescription = document.getElementById('listDescription');
 
-    // Validierung für Listentitel
-    if (listTitle.value.trim().length < 3 || listTitle.value.trim().length > 40) {
-        isValid = false;
-        alert('{{ __('list_update.title_length_validation') }}');
-    }
-
-    // Validierung für Listenbeschreibung
-    if (listDescription.value.trim().length > 200) {
-        isValid = false;
-        alert('{{ __('list_update.description_length_validation') }}');
-    }
-
-    // Validierung für baseWord und targetWord
-    baseWords.forEach((element, index) => {
-        if (element.value.trim() === '' || targetWords[index].value.trim() === '') {
+        // Validierung für Listentitel
+        if (listTitle.value.trim().length < 3 || listTitle.value.trim().length > 40) {
             isValid = false;
-            alert('{{ __('list_update.all_base_and_target_words_must_be_filled') }}');
+            alert('{{ __('list_update.title_length_validation') }}');
+        }
+
+        // Validierung für Listenbeschreibung
+        if (listDescription.value.trim().length > 200) {
+            isValid = false;
+            alert('{{ __('list_update.description_length_validation') }}');
+        }
+
+        // Updated validation
+        baseWords.forEach((baseEl, index) => {
+            const targetEl = targetWords[index];
+            if (baseEl.value.trim() === '' && targetEl.value.trim() === '') {
+                // remove from DOM if both are empty
+                const card = baseEl.closest('.library-Card');
+                if (card) card.remove();
+            } else if (baseEl.value.trim() === '' || targetEl.value.trim() === '') {
+                isValid = false;
+                alert('{{ __('list_update.all_base_and_target_words_must_be_filled') }}');
+            }
+        });
+
+        if (!isValid) {
+            event.preventDefault();
         }
     });
 
-    if (!isValid) {
-        event.preventDefault();
+    function markForDeletion(button) {
+        const card = button.closest('.library-Card');
+        const wordId = card.getAttribute('data-word-id');
+        card.remove();
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'deletedWordIds[]';
+        input.value = wordId;
+        document.getElementById('list_update_form').appendChild(input);
     }
-});
 </script>
 
 @endsection

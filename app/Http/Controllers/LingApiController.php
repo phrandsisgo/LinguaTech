@@ -46,7 +46,7 @@ class LingApiController extends Controller
         $text = Text::with("langOption")->find($id);
         $allTexts = Text::with("langOption")->get();
         $ownLibraryList = WordList::where('created_by', auth()->user()->id)->get();
-        $languages = LangOption::whereBetween('id', [2, 8])->get();
+        $languages = LangOption::whereBetween('id', [2, 12])->get();
 
         return view('api-stuff/textShow', [
             'text' => $text,
@@ -74,17 +74,17 @@ class LingApiController extends Controller
         return view('api-stuff/displayAllTexts',['allTexts' => $allTexts]);
     }
     public function addText(){
-        $languages = LangOption::whereBetween('id', [2, 8])->get();
+        $languages = LangOption::whereBetween('id', [2, 12])->get();
         return view('api-stuff/newText',['languages' => $languages]);
     }
     public function updateText($id){
         $text = Text::with("langOption")->find($id);
-        $languages = LangOption::whereBetween('id', [2, 8])->get();
+        $languages = LangOption::whereBetween('id', [2, 12])->get();
         return view('api-stuff/updateTexts',['text' => $text, 'languages' => $languages]);
     }
 
     public function generateTextView($deck_id = null){
-        $languages = LangOption::whereBetween('id', [2, 8])->get();
+        $languages = LangOption::whereBetween('id', [2, 12])->get();
         $decks = WordList::where('created_by', auth()->user()->id)->get();
         return view('api-stuff/generateText', [
             'languages' => $languages,
