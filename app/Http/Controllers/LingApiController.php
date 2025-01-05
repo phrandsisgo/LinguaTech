@@ -216,55 +216,53 @@ class LingApiController extends Controller
         
         return array_merge($parsedResponse, ['id' => $newText->id]); // Include the new text ID in the response
     }
-
     private function generateStoryPrompt($targetLanguage, $level, $storyTopic, $title, $wordlistJSON = null)
     {
-        //dd("this is the target language: {$storyTopic}");
         $basePrompt = "
-    Create an engaging story in {$targetLanguage} based on the following topic and requirements:
-    
-    Topic and Special Requirements: \"{$storyTopic}\"
-    
-    Note: The topic and requirements above may be provided in any language, but your task is to write the story entirely in {$targetLanguage}. Pay close attention to any specific instructions regarding grammar, tense, or other linguistic aspects mentioned in the topic.
-    
-    The story should be appropriate for language learners at the {$level} level.
-    Ensure the story uses vocabulary and grammar structures suitable for this level, while also incorporating any specific grammatical requirements mentioned in the topic (e.g., using a particular tense).
-    
-    Guidelines:
-    1. Write the entire story in {$targetLanguage}, regardless of the language of the provided topic and requirements.
-    2. Strictly adhere to any grammatical or structural requirements specified in the topic (such as using a specific tense or focusing on particular grammar points).
-    3. Use clear and concise language appropriate for {$level} learners.
-    4. Include a variety of sentence structures typical for {$level}, unless the topic specifies a focus on particular structures.
-    5. Ensure the story has a clear beginning, middle, and end.
-    6. Aim for a story length of approximately 250-300 words. Feel free to aim for a shorter story if the user requests it in their requirements.
-    7. Mention the title \"{$title}\" in the story in a way that it is clear this is the title the user wished for. At the end of the story, translate the title into {$targetLanguage}.
-    ";
+        Create an engaging story in {$targetLanguage} based on the following topic and requirements:
+        
+        Topic and Special Requirements: \"{$storyTopic}\"
+        
+        Note: The topic and requirements above may be provided in any language, but your task is to write the story entirely in {$targetLanguage}. Pay close attention to any specific instructions regarding grammar, tense, or other linguistic aspects mentioned in the topic.
+        
+        The story should be appropriate for language learners at the {$level} level.
+        Ensure the story uses vocabulary and grammar structures suitable for this level, while also incorporating any specific grammatical requirements mentioned in the topic (e.g., using a particular tense).
+        
+        Guidelines:
+        1. Write the entire story in {$targetLanguage}, regardless of the language of the provided topic and requirements.
+        2. Strictly adhere to any grammatical or structural requirements specified in the topic (such as using a specific tense or focusing on particular grammar points).
+        3. Use clear and concise language appropriate for {$level} learners.
+        4. Include a variety of sentence structures typical for {$level}, unless the topic specifies a focus on particular structures.
+        5. Ensure the story has a clear beginning, middle, and end.
+        6. Aim for a story length of approximately 250-300 words. Feel free to aim for a shorter story if the user requests it in their requirements.
+        7. Do not include the title \"{$title}\" in the story text itself.
+        ";
     
         if ($wordlistJSON) {
             $wordIntegration = "
-    Additionally, you must incorporate the following word list into the story:
-    
-    " . json_encode($wordlistJSON, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "
-    
-    Important notes about word usage:
-    - Interpret the word list carefully.
-    - Include as many words or concepts from this list as possible in the story.
-    - You have the flexibility to use different forms of the words as appropriate:
-      - For verbs: You may conjugate them or use different tenses as needed, ensuring consistency with any tense requirements specified in the topic.
-      - For nouns: You may use singular or plural forms.
-      - For adjectives: You may use comparatives or superlatives if it fits the context.
-    - The goal is to include the words or their concepts naturally within the story's context.
-    - Use these words or their variations in a way that helps illustrate their meaning.
-    ";
+        Additionally, you must incorporate the following word list into the story:
+        
+        " . json_encode($wordlistJSON, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "
+        
+        Important notes about word usage:
+        - Interpret the word list carefully.
+        - Include as many words or concepts from this list as possible in the story.
+        - You have the flexibility to use different forms of the words as appropriate:
+        - For verbs: You may conjugate them or use different tenses as needed, ensuring consistency with any tense requirements specified in the topic.
+        - For nouns: You may use singular or plural forms.
+        - For adjectives: You may use comparatives or superlatives if it fits the context.
+        - The goal is to include the words or their concepts naturally within the story's context.
+        - Use these words or their variations in a way that helps illustrate their meaning.
+        ";
             $basePrompt .= $wordIntegration;
         }
     
         $basePrompt .= "\nPlease provide the story in {$targetLanguage}, ensuring you follow all specified requirements. Provide the output in the following format:
-    
-    Title: [Your Title Here]
-    
-    Story:
-    [Your Story Here]";
+        
+        Title: [Your Title Here]
+        
+        Story:
+        [Your Story Here]";
     
         return $basePrompt;
     }
