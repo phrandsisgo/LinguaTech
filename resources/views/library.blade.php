@@ -125,38 +125,38 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             </div>
         </a>
     </div>
-@foreach ($libraryList as $privateList)
+@foreach ($libraryList->sortByDesc('updated_at') as $privateList)
 @if ($privateList->created_by == auth()->user()->id)
 <div class="library-Card">
-        <div class="displayFlex">
-            <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline displayFlex">
-                <p class="cardTitle">{{$privateList->name}}</p>
+    <div class="displayFlex">
+        <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline displayFlex">
+        <p class="cardTitle">{{$privateList->name}}</p>
 
-            </a>
-                <a href="/list_show/{{$privateList->id}}" class="horizontal-fill"></a>
-            <a href="/swipeLearn/{{$privateList->id}}">
-                <img src="{{ asset('svg-icons/learnIcon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
-            </a>
-            <a href="/list_update/{{$privateList->id}}">
-                <img src="{{ asset('svg-icons/pencil-icon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
-            </a>
-            <form action="/list_delete_function/{{$privateList->id}}" method="POST" onsubmit="return confirmDelete()">
-                @csrf
-                <button type="submit" class="delete-hitbox">
-                    <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon" style ="height:34px; padding-top:3px;"class="libryryIcon">
-                </button>
-            </form>
-        <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline">
-        </div>
-        <div>
-            <!-- give me the amount of words next-->
-            <p class="begriffCount">{{ \App\Models\Word::where('word_list_id', $privateList->id)->count() }} {{__('library.begriff') }}</p> 
-        </div> 
-        <div class="leading-library">
-            <p class="leadingText"> {{__('library.createdBy') }} {{$privateList->creator->name}}</p>
-            <div class="horizontal-fill"></div>
-            <p class="leadingText">{{ date('d.m.y', strtotime($privateList->created_at)) }}</p>
-        </div>
+        </a>
+        <a href="/list_show/{{$privateList->id}}" class="horizontal-fill"></a>
+        <a href="/swipeLearn/{{$privateList->id}}">
+        <img src="{{ asset('svg-icons/learnIcon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
+        </a>
+        <a href="/list_update/{{$privateList->id}}">
+        <img src="{{ asset('svg-icons/pencil-icon.svg')}}" alt="Bearbeiten Icon" class="libraryIcon">
+        </a>
+        <form action="/list_delete_function/{{$privateList->id}}" method="POST" onsubmit="return confirmDelete()">
+        @csrf
+        <button type="submit" class="delete-hitbox">
+            <img src="{{ asset('svg-icons/trash-icon.svg')}}" alt="Löschen Icon" style ="height:34px; padding-top:3px;"class="libryryIcon">
+        </button>
+        </form>
+    <a href="/list_show/{{$privateList->id}}" class=" anker-no-underline">
+    </div>
+    <div>
+        <!-- give me the amount of words next-->
+        <p class="begriffCount">{{ \App\Models\Word::where('word_list_id', $privateList->id)->count() }} {{__('library.begriff') }}</p> 
+    </div> 
+    <div class="leading-library">
+        <p class="leadingText"> {{__('library.createdBy') }} {{$privateList->creator->name}}</p>
+        <div class="horizontal-fill"></div>
+        <p class="leadingText">{{ date('d.m.y', strtotime($privateList->created_at)) }}</p>
+    </div>
     </a>
 </div>
 @endif
