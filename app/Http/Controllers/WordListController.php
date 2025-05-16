@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\WordList;
 use App\Models\WordListWord;
+use App\Models\LangOption;
 use App\Models\User;
 use App\Models\Word;
 
@@ -97,7 +98,11 @@ class WordListController extends Controller{
 
     public function swipeLearn($id){
         $liste = WordList::with('words')->find($id);
-        return view('swipeLearn',['liste' => $liste]);
+        $languages = [
+            'base_language' => LangOption::find($liste->words[0]->base_language_id),
+            'target_language' => LangOption::find($liste->words[0]->target_language_id),
+        ];
+        return view('swipeLearn',['liste' => $liste, 'languages' => $languages]);   
     }
 
     public function list_create_function(Request $request){
