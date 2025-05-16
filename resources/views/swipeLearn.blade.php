@@ -28,6 +28,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         <br><br>
         <button id="shuffleFlashCards" class="standartButton" onclick="shuffleAndReloadCards();">{{ __('swipe.mix') }}</button>
         <br><br><br>
+
+        <button type="button" class="standartButton" onclick="showRemaining();">Show remaining Words (experimental)</button>
+        <br><br><br>
         <a href="#"><button onclick="document.getElementById('learningModeModal').style.display = 'none';" class="modalclose">{{ __('swipe.close') }}</button></a>
     </div>
 </div>
@@ -104,11 +107,17 @@ $woerterbuch = $liste->words->map(function ($word) {
         'target_word' => $word->target_word,
         'id' => $word->id,
         'learned' => false,
+        'full_list' => $word,
     ];
 });
+$language = collect([
+    'base_language' => $languages['base_language'],
+    'target_language' => $languages['target_language']
+]);
 @endphp
 
 var woerterbuch = @json($woerterbuch);
+var language = @json($language);
 var learningMode = 'target'; // Standardmäßig Zielwörter lernen
 
 // Funktionen
@@ -174,7 +183,8 @@ function handleSwipe(direction, wordId) {
     var csrf = document.querySelector('meta[name="_token"]').content;
 
     const formData = JSON.stringify(requestData);
-
+    /*
+    //this is used if I'm gonna log the swipes for better algorithm
     fetch('/swipeHandle/', {
             method: 'POST',
             body: formData,
@@ -188,10 +198,13 @@ function handleSwipe(direction, wordId) {
            // Handle response if needed
     })
     .catch(error => console.error('Error:', error));   
+    */
 }
 
 function showNextWord() {
     aktuelleKarteIndex++;
+    console.log(woerterbuch);
+    console.log("das ist der aktuelle Index: " + aktuelleKarteIndex);
     while (aktuelleKarteIndex < woerterbuch.length && woerterbuch[aktuelleKarteIndex].learned) {
         aktuelleKarteIndex++;
     }
@@ -253,6 +266,15 @@ function shuffleAndReloadCards() {
     woerterbuch = shuffleArray(woerterbuch);
     aktuelleKarteIndex = 0;
     updateKarte();
+}
+function showRemaining() {
+    var remainingWords = woerterbuch.filter(word => !word.learned);
+    if (remainingWords.length > 0) {
+        var remainingWordsText = remainingWords.map(word => word.base_word + "/" + word.target_word).join(', ');
+        alert("Remaining words: " + remainingWordsText);
+    } else {
+        alert("{{ __('swipe.all_words_learned') }}");
+    }
 }
 
 function undoLastSwipe() {
