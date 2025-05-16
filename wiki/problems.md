@@ -8,6 +8,7 @@ Und jenachdem liegt das problem daran das ein neues .css/.scss file neu ist auf 
 
 # Falls ich Forge kündigen sollte:
  - Dann kann ich am besten über https://certbot.eff.org eine https certifikat beantragen mit einstellungen (ngnix & Ubuntu)
+ - von nun an in der SSH zum anmelden alse forge anmelden mit dem Befehl "su - forge" dann auf den linguatech ordner gehen und zum upgraden und mittels "git pull" auf den neusten Stand bringen.
 
 # falls ich probleme mit permission habe :
 
