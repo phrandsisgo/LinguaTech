@@ -15,8 +15,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 @section('content')
 <p class="sectiontitle swipeLearnTitle">{{$liste->name}}</p>
 <button id="openLearningModeModal" class="standartButton" onclick="document.getElementById('learningModeModal').style.display = 'block';">{{ __('swipe.change_learning_mode') }}</button>
-
-<div id="learningModeModal" style="display:none;">
+<div id="learningModeModal" style="display:none;" onclick="if(event.target === this) { document.getElementById('learningModeModal').style.display = 'none'; }">
     <div class="modal-content">
         <h2>{{ __('swipe.learning_mode') }}</h2>
         <label>
@@ -28,9 +27,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         <br><br>
         <button id="shuffleFlashCards" class="standartButton" onclick="shuffleAndReloadCards();">{{ __('swipe.mix') }}</button>
         <br><br><br>
-
+           
+        @if (Auth::user()->status == "admin")
+        <button type="button" class="standartButton" onclick="document.getElementById('swipeStatistikModal').style.display = 'block';">Show Swipe Statistics</button>
         <button type="button" class="standartButton" onclick="showRemaining();">Show remaining Words (experimental)</button>
         <br><br><br>
+        @endif
         <a href="#"><button onclick="document.getElementById('learningModeModal').style.display = 'none';" class="modalclose">{{ __('swipe.close') }}</button></a>
     </div>
 </div>
@@ -270,8 +272,41 @@ function shuffleAndReloadCards() {
 function showRemaining() {
     var remainingWords = woerterbuch.filter(word => !word.learned);
     if (remainingWords.length > 0) {
-        var remainingWordsText = remainingWords.map(word => word.base_word + "/" + word.target_word).join(', ');
-        alert("Remaining words: " + remainingWordsText);
+        var remainingWordsJson = remainingWords.map(word => ({
+            base_word: word.base_word,
+            target_word: word.target_word
+        }));
+
+        // Create modal content dynamically
+        var modalContent = `
+            <div class="modal-content">
+                <h2>{{ __('swipe.remaining_words') }}</h2>
+                <button id="copyRemainingWords" class="standartButton">{{ __('swipe.copy_to_clipboard') }}</button>
+                <textarea id="remainingWordsJson" style="width: 100%; height: 200px;" readonly>${JSON.stringify(remainingWordsJson, null, 2)}</textarea>
+                <br><br>
+                <button onclick="document.getElementById('remainingWordsModal').style.display = 'none';" class="modalclose">{{ __('swipe.close') }}</button>
+            </div>
+        `;
+
+        // Create modal container if it doesn't exist
+        var modalContainer = document.getElementById('remainingWordsModal');
+        if (!modalContainer) {
+            modalContainer = document.createElement('div');
+            modalContainer.id = 'remainingWordsModal';
+            modalContainer.style.display = 'none';
+            document.body.appendChild(modalContainer);
+        }
+
+        modalContainer.innerHTML = modalContent;
+        modalContainer.style.display = 'block';
+
+        // Add copy functionality
+        document.getElementById('copyRemainingWords').addEventListener('click', function() {
+            var textarea = document.getElementById('remainingWordsJson');
+            textarea.select();
+            document.execCommand('copy');
+            alert("{{ __('swipe.copied_to_clipboard') }}");
+        });
     } else {
         alert("{{ __('swipe.all_words_learned') }}");
     }
