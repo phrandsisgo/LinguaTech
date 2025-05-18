@@ -35,8 +35,8 @@ class WordListController extends Controller{
             'targetWord' => 'required|min:1|max:50',
         ]);
         $word = new Word;
-        $word->base_word = $request->baseWord;
-        $word->target_word = $request->targetWord;
+        $word->base_word = $request->targetWord;//musste umgekehrt vorgehen weil ich die Variablen vertauscht habe.(not best practice.)
+        $word->target_word = $request->baseWord;//musste umgekehrt vorgehen weil ich die Variablen vertauscht habe.(not best practice.)
         $word->base_language_id = 1;//muss noch zu einem späteren Zeitpunkt angepasst werden.
         $word->target_language_id = 2;//muss noch zu einem späteren Zeitpunkt angepasst werden.
         $word->word_list_id = $request->list;
