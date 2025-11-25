@@ -44,7 +44,7 @@ function confirmDelete() {
         {
             "Base": "{{$word->base_word}}",
             "Ziel": "{{$word->target_word}}"
-        },
+        }@if (!$loop->last),@endif
         @endforeach
     ]
 }</textarea>
