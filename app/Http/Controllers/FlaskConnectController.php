@@ -1,10 +1,11 @@
+<?php
+namespace App\Http\Controllers;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-<?php
-
-namespace App\Http\Controllers;
 
 
 class FlaskConnectController extends Controller
@@ -52,7 +53,7 @@ class FlaskConnectController extends Controller
             ];
 
             // Send request to Flask API
-            $flaskUrl = 'http://127.0.0.1:5000/generate-podcast'; // Update this endpoint as needed
+            $flaskUrl = 'http://127.0.0.1:5000/create_test_secured'; // Update this endpoint as needed
             $response = Http::timeout(60)->post($flaskUrl, $payload);
 
             if ($response->successful()) {

@@ -7,6 +7,7 @@ use App\Http\Controllers\PatchNotesController;
 use App\Http\Controllers\LingApiController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\FlaskConnectController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Mailgun\Mailgun;
 
@@ -156,6 +157,15 @@ Route::group(['middleware' => 'SetLanguageMiddleware'], function () {
     Route::post('/createNewText', [LingApiController::class, 'createNewText'])->name('createNewText')->middleware('auth');
     Route::post('/deleteText', [LingApiController::class, 'destroyText'])->name('text.destroy')->middleware('auth');
 
+
+    //hier die Routes für die Flask API Anbindung:
+    Route::get('/flask-connection', [App\Http\Controllers\FlaskConnectController::class, 'index'])
+    ->name('flask.connection')->middleware('auth');
+
+    Route::post('/flask-generate', [App\Http\Controllers\FlaskConnectController::class, 'generate'])
+    ->name('flask.generate')->middleware('auth');
+
+
     //hier fangen die routen an für die API sachen:
 
     //should not exist anymore
@@ -201,6 +211,7 @@ Route::group(['middleware' => 'SetLanguageMiddleware'], function () {
     Route::post('/profile/cancel-subscription', [ProfileController::class, 'cancelSubscription'])
     ->name('profile.cancel-subscription');
 
+    
     Route::post('/translate', [LingApiController::class, 'translate'])
     ->name('translate')->middleware('auth');
 

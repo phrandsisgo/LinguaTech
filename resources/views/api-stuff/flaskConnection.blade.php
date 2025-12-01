@@ -25,7 +25,7 @@ textarea {
             <h3>Create New Podcast Episode</h3>
         </div>
         <div class="card-body">
-            <form id="podcastForm" action="{{ route('podcast.generate') }}" method="POST">
+            <form id="podcastForm" action="{{ route('flask.generate') }}" method="POST">
                 @csrf
                 
                 <div class="mb-3">
