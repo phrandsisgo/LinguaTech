@@ -81,7 +81,6 @@
 
                     <li><a class="approvetext dropdown-item" href="/displayAllTexts">{{ __('menu.texts') }}</a></li>
                 @endif
-                <li><a class="approvetext dropdown-item" href="/showPatch/2">{{ __('menu.patchNotes') }}</a></li>
 
                 @if (auth()->check())
                     <li><a class="approvetext dropdown-item" href="/profile">{{ __('menu.profile', ['name' => auth()->user()->name]) }}</a></li>

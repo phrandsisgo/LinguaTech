@@ -66,10 +66,12 @@ return new class extends Migration
             throw new Exception("Migration not worked");
         } else {
             // Wenn keine Überschneidungen vorhanden sind, füge die word_list_id Spalte zur words Tabelle hinzu
-            Schema::table('words', function (Blueprint $table) {
-                $table->unsignedBigInteger('word_list_id')->nullable()->after('id');
-                $table->foreign('word_list_id')->references('id')->on('word_lists')->onDelete('set null');
-            });
+            if (!Schema::hasColumn('words', 'word_list_id')) {
+                Schema::table('words', function (Blueprint $table) {
+                    $table->unsignedBigInteger('word_list_id')->nullable()->after('id');
+                    $table->foreign('word_list_id')->references('id')->on('word_lists')->onDelete('set null');
+                });
+            }
 
             // Migrate die Beziehungen von word_list_words zu words
             DB::table('word_list_words')->get()->each(function ($wordListWord) {

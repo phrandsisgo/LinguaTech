@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WordListController;
-use App\Http\Controllers\PatchNotesController;
 use App\Http\Controllers\LingApiController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\StripeController;
@@ -87,17 +86,9 @@ Route::group(['middleware' => 'SetLanguageMiddleware'], function () {
     Route::get('/copy_list/{id}', [WordListController::class,'copyListLoad'])
     ->name('copyListLoad');
 
-    Route::get('/showPatch/{id}', [PatchNotesController::class,'showPatch'])
-    ->name('showPatch');
 
-    Route::post('/releaseNotesComment/{id}', [PatchNotesController::class,'releaseNotesComment'])
-    ->name('releaseNotesComment');
 
-    Route::post('/releaseNotesCommentDelete/{id}', [PatchNotesController::class,'releaseNotesCommentDelete'])
-    ->name('releaseNotesCommentDelete');
 
-    Route::get('/patchList', [PatchNotesController::class,'patchList'])
-    ->name('patchList');
 
     Route::post('/list_update_function/{id}', [WordListController::class, 'list_update_function'])
     //->middleware('checkListAuthor')
