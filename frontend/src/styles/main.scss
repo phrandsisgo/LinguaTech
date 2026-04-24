@@ -1,0 +1,1053 @@
+@import"colorsNvariables.scss";
+
+
+//als erstes ändere ich die hintergrudfarbe der Seite
+
+body {
+    background-color: $background10;
+    padding: 0;
+    margin: 0;
+}
+.space{
+    //border: 3px solid $contrast;
+    width: 20px;
+}
+.footer-wrapper{
+    position: fixed;
+}
+.error{
+    color: $deny;
+    font-size: 1rem;
+    font-weight: bold;
+}
+#register-nav{
+    @media screen and (max-width: 400px) {
+        display: none;
+        
+    }
+}
+.nav-wrapper {
+    background-color: $contrast;
+    color: $approve;
+    position: sticky;
+    display: flex;
+    padding: 8px;
+    padding-left: 0px;
+    user-select: none;
+    z-index: 2;
+    @media screen and (min-width:400) and (max-width: 500px) {
+        width:105vw;
+    }
+}
+.navIcons{
+    @media screen and (max-width: 450px) {
+        width:38px;
+    }
+
+    @media screen and (max-width: 620px) {
+        width:50px;
+    }
+}
+.anker-no-underline{
+    text-decoration: none;
+}
+//MARK: /Landingpage::
+.colorBreak{
+    background-color: $contrast;
+    color: $background10;
+    
+    margin-top: 13vh;
+    p{
+        font-size: 4vw;
+        font-weight: bold;
+        padding-bottom: 6vw;
+        padding-top: 6vw;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 500px) {
+    #carouselExample{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 68vw;
+    }
+}
+
+.carousel-wrapper{
+    padding-left: 10%;
+    padding-right: 10%;
+    
+    @media screen and (max-width: 500px) {
+        .pagetitle{
+            font-size: 5vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 4vw;
+            font-weight: bold;
+        }
+    }
+    @media screen and (min-width: 500px) {
+        .pagetitle{
+            font-size: 3.5vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 2.5vw;
+            font-weight: bold;
+        }
+        
+    }
+}
+ .solutionGraph{
+    background-color: white;
+ }
+.problemsection{
+    text-align: center;
+    background-color: $contrast;
+}
+//for the Herosections of the Landingpage.
+$switchwidth: 530px;
+.mainHero {
+    display:flex;
+    //border: 2px solid $contrast60;
+    margin: 0;
+    @media screen and (max-width: $switchwidth) {
+        
+        background-size: cover;
+        background-position: center;
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        text-align: center;
+    
+    }
+    //bei mindesdens 450px gibt es display flex dazu
+    @media screen and (min-width: $switchwidth) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+
+        & > * {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+}
+//just for font color
+.font-color-main{
+    color: $contrast;
+}
+.text-carousel-welcome{
+    padding: 10px 13%;
+    text-align: center;
+    color: $background10;
+}
+
+//for the carousel of the new Landing Page 30.Aug 2024
+.heroFontSection{
+    //border: 2px solid $contrast60;
+    @media screen and (min-width: $switchwidth) {
+        text-align: left;
+        flex:7;
+        
+        .pagetitle{
+            font-size: 4vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 3.6vw;
+            font-weight: normal;
+        }
+    }
+    @media screen and (max-width: $switchwidth) {
+        text-align: center;
+        
+        .pagetitle{
+            font-size: 5vw;
+            font-weight: bold;
+        }
+        .sectiontitle{
+            font-size: 3.9vw;
+            font-weight: normal;
+        }
+        
+    }
+}
+.landingFont2{
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+    color: $background10;
+}
+
+#gif1{
+    padding-top: 0;
+    margin-top: 0;
+    @media screen and (max-width: 550px) {
+        width: 60vw;
+    }
+    @media screen and (min-width: 551px) and (max-width: 799px) {
+        width: 40vw;
+    }
+    @media  screen and (min-width: 800px) {
+        width: 340px;
+    }
+}
+
+#gif2{
+    @media screen and (max-width: 450px) {
+        width: 150px;
+        
+    }
+    @media  screen and (max-width: 650px) and (max-width: 850px) {
+        width: 270px;
+        
+    }
+    @media  screen and (max-width: 850px)  {
+        width: 370px;
+        
+    }
+}
+.submit-wrapper-addText{
+     display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // flex-direction: column;
+    margin-top: 20px;
+
+}
+.Card-Wrapper{
+    //border: 5px solid green;
+        display: grid;
+        grid-gap: 20px;
+        z-index:5;
+
+        @media screen and (min-width: 501px) and (max-width: 850px) {
+            grid-template-columns: auto auto;
+        }
+        @media screen and (min-width: 851px) {
+            grid-template-columns: auto auto auto;
+        }
+
+}
+
+.Texts-Card {
+    //wird gebraucht weil es ähnlich ist wie librarycard jedoch hat 
+    background-color: white;
+    color: $approve;
+    position: sticky;
+    padding: 20px;
+    border: 3px solid $contrast60;
+    border-radius: 20px;
+    margin: 25px;
+    
+        //make a max-width: ;
+        max-width: 900px;
+        //make it align in the center horizontally
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%; // Add this line
+}
+.tech-skills-   Card {      
+    font-size: 20px;
+    color: #333333;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.tech-skill {
+    font-size: 16px;
+    color: $background;
+    background-color: $contrast30;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+@media screen and (min-width: $phonewidth) {
+    //hier wird die nav bar für die Desktop ansicht angepasst
+    .hero{
+        display:flex;
+    }
+    $bildmass: 28vw;
+    #profilBild{
+        height: $bildmass;
+        width: $bildmass*1.37;
+        margin: 10px;
+        position:relative;
+        left:-47%;
+        top:-7.5%;
+    }
+    .image-crop{
+        height: $bildmass*0.95;
+        width: $bildmass*0.95;
+        overflow: hidden;
+        position: sticky;
+        left: 0;
+        border-radius: 36%;
+        
+        box-sizing: border-box;
+        margin-right : 2rem;
+        display: block;
+        margin-bottom: 3rem;
+    }
+}
+@media screen and (max-width: $phonewidth) {
+    .flipcardWordWrapper{
+        height:140px;
+    }
+    $bildmass: 50vw;
+    #profilBild{
+        height: $bildmass;
+        width: $bildmass*1.37;
+        margin: 10px;
+        position:relative;
+        left:-44%;
+        top:-4.5%;
+    }
+    .image-crop{
+        height: $bildmass*0.95;
+        width: $bildmass*0.95;
+        overflow: hidden;
+        position:relative;
+        border-radius: 50%;
+        border: 6px solid $approve;
+        margin: 10px auto;
+        display: block;
+        cursor: copy;
+    }
+}
+.langDropdownMenu {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1.3rem;
+    border: 6px solid $approve;
+    height: 66px;
+    width: 66px;
+}
+#nav-lang-label{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: $approve;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    @media screen and (max-width: 450px) {
+        font-size: 0.8rem;
+        
+    }
+}
+#nav-label-icon{
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    @media screen and (max-width: 450px) {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.dropdownCheckbox {
+    display: none; 
+}
+.dropdown-color{
+    color: $approve;
+    background-color: $contrast;
+    //change textcolor
+    color: $background10;
+}
+.approvetext{
+    color: $approve;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:  $contrast;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top:70px;
+}
+
+.dropdownCheckbox:checked ~ ul.dropdown-content {
+    display: block;
+}
+
+.dropdownLabel {
+    display: block;
+    cursor: pointer;
+}
+
+
+.icons{
+    margin:5px;
+}
+.iconWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+}
+.horizontal-fill{
+    flex: 1;
+    width: calc(100% - 15px);
+}
+$navTextSize-mid: 2.1rem;
+#navText{
+    //change the textsize
+    font-size: 3.3rem;
+    font-weight: bold;
+    margin: auto;
+    user-select: none;
+
+    @media  screen and (min-width: 600px) and (max-width: 850px) {
+        font-size: $navTextSize-mid;
+        
+    }
+    @media screen and (max-width: 599px) {
+        display:none;
+    }
+}
+.NavFont{
+
+    font-size: 3.0rem;
+    font-weight: bold;
+    margin: auto;
+    user-select: none;
+    color: $approve;
+    
+    text-decoration: underline;
+
+    &:hover{
+        color: $background;
+    }
+
+    @media  screen and (min-width: 600px) and (max-width: 850px) {
+        font-size: $navTextSize-mid;
+        
+    }
+    @media screen and (min-width: 481px) and (max-width: 599px) {
+        font-size: 2.8rem;
+    }
+    @media screen and (max-width: 480px) {
+        font-size: 1.8rem;
+        
+    }
+
+}
+.footer_box{
+    color: $approve;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    right:0;
+    display:flex;
+    justify-content:space-evenly;
+    background-color: $background10;
+}
+.gradiant-box{
+    background-image: linear-gradient(to top, $background10, $oppacity0);
+    height :80px;
+    width: 100%;
+    position:fixed;
+    bottom:50px;
+    left:0;
+    right:0;
+}
+.desktop-gradiant{
+    background-image: linear-gradient(to top, $background10, $oppacity0);
+    height :80px;
+    width: 100%;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.heightbox{
+    height: 100px;
+}
+.mainContent{
+    padding: 5%;
+    margin: 20px;
+    background-color: $background10;
+}
+.nomargin{
+    margin: 0;
+}
+.anzeigemargin{
+    margin: 20%;
+}
+.repetitionCountBox{
+    height: 20px;
+    width: 40px;
+    background-color: $deny;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    align-items: center;
+    display:flex;
+
+}
+.countAnzeige{
+    color: $contrast;
+    font-size: 0.9rem;
+}
+.doneCountBox{
+    height: 20px;
+    width: 40px;
+    background-color: $approve;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    align-items: center;
+    display:flex;
+    justify-content: flex-end;
+    
+}
+.displayFlex{
+    display: flex;
+}
+.noUnderline{
+    text-decoration: none;
+}
+
+$iconSize: 4rem; //gehört zu IconSize
+.iconSpacer{
+    height: $iconSize;
+    width: $iconSize;
+    margin: 25px;
+}
+
+//fonts are gonne be colored here
+.supertitle{
+    color: $contrast;
+    font-size: 3.3rem;
+    font-weight: bold;
+}
+.pagetitle{
+    color: $contrast;
+    font-size: 2.7rem;
+    font-weight: 500;
+
+    @media screen and (max-width: 450px) {
+        font-size: 2rem;
+    }
+}
+.sectiontitle{
+    color: $contrast;
+    font-size: 30px;
+    font-weight: bold;
+}
+.section-content{
+    color: $contrast;
+    font-size: 1.3rem;
+   // text-align: justify;
+    //font-weight: bold;
+}
+.sectionWrapper {
+    padding-left: 20px; /* Abstand vom linken Rand erhöhen */
+    border-left: 2px solid $contrast30; /* Linie links vom Text mit Ihrer gewünschten Farbe (hier blau) */
+    margin-top: 10px; /* Optional: Abstand nach oben hinzufügen */
+}
+
+.sectionWrapper p {
+    margin: 0; /* Um den Abstand um den Text zu entfernen */
+}
+.maxwidthXY{
+    max-width: 500px;
+}
+@media screen and (max-width: $phonewidth) {
+    .des-only {
+        display: none;
+
+    }
+    .begruessung{
+        display:none;
+    }
+    .desktop-gradiant{
+        display: none;
+    }
+   
+    .icons{
+        margin: 0;
+        height: 50px;
+    }
+@media screen and (min-width: 650px) {
+    .mob-only {
+        display: block;
+    }
+    .footer-Wrapper {
+        display: none;
+    }
+    .gradiant-box{
+        display: none;
+    }
+}
+}
+
+.language-button {
+    background-color: $background10;
+    color: $contrast;
+    border: 2px solid $contrast60;
+    display:flex;
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    margin-left:0;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    //height: 5.1rem;
+
+    &:hover{
+        background-color: $approve;
+        color: $background10;
+      
+    }
+}
+.bi.bi-arrow-right-short path {
+    fill: $contrast; // Ursprüngliche Füllfarbe
+    transition: fill 0.3s ease, transform 0.4s ease;
+    transform-origin: center center;
+}
+.arrow-Right path {
+    fill: white;
+    transform: rotate(90deg);
+        
+}
+
+.textSortierer {
+    display: flex;
+    flex-direction: column;
+}
+
+.language-spez-text {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 600px) {/* 
+    .textSortierer {
+        flex-direction: row;
+    } */
+/* 
+    .language-spez-text {
+        flex-direction: column;
+    } */
+}
+
+.patchCommentWrapper{
+    display: flex;
+    position: sticky;
+    margin-left: auto;
+    margin-right: auto;
+    color: $contrast;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 900px;
+    //align-items: center;
+    
+}
+#newComment{
+    //this is a textarea
+    width: 100%;
+    height: 250px;
+    border: 2px solid $contrast60;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+}
+#newComment:focus{
+    outline: 3px solid $approve60;
+}
+.swipeLearnTitle{
+    color: $contrast;
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin: 10px;
+    text-align: center; // Add this line to center the title horizontally
+}
+.swipeContent{
+    color: $contrast;
+    font-size: 20px;
+    text-align: center; // Add this line to center the content horizontally
+    margin: 20px;
+
+}
+
+.standartButton{
+
+    //das wäre ein guter Ansatz bei color invert
+    
+    background-color: white;
+    color: $contrast;
+    border: 2px solid $contrast60;
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    margin-left:0;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    //height: 5.1rem;
+
+    &:hover{
+        background-color: $contrast;
+        color: white;
+
+    }
+}   
+
+.successButton{
+
+    //das wäre ein guter Ansatz bei color invert
+    
+    background-color: $approve;
+    color: $contrast;
+    border: 2px solid $approve;
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    margin-left:0;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    //height: 5.1rem;
+    text-decoration: none;
+
+    &:hover{
+        background-color: $approve60;
+        color: white;
+    }
+
+}   
+.approveButton{
+    background-color: $contrast;
+    color: $background10;
+    //border: 2px solid $approve;
+    border-radius: 5px;
+    padding: 5px 13px ;
+    
+    margin: 5px;
+    margin-left:0;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold; 
+    transition: background-color 0.23s ease-in-out;
+    &:hover{
+        background-color: $approve;
+        color: $background10;
+    }
+}
+.standartDangerButton{
+    background-color: $deny;
+    color: $background10;
+    border: 2px solid $deny;
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.23s ease-in-out;
+    &:hover{
+        background-color: $deny60;
+        color: $background10;
+    }
+}
+
+.standartSelect{
+    background-color: $background10;
+    color: $contrast;
+    border: 2px solid $contrast60;
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.23s ease-in-out;
+    &:hover{
+        background-color: $contrast;
+        color: $background10;
+    }
+
+}
+.delete-hitbox {
+    //padding: 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+//authentification classes:
+.authTextField {
+    width: 100%;
+    height: 40px;
+    border: 2px solid $contrast60;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+
+    &:focus {
+        border-color: #06D6A0;
+    }
+}
+
+//auth for mobil users
+.authDisplayFlex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    @media screen and (max-width: 650px)  {
+        
+    flex-direction: column;
+    }
+}
+
+//for the login and register and /profile page and update-interests
+.centerTextvertical{
+    //this is used on <p> tags to center em
+    text-align: center;
+    margin: auto;
+    //change fontcolor
+    color: $contrast;
+}
+.interestsWords{
+    color: $approve;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid $contrast30;
+    padding: 5px;
+    width:fit-content;
+    //display: block;
+    cursor: pointer;
+}
+.interestsWords:hover{
+    background-color: $approve;
+    color: $background10;
+    border: 2px solid $approve;
+    cursor: pointer;
+}
+
+.interestsWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    //justify-content: center;
+    align-items: center;
+
+}
+.interestCheckbox {
+    display: none;
+}
+.interestCheckbox:checked + label {
+    background-color: $approve60; /* Change to your desired color for checked state */
+    /* Other styles for checked state */
+   //border: 2px solid green; /* Add border style for checked state */
+}
+.interestCheckbox:checked + label.interestsWords {
+    border: 2px solid green;
+}
+//modal box for the textPlay
+#translationModal{
+    display: none;
+    position: fixed;
+    padding-top: calc(39vh - 105px);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    //transform: translateY(-10px);
+    z-index: 7;
+}
+#deleteModal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: calc(39vh - 105px);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content{
+    background-color: $background10;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid $contrast;
+    width: 80%;
+    border-radius: 10px;
+    transform: translateY(-10vh);
+    @media screen and (min-width: 650px) {
+        width: 400px;
+        
+    }
+}
+
+// -/textPlay fängt hier an
+
+.text-learn-wrapper{
+    @media screen and (min-width: 1500px) {
+        margin:0px 20vw;
+    }
+    @media screen and (min-width: 1200px) and (max-width: 1499px) {
+        margin:0px 15vw;
+    }
+    @media screen and (min-width: 1000px) and (max-width: 1199px) {
+        margin:0px 10vw;
+    }
+    @media screen and (min-width: 800px) and (max-width: 999px) {
+        margin:0px 5vw;
+    }
+}
+.dropdown-wrapper{
+    display: inline-block;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 16px;
+    margin: 10px;
+    cursor: pointer;
+}
+.dropbtn {
+    background-color: $contrast;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+.z-index-up{
+    z-index: 1;
+}
+.dropdown{
+    width: 100%;
+    height: 40px;
+   // border: 2px solid $contrast60;
+    border-radius: 10px;
+    padding: 5px;
+    resize: none;
+    background-color: $background10;
+    color: $contrast;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+}
+.dropdown:focus{
+    outline: 3px solid $approve60;
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: $contrast;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.show {display:block;}
+.dropdown-content a{
+    color: $approve;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+
+//MARK: /about_me spezifisch::
+.aboutCardsIcons{
+    padding-right: 1rem;
+    border-right: 2px solid $contrast60;
+    margin-right: 1rem;
+}
+.card-title-about{
+    color: $contrast;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 10px;
+    text-align: left;
+    p{
+        font-size: 20px;
+    }
+}
+.media-Card{
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+@media (min-width:600px){
+    .media-Card{
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+@media (min-width: 1200px){
+    .media-Card{
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+//for the textfieldcopy process
+.textTopping{
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: $contrast;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 2px solid $contrast30;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.title-flex {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 750px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.button-group {
+    display: flex;
+
+    @media screen and (max-width: 750px) {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+.viewAllButton, .addButton {
+    // ...existing styles...
+    margin-left: 10px;
+
+    @media screen and (max-width: 750px) {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+}

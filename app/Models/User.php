@@ -10,11 +10,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Relations\HasMany;
 //use Illuminate\Database\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\belongsToMany;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
 
-
-class User extends Authenticatable implements MustVerifyEmail, FilamentUser
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -60,17 +57,6 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 
     public function createdWordLists(){
         return $this->hasMany(WordList::class, 'created_by', 'id');
-    }
-    
-    public function canAccessPanel(Panel $panel): bool
-    {
-        //return str_ends_with($this->id, is_array[1,9]) && $this->hasVerifiedEmail();
-        $allowedUserIds = [1,9];
-        //check if the user is allowed to access Filament
-        if ( in_array($this->id, $allowedUserIds)) {
-            return true;
-        }
-        return false;
     }
 
     public function wordLists(){

@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'failed' => 'Die E-Mail-Adresse oder das Passwort ist falsch.',
+    'password' => 'Das angegebene Passwort ist falsch.',
+    'throttle' => 'Zu viele Anmeldeversuche. Bitte versuchen Sie es in :seconds Sekunden erneut.',
+
     'login' => 'Anmelden',
     'email' => 'E-Mail',
     'password' => 'Passwort',
