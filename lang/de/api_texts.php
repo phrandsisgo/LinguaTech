@@ -42,5 +42,7 @@ return [
     'no_deck_selected' => 'Kein Deck ausgewählt',
     'title_placeholder' => 'Dieses Feld kann leer gelassen werden',
     'text_description_placeholder' => 'Geben Sie eine Beschreibung zu Ihrer Geschichte ein, die Sie gerne schreiben möchten',
+    'upgrade_to_generate' => 'Upgrade auf ein Abonnement, um mit KI Texte zu generieren.',
+    'upgrade_now' => 'Jetzt upgraden',
 ];
 

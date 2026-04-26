@@ -15,6 +15,19 @@ textarea {
   font-size: 16px;
   resize: none;
 }
+.subscription-banner {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.subscription-banner a {
+    color: #856404;
+    font-weight: bold;
+    text-decoration: underline;
+}
 </style>
 @endsection
 @section('content')
@@ -22,15 +35,19 @@ textarea {
 <p class="pagetitle">{{ __('api_texts.addNewText') }}</p>
 
     @php
-        $subscribedUntil = \Carbon\Carbon::parse(auth()->user()->subscribed_until);
+        $subscribedUntil = auth()->user()->subscribed_until;
+        $hasActiveSubscription = $subscribedUntil && \Carbon\Carbon::parse($subscribedUntil)->isAfter(now());
     @endphp
 
-
-    @if($subscribedUntil && $subscribedUntil->isAfter(now()))
+    @if($hasActiveSubscription)
         <a href="/generate-text">
             <button class="approveButton">{{ __('api_texts.generateNewText') }}</button>
         </a>
     @else
+        <div class="subscription-banner">
+            <p>{{ __('api_texts.upgrade_to_generate') }}</p>
+            <a href="/checkout">{{ __('api_texts.upgrade_now') }}</a>
+        </div>
     @endif
 <form action="/createNewText" method="POST">
     @csrf

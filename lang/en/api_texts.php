@@ -41,4 +41,6 @@ return [
     'no_deck_selected' => 'No deck selected',
     'title_placeholder' => 'This field can be left empty',
     'text_description_placeholder' => 'Enter a description of the story you would like to write',
+    'upgrade_to_generate' => 'Upgrade to a subscription to generate texts with AI.',
+    'upgrade_now' => 'Upgrade now',
 ];

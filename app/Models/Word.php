@@ -4,59 +4,99 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
-
 
 class Word extends Model
 {
     use HasFactory;
 
-    // only needed if you want to have all listst a word belongs to(Beni)
-     public function lists(): BelongsToMany{
-         return $this->belongsToMany(WordList::class, 'word_list_words', 'word_id', 'word_list_id');
-     }
+    public function lists(): BelongsToMany
+    {
+        return $this->belongsToMany(WordList::class, 'word_list_words', 'word_id', 'word_list_id');
+    }
 
-
-    public function base(){
+    public function base()
+    {
         return $this->hasOne(LangOption::class, 'id', 'base_language_id');
     }
-    public function target(){
-        return $this->hasOne(LangOption::class, 'id', 'target_language_id');}
-    public function users(){
-        return $this->belongsToMany(User::class,'user_words', 'word_id', 'user_id');
+
+    public function target()
+    {
+        return $this->hasOne(LangOption::class, 'id', 'target_language_id');
     }
 
-    public function userWithPivot(){
-        return $this->belongsToMany(User::class,'user_words', 'word_id', 'user_id')->withPivot('count');
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_words', 'word_id', 'user_id');
     }
 
-    public function wordList(){
+    public function userWithPivot()
+    {
+        return $this->belongsToMany(User::class, 'user_words', 'word_id', 'user_id')
+            ->withPivot('count', 'interval', 'ease_factor', 'repetition_count', 'next_review_at');
+    }
+
+    public function wordList()
+    {
         return $this->belongsTo(WordList::class, 'word_list_id', 'id');
     }
 
-    public function count(){
+    public function count()
+    {
         $userId = auth()->id();
         $wordId = $this->id;
-    
-        $count = DB::select("
-            SELECT count 
-            FROM user_words 
-            WHERE user_id = $userId 
-            AND word_id = $wordId
-        ");
-        //dd($count);
-        return $count[0]->count;
-        
+
+        $result = DB::table('user_words')
+            ->where('user_id', $userId)
+            ->where('word_id', $wordId)
+            ->first();
+
+        return $result ? $result->count : 0;
     }
 
-    public function increaseCountForAuthUser($amount){
-        $this->users()->updateExistingPivot(auth()->id(), ['count' => $this->count() + $amount]);
-    }
-    
-    public function decreaseCountForAuthUser($amount){
-        $this->users()->updateExistingPivot(auth()->id(), ['count' => $this->count() - $amount]);
+    public function increaseCountForAuthUser($amount)
+    {
+        $newCount = $this->count() + $amount;
+        $this->users()->updateExistingPivot(auth()->id(), ['count' => $newCount]);
     }
 
+    public function decreaseCountForAuthUser($amount)
+    {
+        $newCount = max(0, $this->count() - $amount);
+        $this->users()->updateExistingPivot(auth()->id(), ['count' => $newCount]);
+    }
+
+    public function getUserWordPivot()
+    {
+        return DB::table('user_words')
+            ->where('user_id', auth()->id())
+            ->where('word_id', $this->id)
+            ->first();
+    }
+
+    public function ensureUserWordEntryForAuthUser()
+    {
+        $userId = auth()->id();
+        if (!$userId) {
+            return;
+        }
+
+        $exists = DB::table('user_words')
+            ->where('user_id', $userId)
+            ->where('word_id', $this->id)
+            ->exists();
+
+        if (!$exists) {
+            DB::table('user_words')->insert([
+                'user_id' => $userId,
+                'word_id' => $this->id,
+                'count' => 0,
+                'interval' => 0,
+                'ease_factor' => 2.5,
+                'repetition_count' => 0,
+                'next_review_at' => now(),
+            ]);
+        }
+    }
 }

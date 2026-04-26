@@ -12,36 +12,34 @@ use OpenAI;
 use App\Models\Word;
 use App\Models\ApiUsageLog;
 
-
-
 class LingApiController extends Controller
 {
     public function translate(Request $request){
         $text = $request->input('word');
         $targetLang = $request->input('targetLang');
         $sourceLang = $request->input('baseLang');
-        $context = $request->input('context'); // Accept context
+        $context = $request->input('context');
 
         $response = Http::asForm()->withHeaders([
             'Authorization' => 'DeepL-Auth-Key ' . env('DEEPL_API_KEY'),
-            //'Content-Type' => 'application/x-www-form-urlencoded'
         ])->post('https://api-free.deepl.com/v2/translate', [
             'text' => $text,
             'target_lang' => $targetLang,
             'source_lang' => $sourceLang,
-            'context' => $context // Include context in API request
+            'context' => $context
         ]);
-        //dd(['response' => $response->json(),'context' => $context]);
         $translation = $response->json()['translations'][0]['text'];
 
         return response()->json(['translation' => $translation, 'request' => $text]);
     }
+
     public function textPlay(){
         $ownLibraryList = WordList::where('created_by', auth()->user()->id)->get();
         $allTexts = Text::with("langOption")->get();
 
         return view('api-stuff/textPlay',['ownLibraryList' => $ownLibraryList, 'allTexts' => $allTexts]);
     }
+
     public function textShow($id){
         $text = Text::with("langOption")->find($id);
         $allTexts = Text::with("langOption")->get();
@@ -55,13 +53,13 @@ class LingApiController extends Controller
             'languages' => $languages
         ]);
     }
+
     public function destroyText(Request $request,){
         $id = $request->input('textId');
         $text = Text::find($id);
         if (!$text) {
             return redirect()->back()->with('error', 'Text not found.');
         }
-        //check if userid and $text created_by are the same
         if ($text->created_by != auth()->user()->id) {
             return abort(403, "unauthorized");
         }
@@ -73,10 +71,12 @@ class LingApiController extends Controller
         $allTexts = Text::with("langOption")->get();
         return view('api-stuff/displayAllTexts',['allTexts' => $allTexts]);
     }
+
     public function addText(){
         $languages = LangOption::whereBetween('id', [2, 12])->get();
         return view('api-stuff/newText',['languages' => $languages]);
     }
+
     public function updateText($id){
         $text = Text::with("langOption")->find($id);
         $languages = LangOption::whereBetween('id', [2, 12])->get();
@@ -94,7 +94,6 @@ class LingApiController extends Controller
     }
 
     public function generateText(Request $request){
-        //dd("this is the request {$request->input('add-text-field')}");
         $title = $request->input('title');
         $text = $request->input('add-text-field');
         $lang_option_id = $request->input('lang_option_id');
@@ -102,10 +101,9 @@ class LingApiController extends Controller
         if($deck_id === 'null'){
             $deck_id = null;
         }
-    $response = $this->createAPIRequest($title, $text, $lang_option_id, $deck_id);
-    // New text is being created in the createAPIRequest() function and nowhere else to make it easier to log it.
-    $text_id = $response['id'];
-    
+        $response = $this->createAPIRequest($title, $text, $lang_option_id, $deck_id);
+        $text_id = $response['id'];
+        
         return redirect('/textShow/'.$text_id);
     }
 
@@ -116,7 +114,6 @@ class LingApiController extends Controller
         if (!$text) {
             return redirect()->back()->with('error', 'Text not found.');
         }
-        //check if userid and $text created_by are the same
         if ($text->created_by != auth()->user()->id) {
             return abort(403, "unauthorized");
         }
@@ -127,7 +124,7 @@ class LingApiController extends Controller
         $text->save();
         return redirect('/textShow/'.$id);
     }
-    //wurde noch nicht getestet:
+
     public function createNewText(Request $request){
         $text = new Text();
         $text->title = $request->input('title');
@@ -141,12 +138,10 @@ class LingApiController extends Controller
 
     private function createAPIRequest($title, $textDescription, $lang_option_id, $deck_id)
     {
-        // Get the target language from lang_option_id
         $languageOption = LangOption::find($lang_option_id);
         $langdifficulty = $languageOption->difficulty;
         $targetLanguage = $languageOption ? $languageOption->language_name : 'English';
     
-        // Retrieve words from the user's deck if deck_id is provided
         $wordlistJSON = null;
         if ($deck_id) {
             $wordList = WordList::where('id', $deck_id)
@@ -154,12 +149,10 @@ class LingApiController extends Controller
                 ->first();
     
             if ($wordList) {
-                // Retrieve words with base and target words
                 $words = Word::where('word_list_id', $deck_id)
                     ->get(['base_word', 'target_word'])
                     ->toArray();
     
-                // Build the JSON structure
                 $wordlistJSON = [
                     'Title' => $wordList->name,
                     'Description' => $wordList->description ?? '',
@@ -173,32 +166,19 @@ class LingApiController extends Controller
             }
         }
     
-        // Generate the prompt
-        //intermediate has to be swapped for the level of$languageOption
         $prompt = $this->generateStoryPrompt($targetLanguage, $langdifficulty, $textDescription, $title, $wordlistJSON);
     
-        // Initialize the OpenAI client
-        $client = OpenAI::client(env('OPENAI_SECRET_KEY'));
-        //dd("das ist der Prompt:  {$prompt}");
+        $provider = strtolower(env('LLM_PROVIDER', 'openai'));
     
-        // Make the API call using Chat Completion endpoint
-        $apiResponse = $client->chat()->create([
-            'model' => 'gpt-4o-mini', // Use the model you have access to
-            'messages' => [
-                ['role' => 'system', 'content' => 'You are a helpful assistant that creates stories for language learners.'],
-                ['role' => 'user', 'content' => $prompt],
-            ],
-            'temperature' => 0.7,
-        ]);
-        //dd($apiResponse);
+        if ($provider === 'ollama') {
+            $apiResponse = $this->callOllama($prompt);
+        } else {
+            $apiResponse = $this->callOpenAI($prompt);
+        }
     
-        // Extract the response
-        $storyContent = $apiResponse['choices'][0]['message']['content'];
-        
-        // Parse the response to separate title and story
+        $storyContent = $apiResponse['content'];
         $parsedResponse = $this->parseStoryResponse($storyContent);
 
-        // Save the new text to the database
         $newText = new Text();
         $newText->title = $parsedResponse['title'];
         $newText->text = $parsedResponse['story'];
@@ -206,16 +186,77 @@ class LingApiController extends Controller
         $newText->created_by = auth()->user()->id;
         $newText->save();
 
-        // Log the API usage with the text_id
         ApiUsageLog::create([
             'user_id' => Auth::id(),
-            'text_id' => $newText->id, // Include the text ID
-            'prompt_tokens' => $apiResponse['usage']['prompt_tokens'],
-            'completion_tokens' => $apiResponse['usage']['completion_tokens'],
+            'text_id' => $newText->id,
+            'prompt_tokens' => $apiResponse['prompt_tokens'] ?? 0,
+            'completion_tokens' => $apiResponse['completion_tokens'] ?? 0,
         ]);
         
-        return array_merge($parsedResponse, ['id' => $newText->id]); // Include the new text ID in the response
+        return array_merge($parsedResponse, ['id' => $newText->id]);
     }
+
+    private function callOpenAI($prompt)
+    {
+        $client = OpenAI::client(env('OPENAI_SECRET_KEY'));
+        $model = env('OPENAI_MODEL', 'gpt-5.4-mini');
+
+        $apiResponse = $client->chat()->create([
+            'model' => $model,
+            'messages' => [
+                ['role' => 'system', 'content' => 'You are a helpful assistant that creates stories for language learners.'],
+                ['role' => 'user', 'content' => $prompt],
+            ],
+            'temperature' => 0.7,
+        ]);
+
+        return [
+            'content' => $apiResponse['choices'][0]['message']['content'],
+            'prompt_tokens' => $apiResponse['usage']['prompt_tokens'] ?? 0,
+            'completion_tokens' => $apiResponse['usage']['completion_tokens'] ?? 0,
+        ];
+    }
+
+    private function callOllama($prompt)
+    {
+        $baseUrl = rtrim(env('OLLAMA_BASE_URL', 'https://ollama.com'), '/');
+        $model = env('OLLAMA_MODEL', 'gemma4:31b-cloud');
+        $apiKey = env('OLLAMA_API_KEY');
+
+        $payload = [
+            'model' => $model,
+            'prompt' => "You are a helpful assistant that creates stories for language learners.\n\n" . $prompt,
+            'stream' => false,
+        ];
+
+        $ch = curl_init("{$baseUrl}/api/generate");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $apiKey,
+        ]);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 300);
+
+        $body = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        $data = json_decode($body, true);
+
+        if ($httpCode !== 200 || empty($data['response'])) {
+            throw new \Exception('Ollama API call failed (HTTP ' . $httpCode . '): ' . ($data['error'] ?? $body));
+        }
+
+        return [
+            'content' => $data['response'],
+            'prompt_tokens' => $data['prompt_eval_count'] ?? 0,
+            'completion_tokens' => $data['eval_count'] ?? 0,
+        ];
+    }
+
     private function generateStoryPrompt($targetLanguage, $level, $storyTopic, $title, $wordlistJSON = null)
     {
         $basePrompt = "
@@ -226,7 +267,7 @@ class LingApiController extends Controller
         Note: The topic and requirements above may be provided in any language, but your task is to write the story entirely in {$targetLanguage}. Pay close attention to any specific instructions regarding grammar, tense, or other linguistic aspects mentioned in the topic.
         
         The story should be appropriate for language learners at the {$level} level.
-        Ensure the story uses vocabulary and grammar structures suitable for this level, while also incorporating any specific grammatical requirements mentioned in the topic (e.g., using a particular tense).
+        Ensure the story uses vocabulary and grammar structures suitable for this level, while also incorporating any specific grammatical requirements mentioned in the topic (such as using a particular tense).
         
         Guidelines:
         1. Write the entire story in {$targetLanguage}, regardless of the language of the provided topic and requirements.
@@ -251,7 +292,7 @@ class LingApiController extends Controller
         - For verbs: You may conjugate them or use different tenses as needed, ensuring consistency with any tense requirements specified in the topic.
         - For nouns: You may use singular or plural forms.
         - For adjectives: You may use comparatives or superlatives if it fits the context.
-        - The goal is to include the words or their concepts naturally within the story's context.
+        - The goal is to include the words or their variations naturally within the story's context.
         - Use these words or their variations in a way that helps illustrate their meaning.
         ";
             $basePrompt .= $wordIntegration;
@@ -270,11 +311,9 @@ class LingApiController extends Controller
 
     private function parseStoryResponse($storyContent)
     {
-        // Parse the AI response to extract the title and story
         $title = 'Untitled';
         $story = $storyContent;
 
-        // Use regular expressions to find the title and story
         if (preg_match('/Title:\s*(.*)\n\nStory:\s*(.*)/s', $storyContent, $matches)) {
             $title = trim($matches[1]);
             $story = trim($matches[2]);
@@ -290,13 +329,11 @@ class LingApiController extends Controller
     {
         $userId = Auth::id();
 
-        // Get last 5 decks created by the user
         $decks = WordList::where('created_by', $userId)
             ->orderBy('updated_at', 'desc')
             ->take(3)
             ->get();
 
-        // Get last 5 texts created by the user
         $texts = Text::where('created_by', $userId)
             ->orderBy('updated_at', 'desc')
             ->take(3)
@@ -304,5 +341,4 @@ class LingApiController extends Controller
 
         return view('home', compact('decks', 'texts'));
     }
-
 }

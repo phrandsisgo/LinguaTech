@@ -8,52 +8,71 @@ use App\Models\WordListWord;
 use App\Models\LangOption;
 use App\Models\User;
 use App\Models\Word;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
-class WordListController extends Controller{
-    public function library(){
+class WordListController extends Controller
+{
+    public function library()
+    {
         $libraryList = WordList::get();
-        return view('library',['libraryList' => $libraryList]);
-    }
-    public function listShow($id){
-        $liste = WordList::with('words')->find($id);
-        return view('list_show',['liste' => $liste]);
-    }
-    public function listLoad($id){
-        $liste = WordList::with('words')->find($id);
-        return view('list_update',['liste' => $liste]);
-    }
-    public function copyListLoad($id){
-        $liste = WordList::with('words')->find($id);
-        return view('copy-list',['liste' => $liste]);
+        return view('library', ['libraryList' => $libraryList]);
     }
 
-    public function list_add_word(Request $request){
-        //dd($request);
-        //diese Funktion sollte so funktionieren, dass es im request ein base und target wort bekommt und noch eine WordlistID und dann sollte ein neuer Eintrag in der WordlistWord Tabelle erstellt werden und in die Wordlist auch.
+    public function listShow($id)
+    {
+        $liste = WordList::with('words')->find($id);
+        return view('list_show', ['liste' => $liste]);
+    }
+
+    public function listLoad($id)
+    {
+        $liste = WordList::with('words')->find($id);
+        return view('list_update', ['liste' => $liste]);
+    }
+
+    public function copyListLoad($id)
+    {
+        $liste = WordList::with('words')->find($id);
+        return view('copy-list', ['liste' => $liste]);
+    }
+
+    public function list_add_word(Request $request)
+    {
         $request->validate([
             'baseWord' => 'required|min:1|max:50',
             'targetWord' => 'required|min:1|max:50',
         ]);
         $word = new Word;
-        $word->base_word = $request->targetWord;//musste umgekehrt vorgehen weil ich die Variablen vertauscht habe.(not best practice.)
-        $word->target_word = $request->baseWord;//musste umgekehrt vorgehen weil ich die Variablen vertauscht habe.(not best practice.)
-        $word->base_language_id = 1;//muss noch zu einem späteren Zeitpunkt angepasst werden.
-        $word->target_language_id = 2;//muss noch zu einem späteren Zeitpunkt angepasst werden.
+        $word->base_word = $request->targetWord;
+        $word->target_word = $request->baseWord;
+        $word->base_language_id = 1;
+        $word->target_language_id = 2;
         $word->word_list_id = $request->list;
         $word->save();
-        $id=$request->list;
-        $liste = WordList::find($id);
-        return redirect('/list_show/'.$id);//redirect wird gar nicht gebraucht, da es ein event.preventDefault request ist.
+
+        DB::table('user_words')->insert([
+            'user_id' => auth()->id(),
+            'word_id' => $word->id,
+            'count' => 0,
+            'interval' => 0,
+            'ease_factor' => 2.5,
+            'repetition_count' => 0,
+            'next_review_at' => now(),
+        ]);
+
+        $id = $request->list;
+        return redirect('/list_show/' . $id);
     }
 
-    public function list_update_function(Request $request, $id){
+    public function list_update_function(Request $request, $id)
+    {
         $request->validate([
             'listTitle' => 'required|min:3|max:20',
             'baseWord.*' => 'required|min:1|max:50',
             'targetWord.*' => 'required|min:1|max:50',
             'listDescription' => 'max:200',
         ]);
-        //dd($request);
 
         $liste = WordList::find($id);
         $baseWords = $request->baseWord;
@@ -61,7 +80,6 @@ class WordListController extends Controller{
         $wordIds = $request->wordIds ?? [];
         $deletedWordIds = $request->deletedWordIds ?? [];
 
-        // Loop to delete all words marked for deletion
         foreach ($deletedWordIds as $wordId) {
             $word = Word::find($wordId);
             if ($word) {
@@ -69,19 +87,28 @@ class WordListController extends Controller{
             }
         }
 
-        // Process remaining words
         foreach ($wordIds as $index => $wordId) {
             if ($wordId === 'new') {
                 $word = new Word;
                 $word->base_word = $baseWords[$index];
                 $word->target_word = $targetWords[$index];
-                 $word->base_language_id = 1;
-                $word->target_language_id = 2; 
+                $word->base_language_id = 1;
+                $word->target_language_id = 2;
                 $word->word_list_id = $liste->id;
                 $word->save();
+
+                DB::table('user_words')->insert([
+                    'user_id' => auth()->id(),
+                    'word_id' => $word->id,
+                    'count' => 0,
+                    'interval' => 0,
+                    'ease_factor' => 2.5,
+                    'repetition_count' => 0,
+                    'next_review_at' => now(),
+                ]);
             } else {
                 $word = Word::find($wordId);
-                if ($word) { // Stellen Sie sicher, dass das Wort gefunden wurde
+                if ($word) {
                     $word->base_word = $baseWords[$index];
                     $word->target_word = $targetWords[$index];
                     $word->save();
@@ -96,131 +123,245 @@ class WordListController extends Controller{
         return redirect('/library');
     }
 
-    public function swipeLearn($id){
+    public function swipeLearn($id)
+    {
         $liste = WordList::with('words')->find($id);
+
+        foreach ($liste->words as $word) {
+            $word->ensureUserWordEntryForAuthUser();
+        }
+
         $languages = [
             'base_language' => LangOption::find($liste->words[0]->base_language_id),
             'target_language' => LangOption::find($liste->words[0]->target_language_id),
         ];
-        return view('swipeLearn',['liste' => $liste, 'languages' => $languages]);   
+
+        $dueWords = $liste->words->filter(function ($word) {
+            $pivot = $word->getUserWordPivot();
+            if (!$pivot) {
+                return false;
+            }
+            if ($pivot->next_review_at === null) {
+                return true;
+            }
+            return Carbon::parse($pivot->next_review_at)->lte(now());
+        });
+
+        $liste->setRelation('words', $dueWords->values());
+
+        return view('swipeLearn', ['liste' => $liste, 'languages' => $languages]);
     }
 
-    public function list_create_function(Request $request){
-        //diese Funktion sollte nicht nur eine Liste erstellen sondern auch die Wörter aus dem Formular in die Datenbank schreiben.
+    public function list_create_function(Request $request)
+    {
         $request->validate([
             'listTitle' => 'required|min:3|max:40',
             'baseWord.*' => 'required|min:1|max:50',
             'targetWord.*' => 'required|min:1|max:50',
             'listDescription' => 'max:200',
         ]);
-    
+
         $liste = new WordList;
         $liste->name = $request->listTitle;
         $liste->description = $request->listDescription;
         $liste->created_by = auth()->user()->id;
         $liste->save();
-    
+
+        $userId = auth()->user()->id;
+
         foreach ($request->baseWord as $index => $baseWord) {
             $word = new Word;
             $word->base_word = $baseWord;
             $word->target_word = $request->targetWord[$index];
-            $word->base_language_id = 1; // muss noch zu einem späteren Zeitpunkt angepasst werden.
-            $word->target_language_id = 2; // muss noch zu einem späteren Zeitpunkt angepasst werden.
-            $word->word_list_id = $liste->id; // Setze den word_list_id auf die ID der neu erstellten WordList.
+            $word->base_language_id = 1;
+            $word->target_language_id = 2;
+            $word->word_list_id = $liste->id;
             $word->save();
-    
+
+            DB::table('user_words')->insert([
+                'user_id' => $userId,
+                'word_id' => $word->id,
+                'count' => 0,
+                'interval' => 0,
+                'ease_factor' => 2.5,
+                'repetition_count' => 0,
+                'next_review_at' => now(),
+            ]);
         }
-    
+
         return redirect('/library');
     }
-    
-    public function list_delete_function($id){
+
+    public function list_delete_function($id)
+    {
         $liste = WordList::find($id);
-    
-        // Prüfe, ob die Liste existiert
+
         if (!$liste) {
-            // Optional: Füge eine Fehlermeldung hinzu, wenn die Liste nicht gefunden wurde
             return redirect('/library')->withErrors(['Die gesuchte Liste existiert nicht.']);
         }
-    
-        // Lösche alle Wörter, die zur Liste gehören
+
         foreach ($liste->words as $word) {
             $word->delete();
         }
-    
-        // Jetzt kann die Liste selbst gelöscht werden
+
         $liste->delete();
-    
+
         return redirect('/library');
     }
-    
 
-    public function word_delete_function($id, $listId){
+    public function word_delete_function($id, $listId)
+    {
         $word = Word::find($id);
         $word->delete();
-        return redirect('/list_show/'.$listId);
+        return redirect('/list_show/' . $listId);
     }
-    public function word_list_copy($id){
-        dd($id);//zur Zeit wird dies noch nicht gebraucht.
+
+    public function word_list_copy($id)
+    {
+        dd($id);
         $liste = WordList::with('words')->find($id);
-        return view('list_copy',['liste' => $liste]);
+        return view('list_copy', ['liste' => $liste]);
     }
-    public function copyList($id){
+
+    public function copyList($id)
+    {
         $liste = WordList::with('words')->find($id);
         if (!$liste) {
-            // Optional: Rückmeldung geben, dass die Liste nicht gefunden wurde
             return redirect('/library')->withErrors('Liste nicht gefunden.');
         }
-    
+
         $newList = $liste->replicate();
         $newList->created_by = auth()->user()->id;
-        // Setze created_at und updated_at auf die aktuelle Zeit
         $newList->created_at = now();
         $newList->updated_at = now();
         $newList->save();
-    
-        foreach($liste->words as $word){
+
+        foreach ($liste->words as $word) {
             $newWord = $word->replicate();
             $newWord->word_list_id = $newList->id;
-            // Setze auch hier created_at und updated_at auf die aktuelle Zeit
             $newWord->created_at = now();
             $newWord->updated_at = now();
             $newWord->save();
+
+            DB::table('user_words')->insert([
+                'user_id' => auth()->id(),
+                'word_id' => $newWord->id,
+                'count' => 0,
+                'interval' => 0,
+                'ease_factor' => 2.5,
+                'repetition_count' => 0,
+                'next_review_at' => now(),
+            ]);
         }
-    
+
         return redirect('/library');
     }
-    
 
-    public function swipeHandle(Request $request){
+    public function swipeHandle(Request $request)
+    {
         $request->validate([
             'wordId' => 'required',
             'direction' => 'required',
         ]);
+
+        $word = Word::findOrFail($request->wordId);
+        $userId = auth()->id();
+
+        $userWord = DB::table('user_words')
+            ->where('user_id', $userId)
+            ->where('word_id', $word->id)
+            ->first();
+
+        if (!$userWord) {
+            DB::table('user_words')->insert([
+                'user_id' => $userId,
+                'word_id' => $word->id,
+                'count' => 0,
+                'interval' => 0,
+                'ease_factor' => 2.5,
+                'repetition_count' => 0,
+                'next_review_at' => now(),
+            ]);
+
+            $userWord = DB::table('user_words')
+                ->where('user_id', $userId)
+                ->where('word_id', $word->id)
+                ->first();
+        }
+
+        $interval = $userWord->interval;
+        $easeFactor = $userWord->ease_factor;
+        $repetitionCount = $userWord->repetition_count;
+        $count = $userWord->count;
+
         if ($request->direction == 'left') {
-            //happens when the user swipes left
-            $word = Word::find($request->wordId);
-            $word->decreaseCountForAuthUser(1);
+            $quality = 0;
+            $repetitionCount = 0;
+            $interval = 1;
+
+            $easeFactor = $easeFactor + (0.1 - (5 - $quality) * (0.08 + (5 - $quality) * 0.02));
+            if ($easeFactor < 1.3) {
+                $easeFactor = 1.3;
+            }
+
+            $count = max(0, $count - 1);
+            $nextReviewAt = now()->addDays($interval);
+
+            DB::table('user_words')
+                ->where('user_id', $userId)
+                ->where('word_id', $word->id)
+                ->update([
+                    'count' => $count,
+                    'interval' => $interval,
+                    'ease_factor' => round($easeFactor, 2),
+                    'repetition_count' => $repetitionCount,
+                    'next_review_at' => $nextReviewAt,
+                ]);
+
             return response()->json([
                 'success' => 'success',
-                'count' => $word->count(),
-                'wordId' => $word->id
+                'count' => $count,
+                'wordId' => $word->id,
             ], 200);
         } elseif ($request->direction == 'right') {
-            //happens when the user swipes right
-            $word = Word::find($request->wordId);
-            $word->increaseCountForAuthUser(1);
+            $quality = 5;
+
+            if ($repetitionCount == 0) {
+                $interval = 1;
+            } elseif ($repetitionCount == 1) {
+                $interval = 6;
+            } else {
+                $interval = round($interval * $easeFactor);
+            }
+
+            $repetitionCount++;
+
+            $easeFactor = $easeFactor + (0.1 - (5 - $quality) * (0.08 + (5 - $quality) * 0.02));
+            if ($easeFactor < 1.3) {
+                $easeFactor = 1.3;
+            }
+
+            $count = $count + 1;
+            $nextReviewAt = now()->addDays($interval);
+
+            DB::table('user_words')
+                ->where('user_id', $userId)
+                ->where('word_id', $word->id)
+                ->update([
+                    'count' => $count,
+                    'interval' => $interval,
+                    'ease_factor' => round($easeFactor, 2),
+                    'repetition_count' => $repetitionCount,
+                    'next_review_at' => $nextReviewAt,
+                ]);
+
             return response()->json([
                 'success' => 'success',
-                'count' => $word->count(),
-                'wordId' => $word->id
+                'count' => $count,
+                'wordId' => $word->id,
             ], 200);
-        }else{
-            return response()->json(['error' => 'false input(direction expected)'], 400);
         }
-        $liste = WordList::with('words')->find($request->listId);
-        $word = Word::find($request->wordId);
-        $liste->words()->syncWithoutDetaching($word->id);
-        return response()->json(['success' => 'success'], 200);
+
+        return response()->json(['error' => 'false input(direction expected)'], 400);
     }
 }

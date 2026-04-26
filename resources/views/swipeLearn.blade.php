@@ -177,7 +177,6 @@ function zeigeStatistikModal() {
 
 function handleSwipe(direction, wordId) {
     console.log("handling swipe " + direction);
-    event.preventDefault();
     const requestData = {
         wordId: wordId,
         direction: direction
@@ -185,22 +184,20 @@ function handleSwipe(direction, wordId) {
     var csrf = document.querySelector('meta[name="_token"]').content;
 
     const formData = JSON.stringify(requestData);
-    /*
-    //this is used if I'm gonna log the swipes for better algorithm
-    fetch('/swipeHandle/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrf
-            }
-        })
+
+    fetch('/swipeHandle', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrf
+        }
+    })
     .then(response => response.json())
     .then(data => {
-           // Handle response if needed
+        console.log('Swipe logged:', data);
     })
-    .catch(error => console.error('Error:', error));   
-    */
+    .catch(error => console.error('Error:', error));
 }
 
 function showNextWord() {
@@ -218,6 +215,9 @@ function showNextWord() {
 }
 
 function updateKarte() {
+    if (woerterbuch.length === 0 || aktuelleKarteIndex >= woerterbuch.length) {
+        return;
+    }
     var countAnzeigeA = document.getElementById('countAnzeigeA');
     var countAnzeigeB = document.getElementById('countAnzeigeB');
     countAnzeigeA.textContent = (aktuelleKarteIndex + 1) + "/" + listLength + " {{ __('swipe.words') }}";
@@ -339,6 +339,9 @@ function triggerAnimationRight(callback){
 
 function triggerLeft(event){
     console.log("trigger left");
+    if (woerterbuch.length === 0 || aktuelleKarteIndex >= woerterbuch.length) {
+        return;
+    }
     // Check if event is provided and stopPropagation is a function
     if (event && typeof event.stopPropagation === 'function') {
         event.stopPropagation();
@@ -356,6 +359,9 @@ function triggerLeft(event){
 
 function triggerRight(event){
     console.log("trigger right");
+    if (woerterbuch.length === 0 || aktuelleKarteIndex >= woerterbuch.length) {
+        return;
+    }
     if (event && typeof event.stopPropagation === 'function') {
         event.stopPropagation();
     }
