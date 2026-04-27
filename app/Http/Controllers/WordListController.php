@@ -83,6 +83,8 @@ class WordListController extends Controller
         foreach ($deletedWordIds as $wordId) {
             $word = Word::find($wordId);
             if ($word) {
+                DB::table('user_words')->where('word_id', $word->id)->delete();
+                DB::table('word_list_words')->where('word_id', $word->id)->delete();
                 $word->delete();
             }
         }
@@ -201,6 +203,8 @@ class WordListController extends Controller
         }
 
         foreach ($liste->words as $word) {
+            DB::table('user_words')->where('word_id', $word->id)->delete();
+            DB::table('word_list_words')->where('word_id', $word->id)->delete();
             $word->delete();
         }
 
@@ -212,7 +216,11 @@ class WordListController extends Controller
     public function word_delete_function($id, $listId)
     {
         $word = Word::find($id);
-        $word->delete();
+        if ($word) {
+            DB::table('user_words')->where('word_id', $word->id)->delete();
+            DB::table('word_list_words')->where('word_id', $word->id)->delete();
+            $word->delete();
+        }
         return redirect('/list_show/' . $listId);
     }
 
