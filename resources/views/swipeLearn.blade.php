@@ -28,6 +28,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         <button id="shuffleFlashCards" class="standartButton" onclick="shuffleAndReloadCards();">{{ __('swipe.mix') }}</button>
         <br><br><br>
            
+        <hr style="margin:1rem 0;">
+        <p style="margin-bottom:0.5rem;"><strong>Priorität dieses Wortes:</strong></p>
+        <select id="prioritySelect" class="standartSelect" onchange="updateCurrentWordPriority()">
+            <option value="5">⭐⭐⭐⭐⭐ Sehr wichtig</option>
+            <option value="4">⭐⭐⭐⭐ Wichtig</option>
+            <option value="3" selected>⭐⭐⭐ Normal</option>
+            <option value="2">⭐⭐ Weniger wichtig</option>
+            <option value="1">⭐ Unwichtig</option>
+        </select>
+        <br><br>
+        
         @if (Auth::user()->status == "admin")
         <button type="button" class="standartButton" onclick="document.getElementById('swipeStatistikModal').style.display = 'block';">Show Swipe Statistics</button>
         <button type="button" class="standartButton" onclick="showRemaining();">Show remaining Words (experimental)</button>
@@ -48,6 +59,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
                 <p class="flipcardWord" id="baseWord">{{ __('swipe.word') }}</p>
             </div>
+            <div class="srsInfoBar" id="srsInfoB" style="display:none; font-size:12px; color:#666; text-align:center; margin:4px 0;">
+                <span id="srsIntervalB"></span> · <span id="srsRepsB"></span> · <span id="srsEaseB"></span>
+            </div>
             <div class="displayFlex">
                 <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerLeft(event)">
                 <div class="horizontal-fill"></div>
@@ -63,6 +77,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
             </div>
             <div class="flipcardWordWrapper" onclick="showUebersetzung()">
                 <p class="flipcardWord" id="targetWord">{{ __('swipe.word') }}</p>
+            </div>
+            <div class="srsInfoBar" id="srsInfoA" style="display:none; font-size:12px; color:#666; text-align:center; margin:4px 0;">
+                <span id="srsIntervalA"></span> · <span id="srsRepsA"></span> · <span id="srsEaseA"></span>
             </div>
             <div class="displayFlex">
                 <img src="{{ asset('svg-icons/denyIcon.svg')}}" alt="{{ __('swipe.confirmIconAlt') }}" class="iconSpacer" onclick="triggerLeft(event)">
@@ -104,11 +121,24 @@ var unlearnedWords = []; // Declare unlearnedWords as a global variable
 
 @php
 $woerterbuch = $liste->words->map(function ($word) {
+    $pivot = $word->getUserWordPivot();
+    $srs = $srsData[$word->id] ?? [
+        'interval' => 0,
+        'repetition_count' => 0,
+        'ease_factor' => 2.5,
+        'next_review_at' => null,
+    ];
     return [
         'base_word' => $word->base_word,
         'target_word' => $word->target_word,
         'id' => $word->id,
         'learned' => false,
+        'priority' => $pivot ? (int)$pivot->priority : 3,
+        'interval' => (int)$srs['interval'],
+        'repetition_count' => (int)$srs['repetition_count'],
+        'ease_factor' => (float)$srs['ease_factor'],
+        'next_review_at' => $srs['next_review_at'],
+        'count' => (int)($pivot->count ?? 0),
         'full_list' => $word,
     ];
 });
@@ -196,6 +226,20 @@ function handleSwipe(direction, wordId) {
     .then(response => response.json())
     .then(data => {
         console.log('Swipe logged:', data);
+        if (data.success) {
+            // Update SRS data in woerterbuch for display
+            for (var i = 0; i < woerterbuch.length; i++) {
+                if (woerterbuch[i].id === data.wordId) {
+                    woerterbuch[i].interval = data.interval;
+                    woerterbuch[i].repetition_count = data.repetition_count;
+                    woerterbuch[i].ease_factor = data.ease_factor;
+                    woerterbuch[i].next_review_at = data.next_review_at;
+                    woerterbuch[i].count = data.count;
+                    break;
+                }
+            }
+            updateSRSInfoDisplay();
+        }
     })
     .catch(error => console.error('Error:', error));
 }
@@ -232,7 +276,37 @@ function updateKarte() {
         kartenTextBase.textContent = woerterbuch[aktuelleKarteIndex].target_word;
         kartenTextTarget.textContent = woerterbuch[aktuelleKarteIndex].base_word;
     }
-    resetFlipCard(); // Reset flip state when updating the card
+    
+    // Sync priority dropdown
+    var prioritySelect = document.getElementById('prioritySelect');
+    if (prioritySelect && woerterbuch[aktuelleKarteIndex].priority) {
+        prioritySelect.value = woerterbuch[aktuelleKarteIndex].priority;
+    }
+    
+    updateSRSInfoDisplay();
+    resetFlipCard();
+}
+
+function updateSRSInfoDisplay() {
+    if (woerterbuch.length === 0 || aktuelleKarteIndex >= woerterbuch.length) {
+        document.getElementById('srsInfoB').style.display = 'none';
+        document.getElementById('srsInfoA').style.display = 'none';
+        return;
+    }
+    var w = woerterbuch[aktuelleKarteIndex];
+    var intervalText = w.interval > 0 ? 'Wiederholung in ' + w.interval + ' Tagen' : 'Neu';
+    var repsText = w.repetition_count + 'x richtig';
+    var easeText = 'EF ' + w.ease_factor.toFixed(2);
+    
+    document.getElementById('srsIntervalB').textContent = intervalText;
+    document.getElementById('srsRepsB').textContent = repsText;
+    document.getElementById('srsEaseB').textContent = easeText;
+    document.getElementById('srsIntervalA').textContent = intervalText;
+    document.getElementById('srsRepsA').textContent = repsText;
+    document.getElementById('srsEaseA').textContent = easeText;
+    
+    document.getElementById('srsInfoB').style.display = 'block';
+    document.getElementById('srsInfoA').style.display = 'block';
 }
 
 function restartWithUnknownAnswers(){
@@ -254,6 +328,30 @@ function restartWithUnknownAnswers(){
     } else {
         alert("{{ __('swipe.all_words_learned') }}");
     }
+}
+
+function updateCurrentWordPriority() {
+    var prioritySelect = document.getElementById('prioritySelect');
+    if (!prioritySelect || aktuelleKarteIndex >= woerterbuch.length) return;
+    
+    var newPriority = parseInt(prioritySelect.value);
+    var wordId = woerterbuch[aktuelleKarteIndex].id;
+    woerterbuch[aktuelleKarteIndex].priority = newPriority;
+    
+    var csrf = document.querySelector('meta[name="_token"]').content;
+    fetch('/updatePriority', {
+        method: 'POST',
+        body: JSON.stringify({ wordId: wordId, priority: newPriority }),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrf
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Priority updated:', data);
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 function shuffleArray(array) {
@@ -314,8 +412,55 @@ function showRemaining() {
 
 function undoLastSwipe() {
     if (swipeHistory.length > 0) {
-        aktuelleKarteIndex = swipeHistory.pop(); // Restore last index
-        updateKarte(); // Update the card display
+        var snapshot = swipeHistory.pop();
+        var wordIndex = snapshot.index;
+        var word = woerterbuch[wordIndex];
+        
+        // Restore counters
+        repAzeig = snapshot.repAzeig;
+        doneAnzeige = snapshot.doneAnzeige;
+        document.getElementById('repAzeigA').innerHTML = repAzeig;
+        document.getElementById('repAzeigB').innerHTML = repAzeig;
+        document.getElementById('doneAnzeigeA').innerHTML = doneAnzeige;
+        document.getElementById('doneAnzeigeB').innerHTML = doneAnzeige;
+        
+        // Restore word state
+        word.learned = snapshot.learned;
+        word.interval = snapshot.old_interval;
+        word.repetition_count = snapshot.old_repetition_count;
+        word.ease_factor = snapshot.old_ease_factor;
+        word.count = snapshot.old_count;
+        word.next_review_at = snapshot.old_next_review_at;
+        
+        // Restore current index
+        aktuelleKarteIndex = wordIndex;
+        
+        // Send undo to server
+        var csrf = document.querySelector('meta[name="_token"]').content;
+        var undoData = {
+            wordId: snapshot.wordId,
+            old_interval: snapshot.old_interval,
+            old_ease_factor: snapshot.old_ease_factor,
+            old_repetition_count: snapshot.old_repetition_count,
+            old_count: snapshot.old_count,
+            old_next_review_at: snapshot.old_next_review_at,
+        };
+        
+        fetch('/swipeUndo', {
+            method: 'POST',
+            body: JSON.stringify(undoData),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrf
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Undo logged:', data);
+        })
+        .catch(error => console.error('Undo error:', error));
+        
+        updateKarte();
     } else {
         console.log("{{ __('swipe.no_swipes_to_undo') }}");
     }
@@ -342,19 +487,34 @@ function triggerLeft(event){
     if (woerterbuch.length === 0 || aktuelleKarteIndex >= woerterbuch.length) {
         return;
     }
-    // Check if event is provided and stopPropagation is a function
     if (event && typeof event.stopPropagation === 'function') {
         event.stopPropagation();
     }
+    
+    // Save snapshot BEFORE the swipe
+    var word = woerterbuch[aktuelleKarteIndex];
+    swipeHistory.push({
+        index: aktuelleKarteIndex,
+        direction: 'left',
+        repAzeig: repAzeig,
+        doneAnzeige: doneAnzeige,
+        wordId: word.id,
+        learned: word.learned,
+        old_interval: word.interval,
+        old_repetition_count: word.repetition_count,
+        old_ease_factor: word.ease_factor,
+        old_count: word.count ?? 0,
+        old_next_review_at: word.next_review_at,
+    });
+    
     triggerAnimationLeft(function(){
         showNextWord();
     });
 
-    swipeHistory.push(aktuelleKarteIndex); // Aktuellen Index speichern
     repAzeig++;
     document.getElementById('repAzeigA').innerHTML = repAzeig;
     document.getElementById('repAzeigB').innerHTML = repAzeig;
-    handleSwipe("left", woerterbuch[aktuelleKarteIndex].id);
+    handleSwipe("left", word.id);
 }
 
 function triggerRight(event){
@@ -365,16 +525,32 @@ function triggerRight(event){
     if (event && typeof event.stopPropagation === 'function') {
         event.stopPropagation();
     }
+    
+    // Save snapshot BEFORE the swipe
+    var word = woerterbuch[aktuelleKarteIndex];
+    swipeHistory.push({
+        index: aktuelleKarteIndex,
+        direction: 'right',
+        repAzeig: repAzeig,
+        doneAnzeige: doneAnzeige,
+        wordId: word.id,
+        learned: word.learned,
+        old_interval: word.interval,
+        old_repetition_count: word.repetition_count,
+        old_ease_factor: word.ease_factor,
+        old_count: word.count ?? 0,
+        old_next_review_at: word.next_review_at,
+    });
+    
     triggerAnimationRight(function(){
         showNextWord();
     });
 
-    swipeHistory.push(aktuelleKarteIndex); // Aktuellen Index speichern
-    woerterbuch[aktuelleKarteIndex].learned = true;
+    word.learned = true;
     doneAnzeige++;
     document.getElementById('doneAnzeigeA').innerHTML = doneAnzeige;
     document.getElementById('doneAnzeigeB').innerHTML = doneAnzeige;
-    handleSwipe("right", woerterbuch[aktuelleKarteIndex].id);
+    handleSwipe("right", word.id);
 }
 
 // Event Listener für die Auswahl des Lernmodus

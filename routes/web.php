@@ -109,6 +109,14 @@ Route::group(['middleware' => 'SetLanguageMiddleware'], function () {
 
     Route::post('/swipeHandle', [WordListController::class, 'swipeHandle'])
     ->name('swipeHandle'); //middleware is missing here
+    Route::post('/swipeUndo', [WordListController::class, 'swipeUndo'])
+    ->name('swipeUndo'); //middleware is missing here
+    Route::post('/updatePriority', [WordListController::class, 'updatePriority'])
+    ->name('updatePriority')
+    ->middleware('auth');
+    Route::post('/subscribeList/{id}', [WordListController::class, 'subscribeList'])
+    ->name('subscribeList')
+    ->middleware('auth');
 
     Route::get('/list_create', function () {
         return view('list_create');

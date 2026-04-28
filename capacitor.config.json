@@ -1,0 +1,16 @@
+{
+  "appId": "ch.linguatech.app",
+  "appName": "LinguaTech",
+  "webDir": "public",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://REPLACE_WITH_YOUR_URL",
+    "cleartext": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#06D6A0"
+    }
+  }
+}

@@ -11,7 +11,18 @@
     
     <!--FAVICON -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <!-- PWA / Mobile -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#06D6A0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LinguaTech">
     @vite(['resources/css/main.scss', 'resources/js/app.js'])
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(console.error);
+      }
+    </script>
     <script>
         document.addEventListener('click', function(event) {
             const dropdown = document.querySelector('.langDropdownMenu');

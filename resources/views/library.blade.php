@@ -10,7 +10,6 @@
     function deleteList(id) {
         var bestaetigung = confirm("{{__('library.rUSureUDelete') }}");
 
-        // Überprüfen, ob der Benutzer auf "OK" geklickt hat
         if (bestaetigung) {  
             axios.post('/list_delete_function/'+id)
             .then(function(response) {
@@ -57,21 +56,15 @@ document.querySelectorAll('input[type=checkbox][data-toggle="toggle"]').forEach(
 <script>
 document.getElementById('toggleButton').addEventListener('change', function() {
     if(this.checked) {
-        //if the id="privateList" is visible, hide it
         document.getElementById('privateList').style.display = 'none';
-        //if the id="publicList" is hidden, show it
         document.getElementById('publicList').style.display = 'block';
     } else {
-        //if the id="privateList" is hidden, show it
         document.getElementById('privateList').style.display = 'block';
-        //if the id="publicList" is visible, hide it
         document.getElementById('publicList').style.display = 'none';
     }
 });
 </script>
-<!--
-<input type="checkbox" checked="" data-toggle="toggle">
--->
+
 
 
 
@@ -89,11 +82,9 @@ document.getElementById('toggleButton').addEventListener('change', function() {
             <div class="displayFlex">
                 <p class="cardTitle">{{$libraryListe->name}}</p>
                 <div class="horizontal-fill"></div>
-            <form action="/copyList/{{$libraryListe->id}}" method="POST" onsubmit="return confirmCopy()">
+            <form action="/subscribeList/{{$libraryListe->id}}" method="POST" onsubmit="return confirm('Möchten Sie diese Liste abonnieren?')">
                 @csrf
-                <button type="submit" class="delete-hitbox">
-                    <img src="{{ asset('svg-icons/copy-icon.svg')}}" alt="Löschen Icon" class="libraryIcon">
-                </button>
+                <button type="submit" class="standartButton" style="margin-right:8px;">Abonnieren</button>
             </form>
             </div>
             <div></div>
@@ -162,4 +153,36 @@ document.getElementById('toggleButton').addEventListener('change', function() {
 @endif
 @endforeach
 </div>
+
+<!-- Abonnierte Listen -->
+@if(isset($subscribedLists) && count($subscribedLists) > 0)
+<div class="" id="subscribedList">
+    <div class="displayFlex titleMargin">
+        <p class="pagetitle">Abonnierte Listen</p>
+        <div class="horizontal-fill"></div>
+    </div>
+    @foreach ($subscribedLists as $subList)
+    <div class="library-Card">
+        <div class="displayFlex">
+            <a href="/list_show/{{$subList->id}}" class=" anker-no-underline displayFlex">
+            <p class="cardTitle">{{$subList->name}}</p>
+            </a>
+            <a href="/list_show/{{$subList->id}}" class="horizontal-fill"></a>
+            <a href="/swipeLearn/{{$subList->id}}">
+            <img src="{{ asset('svg-icons/learnIcon.svg')}}" alt="Lernen" class="libraryIcon">
+            </a>
+        </div>
+        <div>
+            <p class="begriffCount">{{ \App\Models\Word::where('word_list_id', $subList->id)->count() }} {{__('library.begriff') }}</p>
+        </div>
+        <div class="leading-library">
+            <p class="leadingText"> {{__('library.createdBy') }} {{$subList->creator->name}}</p>
+            <div class="horizontal-fill"></div>
+            <p class="leadingText">{{ date('d.m.y', strtotime($subList->created_at)) }}</p>
+        </div>
+    </div>
+    @endforeach
+</div>
+@endif
+
 @endsection
