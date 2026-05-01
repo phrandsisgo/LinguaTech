@@ -31,7 +31,13 @@ class TranslateController extends Controller
             'context' => $context,
         ]);
 
-        $translation = $response->json()['translations'][0]['text'];
+        $body = $response->json();
+
+        if (!isset($body['translations'][0]['text'])) {
+            return response()->json(['error' => 'Translation failed. Please try again.'], 502);
+        }
+
+        $translation = $body['translations'][0]['text'];
 
         return response()->json(['translation' => $translation, 'request' => $text]);
     }

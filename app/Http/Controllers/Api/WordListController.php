@@ -61,7 +61,7 @@ class WordListController extends Controller
     public function update(Request $request, int $id): JsonResponse
     {
         $request->validate([
-            'listTitle' => 'required|min:3|max:20',
+            'listTitle' => 'required|min:3|max:40',
             'baseWord' => 'sometimes|array',
             'baseWord.*' => 'required|min:1|max:50',
             'targetWord' => 'sometimes|array',

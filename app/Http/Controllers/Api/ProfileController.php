@@ -96,7 +96,7 @@ class ProfileController extends Controller
         }
 
         try {
-            \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET'));
+            \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
             $subscription = \Stripe\Subscription::retrieve($user->stripe_subscription_id);
             $subscription->cancel();
