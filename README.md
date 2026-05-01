@@ -106,3 +106,46 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Contact
 [Your contact information or preferred method of contact]
+
+## Paralleles Entwickeln: Frontend & Native App
+
+Dieses Repository enthält zusätzlich zum Laravel-Backend ein modernes Web-Frontend und eine React Native App.
+
+### Ordnerstruktur
+
+- `/frontend` – Web-App (React + Vite)
+- `/native` – Mobile App (React Native mit Expo)
+
+### Beide Apps parallel starten
+
+**1. Web-Frontend**
+```bash
+cd frontend
+npm install   # nur beim ersten Mal
+npm run dev
+```
+Läuft standardmässig unter: http://localhost:5173
+
+**2. Native App**
+```bash
+cd native
+npm install   # nur beim ersten Mal
+npx expo start
+```
+
+Im Metro-Terminal dann wählen:
+- `w` – Im Browser öffnen (schnellster Weg zum Testen)
+- `i` – iOS-Simulator starten *(benötigt Xcode, nur macOS)*
+- `a` – Android-Emulator starten *(benötigt Android Studio)*
+
+**Alternative: Direkt Web-Preview starten**
+```bash
+cd native
+npx expo start --web
+```
+
+### Hinweise
+
+- Der Browser-Preview (`w` oder `--web`) ist ideal, um UI und Logik schnell zu testen.
+- Native Features (Kamera, Push-Benachrichtigungen) funktionieren nur auf einem echten Gerät oder Emulator/Simulator.
+- Für das echte Gerät: **Expo Go** App aus dem App Store installieren und den QR-Code im Terminal scannen.
