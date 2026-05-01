@@ -5,6 +5,25 @@ Der `main` Branch (Blade-Version) bleibt vollständig unverändert.
 
 ---
 
+## Voraussetzungen
+
+- PHP 8.2 oder 8.3 (nicht 8.4 oder 8.5 wegen Package-Kompatibilität)
+- Composer 2.x
+- Node.js 18+
+- MySQL 8.x
+
+## Setup
+
+1. `composer install`
+2. `cp .env.example .env`
+3. `php artisan key:generate`
+4. `php artisan migrate`
+5. Terminal 1: `php artisan serve`
+6. Terminal 2: `npm install && npm run dev`
+7. Browser: http://localhost:8000/app
+
+---
+
 ## Architektur
 
 ```
