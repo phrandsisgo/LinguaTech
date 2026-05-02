@@ -1,37 +1,11 @@
 {
-  "resources/css/animations.scss": {
-    "file": "assets/animations-ff352fa1.css",
+  "frontend/src/main.jsx": {
+    "file": "assets/main-COR_NquZ.js",
+    "name": "main",
+    "src": "frontend/src/main.jsx",
     "isEntry": true,
-    "src": "resources/css/animations.scss"
-  },
-  "resources/css/app.css": {
-    "file": "assets/app-8b3c4d12.css",
-    "isEntry": true,
-    "src": "resources/css/app.css"
-  },
-  "resources/css/application.scss": {
-    "file": "assets/application-09440518.css",
-    "isEntry": true,
-    "src": "resources/css/application.scss"
-  },
-  "resources/css/library.scss": {
-    "file": "assets/library-f9dde38b.css",
-    "isEntry": true,
-    "src": "resources/css/library.scss"
-  },
-  "resources/css/main.scss": {
-    "file": "assets/main-eda7e1b9.css",
-    "isEntry": true,
-    "src": "resources/css/main.scss"
-  },
-  "resources/js/app.js": {
-    "file": "assets/app-ce6463f1.js",
-    "isEntry": true,
-    "src": "resources/js/app.js"
-  },
-  "resources/js/list-create.js": {
-    "file": "assets/list-create-3f540827.js",
-    "isEntry": true,
-    "src": "resources/js/list-create.js"
+    "css": [
+      "assets/main-_qyl0G9u.css"
+    ]
   }
 }
