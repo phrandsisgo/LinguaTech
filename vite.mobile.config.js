@@ -9,7 +9,7 @@ export default defineConfig({
         outDir: 'mobile-dist',
         emptyOutDir: true,
         rollupOptions: {
-            input: resolve(__dirname, 'mobile.html'),
+            input: resolve(__dirname, 'index.html'),
         },
     },
     resolve: {
