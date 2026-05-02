@@ -214,3 +214,9 @@ Route::group(['middleware' => 'SetLanguageMiddleware'], function () {
 });
 
 require __DIR__.'/auth.php';
+
+// SPA Catch-all – React Router übernimmt die Navigation
+// Diese Route greift nur wenn keine andere Route passt
+Route::get('/app/{any?}', function () {
+    return view('spa');
+})->where('any', '.*');
