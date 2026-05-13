@@ -3,7 +3,10 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "build:mobile": "vite build --config vite.mobile.config.js",
+        "cap:sync": "npm run build:mobile && npx cap sync",
+        "cap:ios": "npm run build:mobile && npx cap sync ios && npx cap open ios"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
